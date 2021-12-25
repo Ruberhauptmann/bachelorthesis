@@ -1,10 +1,23 @@
+% command for path of images (needs to be different in subfiles)
 \providecommand{\main}{.} 
 \documentclass{scrreprt}
 
-\renewcommand{\rmdefault}{fts}
+% use The Sans UHH as default
+%\renewcommand{\rmdefault}{fts}
 
+% use mathptmx package (like Times New Roman)
+\usepackage{mathptmx}
+
+% page geometry setup
+\usepackage[onehalfspacing]{setspace}
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.0cm}
+
+% graphics path (relative to main file)
 \usepackage{graphicx}
 \graphicspath{{\main/images/}{images/}}
+
+% color package, definition of the UHH color
 \usepackage[dvipsnames]{xcolor}
 \definecolor{uhhred}{RGB}{216,34,41}
 
