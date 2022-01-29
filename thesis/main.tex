@@ -1,30 +1,59 @@
-% command for path of images (needs to be different in subfiles)
-\providecommand{\main}{.} 
-\documentclass{scrreprt}
+\documentclass[ 10pt,
+                DIV=10,
+                headtopline=0.08em,
+                headsepline=0.04em,
+                headinclude,
+                BCOR=6mm
+              ]{scrbook}
 
-% use The Sans UHH as default
-%\renewcommand{\rmdefault}{fts}
-
-% use mathptmx package (like Times New Roman)
-\usepackage{mathptmx}
-
-% page geometry setup
-\usepackage[onehalfspacing]{setspace}
-\usepackage{geometry}
-\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.0cm}
-
-% graphics path (relative to main file)
-\usepackage{graphicx}
-\graphicspath{{\main/images/}{images/}}
-
-% color package, definition of the UHH color
-\usepackage[dvipsnames]{xcolor}
-\definecolor{uhhred}{RGB}{216,34,41}
-
-\usepackage{subfiles}
+\include{preamble.tex}
 
 \begin{document}
+    % Laden der Titelseite
+    %{
+    \KOMAoptions{twoside = false}
+    \input{00_titlepage.tex}
+    \KOMAoptions{twoside}
+    %}
+    %
+    % Wie in Büchern: Seitennummerierung in kleinen römischen Zahlen; Kapitel und Abschnitte ohne Nummerierung
+	\frontmatter
+    %
+    % Einbinden einer kurzen Zusammenfassung
+    %\input{01_abstract.tex}
+    %
+    % Laden einer Danksagung
+    %\input{02_acknowledgement.tex}
+    %
+    % Laden der Motivation
+    %\{00-motivation.tex}
+    %
+    % Erstellen des Inhaltsverzeichnisses ohne Hyperlinkboxen
+    {\hypersetup{hidelinks}\tableofcontents}%
+    \section*{Conventions}
+    Throughout the text of this thesis scalars are written in italic $s$, vectors in bold italic $\vec v$ and matrices in bold $\textbf M$ fonts. The summation/multiplication over nearest neighbour sites $i$ and $j$ is $\left\langle ij \right\rangle$ as a subscript to $\sum$/$\prod$. Furthermore, Hartree atomic units are used in general and only in selected instances it is deviated from this: $\hbar = m_\mathrm{e} = \mathrm e = \nicefrac{4\pi}{\varepsilon_0} = 1$. 
+    \newpage
+    \nonfrenchspacing
 
-\subfile{chapters/00_titlepage.tex}
-
-\end{document}
+    %
+    % Beginn des eigentlichen Inhalts: Seitennummern arabisch, Kapitel und Abschnitte werden numeriert
+    \mainmatter
+    \renewcommand{\thechapter}{\Roman{chapter}}
+    \input{01-XXX}
+    \blinddocument
+    %
+    % Ende des Inhalts und Übergang zur Literatur sowie anderen Listen
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+    \printbibliography
+    %
+    % Nicht nötig, aber zur Vollständigkeit: Einbindung einer Liste aller Grafiken und Tabellen
+    %\chapter*{Listings}
+    %\addcontentsline{toc}{chapter}{Listings}
+    %\listoffigures
+    %\listoftables
+    %
+    % Eine Selbstständigkeitserklärung (in aller Regel nötig)
+    %\input{selbst.tex}
+\end{document}%
