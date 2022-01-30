@@ -6,13 +6,15 @@
                 BCOR=6mm
               ]{scrbook}
 
-\include{preamble.tex}
+\input{preamble.tex}
+
+\usepackage{subfiles}
 
 \begin{document}
     % Laden der Titelseite
     %{
     \KOMAoptions{twoside = false}
-    \input{00_titlepage.tex}
+    \subfile{00_titlepage.tex}
     \KOMAoptions{twoside}
     %}
     %
@@ -20,13 +22,13 @@
 	\frontmatter
     %
     % Einbinden einer kurzen Zusammenfassung
-    %\input{01_abstract.tex}
+    \subfile{01_abstract.tex}
     %
     % Laden einer Danksagung
-    %\input{02_acknowledgement.tex}
+    \subfile{02_acknowledgement.tex}
     %
     % Laden der Motivation
-    %\{00-motivation.tex}
+    \subfile{03_motivation.tex}
     %
     % Erstellen des Inhaltsverzeichnisses ohne Hyperlinkboxen
     {\hypersetup{hidelinks}\tableofcontents}%
@@ -39,7 +41,7 @@
     % Beginn des eigentlichen Inhalts: Seitennummern arabisch, Kapitel und Abschnitte werden numeriert
     \mainmatter
     \renewcommand{\thechapter}{\Roman{chapter}}
-    \input{01-XXX}
+    \subfile{ch01_XXX.tex}
     \blinddocument
     %
     % Ende des Inhalts und Übergang zur Literatur sowie anderen Listen
