@@ -16,6 +16,7 @@ for i, file in enumerate(files):
         if "!    total energy" in line:
             data[1, i] = line.split(" ")[-2]
 
+data = np.array([data[0, data.argsort()[0]], data[1, data.argsort()[0]]])
 print(data)
 
 plt.plot(data[0], data[1])
