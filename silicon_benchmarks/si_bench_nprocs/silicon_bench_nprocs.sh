@@ -1,0 +1,16 @@
+#!/bin/bash
+#$ -q lernfix.q
+#$ -e $HOME/job_logs/error_logs/
+#$ -o $HOME/job_logs/silicon/bench_nprocs/
+#$ -l h_cpu=01:00:00
+#$ -l excl=TRUE
+#$ -cwd
+#$ -S /bin/bash
+#$ -M tsievers@physnet.uni-hamburg.de -m as
+
+QEPREFIX=/fastscratch/tsievers/qe-7.0
+
+module load openmpi/4.1.0.gcc10.2-infiniband
+
+mpirun $QEPREFIX/bin/pw.x -i silicon_ecut_59_kpoints_50.scf
+
