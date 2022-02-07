@@ -21,7 +21,7 @@ print(data)
 
 plt.plot(data[0], data[1])
 
-plt.xlabel("kinetic energy cutoff [Ry]")
+plt.xlabel("energy cutoff [Ry]")
 plt.ylabel("total energy [Ry]")
 
 plt.savefig("si_ecutwfc.pdf", bbox_inches="tight")

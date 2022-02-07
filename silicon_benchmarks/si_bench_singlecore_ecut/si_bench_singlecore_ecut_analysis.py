@@ -45,7 +45,7 @@ plt.plot(walltimes[0], walltimes[1], label="WALL time")
 
 plt.legend()
 
-plt.xlabel("kinetic energy cutoff [Ry]")
+plt.xlabel("energy cutoff [Ry]")
 plt.ylabel("runtime [s]")
 
 plt.savefig("si_bench_singlecore_ecutwfc.pdf", bbox_inches="tight")

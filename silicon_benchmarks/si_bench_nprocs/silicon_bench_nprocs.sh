@@ -12,5 +12,5 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0
 
 module load openmpi/4.1.0.gcc10.2-infiniband
 
-mpirun $QEPREFIX/bin/pw.x -i silicon_ecut_59_kpoints_50.scf
+mpirun $QEPREFIX/bin/pw.x -i in_files/si_bench_$1.scf
 
