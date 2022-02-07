@@ -2,7 +2,7 @@ Module for gcc 10.2:
 (GNU C/C++/FORTRAN compilers v10.2.0) - loaded.
 Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
-     Program PWSCF v.7.0 starts on  4Feb2022 at 13:27: 5 
+     Program PWSCF v.7.0 starts on  7Feb2022 at 14:56:45 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -16,7 +16,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Parallel version (MPI), running on     1 processors
 
      MPI processes distributed on     1 nodes
-     62465 MiB available memory on the printing compute node when the environment starts
+     62482 MiB available memory on the printing compute node when the environment starts
 
      Reading input from in_files/ec_50.scf
 
@@ -134,7 +134,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      starting charge       7.9988, renormalised to       8.0000
      Starting wfcs are    8 randomized atomic wfcs
 
-     total cpu time spent up to now is        0.8 secs
+     total cpu time spent up to now is        0.7 secs
 
      Self-consistent Calculation
 
@@ -148,7 +148,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  5.88E-04,  avg # of iterations =  2.1
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        1.6 secs
 
      total energy              =     -16.92123378 Ry
      estimated scf accuracy    <       0.05550794 Ry
@@ -157,7 +157,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  6.94E-04,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        2.2 secs
+     total cpu time spent up to now is        2.1 secs
 
      total energy              =     -16.92292275 Ry
      estimated scf accuracy    <       0.00291472 Ry
@@ -175,7 +175,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  8.34E-07,  avg # of iterations =  4.8
 
-     total cpu time spent up to now is        3.3 secs
+     total cpu time spent up to now is        3.4 secs
 
      total energy              =     -16.92364833 Ry
      estimated scf accuracy    <       0.00000036 Ry
@@ -184,7 +184,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  4.47E-09,  avg # of iterations =  6.3
 
-     total cpu time spent up to now is        4.1 secs
+     total cpu time spent up to now is        4.2 secs
 
      total energy              =     -16.92364975 Ry
      estimated scf accuracy    <       0.00000001 Ry
@@ -193,7 +193,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  1.41E-10,  avg # of iterations =  3.7
 
-     total cpu time spent up to now is        4.6 secs
+     total cpu time spent up to now is        4.8 secs
 
      total energy              =     -16.92364975 Ry
      estimated scf accuracy    <          4.7E-10 Ry
@@ -202,7 +202,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  5.92E-12,  avg # of iterations =  4.3
 
-     total cpu time spent up to now is        5.2 secs
+     total cpu time spent up to now is        5.4 secs
 
      total energy              =     -16.92364975 Ry
      estimated scf accuracy    <          2.2E-10 Ry
@@ -211,7 +211,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  2.70E-12,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is        5.6 secs
+     total cpu time spent up to now is        5.8 secs
 
      End of self-consistent calculation
 
@@ -360,51 +360,51 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
    0.00000000  -0.00000000   0.00025774            0.00       -0.00       37.92
 
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon.save/
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_50.save/
 
-     init_run     :      0.67s CPU      0.77s WALL (       1 calls)
-     electrons    :      4.77s CPU      4.85s WALL (       1 calls)
-     forces       :      0.12s CPU      0.12s WALL (       1 calls)
-     stress       :      0.42s CPU      0.42s WALL (       1 calls)
+     init_run     :      0.65s CPU      0.67s WALL (       1 calls)
+     electrons    :      5.10s CPU      6.84s WALL (       1 calls)
+     forces       :      0.13s CPU      0.13s WALL (       1 calls)
+     stress       :      0.43s CPU      0.43s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.39s CPU      0.41s WALL (       1 calls)
-     potinit      :      0.04s CPU      0.10s WALL (       1 calls)
+     wfcinit      :      0.38s CPU      0.38s WALL (       1 calls)
+     potinit      :      0.03s CPU      0.03s WALL (       1 calls)
      hinit0       :      0.23s CPU      0.24s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      3.98s CPU      4.00s WALL (       9 calls)
-     sum_band     :      0.57s CPU      0.58s WALL (       9 calls)
-     v_of_rho     :      0.23s CPU      0.24s WALL (       9 calls)
-     mix_rho      :      0.01s CPU      0.01s WALL (       9 calls)
+     c_bands      :      4.25s CPU      4.26s WALL (       9 calls)
+     sum_band     :      0.62s CPU      0.63s WALL (       9 calls)
+     v_of_rho     :      0.25s CPU      0.27s WALL (       9 calls)
+     mix_rho      :      0.01s CPU      0.02s WALL (       9 calls)
 
      Called by c_bands:
-     init_us_2    :      0.34s CPU      0.34s WALL (     609 calls)
-     init_us_2:cp :      0.34s CPU      0.34s WALL (     609 calls)
-     cegterg      :      3.34s CPU      3.35s WALL (     261 calls)
+     init_us_2    :      0.36s CPU      0.36s WALL (     609 calls)
+     init_us_2:cp :      0.36s CPU      0.36s WALL (     609 calls)
+     cegterg      :      3.56s CPU      3.56s WALL (     261 calls)
 
      Called by *egterg:
      cdiaghg      :      0.03s CPU      0.03s WALL (    1052 calls)
-     h_psi        :      3.33s CPU      3.34s WALL (    1110 calls)
+     h_psi        :      3.51s CPU      3.52s WALL (    1110 calls)
      g_psi        :      0.03s CPU      0.03s WALL (     820 calls)
 
      Called by h_psi:
-     h_psi:calbec :      0.31s CPU      0.31s WALL (    1110 calls)
-     vloc_psi     :      2.69s CPU      2.71s WALL (    1110 calls)
-     add_vuspsi   :      0.32s CPU      0.32s WALL (    1110 calls)
+     h_psi:calbec :      0.33s CPU      0.33s WALL (    1110 calls)
+     vloc_psi     :      2.83s CPU      2.83s WALL (    1110 calls)
+     add_vuspsi   :      0.34s CPU      0.35s WALL (    1110 calls)
 
      General routines
-     calbec       :      0.35s CPU      0.35s WALL (    1255 calls)
+     calbec       :      0.38s CPU      0.38s WALL (    1255 calls)
      fft          :      0.21s CPU      0.22s WALL (     115 calls)
-     ffts         :      0.00s CPU      0.00s WALL (       9 calls)
-     fftw         :      2.60s CPU      2.62s WALL (    8462 calls)
+     ffts         :      0.01s CPU      0.01s WALL (       9 calls)
+     fftw         :      2.73s CPU      2.74s WALL (    8462 calls)
 
      Parallel routines
 
-     PWSCF        :      6.03s CPU      6.45s WALL
+     PWSCF        :      6.36s CPU     11.87s WALL
 
 
-   This run was terminated on:  13:27:12   4Feb2022            
+   This run was terminated on:  14:56:57   7Feb2022            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

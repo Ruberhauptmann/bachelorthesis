@@ -1,7 +1,23 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import re
 
+def convert_to_seconds(hours, minutes, seconds):
+    """Converts times in 00h00m00s format to seconds
+    """
+    if not hours:
+        hours = 0
+    else:
+        hours = float(hours[:-1])
+    if not minutes:
+        minutes = 0
+    else:
+        minutes = float(minutes[:-1])
+
+    seconds = float(seconds[:-1])
+
+    return hours * 3600 + minutes * 60 + seconds
 
 files = os.listdir("out_files")
 walltimes = np.zeros((2, len(files)))
@@ -10,17 +26,17 @@ cputimes = np.zeros((2, len(files)))
 print(files)
 
 for i, file in enumerate(files):
+    cputimes[0, i] = file.split("_")[-1].split(".")[0]
+    walltimes[0, i] = file.split("_")[-1].split(".")[0]
     with open("out_files/" + file, "r") as f:
         searchlines = f.readlines()
     for line in searchlines:
-        if "kinetic-energy cutoff" in line:
-            cputimes[0, i] = line.split(" ")[-3]
-            walltimes[0, i] = line.split(" ")[-3]
         if "PWSCF        :" in line:
-            print(line.split(" ")[-2][:-1])
-            cputimes[1, i] = float(line.split(" ")[-2][:-1])
-            walltimes[1, i] = float(line.split(" ")[-9][:-1])
+            cputimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+            walltimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
 
+cputimes = np.array([cputimes[0, cputimes.argsort()[0]], cputimes[1, cputimes.argsort()[0]]])
+walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltimes.argsort()[0]]])
 print(cputimes)
 print(walltimes)
 

@@ -2,7 +2,7 @@ Module for gcc 10.2:
 (GNU C/C++/FORTRAN compilers v10.2.0) - loaded.
 Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
-     Program PWSCF v.7.0 starts on  4Feb2022 at 13:26:45 
+     Program PWSCF v.7.0 starts on  7Feb2022 at 14:56:27 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -16,7 +16,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Parallel version (MPI), running on     1 processors
 
      MPI processes distributed on     1 nodes
-     62462 MiB available memory on the printing compute node when the environment starts
+     62504 MiB available memory on the printing compute node when the environment starts
 
      Reading input from in_files/ec_20.scf
 
@@ -373,8 +373,8 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
      Forces acting on atoms (cartesian axes, Ry/au):
 
-     atom    1 type  1   force =     0.00000000    0.00000000   -0.00000000
-     atom    2 type  1   force =    -0.00000000   -0.00000000    0.00000000
+     atom    1 type  1   force =     0.00000000    0.00000000    0.00000000
+     atom    2 type  1   force =    -0.00000000   -0.00000000   -0.00000000
 
      Total force =     0.000000     Total SCF correction =     0.000000
 
@@ -382,15 +382,15 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Computing stress (Cartesian axis) and pressure
 
           total   stress  (Ry/bohr**3)                   (kbar)     P=       34.44
-   0.00023412  -0.00000000   0.00000000           34.44       -0.00        0.00
-  -0.00000000   0.00023412  -0.00000000           -0.00       34.44       -0.00
-   0.00000000  -0.00000000   0.00023412            0.00       -0.00       34.44
+   0.00023412  -0.00000000  -0.00000000           34.44       -0.00       -0.00
+  -0.00000000   0.00023412   0.00000000           -0.00       34.44        0.00
+  -0.00000000   0.00000000   0.00023412           -0.00        0.00       34.44
 
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon.save/
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_20.save/
 
-     init_run     :      0.34s CPU      0.34s WALL (       1 calls)
-     electrons    :      1.83s CPU      1.89s WALL (       1 calls)
+     init_run     :      0.33s CPU      0.34s WALL (       1 calls)
+     electrons    :      1.86s CPU      1.90s WALL (       1 calls)
      forces       :      0.04s CPU      0.04s WALL (       1 calls)
      stress       :      0.12s CPU      0.12s WALL (       1 calls)
 
@@ -400,38 +400,38 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      hinit0       :      0.16s CPU      0.16s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :      1.51s CPU      1.56s WALL (      12 calls)
-     sum_band     :      0.23s CPU      0.23s WALL (      12 calls)
-     v_of_rho     :      0.09s CPU      0.10s WALL (      12 calls)
+     c_bands      :      1.55s CPU      1.57s WALL (      12 calls)
+     sum_band     :      0.22s CPU      0.23s WALL (      12 calls)
+     v_of_rho     :      0.09s CPU      0.09s WALL (      12 calls)
      mix_rho      :      0.01s CPU      0.01s WALL (      12 calls)
 
      Called by c_bands:
      init_us_2    :      0.12s CPU      0.12s WALL (     783 calls)
-     init_us_2:cp :      0.12s CPU      0.12s WALL (     783 calls)
-     cegterg      :      1.29s CPU      1.33s WALL (     348 calls)
+     init_us_2:cp :      0.11s CPU      0.12s WALL (     783 calls)
+     cegterg      :      1.32s CPU      1.34s WALL (     348 calls)
 
      Called by *egterg:
      cdiaghg      :      0.03s CPU      0.03s WALL (    1338 calls)
-     h_psi        :      1.29s CPU      1.32s WALL (    1396 calls)
+     h_psi        :      1.32s CPU      1.33s WALL (    1396 calls)
      g_psi        :      0.01s CPU      0.01s WALL (    1019 calls)
 
      Called by h_psi:
      h_psi:calbec :      0.10s CPU      0.11s WALL (    1396 calls)
-     vloc_psi     :      1.07s CPU      1.09s WALL (    1396 calls)
+     vloc_psi     :      1.09s CPU      1.11s WALL (    1396 calls)
      add_vuspsi   :      0.11s CPU      0.11s WALL (    1396 calls)
 
      General routines
      calbec       :      0.11s CPU      0.12s WALL (    1541 calls)
      fft          :      0.14s CPU      0.14s WALL (     145 calls)
      ffts         :      0.00s CPU      0.00s WALL (      12 calls)
-     fftw         :      1.06s CPU      1.09s WALL (   11104 calls)
+     fftw         :      1.08s CPU      1.10s WALL (   11104 calls)
 
      Parallel routines
 
-     PWSCF        :      2.37s CPU      2.57s WALL
+     PWSCF        :      2.39s CPU      2.64s WALL
 
 
-   This run was terminated on:  13:26:48   4Feb2022            
+   This run was terminated on:  14:56:29   7Feb2022            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

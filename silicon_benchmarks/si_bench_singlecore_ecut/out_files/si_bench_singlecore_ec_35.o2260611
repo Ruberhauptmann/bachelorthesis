@@ -2,7 +2,7 @@ Module for gcc 10.2:
 (GNU C/C++/FORTRAN compilers v10.2.0) - loaded.
 Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
-     Program PWSCF v.7.0 starts on  4Feb2022 at 13:26:45 
+     Program PWSCF v.7.0 starts on  7Feb2022 at 14:56:27 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -16,7 +16,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Parallel version (MPI), running on     1 processors
 
      MPI processes distributed on     1 nodes
-     62298 MiB available memory on the printing compute node when the environment starts
+     62527 MiB available memory on the printing compute node when the environment starts
 
      Reading input from in_files/ec_35.scf
 
@@ -148,7 +148,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  5.89E-04,  avg # of iterations =  2.1
 
-     total cpu time spent up to now is        1.0 secs
+     total cpu time spent up to now is        1.1 secs
 
      total energy              =     -16.92115792 Ry
      estimated scf accuracy    <       0.05559597 Ry
@@ -157,7 +157,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  6.95E-04,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is        1.2 secs
+     total cpu time spent up to now is        1.3 secs
 
      total energy              =     -16.92287391 Ry
      estimated scf accuracy    <       0.00290127 Ry
@@ -166,7 +166,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  3.63E-05,  avg # of iterations =  2.3
 
-     total cpu time spent up to now is        1.5 secs
+     total cpu time spent up to now is        1.6 secs
 
      total energy              =     -16.92351373 Ry
      estimated scf accuracy    <       0.00006604 Ry
@@ -175,7 +175,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  8.26E-07,  avg # of iterations =  4.5
 
-     total cpu time spent up to now is        1.8 secs
+     total cpu time spent up to now is        1.9 secs
 
      total energy              =     -16.92358501 Ry
      estimated scf accuracy    <       0.00000034 Ry
@@ -184,7 +184,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  4.25E-09,  avg # of iterations =  6.4
 
-     total cpu time spent up to now is        2.3 secs
+     total cpu time spent up to now is        2.4 secs
 
      total energy              =     -16.92358671 Ry
      estimated scf accuracy    <       0.00000003 Ry
@@ -193,7 +193,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  3.89E-10,  avg # of iterations =  2.6
 
-     total cpu time spent up to now is        2.6 secs
+     total cpu time spent up to now is        2.7 secs
 
      total energy              =     -16.92358672 Ry
      estimated scf accuracy    <          2.5E-09 Ry
@@ -202,7 +202,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  3.17E-11,  avg # of iterations =  3.3
 
-     total cpu time spent up to now is        2.9 secs
+     total cpu time spent up to now is        3.0 secs
 
      total energy              =     -16.92358672 Ry
      estimated scf accuracy    <          5.3E-10 Ry
@@ -211,7 +211,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  6.64E-12,  avg # of iterations =  2.2
 
-     total cpu time spent up to now is        3.1 secs
+     total cpu time spent up to now is        3.3 secs
 
      End of self-consistent calculation
 
@@ -360,25 +360,52 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
    0.00000000  -0.00000000   0.00025619            0.00       -0.00       37.69
 
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon.save/
-At line 35 of file stop_run.f90 (unit = 90, file = '/fastscratch/tsievers/QE_TMP_DIR/silicon.restart')
-Fortran runtime error: File cannot be deleted
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_35.save/
 
-Error termination. Backtrace:
-#0  0x50f914 in stop_run_
-	at /fastscratch/tsievers/qe-7.0/PW/src/stop_run.f90:35
-#1  0x40707c in pwscf
-	at /fastscratch/tsievers/qe-7.0/PW/src/pwscf.f90:98
-#2  0x406dbc in main
-	at /fastscratch/tsievers/qe-7.0/PW/src/pwscf.f90:40
---------------------------------------------------------------------------
-Primary job  terminated normally, but 1 process returned
-a non-zero exit code. Per user-direction, the job has been aborted.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-mpirun detected that one or more processes exited with non-zero status, thus causing
-the job to be terminated. The first process to do so was:
+     init_run     :      0.46s CPU      0.46s WALL (       1 calls)
+     electrons    :      2.71s CPU      2.76s WALL (       1 calls)
+     forces       :      0.08s CPU      0.08s WALL (       1 calls)
+     stress       :      0.27s CPU      0.27s WALL (       1 calls)
 
-  Process name: [[40327,1],0]
-  Exit code:    2
---------------------------------------------------------------------------
+     Called by init_run:
+     wfcinit      :      0.25s CPU      0.25s WALL (       1 calls)
+     potinit      :      0.02s CPU      0.02s WALL (       1 calls)
+     hinit0       :      0.18s CPU      0.18s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :      2.22s CPU      2.26s WALL (       9 calls)
+     sum_band     :      0.34s CPU      0.34s WALL (       9 calls)
+     v_of_rho     :      0.16s CPU      0.16s WALL (       9 calls)
+     mix_rho      :      0.01s CPU      0.01s WALL (       9 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.21s CPU      0.21s WALL (     609 calls)
+     init_us_2:cp :      0.21s CPU      0.21s WALL (     609 calls)
+     cegterg      :      1.84s CPU      1.87s WALL (     261 calls)
+
+     Called by *egterg:
+     cdiaghg      :      0.03s CPU      0.03s WALL (     996 calls)
+     h_psi        :      1.84s CPU      1.87s WALL (    1054 calls)
+     g_psi        :      0.02s CPU      0.02s WALL (     764 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      0.18s CPU      0.18s WALL (    1054 calls)
+     vloc_psi     :      1.47s CPU      1.49s WALL (    1054 calls)
+     add_vuspsi   :      0.19s CPU      0.19s WALL (    1054 calls)
+
+     General routines
+     calbec       :      0.20s CPU      0.21s WALL (    1199 calls)
+     fft          :      0.14s CPU      0.14s WALL (     115 calls)
+     ffts         :      0.00s CPU      0.00s WALL (       9 calls)
+     fftw         :      1.36s CPU      1.38s WALL (    8312 calls)
+
+     Parallel routines
+
+     PWSCF        :      3.55s CPU      5.30s WALL
+
+
+   This run was terminated on:  14:56:33   7Feb2022            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
