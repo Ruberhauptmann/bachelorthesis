@@ -1,0 +1,75 @@
+\documentclass{beamer}
+
+\usepackage{xcolor}
+\definecolor{UHHred}{HTML}{E2001A}
+
+\usetheme{Warsaw}
+\usecolortheme[named=UHHred]{structure}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{titlelike}{parent=structure,bg=UHHred}
+
+\begin{document}
+
+\begin{frame}
+    \frametitle{Si convergence tests ecutwfc}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_ecutwfc.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Si convergence tests kpoints}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_kpoints.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Si singlecore times ecutwfc}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_bench_singlecore_ecutwfc.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Si singlecore times MP grid}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_bench_singlecore_kpoints.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Si singlecore times MP grid (bigger ecutwfc)}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_bench_singlecore_kpoints_max_ecut.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Si Benchmark}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{si_bench_nprocs.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{TaS2 Benchmark, 12x12 Monkhorst-Pack-Grid}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{TaS2_bench_nprocs_12x12.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{TaS2 Benchmark, 24x24 Monkhorst-Pack-Grid}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{TaS2_bench_nprocs_24x24.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{TaS2 Benchmark, 48x48 Monkhorst-Pack-Grid}
+    \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight,keepaspectratio]{TaS2_bench_nprocs_24x24.pdf}
+    \end{figure}
+\end{frame}
+\end{document}
