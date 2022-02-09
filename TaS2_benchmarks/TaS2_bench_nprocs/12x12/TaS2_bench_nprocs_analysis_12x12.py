@@ -42,12 +42,25 @@ walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltim
 print(cputimes)
 print(walltimes)
 
-plt.plot(cputimes[0], cputimes[1], label="CPU time")
-plt.plot(walltimes[0], walltimes[1], label="WALL time")
+fig, ax1 = plt.subplots()
 
-plt.legend()
+ax1.plot(cputimes[0], cputimes[1], label="CPU", marker='o', linestyle='dashed')
+ax1.plot(walltimes[0], walltimes[1], label="WALL", marker='o', linestyle='dashed')
 
-plt.xlabel("Number of processors")
-plt.ylabel("runtime [s]")
 
-plt.savefig("TaS2_bench_nprocs_12x12.pdf", bbox_inches="tight")
+ax1.set_xlabel("Number of processors")
+ax1.set_ylabel("runtime [s]")
+
+ax1.set_ylim(top=200)
+
+left, bottom, width, height = [0.25, 0.565, 0.3, 0.3]
+ax2 = fig.add_axes([left, bottom, width, height])
+ax2.plot(cputimes[0], walltimes[1] - cputimes[1], label="WALL-CPU", marker='o', linestyle='dashed', color="red")
+
+ax2.set_xlabel("Number of processors")
+ax2.set_ylabel("runtime [s]")
+
+
+fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
+
+fig.savefig("TaS2_bench_nprocs_12x12.pdf", bbox_inches="tight")

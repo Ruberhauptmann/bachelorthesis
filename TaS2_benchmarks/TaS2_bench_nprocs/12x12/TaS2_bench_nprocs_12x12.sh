@@ -12,5 +12,5 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0
 
 module load openmpi/4.1.0.gcc10.2-infiniband
 
-mpirun $QEPREFIX/bin/pw.x -i TaS2_19mRy_12x12.scf
+mpirun $QEPREFIX/bin/pw.x -i in_files/TaS2_bench_$1.scf
 
