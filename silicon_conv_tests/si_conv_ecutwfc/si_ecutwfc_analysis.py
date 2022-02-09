@@ -19,7 +19,7 @@ for i, file in enumerate(files):
 
 print(data)
 
-plt.plot(data[0], data[1])
+plt.plot(data[0], data[1], marker='o', linestyle='dashed')
 
 plt.xlabel("energy cutoff [Ry]")
 plt.ylabel("total energy [Ry]")

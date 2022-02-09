@@ -40,8 +40,8 @@ walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltim
 print(cputimes)
 print(walltimes)
 
-plt.plot(cputimes[0], cputimes[1], label="CPU time")
-plt.plot(walltimes[0], walltimes[1], label="WALL time")
+plt.plot(cputimes[0], cputimes[1], label="CPU", marker='o', linestyle='dashed')
+plt.plot(walltimes[0], walltimes[1], label="WALL", marker='o', linestyle='dashed')
 
 plt.legend()
 
