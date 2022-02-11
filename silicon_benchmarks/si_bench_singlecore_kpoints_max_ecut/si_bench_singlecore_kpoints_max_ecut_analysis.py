@@ -40,12 +40,12 @@ walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltim
 print(cputimes)
 print(walltimes)
 
-plt.plot(cputimes[0], cputimes[1], label="CPU", marker='o', linestyle='dashed')
-plt.plot(walltimes[0], walltimes[1], label="WALL", marker='o', linestyle='dashed')
+plt.plot(cputimes[0]**3, cputimes[1], label="CPU", marker='o', linestyle='dashed')
+plt.plot(walltimes[0]**3, walltimes[1], label="WALL", marker='o', linestyle='dashed')
 
 plt.legend()
 
-plt.xlabel("N (NxNxN Monkhorst-Pack grid)")
+plt.xlabel("Number of kpoints")
 plt.ylabel("runtime [s]")
 
 plt.savefig("si_bench_singlecore_kpoints_max_ecut.pdf", bbox_inches="tight")
