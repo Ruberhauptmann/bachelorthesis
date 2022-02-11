@@ -20,45 +20,51 @@ def convert_to_seconds(hours, minutes, seconds):
 
     return hours * 3600 + minutes * 60 + seconds
 
-files = os.listdir("out_files")
-walltimes = np.zeros((2, len(files)))
-cputimes = np.zeros((2, len(files)))
+runs = os.listdir("out_files")
 
-print(files)
+n_procs = np.zeros(len(os.listdir("out_files/1")))
+walltimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
+cputimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
 
-for i, file in enumerate(files):
-    with open("out_files/" + file, "r") as f:
-        searchlines = f.readlines()
-    for line in searchlines:
-        if "running on" in line:
-            cputimes[0, i] = re.search("[0-9]+", line).group(0)
-            walltimes[0, i] = re.search("[0-9]+", line).group(0)
-        if "PWSCF        :" in line:
-            cputimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-            walltimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+for run in runs:
+    files = os.listdir("out_files/" + run)
 
-cputimes = np.array([cputimes[0, cputimes.argsort()[0]], cputimes[1, cputimes.argsort()[0]]])
-walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltimes.argsort()[0]]])
-print(cputimes)
-print(walltimes)
+    for i, file in enumerate(files):
+        with open("out_files/" + run + "/" + file, "r") as f:
+            searchlines = f.readlines()
+        for line in searchlines:
+            if "running on" in line:
+                n_procs[i] = re.search("[0-9]+", line).group(0)
+            if "PWSCF        :" in line:
+                cputimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                walltimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+
+    cputimes[int(run) - 1] = np.array(cputimes[int(run) - 1, n_procs.argsort()])
+    walltimes[int(run) - 1] = np.array(walltimes[int(run) - 1, n_procs.argsort()])
+
+cpu_std = np.std(cputimes, axis=0)
+wall_std = np.std(walltimes, axis=0)
+
+cputimes = np.mean(cputimes, axis=0)
+walltimes = np.mean(walltimes, axis=0)
 
 #fig, ax1 = plt.subplots(figsize=(10, 3))
 fig, ax1 = plt.subplots()
 
-ax1.plot(cputimes[0], cputimes[1], label="CPU", marker='o', linestyle='dashed')
-ax1.plot(walltimes[0], walltimes[1], label="WALL", marker='o', linestyle='dashed')
-
+ax1.fill_between(n_procs, cputimes-cpu_std, cputimes+cpu_std, alpha=0.2)
+ax1.plot(n_procs, cputimes, label="CPU", marker='o', linestyle='dashed')
+ax1.fill_between(n_procs, walltimes-wall_std, walltimes+wall_std, alpha=0.2)
+ax1.plot(n_procs, walltimes, label="WALL", marker='o', linestyle='dashed')
 
 ax1.set_xlabel("Number of processors")
 ax1.set_ylabel("runtime [s]")
 
 left, bottom, width, height = [0.25, 0.565, 0.3, 0.3]
 ax2 = fig.add_axes([left, bottom, width, height])
-ax2.plot(cputimes[0], walltimes[1] - cputimes[1], label="WALL-CPU", marker='o', linestyle='dashed', color="red")
+ax2.plot(n_procs, walltimes - cputimes, label="WALL-CPU", marker='o', linestyle='dashed', color="red")
 
 ax2.set_xlabel("Number of processors")
 ax2.set_ylabel("runtime [s]")
-
 
 fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
 
