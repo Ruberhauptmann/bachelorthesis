@@ -11,7 +11,7 @@
  &control
     calculation = 'scf'
     restart_mode='from_scratch',
-    prefix='silicon_bench_singlecore_kpoints_28',
+    prefix='silicon_bench_singlecore_kpoints_maxecut_28',
     tstress = .true.
     tprnfor = .true.
     pseudo_dir = './pseudos/',

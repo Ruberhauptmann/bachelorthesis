@@ -19,33 +19,50 @@ def convert_to_seconds(hours, minutes, seconds):
 
     return hours * 3600 + minutes * 60 + seconds
 
-files = os.listdir("out_files")
-walltimes = np.zeros((2, len(files)))
-cputimes = np.zeros((2, len(files)))
+runs = os.listdir("out_files")
 
-print(files)
+E_tot = np.zeros(len(os.listdir("out_files/1")))
+walltimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
+cputimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
 
-for i, file in enumerate(files):
-    cputimes[0, i] = file.split("_")[-1].split(".")[0]
-    walltimes[0, i] = file.split("_")[-1].split(".")[0]
-    with open("out_files/" + file, "r") as f:
-        searchlines = f.readlines()
-    for line in searchlines:
-        if "PWSCF        :" in line:
-            cputimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-            walltimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+for run in runs:
+    files = os.listdir("out_files/" + run)
 
-cputimes = np.array([cputimes[0, cputimes.argsort()[0]], cputimes[1, cputimes.argsort()[0]]])
-walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltimes.argsort()[0]]])
+    for i, file in enumerate(files):
+        with open("out_files/" + run + "/" + file, "r") as f:
+            searchlines = f.readlines()
+        for line in searchlines:
+            if "kinetic-energy cutoff" in line:
+                E_tot[i] = re.search("[0-9]+", line).group(0)
+            if "PWSCF        :" in line:
+                cputimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                walltimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+
+    cputimes[int(run) - 1] = np.array(cputimes[int(run) - 1, E_tot.argsort()])
+    walltimes[int(run) - 1] = np.array(walltimes[int(run) - 1, E_tot.argsort()])
+
 print(cputimes)
-print(walltimes)
 
-plt.plot(cputimes[0], cputimes[1], label="CPU", marker='o', linestyle='dashed')
-plt.plot(walltimes[0], walltimes[1], label="WALL", marker='o', linestyle='dashed')
+cpu_std = np.std(cputimes, axis=0)
+wall_std = np.std(walltimes, axis=0)
 
-plt.legend()
+cputimes = np.mean(cputimes, axis=0)
+walltimes = np.mean(walltimes, axis=0)
 
-plt.xlabel("energy cutoff [Ry]")
-plt.ylabel("runtime [s]")
+print(cputimes)
 
-plt.savefig("si_bench_singlecore_ecutwfc.pdf", bbox_inches="tight")
+print(E_tot)
+
+fig, ax1 = plt.subplots()
+
+ax1.fill_between(E_tot, cputimes-cpu_std, cputimes+cpu_std, alpha=0.2)
+ax1.plot(E_tot, cputimes, label="CPU", marker='o', linestyle='dashed')
+ax1.fill_between(E_tot, walltimes-wall_std, walltimes+wall_std, alpha=0.2)
+ax1.plot(E_tot, walltimes, label="WALL", marker='o', linestyle='dashed')
+
+ax1.legend()
+
+ax1.set_xlabel("energy cutoff [Ry]")
+ax1.set_ylabel("runtime [s]")
+
+fig.savefig("si_bench_singlecore_ecutwfc.pdf", bbox_inches="tight")

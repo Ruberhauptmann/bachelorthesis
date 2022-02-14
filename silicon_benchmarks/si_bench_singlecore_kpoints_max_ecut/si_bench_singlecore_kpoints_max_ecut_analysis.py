@@ -19,34 +19,43 @@ def convert_to_seconds(hours, minutes, seconds):
 
     return hours * 3600 + minutes * 60 + seconds
 
-files = os.listdir("out_files")
-walltimes = np.zeros((2, len(files)))
-cputimes = np.zeros((2, len(files)))
+runs = os.listdir("out_files")
 
-print(files)
+k_points = np.zeros(len(os.listdir("out_files/1")))
+walltimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
+cputimes = np.zeros((len(runs), len(os.listdir("out_files/1"))))
 
-for i, file in enumerate(files):
-    cputimes[0, i] = file.split("_")[-1].split(".")[0]
-    walltimes[0, i] = file.split("_")[-1].split(".")[0]
-    with open("out_files/" + file, "r") as f:
-        searchlines = f.readlines()
-    for line in searchlines:
-        if "PWSCF        :" in line:
-            cputimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-            walltimes[1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+for run in runs:
+    files = os.listdir("out_files/" + run)
 
-cputimes = np.array([cputimes[0, cputimes.argsort()[0]], cputimes[1, cputimes.argsort()[0]]])
-walltimes = np.array([walltimes[0, walltimes.argsort()[0]], walltimes[1, walltimes.argsort()[0]]])
-print(cputimes)
-print(walltimes)
+    for i, file in enumerate(files):
+        k_points[i] = re.search("[0-9]+", file).group(0)
+        with open("out_files/" + run + "/" + file, "r") as f:
+            searchlines = f.readlines()
+        for line in searchlines:
+            if "PWSCF        :" in line:
+                cputimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                walltimes[int(run) - 1, i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
 
-plt.plot(cputimes[0]**3, cputimes[1], label="CPU", marker='o', linestyle='dashed')
-plt.plot(walltimes[0]**3, walltimes[1], label="WALL", marker='o', linestyle='dashed')
+    cputimes[int(run) - 1] = np.array(cputimes[int(run) - 1, k_points.argsort()])
+    walltimes[int(run) - 1] = np.array(walltimes[int(run) - 1, k_points.argsort()])
 
-plt.legend()
+cpu_std = np.std(cputimes, axis=0)
+wall_std = np.std(walltimes, axis=0)
 
-plt.xlabel("Number of kpoints")
-plt.ylabel("runtime [s]")
+cputimes = np.mean(cputimes, axis=0)
+walltimes = np.mean(walltimes, axis=0)
 
-plt.savefig("si_bench_singlecore_kpoints_max_ecut.pdf", bbox_inches="tight")
+fig, ax1 = plt.subplots()
 
+ax1.fill_between(k_points**3, cputimes-cpu_std, cputimes+cpu_std, alpha=0.2)
+ax1.plot(k_points**3, cputimes, label="CPU", marker='o', linestyle='dashed')
+ax1.fill_between(k_points**3, walltimes-wall_std, walltimes+wall_std, alpha=0.2)
+ax1.plot(k_points**3, walltimes, label="WALL", marker='o', linestyle='dashed')
+
+ax1.legend()
+
+ax1.set_xlabel("Number of kpoints")
+ax1.set_ylabel("runtime [s]")
+
+fig.savefig("si_bench_singlecore_kpoints_max_ecut.pdf", bbox_inches="tight")

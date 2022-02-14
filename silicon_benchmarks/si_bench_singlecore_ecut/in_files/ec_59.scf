@@ -11,9 +11,7 @@
  &control
     calculation = 'scf'
     restart_mode='from_scratch',
-    prefix='silicon_59',
-    tstress = .true.
-    tprnfor = .true.
+    prefix='silicon_bench_singlecore_ecut_59',
     pseudo_dir = './pseudos/',
     outdir='/fastscratch/tsievers/QE_TMP_DIR/'
  /
