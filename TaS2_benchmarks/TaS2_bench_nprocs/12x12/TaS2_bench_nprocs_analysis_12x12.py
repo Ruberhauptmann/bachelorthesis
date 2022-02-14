@@ -71,3 +71,40 @@ ax2.set_ylabel("runtime [s]")
 fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
 
 fig.savefig("TaS2_bench_nprocs_12x12.pdf", bbox_inches="tight")
+
+# Speedup plots
+
+files_singlecore = os.listdir("out_files_singlecore")
+walltimes_singlecore = np.zeros((len(files_singlecore)))
+cputimes_singlecore = np.zeros((len(files_singlecore)))
+
+for i, file in enumerate(files_singlecore):
+    with open("out_files_singlecore/" + file, "r") as f:
+        searchlines = f.readlines()
+    for line in searchlines:
+        if "PWSCF        :" in line:
+            cputimes_singlecore[i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+            walltimes_singlecore[i] = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+
+cpu_singlecore_std = np.std(cputimes_singlecore)
+wall_singlecore_std = np.std(walltimes_singlecore)
+
+cputime_singlecore = np.mean(cputimes_singlecore)
+walltime_singlecore = np.mean(walltimes_singlecore)
+
+speedup_cpu = cputime_singlecore / cputimes
+speedup_wall = walltime_singlecore / walltimes
+
+fig, ax1 = plt.subplots()
+
+ax1.plot(n_procs, speedup_cpu, label="CPU", marker='o', linestyle='dashed')
+ax1.plot(n_procs, speedup_wall, label="WALL", marker='o', linestyle='dashed')
+
+ax1.axhline(y=1, color='r', linestyle='dashed')
+
+ax1.set_xlabel("Number of processors")
+ax1.set_ylabel("speedup")
+
+ax1.legend()
+
+fig.savefig("TaS2_bench_nprocs_12x12_speedup.pdf", bbox_inches="tight")

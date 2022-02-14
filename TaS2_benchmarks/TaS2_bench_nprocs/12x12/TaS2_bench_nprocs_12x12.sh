@@ -3,6 +3,7 @@
 #$ -e $HOME/job_logs/error_logs/
 #$ -o $HOME/job_logs/TaS2/bench_nprocs/12x12/
 #$ -l h_cpu=01:00:00
+#$ -l h_vmem=2G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
