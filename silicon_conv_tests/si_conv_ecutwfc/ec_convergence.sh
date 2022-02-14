@@ -12,5 +12,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0
 
 module load openmpi/4.1.0.gcc10.2-infiniband
 
-mpirun $QEPREFIX/bin/pw.x -i in_files/ec_$1.scf
-
+mpirun $QEPREFIX/bin/pw.x -i in_files/si_conv_ecutwfc_$1.scf

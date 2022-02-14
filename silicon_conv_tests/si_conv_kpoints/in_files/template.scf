@@ -12,14 +12,12 @@
     calculation = 'scf'
     restart_mode='from_scratch',
     prefix='silicon',
-    tstress = .true.
-    tprnfor = .true.
     pseudo_dir = './pseudos/',
     outdir='/fastscratch/tsievers/QE_TMP_DIR/'
  /
  &system
     ibrav = 2, celldm(1) = 10.20, nat = 2, ntyp= 1,
-    ecutwfc = 23.0,
+    ecutwfc = 50.0,
  /
  &electrons
     mixing_mode = 'plain'
