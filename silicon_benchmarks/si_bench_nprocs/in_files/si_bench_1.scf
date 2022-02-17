@@ -11,7 +11,7 @@
  &control
     calculation = 'scf'
     restart_mode='from_scratch',
-    prefix='silicon_bench_nprocs_20',
+    prefix='silicon_bench_nprocs_1',
     pseudo_dir = './pseudos/',
     outdir='/fastscratch/tsievers/QE_TMP_DIR/'
  /
