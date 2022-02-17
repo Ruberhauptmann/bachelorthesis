@@ -1,8 +1,8 @@
 &CONTROL
-    outdir = 'work'
-    prefix = 'TaS2'
+    outdir = '/fastscratch/tsievers/QE_TMP_DIR'
+    prefix='TaS2_cdw_bench_nprocs_20'
 
-    pseudo_dir = '.'
+    pseudo_dir = './pseudos'
 /
 &SYSTEM
     ibrav = 4
