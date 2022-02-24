@@ -97,6 +97,7 @@ fig, ax1 = plt.subplots()
 
 ax1.plot(n_procs, speedup_cpu, label="CPU", marker='o', linestyle='dashed')
 ax1.plot(n_procs, speedup_wall, label="WALL", marker='o', linestyle='dashed')
+#ax1.plot(n_procs, n_procs)
 
 ax1.axhline(y=1, color='r', linestyle='dashed')
 
