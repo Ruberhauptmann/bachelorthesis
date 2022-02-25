@@ -2,8 +2,8 @@
 #$ -q lernfix.q
 #$ -e $HOME/job_logs/error_logs/
 #$ -o $HOME/job_logs/TaS2/bench_nprocs/cdw/
-#$ -l h_cpu=30:00:00
-#$ -l h_vmem=4G
+#$ -l h_cpu=100:00:00
+#$ -l h_vmem=24G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash

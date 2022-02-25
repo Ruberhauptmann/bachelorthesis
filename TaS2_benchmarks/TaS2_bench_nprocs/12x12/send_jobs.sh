@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for num in $(seq 1 2 2)
+for num in $(seq 20 2 21)
 do
     echo "$num"
     sed "s/prefix = 'TaS2'/prefix='TaS2_bench_nprocs_$num'/" in_files/template.scf > in_files/TaS2_bench_$num.scf

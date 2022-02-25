@@ -13,6 +13,9 @@
 
     assume_isolated = '2D'
 
+    nosym = .TRUE.
+    noinv = .TRUE.
+
     ecutwfc = 50.0
     ecutrho = 400.0
 

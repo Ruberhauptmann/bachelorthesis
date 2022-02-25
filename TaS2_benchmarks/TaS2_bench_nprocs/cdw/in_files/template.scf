@@ -12,6 +12,9 @@
     a = 10.160463438
     c = 15
 
+    nosym = .TRUE.
+    noinv = .TRUE.
+
     ecutwfc = 100
 
     occupations = 'smearing'
