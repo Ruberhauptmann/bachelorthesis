@@ -3,6 +3,7 @@
 #$ -e $HOME/job_logs/error_logs/
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nk/cdw/nk_18
 #$ -l h_cpu=60:00:00
+#$ -l h_vmem=3G
 #$ -pe mpi 18
 #$ -N TaS2_cdw_bench_nk_18_n_procs_18
 #$ -l excl=TRUE
