@@ -175,12 +175,39 @@ for i, run in enumerate(n_procs):
 
 ax1.axhline(y=1, color='r', linestyle='dashed')
 
+ax1.plot(n_procs["nk_2"], 0.6 * n_procs["nk_2"])
+
 ax1.set_xlabel("Number of processors")
 ax1.set_ylabel("speedup")
 
 ax1.legend()
 
 fig.savefig("si_bench_nk_speedup.pdf", bbox_inches="tight")
+
+# Efficiency plots
+
+fig, ax1 = plt.subplots()
+
+for i, run in enumerate(n_procs):
+    speedup_cpu = cputime_singlecore / cputimes[run]
+    efficiency_cpu = speedup_cpu / n_procs[run]
+    #speedup_wall = walltime_singlecore / walltimes
+
+    ax1.plot(n_procs[run], efficiency_cpu, label=run, marker='o', linestyle='dashed')
+    #ax1.plot(n_procs, speedup_wall, label="WALL", marker='o', linestyle='dashed')
+
+#ax1.plot(n_procs["nk_2"], n_procs["nk_2"])
+
+#ax1.axhline(y=1, color='r', linestyle='dashed')
+
+#ax1.plot(n_procs["nk_2"], 0.6 * n_procs["nk_2"])
+
+ax1.set_xlabel("Number of processors")
+ax1.set_ylabel("efficiency (speedup / Number of processors)")
+
+ax1.legend()
+
+fig.savefig("si_bench_nk_efficiency.pdf", bbox_inches="tight")
 
 # nk Plots
 

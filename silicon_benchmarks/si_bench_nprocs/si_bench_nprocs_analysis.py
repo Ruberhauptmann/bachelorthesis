@@ -107,3 +107,21 @@ ax1.set_ylabel("speedup")
 ax1.legend()
 
 fig.savefig("si_bench_nprocs_speedup.pdf", bbox_inches="tight")
+
+# Efficiency plots
+
+fig, ax1 = plt.subplots()
+
+efficiency_cpu = speedup_cpu / n_procs
+
+ax1.plot(n_procs, efficiency_cpu, label="CPU", marker='o', linestyle='dashed')
+#ax1.plot(n_procs, speedup_wall, label="WALL", marker='o', linestyle='dashed')
+
+#ax1.axhline(y=1, color='r', linestyle='dashed')
+
+ax1.set_xlabel("Number of processors")
+ax1.set_ylabel("efficiency (speedup / Number of processors)")
+
+ax1.legend()
+
+fig.savefig("si_bench_nprocs_efficiency.pdf", bbox_inches="tight")
