@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-plt.style.use('seaborn')
+plt.style.use('seaborn-colorblind')
 
 def take_mean(cpu_y, wall_y):
     cpu_std = np.std(cpu_y, axis=0)
