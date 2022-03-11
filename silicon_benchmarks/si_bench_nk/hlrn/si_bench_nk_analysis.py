@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import re
 import glob
 
+plt.style.use('seaborn-colorblind')
+
 def convert_to_seconds(hours, minutes, seconds):
     """Converts times in 00h00m00s format to seconds
     """
@@ -122,10 +124,11 @@ for i, run in enumerate(n_procs):
     #print(cputimes[i])
     #ax1.fill_between(n_procs, cputimes-cpu_std, cputimes+cpu_std, alpha=0.2)
     ax1.plot(n_procs[run], cputimes[run], label=run, marker='o', linestyle='dashed')
+    #ax1.plot(n_procs[run], walltimes[run], label="WALL " + run, marker='o', linestyle='dashed')
     #ax1.fill_between(n_procs, walltimes-wall_std, walltimes+wall_std, alpha=0.2)
     #ax1.plot(n_procs, walltimes[i], label=run, marker='o', linestyle='dashed')
 
-ax1.plot(n_procs["nk_2"], n_procs["nk_2"])
+#ax1.plot(n_procs["nk_2"], n_procs["nk_2"])
 
 ax1.set_xlabel("Number of processors")
 ax1.set_ylabel("runtime [s]")
@@ -137,7 +140,8 @@ ax1.set_ylabel("runtime [s]")
 #ax2.set_xlabel("Number of processors")
 #ax2.set_ylabel("runtime [s]")
 
-fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
+#fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
+ax1.legend()
 
 fig.savefig("si_bench_nprocs.pdf", bbox_inches="tight")
 
@@ -174,6 +178,13 @@ for i, run in enumerate(n_procs):
 #ax1.plot(n_procs["nk_2"], n_procs["nk_2"])
 
 ax1.axhline(y=1, color='r', linestyle='dashed')
+
+ax1.set_xlim(0)
+ax1.set_ylim(0)
+
+n_procs_reference = np.linspace(0, 80)
+
+ax1.plot(n_procs_reference, n_procs_reference, linestyle='solid')
 
 #ax1.plot(n_procs["nk_2"], 0.6 * n_procs["nk_2"])
 
@@ -239,7 +250,7 @@ ax1.set_ylabel("runtime [s]")
 #ax2.set_xlabel("Number of processors")
 #ax2.set_ylabel("runtime [s]")
 
-fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
+#fig.legend(loc = "lower right", bbox_to_anchor = [0.9, 0.11])
 
 fig.savefig("si_bench_nk_x_nk.pdf", bbox_inches="tight")
 
