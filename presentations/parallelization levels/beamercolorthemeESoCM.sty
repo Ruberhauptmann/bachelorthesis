@@ -1,0 +1,29 @@
+\mode<presentation>
+
+\definecolor{uhhblack}{RGB}{0,0,0}
+\definecolor{uhhred}{RGB}{226,0,26}
+\definecolor{uhhredbg}{RGB}{240,130,136}
+\definecolor{uhhblue}{RGB}{2,113,187}
+\definecolor{uhhbluebg}{RGB}{128,184,219}
+\definecolor{uhhstone}{RGB}{59,81,91}
+\definecolor{uhhstonebg}{RGB}{178,186,189}
+
+\setbeamercolor*{title page header}{fg=uhhstone}
+\setbeamercolor*{author}{fg=uhhstone}
+\setbeamercolor*{date}{fg=uhhstone}
+\setbeamercolor*{item}{fg=uhhstone}
+\setbeamercolor*{normal text}{fg=uhhstone}
+
+% Block environment
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamercolor{block title}{fg=white,bg=uhhstone}
+\setbeamercolor{block body}{fg=black,bg=uhhstonebg}
+\setbeamercolor{block title alerted}{fg=white,bg=uhhred}
+\setbeamercolor{block body alerted}{fg=black,bg=uhhredbg}
+\setbeamercolor{block title example}{fg=white,bg=uhhblue}
+\setbeamercolor{block body example}{fg=black,bg=uhhbluebg}
+\addtobeamertemplate{block begin}{\pgfsetfillopacity{1}}{\pgfsetfillopacity{1}}
+\addtobeamertemplate{block begin alerted}{\pgfsetfillopacity{1}}{\pgfsetfillopacity{1}}
+\addtobeamertemplate{block begin example}{\pgfsetfillopacity{1}}{\pgfsetfillopacity{1}}
+
+\mode<all>
