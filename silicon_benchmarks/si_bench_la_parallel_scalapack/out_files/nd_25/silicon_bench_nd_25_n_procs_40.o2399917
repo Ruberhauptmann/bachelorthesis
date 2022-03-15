@@ -1,0 +1,51 @@
+Module for gcc 10.2:
+(GNU C/C++/FORTRAN compilers v10.2.0) - loaded.
+Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
+Module for OpenBLAS v.0.3.20 - loaded.
+Module for scalapack 2.2.0 loaded.
+
+     Program PWSCF v.7.0 starts on 14Mar2022 at 13:33:33 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+         "P. Giannozzi et al., J. Chem. Phys. 152 154105 (2020);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    40 processors
+
+     MPI processes distributed on     2 nodes
+     R & G space division:  proc/nbgrp/npool/nimage =      40
+     58507 MiB available memory on the printing compute node when the environment starts
+
+     Reading input from in_files/silicon_bench_nd_25_n_procs_40.scf
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  4
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     Error in routine set_para_diag (4):
+     Too few bands for required ndiag
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+     stopping ...
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 10 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+[idefix878:18421] [[3297,0],0] ORTE_ERROR_LOG: Data unpack would read past end of buffer in file ../../orte/util/show_help.c at line 513
+[idefix878:18421] 38 more processes have sent help message help-mpi-api.txt / mpi-abort
+[idefix878:18421] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+Command exited with non-zero status 1
+real 1.93
+user 4.71
+sys 13.96

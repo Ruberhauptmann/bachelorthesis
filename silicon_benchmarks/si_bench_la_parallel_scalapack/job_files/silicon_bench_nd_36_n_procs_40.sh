@@ -14,4 +14,6 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-scalapack
 
 module load scalapack/2.2.0
 
+export LIBRARY_PATH=/opt/sw1/public/scalapack/2.2.0:$LIBRARY_PATH
+
 /usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nd 36 -i in_files/silicon_bench_nd_36_n_procs_40.scf
