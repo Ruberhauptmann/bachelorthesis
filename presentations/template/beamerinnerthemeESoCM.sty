@@ -1,0 +1,45 @@
+\mode<presentation>
+
+\usepackage[export]{adjustbox}
+\usepackage[nomessages]{fp}
+
+\newcommand{\includegraphicx}[5]{
+    \FPeval{\mywidtha}{     #3*2.845274*#1}
+    \FPeval{\mywidthb}{ (1-#3)*2.845274*#1}
+    \FPeval{\myheighta}{    #4*2.845274*#2}
+    \FPeval{\myheightb}{(1-#4)*2.845274*#2}%
+    \adjustbox{min size={#1mm}{#2mm},
+    Clip*={#3\width - \mywidtha}   {#4\height - \myheighta}
+    {#3\width + \mywidthb}  {#4\height + \myheightb}}%          
+    {\includegraphics[max size={#1mm}{#2mm}]{#5}}
+}
+
+% Title page
+\defbeamertemplate*{title page}{ESoCM}[1][]
+{
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,yshift=-11.33pt,xshift=11.33pt]%
+            at (current page.north west)
+            {
+                \includegraphics[height=20pt]{figs/uhh-logo-de.eps}
+                \hspace{30.66pt}
+                \includegraphics[height=15.33pt]{figs/uhh-wortmarken-MIN-de.eps}
+            };
+        \node[anchor=north,yshift=-46.67pt]
+        at (current page.north)
+        {
+            \includegraphicx{170}{45}{0.5}{0.5}{figs/uni-hamburg-institut-theoretische-physik-formeln.jpg}
+        };
+        \draw[draw=uhhstone,fill=uhhstone,xshift=-29pt,yshift=-190pt] (0,0) rectangle ++(14.1,0.05);
+    \end{tikzpicture}
+    \vskip170pt
+    \begin{beamercolorbox}[leftskip=.67pt,#1]{author}
+        \usebeamerfont{author}\insertauthor{} -- \insertinstitute \hfill \insertdate%
+    \end{beamercolorbox}
+    \vskip10pt
+    \begin{beamercolorbox}[leftskip=.67pt,#1]{title page header}
+      \usebeamerfont{title}\textbf{\inserttitle}\par%
+    \end{beamercolorbox}%
+}
+
+\mode<all>

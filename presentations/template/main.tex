@@ -1,0 +1,41 @@
+\documentclass[aspectratio=169]{beamer}
+
+\input{preamble}
+
+\title[Shortened title]{This is a Blindtext. Here the head line or the name of the event should be given}
+\author{Rainer Zufall}
+\date{\today}
+\institute[I. ITP -- AG ESoCM]{I. Institute of Theoretical Physics}
+
+\usetheme{ESoCM}
+
+
+\begin{document}
+
+{
+\setbeamertemplate{footline}{\empty}
+\begin{frame}
+	\titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+\begin{frame}{This is a frame title -- avoid more than two line}
+	\begin{block}{Observation 1}
+		Simmons Hall is composed of metal and concrete.
+	\end{block}
+	\begin{exampleblock}{Observation 2}
+		Simmons Dormitory is composed of brick.
+	\end{exampleblock}
+	\begin{alertblock}{Conclusion}
+		Simmons Hall $\not=$ Simmons Dormitory.
+	\end{alertblock}
+    \begin{itemize}[$\triangleright$]
+        \item adf
+        \item a
+        \item b
+        \item c
+    \end{itemize}
+\end{frame}
+
+\end{document}

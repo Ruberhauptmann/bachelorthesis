@@ -2,9 +2,11 @@
 
 \input{preamble}
 
-\title[Shortened title]{This is a Blindtext. Here the head line or the name of the event should be given}
-\author{Rainer Zufall}
-\date{\today}
+\newcommand{\QE}{\textsc{Quantum} ESPRESSO}
+
+\title[Parallelization Levels in \QE]{Parallelization Levels in \QE}
+\author{Tjark Sievers}
+\date{}
 \institute[I. ITP -- AG ESoCM]{I. Institute of Theoretical Physics}
 
 \usetheme{ESoCM}
@@ -20,22 +22,34 @@
 }
 \addtocounter{framenumber}{-1}
 
-\begin{frame}{This is a frame title -- avoid more than two line}
-	\begin{block}{Observation 1}
-		Simmons Hall is composed of metal and concrete.
-	\end{block}
-	\begin{exampleblock}{Observation 2}
-		Simmons Dormitory is composed of brick.
-	\end{exampleblock}
-	\begin{alertblock}{Conclusion}
-		Simmons Hall $\not=$ Simmons Dormitory.
-	\end{alertblock}
-    \begin{itemize}[$\triangleright$]
-        \item adf
-        \item a
-        \item b
-        \item c
-    \end{itemize}
+\begin{frame}
+	\frametitle{k-point Parallelization}
+
+	
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Plane-wave Parallelization}
+
+	wave-function coefficients
+\end{frame}
+
+\begin{frame}
+	\frametitle{Linear Algebra Parallelization}
+
+	distributes matrix diagonalization and matrix-matrix 	
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Summary: Parallelization in pw.x}
+
+	\begin{itemize}
+		\item \textbf{plane wave}: orbitals in plane wave basis set
+		
+		\item \textbf{tasks}: 
+	\end{itemize}
 \end{frame}
 
 \end{document}
