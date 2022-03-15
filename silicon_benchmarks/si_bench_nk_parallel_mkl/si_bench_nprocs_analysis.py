@@ -1,5 +1,4 @@
 import os
-import matplotlib
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
@@ -11,7 +10,7 @@ from helper import qe_helper
 from helper.plot_helper import nprocs_plots
 
 if __name__ == "__main__":
-    runs_nk = os.listdir("out_files")
+    runs_nd = os.listdir("out_files")
 
     n_procs = {}
     walltimes = {}
@@ -21,12 +20,12 @@ if __name__ == "__main__":
 
     nk_list = []
 
-    for run in runs_nk:
+    for run in runs_nd:
         n_procs[run] = np.zeros(len(os.listdir("out_files/" + run)))
         walltimes[run] = np.zeros(len(os.listdir("out_files/" + run)))
         cputimes[run] = np.zeros(len(os.listdir("out_files/" + run)))
 
-    for i, run in enumerate(runs_nk):
+    for i, run in enumerate(runs_nd):
         files = os.listdir("out_files/" + run)
 
         for file_index, file in enumerate(files):
