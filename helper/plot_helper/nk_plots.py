@@ -1,3 +1,4 @@
+from matplotlib import markers
 import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-colorblind')
@@ -7,6 +8,9 @@ def plot(cpu_y, wall_y, n_procs, prefix, type):
 
     for nk in n_procs:
         ax1.plot(n_procs[nk], cpu_y[nk], label=nk, marker='o', linestyle='dashed')
+    
+    #ax1.plot(list(n_procs)[0], list(n_procs)[0])
+    ax1.plot(n_procs[list(n_procs)[0]], n_procs[list(n_procs)[0]])
 
     ax1.set_xlabel("Number of processors")
 

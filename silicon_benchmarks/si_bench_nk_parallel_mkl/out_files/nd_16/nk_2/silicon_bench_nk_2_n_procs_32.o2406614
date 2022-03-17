@@ -3,7 +3,7 @@ Module for gcc 10.2:
 (GNU C/C++/FORTRAN compilers v10.2.0) - loaded.
 Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
-     Program PWSCF v.7.0 starts on 15Mar2022 at 10:25:33 
+     Program PWSCF v.7.0 starts on 15Mar2022 at 18:19:59 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -19,7 +19,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      MPI processes distributed on     2 nodes
      K-points division:     npool     =       2
      R & G space division:  proc/nbgrp/npool/nimage =      16
-     42791 MiB available memory on the printing compute node when the environment starts
+     22912 MiB available memory on the printing compute node when the environment starts
 
      Reading input from in_files/silicon_bench_nk_2_n_procs_32.scf
 
@@ -30,7 +30,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
 
      Subspace diagonalization in iterative solution of the eigenvalue problem:
      one sub-group per band group will be used
-     scalapack distributed-memory algorithm (size of sub-group:  3*  3 procs)
+     scalapack distributed-memory algorithm (size of sub-group:  4*  4 procs)
 
 
      Parallelization info
@@ -114,7 +114,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      starting charge       7.9988, renormalised to       8.0000
      Starting wfcs are    8 randomized atomic wfcs
 
-     total cpu time spent up to now is       14.8 secs
+     total cpu time spent up to now is       31.1 secs
 
      Self-consistent Calculation
 
@@ -128,7 +128,7 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  5.86E-04,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       83.7 secs
+     total cpu time spent up to now is      104.4 secs
 
      total energy              =     -16.92149417 Ry
      estimated scf accuracy    <       0.05528576 Ry
@@ -137,66 +137,126 @@ Module for OpenMPI 4.1.0-gcc10.2-infiniband loaded.
      Davidson diagonalization with overlap
      ethr =  6.91E-04,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      110.1 secs
+     total cpu time spent up to now is      131.9 secs
 
      total energy              =     -16.92319883 Ry
      estimated scf accuracy    <       0.00291056 Ry
 
      iteration #  3     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
+     ethr =  3.64E-05,  avg # of iterations =  2.3
+
+     total cpu time spent up to now is      178.9 secs
+
+     total energy              =     -16.92386794 Ry
+     estimated scf accuracy    <       0.00006641 Ry
+
+     iteration #  4     ecut=    70.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  8.30E-07,  avg # of iterations =  5.1
+
+     total cpu time spent up to now is      257.7 secs
+
+     total energy              =     -16.92395271 Ry
+     estimated scf accuracy    <       0.00000026 Ry
+
+     iteration #  5     ecut=    70.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  3.31E-09,  avg # of iterations =  6.6
+
+     total cpu time spent up to now is      353.5 secs
+
+     total energy              =     -16.92395445 Ry
+     estimated scf accuracy    <          9.3E-09 Ry
+
+     iteration #  6     ecut=    70.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.16E-10,  avg # of iterations =  3.5
+
+     total cpu time spent up to now is      409.7 secs
+
+     total energy              =     -16.92395445 Ry
+     estimated scf accuracy    <          8.8E-10 Ry
+
+     iteration #  7     ecut=    70.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.10E-11,  avg # of iterations =  3.3
+
+     total cpu time spent up to now is      464.3 secs
+
+     total energy              =     -16.92395445 Ry
+     estimated scf accuracy    <          1.5E-10 Ry
+
+     iteration #  8     ecut=    70.00 Ry     beta= 0.70
+     Davidson diagonalization with overlap
+     ethr =  1.82E-12,  avg # of iterations =  2.4
+
+     total cpu time spent up to now is      507.2 secs
+
+     End of self-consistent calculation
+
+     Number of k-points >= 100: set verbosity='high' to print the bands.
+
+     highest occupied level (ev):     6.4228
+
+!    total energy              =     -16.92395445 Ry
+     estimated scf accuracy    <          1.0E-13 Ry
+
+     The total energy is the sum of the following terms:
+     one-electron contribution =       5.10086350 Ry
+     hartree contribution      =       1.07923924 Ry
+     xc contribution           =      -6.20429862 Ry
+     ewald contribution        =     -16.89975857 Ry
+
+     convergence has been achieved in   8 iterations
+
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_bench_nk_2_n_procs_32.save/
+
+     init_run     :      2.44s CPU      3.06s WALL (       1 calls)
+     electrons    :    298.18s CPU    476.23s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      2.39s CPU      2.96s WALL (       1 calls)
+     potinit      :      0.01s CPU      0.01s WALL (       1 calls)
+     hinit0       :      0.02s CPU      0.06s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :    289.77s CPU    463.34s WALL (       9 calls)
+     sum_band     :      8.27s CPU     12.57s WALL (       9 calls)
+     v_of_rho     :      0.07s CPU      0.09s WALL (       9 calls)
+     mix_rho      :      0.01s CPU      0.01s WALL (       9 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.94s CPU      1.30s WALL (   15789 calls)
+     init_us_2:cp :      0.91s CPU      1.27s WALL (   15789 calls)
+     cegterg      :     59.79s CPU     81.90s WALL (    7479 calls)
+
+     Called by *egterg:
+     cdiaghg      :     27.48s CPU     37.59s WALL (   31086 calls)
+     h_psi        :     16.96s CPU     23.19s WALL (   32748 calls)
+     g_psi        :      0.09s CPU      0.12s WALL (   24438 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      1.81s CPU      2.45s WALL (   32748 calls)
+     vloc_psi     :     14.44s CPU     19.80s WALL (   32748 calls)
+     add_vuspsi   :      0.52s CPU      0.71s WALL (   32748 calls)
+
+     General routines
+     calbec       :      1.75s CPU      2.38s WALL (   32748 calls)
+     fft          :      0.01s CPU      0.05s WALL (      91 calls)
+     ffts         :      0.03s CPU      0.05s WALL (       9 calls)
+     fftw         :     16.12s CPU     21.72s WALL (  249042 calls)
+
+     Parallel routines
+
+     PWSCF        :   5m21.81s CPU   8m54.44s WALL
 
 
+   This run was terminated on:  18:28:53  15Mar2022            
 
-
-
-
-
-
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-{    0,    0}:  On entry to 
-DSTEQR parameter number   -2 had an illegal value 
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 5 was incorrect on entry to DLASCL.
-{    1,    1}:  On entry to 
-DSTEQR parameter number   -2 had an illegal value 
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 5 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.
-
-
-Intel MKL ERROR: Parameter 4 was incorrect on entry to DLASCL.[idefix882:22924] *** An error occurred in MPI_Bcast
-[idefix882:22924] *** reported by process [1085276161,2]
-[idefix882:22924] *** on communicator MPI COMMUNICATOR 14 CREATE FROM 11
-[idefix882:22924] *** MPI_ERR_TRUNCATE: message truncated
-[idefix882:22924] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
-[idefix882:22924] ***    and potentially your MPI job)
-
-[idefix882:22915] 1 more process has sent help message help-mpi-errors.txt / mpi_errors_are_fatal
-[idefix882:22915] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-Command exited with non-zero status 15
-real 114.58
-user 1367.83
-sys 863.76
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
+real 536.90
+user 6515.57
+sys 4145.66

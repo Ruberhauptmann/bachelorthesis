@@ -96,9 +96,9 @@ def extract_times_nk(out_files_path, multiple_runs=False):
     cputimes = {}
 
     for nk in runs_nk:
-        n_procs[nk] = np.zeros(len(os.listdir("out_files/" + nk)))
-        walltimes[nk] = np.zeros(len(os.listdir("out_files/" + nk)))
-        cputimes[nk] = np.zeros(len(os.listdir("out_files/" + nk)))
+        n_procs[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
+        walltimes[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
+        cputimes[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
 
         files = os.listdir(out_files_path + "/" + nk)
 
