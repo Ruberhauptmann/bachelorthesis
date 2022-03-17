@@ -25,31 +25,34 @@
 \begin{frame}
 	\frametitle{k-point Parallelization}
 
-	
-
+	\begin{itemize}
+		\item Highest level of parallelization I currently use
+		\item Distributes k points to pools of processors
+		\item Relevant parameter: \(\mathtt{Nk}\)
+		\item Number of processors for the whole job \( = \mathtt{Np} \implies\) number of processors in one pool \(= \frac{\mathtt{Np}}{\mathtt{Nk}}\)
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Plane-wave Parallelization}
+	\frametitle{Plane-wave (PW) Parallelization}
 
-	wave-function coefficients
+	\begin{itemize}
+		\item Calculations for the group of k points in one pool are automatically parallelized
+		\item This means: Orbitals in plane wave basis set, charge density in real and reciprocal
+		space are distributed among processors
+		\item Also includes fourier transforms
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Linear Algebra Parallelization}
 
-	distributes matrix diagonalization and matrix-matrix 	
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{Summary: Parallelization in pw.x}
-
 	\begin{itemize}
-		\item \textbf{plane wave}: orbitals in plane wave basis set
-		
-		\item \textbf{tasks}: 
+		\item Parallelization level running along PW parallelization
+		\item Distributes matrix diagonalization and orthonomalization of wave functions
+		\item Relevant parameter: \(\mathtt{Nd}\)
 	\end{itemize}
+
 \end{frame}
 
 \end{document}
