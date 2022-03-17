@@ -2,7 +2,9 @@ import re
 import os
 import numpy as np
 
-def convert_to_seconds(hours, minutes, seconds):
+def convert_to_seconds(hours, minutes, seconds=0):
+    """Converts times in 00h00m00s format to seconds
+    """
     if not hours:
         hours = 0
     else:
@@ -11,8 +13,12 @@ def convert_to_seconds(hours, minutes, seconds):
         minutes = 0
     else:
         minutes = float(minutes[:-1])
+    if not seconds:
+        seconds = 0
+    else:
+        seconds = float(seconds[:-1])
 
-    seconds = float(seconds[:-1])
+    #print(hours, minutes, seconds)
 
     return hours * 3600 + minutes * 60 + seconds
 
@@ -38,8 +44,10 @@ def search_times(searchlines, n_procs):
         print("Time was not measured using time. Defaulting on Quantum Espresso times instead.")
         for line in searchlines:
             if "PWSCF        :" in line:
-                execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-                wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+                #execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                #wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+                execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
 
     return execution_time, wall_time
 
