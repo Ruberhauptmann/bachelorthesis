@@ -73,7 +73,7 @@ if __name__ == "__main__":
         searchlines = f.readlines()
     
 
-    cputime_singlecore, walltime_singlecore = qe_helper.extract_times(searchlines, 1)
+    cputime_singlecore, walltime_singlecore = qe_helper.search_times(searchlines, 1)
 
     speedup_cpu = {}
     speedup_wall = {}
