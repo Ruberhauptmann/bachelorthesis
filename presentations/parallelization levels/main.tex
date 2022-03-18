@@ -38,9 +38,10 @@
 
 	\begin{itemize}
 		\item Calculations for the group of k points in one pool are automatically parallelized
-		\item This means: Orbitals in plane wave basis set, charge density in real and reciprocal
-		space are distributed among processors
-		\item Also includes fourier transforms
+		\item This means: wave function coefficients in real and reciprocal space are distributed among processors
+		\item Includes parallelization of fourier transforms: planes of the real grid or columns of G-vectors respectively are distributed
+		among processors
+		\item Also called R \& G space parallelization
 	\end{itemize}
 \end{frame}
 
@@ -48,9 +49,10 @@
 	\frametitle{Linear Algebra Parallelization}
 
 	\begin{itemize}
-		\item Parallelization level running along PW parallelization
+		\item Parallelization level running alongside PW parallelization
 		\item Distributes matrix diagonalization and orthonomalization of wave functions
 		\item Relevant parameter: \(\mathtt{Nd}\)
+		\item Groups of \(\mathtt{Nd}\) processors in every pool
 	\end{itemize}
 
 \end{frame}
