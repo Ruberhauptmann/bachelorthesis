@@ -14,4 +14,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0
 
 module load openmpi/4.1.0.gcc10.2-infiniband
 
-mpirun $QEPREFIX/bin/pw.x -nk 8 -i in_files/silicon_bench_nk_8_n_procs_32.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 8 -i in_files/silicon_bench_nk_8_n_procs_32.scf

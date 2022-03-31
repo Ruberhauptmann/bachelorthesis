@@ -15,7 +15,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 4000
-    max_number_procs = 80
+    max_number_procs = 40
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -41,7 +41,7 @@ def main():
                 prefix = '\'' + job_name +  '\''
 
                 input_file = input_template.render(prefix=prefix)
-                job_file = job_template.render(nk=nk, n_procs=n_procs, log_path=log_path, job_name=job_name)
+                job_file = job_template.render(nk=nk, n_procs=n_procs, log_path=log_path, job_name=job_name, in_files_path="in_files")
                 with open('in_files/' + job_name + '.scf'  , 'w') as fh:
                     fh.write(input_file)
                 with open('job_files/' + job_name + '.sh'  , 'w') as fh:
