@@ -30,7 +30,7 @@ def main():
     job_template = env.get_template('silicon_bench_nk.sh.jinja')
 
     for nk in find_all_divisors(number_k_points, max_number_procs):
-        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_parallel_mkl/nd_16/nk_' + str(nk)
+        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_parallel_mkl/nd_1/nk_' + str(nk)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
