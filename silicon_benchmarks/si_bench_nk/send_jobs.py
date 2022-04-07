@@ -40,6 +40,11 @@ def main():
                 job_name = 'silicon_bench_nk_' + str(nk) + '_n_procs_' + str(n_procs)
                 prefix = '\'' + job_name +  '\''
 
+                with open('silicon_nk_benchmark_hlrn.sh', 'a') as f:
+                    f.write('nk=' + str(nk) + '\n')
+                    f.write('n_scf=' + str(n_procs) + '\n')
+                    f.write('mpirun -n $n_scf pw.x -nk $nk < silicon.scf > silicon_bench_nk_"$nk"_n_procs_"$n_scf".out' + '\n')
+
                 input_file = input_template.render(prefix=prefix)
                 job_file = job_template.render(nk=nk, n_procs=n_procs, log_path=log_path, job_name=job_name, in_files_path="in_files")
                 with open('in_files/' + job_name + '.scf'  , 'w') as fh:
@@ -47,7 +52,7 @@ def main():
                 with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                     fh.write(job_file)
 
-                subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()
