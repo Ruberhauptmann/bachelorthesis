@@ -61,9 +61,22 @@ auxiliary system of electrons and introduce a correction potential.
 \section{Parallel computing\label{sec:parallel_computing}}
 
 The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
-The information presented can be found in any textbook on parallel/high-perfomance computing \cite{hager_introduction_2010}.
+The information presented can be found in any textbook on parallel or high-perfomance computing \cite{hager_introduction_2010}.
 
+\subsection{On scalabilty}
 
+In scientific computing, one can identify two distinct reasons to distribute workloads to multiple processors:
+\begin{itemize}
+    \item The execution time on a single core is not sufficient. The definition of sufficient is dependent on the specific task and can range from "over lunch" to "multiple weeks"
+    \item The memory requirements grow outside the capabilities of a single core
+\end{itemize}
+In order to judge how well a task can parallelized, usually some sort of scalabilty metric is employed, for example:
+\begin{itemize}
+    \item How fast can a problem be solved with \(N\) processors instead of one?
+    \item What kind of bigger problem (finer resolution, more particles, etc.) can be solved with \(N\) processors?
+    \item How much of the resources is used for solving the problem?
+\end{itemize}
+The speedup by using \(N\) workers to solve a problem instead of one is defined as \(S = \frac{T_1}{T_N}\), where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
 
 
 \end{document}
