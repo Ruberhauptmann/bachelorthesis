@@ -79,12 +79,12 @@ In order to judge how well a task can parallelized, usually some sort of scalabi
 The speedup by using \(N\) workers to solve a problem instead of one is defined as \(S = \frac{T_1}{T_N}\), where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
 In the ideal case, where all the work can be perfectly distributed among the processors, all processors need the same time for their respective workloads and don't have to wait for others processors to finish their workload to continue, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so the speedup would be \(S = \frac{T_1}{\frac{T_1}{N}} = N\).
 
-In reality, there are many factors either limiting or in some cases accelerating parallel code execution. Limiting factors include:
+In reality, there are many factors either limiting or in some cases supporting parallel code scalability. Limiting factors include:
 \begin{itemize}
-    \item \emph{Algorithmic limitations}: some parts 
-    \item \emph{Bottlenecks}:
-    \item \emph{Startup Overhead}:
-    \item \emph{Communication}: 
+    \item \emph{Algorithmic limitations}: when parts of a calculation are mutually dependent on each other, the calculation cannot be fully parallelized
+    \item \emph{Bottlenecks}: in any computer system exist resources which are shared between processor cores with limitations on parallel access. This serializes the execution by requiring cores to wait for others to complete the task which uses the shared resources in question
+    \item \emph{Startup Overhead}: introducing parallelization into a programm necessarily introduces an overhead, e.g. for distributing data across all the processors
+    \item \emph{Communication}: often solving a problem requires communication between different cores (e.g. exchange of interim results after a step of the calculation). Communication can be implemented very effectively, but can still introduce a big prize in computation time
 \end{itemize}
 On the other hand, faster parallel code execution can come from:
 \begin{itemize}
