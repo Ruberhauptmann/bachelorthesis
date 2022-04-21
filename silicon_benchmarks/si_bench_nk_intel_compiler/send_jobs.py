@@ -15,7 +15,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 4000
-    max_number_procs = 40
+    max_number_procs = 2
 
     for file in glob.glob('in_files/*'):
         os.remove(file)

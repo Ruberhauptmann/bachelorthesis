@@ -13,9 +13,6 @@
 
 QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
-ulimit -l unlimited
-ulimit -a
-
 module load intel/oneAPI-2021.4
 
 /usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 1 -i in_files_singlecore/silicon_bench_nk_singlecore_9.scf
