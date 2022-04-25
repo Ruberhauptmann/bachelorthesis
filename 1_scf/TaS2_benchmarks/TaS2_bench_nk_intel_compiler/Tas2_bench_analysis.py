@@ -6,7 +6,6 @@ import os
 sys.path.append("../../")
 
 from helper import qe_helper
-from helper.plot_helper import nk_plots
 
 if __name__ == "__main__":
     nk_list = os.listdir("out_files/")
