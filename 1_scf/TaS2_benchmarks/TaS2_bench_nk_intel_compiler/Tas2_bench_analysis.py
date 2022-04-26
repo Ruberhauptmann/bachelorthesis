@@ -1,4 +1,3 @@
-import enum
 import numpy as np
 import sys
 import os
@@ -32,4 +31,7 @@ if __name__ == "__main__":
 
     for nk in cputimes:
         for n_procs in cputimes[nk]:
-            print("nk = {nk}, N processors = {n_procs}, Mean execution time = {cpu_time:.2f} +- {cpu_time_std}". format(nk=nk, n_procs=n_procs, cpu_time=np.mean(cputimes[nk][n_procs]), cpu_time_std=np.std(cputimes[nk][n_procs])))
+            print("nk = {nk}, N processors = {n_procs}, Mean execution time = {cpu_time:.2f} +- {cpu_time_std}". format(nk=nk,
+            n_procs=n_procs,
+            cpu_time=np.mean(cputimes[nk][n_procs]),
+            cpu_time_std=np.std(cputimes[nk][n_procs], ddof=1) / np.sqrt(np.size(cputimes[nk][n_procs]))))
