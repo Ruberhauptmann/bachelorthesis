@@ -1,4 +1,5 @@
 __pycache__/
+temp_out_files/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
