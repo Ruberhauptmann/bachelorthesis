@@ -1,10 +1,7 @@
 import numpy as np
 import sys
 
-sys.path.append("../../")
-
-from helper import qe_helper
-from helper.plot_helper import nk_plots
+from qe_benchmarking import nk_plots, qe_helper
 
 if __name__ == "__main__":
     ### Plot absolute times
