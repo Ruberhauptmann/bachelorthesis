@@ -36,13 +36,13 @@ def main():
         for nk in nk_list:
         #for nk in [2]:
             for n_procs in range(nk_list[-1], max_number_procs, nk_list[-1]):
-                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk/nk_' + str(nk) + '/' + str(n_procs)
+                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_ompi/nk_' + str(nk) + '/' + str(n_procs)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)
 
                 if n_procs % nk == 0:
-                    job_name = 'si_ph_bench_nk_' + str(nk) + '_n_procs_' + str(n_procs) + '_' + str(run)
+                    job_name = 'si_ph_bench_nk_ompi_' + str(nk) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
 
                     input_file_scf = input_template_scf.render(prefix=prefix)
