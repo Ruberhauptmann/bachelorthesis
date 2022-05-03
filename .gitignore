@@ -1,6 +1,10 @@
 __pycache__/
 temp_out_files/
 
+build/
+*.egg-info
+dist/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
