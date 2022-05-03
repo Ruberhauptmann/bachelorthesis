@@ -14,7 +14,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 144
-    max_number_procs = 40
+    max_number_procs = 80
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -29,12 +29,12 @@ def main():
     job_template = env.get_template('TaS2_cdw_bench_nk.sh.jinja')
 
     nk_list = find_all_divisors(number_k_points, max_number_procs)
+    print(nk_list)
 
     for run in range(1):
         for nk in nk_list:
-            for n_procs in range(nk_list[-1], max_number_procs, nk_list[-1]):
-                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk/nk_' + str(nk) + '/' + str(n_procs)
-                log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler/nk_' + str(nk) + '/' + str(n_procs)
+            for n_procs in range(nk_list[-3], max_number_procs, nk_list[-3]):
+                log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler/nk_' + str(nk)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)

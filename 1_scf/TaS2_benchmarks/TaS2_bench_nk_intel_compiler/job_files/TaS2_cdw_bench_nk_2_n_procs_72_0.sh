@@ -1,11 +1,11 @@
 #!/bin/bash
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nk_intel_compiler/nk_8
+#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nk_intel_compiler/nk_2
 #$ -l h_cpu=60:00:00
 #$ -l h_vmem=3G
-#$ -pe mpi 36
-#$ -N TaS2_cdw_bench_nk_8_n_procs_36_0
+#$ -pe mpi 72
+#$ -N TaS2_cdw_bench_nk_2_n_procs_72_0
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
@@ -15,4 +15,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 8 -i in_files/TaS2_cdw_bench_nk_8_n_procs_36_0.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 2 -i in_files/TaS2_cdw_bench_nk_2_n_procs_72_0.scf
