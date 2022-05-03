@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
         cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files/" + nd, multiple_runs=False)
 
-        nk_plots.plot(cputimes, walltimes, n_procs, "TaS2_nd" + nd, "absolute")
+        nk_plots.plot(walltimes, cputimes, n_procs, "TaS2_nd" + nd, "absolute")
 
         ### Plot speedup
 
@@ -29,4 +29,4 @@ if __name__ == "__main__":
             speedup_cpu[nk] = cputime_singlecore / cputimes[nk]
             speedup_wall[nk] = walltime_singlecore / walltimes[nk]
 
-        nk_plots.plot(speedup_cpu, speedup_wall, n_procs, "TaS2_nd" + nd, "speedup")
+        nk_plots.plot(speedup_wall, speedup_cpu, n_procs, "TaS2_nd" + nd, "speedup")
