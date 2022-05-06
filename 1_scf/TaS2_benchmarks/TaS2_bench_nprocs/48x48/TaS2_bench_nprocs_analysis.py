@@ -5,7 +5,7 @@ from qe_benchmarking import qe_helper, nprocs_plots
 if __name__ == "__main__":
     ### Plot absolute times
 
-    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=False)
+    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=True)
 
     nprocs_plots.plot(cputimes, walltimes, n_procs, "TaS2", "absolute")
 

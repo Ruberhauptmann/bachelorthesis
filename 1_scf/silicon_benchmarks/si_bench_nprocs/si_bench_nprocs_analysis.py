@@ -1,16 +1,11 @@
-import os
 import numpy as np
-import sys
 
-sys.path.append("../../")
-
-from helper import qe_helper
-from helper.plot_helper import nprocs_plots
+from qe_benchmarking import qe_helper, nprocs_plots
 
 if __name__ == "__main__":
     ### Plot absolute times
 
-    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=True)
+    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=False)
 
     nprocs_plots.plot(cputimes, walltimes, n_procs, "si", "absolute")
 
@@ -25,6 +20,12 @@ if __name__ == "__main__":
     speedup_wall = walltime_singlecore / walltimes
 
     nprocs_plots.plot(speedup_cpu, speedup_wall, n_procs, "si", "speedup")
+
+    ### Plot idle time
+
+    wait_time = (walltimes - cputimes) / walltimes
+
+    nprocs_plots.plot(wait_time, wait_time, n_procs, "si", "wait")
 
     ### Plot efficiency
 

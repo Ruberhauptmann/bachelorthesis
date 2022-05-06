@@ -12,7 +12,8 @@ def take_mean(cpu_y, wall_y):
     return cpu_std, wall_std, cpu_y,wall_y 
 
 def plot(cpu_y, wall_y, n_procs, prefix, type, plot_error=False):
-    cpu_std, wall_std, cpu_y, wall_y = take_mean(cpu_y, wall_y)
+    if cpu_y.ndim != 1:
+        cpu_std, wall_std, cpu_y, wall_y = take_mean(cpu_y, wall_y)
 
     fig, ax1 = plt.subplots()
 
@@ -21,6 +22,8 @@ def plot(cpu_y, wall_y, n_procs, prefix, type, plot_error=False):
         ax1.plot(n_procs, cpu_y, label="CPU", marker='o', linestyle='dashed')
         ax1.fill_between(n_procs, wall_y-wall_std, wall_y+wall_std, alpha=0.2)
         ax1.plot(n_procs, wall_y, label="WALL", marker='o', linestyle='dashed')
+    if type == 'wait':
+        ax1.plot(n_procs, cpu_y, marker='o', linestyle='dashed')
     else:
         ax1.plot(n_procs, cpu_y, label="CPU", marker='o', linestyle='dashed')
         ax1.plot(n_procs, wall_y, label="WALL", marker='o', linestyle='dashed')
@@ -32,6 +35,8 @@ def plot(cpu_y, wall_y, n_procs, prefix, type, plot_error=False):
     if type == "speedup":
         ax1.axhline(y=1, color='r', linestyle='dashed')
         ax1.set_ylabel("speedup")
+    if type == "wait":
+        ax1.set_ylabel("system time")
     if type == "efficiency":
         ax1.set_ylabel("efficiency (speedup / Number of processors)")
 
