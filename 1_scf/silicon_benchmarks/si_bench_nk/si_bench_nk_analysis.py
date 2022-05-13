@@ -1,14 +1,13 @@
 import numpy as np
-import sys
 
-from qe_benchmarking import nk_plots, qe_helper
+from qe_benchmarking import qe_helper, nk_plots
 
 if __name__ == "__main__":
     ### Plot absolute times
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=False)
 
-    nk_plots.plot(cputimes, walltimes, n_procs, "si", "absolute")
+    nk_plots.plot(cputimes, walltimes, n_procs, "si_ompi", "absolute")
 
     ### Plot speedup
 
@@ -24,4 +23,26 @@ if __name__ == "__main__":
         speedup_cpu[nk] = cputime_singlecore / cputimes[nk]
         speedup_wall[nk] = walltime_singlecore / walltimes[nk]
 
-    nk_plots.plot(speedup_cpu, speedup_wall, n_procs, "si", "speedup")
+    nk_plots.plot(speedup_cpu, speedup_wall, n_procs, "si_ompi", "speedup")
+
+    ### Plot idle time
+
+    wait_time = {}
+
+    for nk in n_procs:
+        wait_time[nk] = (walltimes[nk] - cputimes[nk]) / walltimes[nk]
+
+    nk_plots.plot(wait_time, wait_time, n_procs, "si_ompi", "wait")
+
+    ### Plot efficiency
+
+    efficiency_cpu = {}
+    efficiency_wall = {}
+
+    for nk in n_procs:
+        efficiency_cpu[nk] = speedup_cpu[nk] / n_procs[nk]
+        efficiency_wall[nk] = speedup_wall[nk] / n_procs[nk]
+
+    nk_plots.plot(efficiency_cpu, efficiency_wall, n_procs, "si_ompi", "efficiency")
+
+
