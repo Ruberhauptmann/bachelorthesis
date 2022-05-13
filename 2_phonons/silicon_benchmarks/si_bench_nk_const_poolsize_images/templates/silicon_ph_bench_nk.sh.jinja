@@ -1,0 +1,19 @@
+#!/bin/bash
+#$ -q th1prio.q
+#$ -e $HOME/job_logs/error_logs/
+#$ -o {{ log_path }}
+#$ -l h_cpu=02:00:00
+#$ -l excl=TRUE
+#$ -pe mpi {{ n_procs }}
+#$ -N {{ job_name }}
+#$ -cwd
+#$ -S /bin/bash
+#$ -M tsievers@physnet.uni-hamburg.de -m as
+
+QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
+
+module load intel/oneAPI-2021.4
+
+mpirun $QEPREFIX/bin/pw.x -nk {{ nk }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.scf
+
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni 2 -nk {{ nk }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.ph
