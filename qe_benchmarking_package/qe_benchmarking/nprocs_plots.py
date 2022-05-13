@@ -15,7 +15,7 @@ def plot(cpu_y, wall_y, n_procs, prefix, type, plot_error=False):
     if cpu_y.ndim != 1:
         cpu_std, wall_std, cpu_y, wall_y = take_mean(cpu_y, wall_y)
 
-    fig, ax1 = plt.subplots()
+    fig, ax1 = plt.subplots(figsize=[6.4, 4.8])
 
     if plot_error:
         ax1.fill_between(n_procs, cpu_y-cpu_std, cpu_y+cpu_std, alpha=0.2)

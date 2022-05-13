@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=False)
 
-    nprocs_plots.plot(cputimes, walltimes, n_procs, "si", "absolute")
+    nprocs_plots.plot(cputimes, walltimes, n_procs, "si_ompi", "absolute")
 
     ### Plot speedup
 
@@ -19,17 +19,17 @@ if __name__ == "__main__":
     speedup_cpu = cputime_singlecore / cputimes
     speedup_wall = walltime_singlecore / walltimes
 
-    nprocs_plots.plot(speedup_cpu, speedup_wall, n_procs, "si", "speedup")
+    nprocs_plots.plot(speedup_cpu, speedup_wall, n_procs, "si_ompi", "speedup")
 
     ### Plot idle time
 
     wait_time = (walltimes - cputimes) / walltimes
 
-    nprocs_plots.plot(wait_time, wait_time, n_procs, "si", "wait")
+    nprocs_plots.plot(wait_time, wait_time, n_procs, "si_ompi", "wait")
 
     ### Plot efficiency
 
     efficiency_cpu = speedup_cpu / n_procs
     efficiency_wall = speedup_wall / n_procs
 
-    nprocs_plots.plot(efficiency_cpu, efficiency_wall, n_procs, "si", "efficiency")
+    nprocs_plots.plot(efficiency_cpu, efficiency_wall, n_procs, "si_ompi", "efficiency")
