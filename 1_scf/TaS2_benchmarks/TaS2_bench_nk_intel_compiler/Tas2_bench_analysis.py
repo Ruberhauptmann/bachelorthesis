@@ -1,37 +1,46 @@
 import numpy as np
-import sys
-import os
 
-sys.path.append("../../")
-
-from helper import qe_helper
+from qe_benchmarking import qe_helper, nk_plots
 
 if __name__ == "__main__":
-    nk_list = os.listdir("out_files/")
-    print(nk_list)
-    
-    cputimes = {}
-    walltimes = {}
+    ### Plot absolute times
 
-    for nk in nk_list:
-        n_procs_list = os.listdir("out_files/" + nk)
+    cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=False)
 
-        cputimes[nk] = {}
+    nk_plots.plot(cputimes, walltimes, n_procs, "TaS2_intel", "absolute")
 
-        for n_procs in n_procs_list:
-            print(n_procs)
-            files = os.listdir("out_files/" + nk + "/" + n_procs)
+    ### Plot speedup
 
-            cputimes[nk][n_procs] = np.zeros(len(files))
+    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
 
-            for file_index, file in enumerate(files):
-                with open("out_files/" + nk + "/" + n_procs + "/" + file, "r") as f:
-                    searchlines = f.readlines()
-                    cputimes[nk][n_procs][file_index] = qe_helper.search_times(searchlines, int(n_procs))[0]
+    cputime_singlecore = np.mean(cputimes_singlecore)
+    walltime_singlecore = np.mean(walltimes_singlecore)
 
-    for nk in cputimes:
-        for n_procs in cputimes[nk]:
-            print("nk = {nk}, N processors = {n_procs}, Mean execution time = {cpu_time:.2f} +- {cpu_time_std}". format(nk=nk,
-            n_procs=n_procs,
-            cpu_time=np.mean(cputimes[nk][n_procs]),
-            cpu_time_std=np.std(cputimes[nk][n_procs], ddof=1) / np.sqrt(np.size(cputimes[nk][n_procs]))))
+    speedup_cpu = {}
+    speedup_wall = {}
+
+    for nk in n_procs:
+        speedup_cpu[nk] = cputime_singlecore / cputimes[nk]
+        speedup_wall[nk] = walltime_singlecore / walltimes[nk]
+
+    nk_plots.plot(speedup_cpu, speedup_wall, n_procs, "TaS2_intel", "speedup")
+
+    ### Plot idle time
+
+    wait_time = {}
+
+    for nk in n_procs:
+        wait_time[nk] = (walltimes[nk] - cputimes[nk]) / walltimes[nk]
+
+    nk_plots.plot(wait_time, wait_time, n_procs, "TaS2_intel", "wait")
+
+    ### Plot efficiency
+
+    efficiency_cpu = {}
+    efficiency_wall = {}
+
+    for nk in n_procs:
+        efficiency_cpu[nk] = speedup_cpu[nk] / n_procs[nk]
+        efficiency_wall[nk] = speedup_wall[nk] / n_procs[nk]
+
+    nk_plots.plot(efficiency_cpu, efficiency_wall, n_procs, "TaS2_intel", "efficiency")
