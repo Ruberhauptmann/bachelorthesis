@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q lernfix.q
+#$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
 #$ -o $HOME/job_logs/silicon/bench_nprocs_openblas/
 #$ -l h_cpu=01:00:00

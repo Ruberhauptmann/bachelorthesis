@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for num in $(seq 2 2 40)
+for num in $(seq 1 2 1)
 do
     echo "$num"
     sed "s/prefix='silicon',/prefix='silicon_bench_nprocs_openblas_$num',/" in_files/template.scf > in_files/si_bench_$num.scf
