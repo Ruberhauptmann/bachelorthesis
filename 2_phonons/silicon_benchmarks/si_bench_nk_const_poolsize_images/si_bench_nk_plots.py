@@ -2,6 +2,7 @@ import numpy as np
 import sys
 import matplotlib.pyplot as plt
 from pyparsing import line
+import os
 
 from qe_benchmarking import nk_plots, qe_helper
 
@@ -33,24 +34,29 @@ def plot(cpu_y, wall_y, n_procs, prefix, type):
     fig.savefig(filename, bbox_inches="tight")
 
 if __name__ == "__main__":
-    ### Plot absolute times
+    nimage_list = os.listdir('out_files')
 
-    cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=False)
+    for nimage in nimage_list:
+        ### Plot absolute times
 
-    plot(walltimes, cputimes, n_procs, "Si", "absolute")
+        cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files/" + nimage, multiple_runs=False)
 
-    ### Plot speedup
+        plot(walltimes, cputimes, n_procs, "si_ph_" + nimage, "absolute")
 
-    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
+        """
+        ### Plot speedup
 
-    cputime_singlecore = np.mean(cputimes_singlecore)
-    walltime_singlecore = np.mean(walltimes_singlecore)
+        cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
 
-    speedup_cpu = {}
-    speedup_wall = {}
+        cputime_singlecore = np.mean(cputimes_singlecore)
+        walltime_singlecore = np.mean(walltimes_singlecore)
 
-    for nk in n_procs:
-        speedup_cpu[nk] = cputime_singlecore / cputimes[nk]
-        speedup_wall[nk] = walltime_singlecore / walltimes[nk]
+        speedup_cpu = {}
+        speedup_wall = {}
 
-    plot(speedup_wall, speedup_cpu, n_procs, "Si", "speedup")
+        for nk in n_procs:
+            speedup_cpu[nk] = cputime_singlecore / cputimes[nk]
+            speedup_wall[nk] = walltime_singlecore / walltimes[nk]
+
+        plot(speedup_wall, speedup_cpu, n_procs, "Si", "speedup")
+        """

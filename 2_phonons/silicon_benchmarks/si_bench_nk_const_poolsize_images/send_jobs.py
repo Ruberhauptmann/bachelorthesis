@@ -1,4 +1,3 @@
-from cmath import log
 import glob
 import os
 import subprocess
@@ -33,6 +32,8 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
+    nimages = 8
+
     for run in range(1):
         #for poolsize in poolsize_list:
         for poolsize in [2, 8]:
@@ -45,15 +46,17 @@ def main():
                     os.remove(file)
 
                 #if n_procs % poolsize == 0 and n_procs % 5 == 0:
-                if n_procs % poolsize == 0:
+                if (n_procs / nimages ) % poolsize == 0:
                     job_name = 'si_ph_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
 
                     input_file_scf = input_template_scf.render(prefix=prefix)
                     input_file_ph = input_template_ph.render(prefix=prefix,
                     fildyn="\'/fastscratch/tsievers/QE_TMP_DIR/" + job_name + ".dyn\'")
-                    job_file = job_template.render(nk=int((n_procs / 2) / poolsize),
-                    n_procs=n_procs, 
+                    job_file = job_template.render(ni=nimages,
+                    nk_ph=int((n_procs / nimages) / poolsize),
+                    nk_pw=int(n_procs / poolsize),
+                    n_procs=n_procs,
                     log_path=log_path,
                     job_name=job_name,
                     in_files_path="in_files")
