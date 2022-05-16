@@ -15,7 +15,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 144
-    max_number_procs = 80
+    max_number_procs = 150
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -34,14 +34,14 @@ def main():
 
     for run in range(1):
         #for poolsize in poolsize_list:
-        for poolsize in [3, 8, 18]:
-            for n_procs in range(8, max_number_procs, 4):
+        for poolsize in [2, 8, 18]:
+            for n_procs in range(72, max_number_procs, 4):
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)
 
-                if n_procs % poolsize == 0:
+                if n_procs % poolsize == 0.:
                     job_name = 'TaS2_cdw_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
 
