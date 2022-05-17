@@ -1,26 +1,26 @@
 import re
 import os
+import sys
 import numpy as np
 
 def convert_to_seconds(hours, minutes, seconds=0):
-    """Converts times in 00h00m00s format to seconds
-    """
-    if not hours:
-        hours = 0
-    else:
-        hours = float(hours[:-1])
-    if not minutes:
-        minutes = 0
-    else:
-        minutes = float(minutes[:-1])
-    if not seconds:
-        seconds = 0
-    else:
-        seconds = float(seconds[:-1])
-
-    #print(hours, minutes, seconds)
-
     return hours * 3600 + minutes * 60 + seconds
+
+def separate_time_string(time_string):
+    if "h" in time_string:
+        hours = float(re.search("\d+(?=h)", time_string)[0])
+        minutes = float(re.search("\d+(?=m)", time_string)[0])
+        seconds = 0
+    elif "m" in time_string:
+        hours = 0
+        minutes = float(re.search("\d+(?=m)", time_string)[0])
+        seconds = float(re.search("\d+[.]\d+(?=s)", time_string)[0])
+    else:
+        hours = 0
+        minutes = 0
+        seconds = float(re.search("\d+[.]\d+(?=s)", time_string)[0])
+
+    return hours, minutes, seconds
 
 def search_times(searchlines, n_procs):
     cpu_time = 0
@@ -28,26 +28,40 @@ def search_times(searchlines, n_procs):
     wall_time = 0
     execution_time = 0
 
-    if searchlines[-1].split(" ")[0] == "sys":
-        match_cputime = re.search("\d+.\d{2}", searchlines[-1])
-        match_systime = re.search("\d+.\d{2}", searchlines[-2])
+    time = False
+
+    if searchlines[-1].split(" ")[0] == "sys" and time == True:
+        match_systime = re.search("\d+.\d{2}", searchlines[-1])
+        match_cputime = re.search("\d+.\d{2}", searchlines[-2])
         match_walltime = re.search("\d+.\d{2}", searchlines[-3])
-        if match_cputime:
-            cpu_time = float(match_cputime[0])
         if match_systime:
             sys_time = float(match_systime[0])
+        if match_cputime:
+            cpu_time = float(match_cputime[0])
         if match_walltime:
             wall_time = float(match_walltime[0])
 
-        execution_time = (cpu_time + sys_time) / n_procs
+        if n_procs >= 20:
+            execution_time = (cpu_time / 20) + sys_time
+        else:
+            execution_time = (cpu_time / n_procs) + sys_time
+
     else:
         print("Time was not measured using time. Defaulting on Quantum Espresso times instead.")
         for line in searchlines:
             if "PWSCF        :" in line:
                 #execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
                 #wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
-                execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-                wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+                #execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
+                #wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
+
+                execution_time_string = re.search("(?<=:).*(?=CPU)", line)[0].strip()
+                wall_time_string = re.search("(?<=CPU).*(?=WALL)", line)[0].strip()
+
+                print(separate_time_string(execution_time_string))
+
+                execution_time = convert_to_seconds(*separate_time_string(execution_time_string))
+                wall_time = convert_to_seconds(*separate_time_string(wall_time_string))
 
     return execution_time, wall_time
 
