@@ -35,7 +35,7 @@ def main():
 
     for run in range(1):
         #for poolsize in poolsize_list:
-        for poolsize in [2, 4, 8, 18]:
+        for poolsize in [2, 8, 18]:
         #for nk in [2]:
             #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
             for n_procs in range(16, max_number_procs+1, 4):
