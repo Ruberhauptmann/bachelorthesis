@@ -1,6 +1,7 @@
 __pycache__/
 temp_out_files/
 .DS_Store
+out.*
 
 build/
 *.egg-info

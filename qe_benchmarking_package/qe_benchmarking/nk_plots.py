@@ -3,11 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 plt.style.use('seaborn-colorblind')
 
-def plot(cpu_y, wall_y, n_procs, prefix, type):
+def plot(y, n_procs, prefix, type):
     fig, ax1 = plt.subplots()
 
     for nk in n_procs:
-        ax1.plot(n_procs[nk], wall_y[nk], label=nk, marker='o', linestyle='dashed')
+        ax1.plot(n_procs[nk], y[nk], label=nk, marker='o', linestyle='dashed')
     
     if type == "speedup":
         linear_nprocs = np.linspace(0, n_procs[list(n_procs)[-1]][-1])

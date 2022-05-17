@@ -1,6 +1,5 @@
 import re
 import os
-import sys
 import numpy as np
 
 def convert_to_seconds(hours, minutes, seconds=0):
@@ -22,46 +21,20 @@ def separate_time_string(time_string):
 
     return hours, minutes, seconds
 
-def search_times(searchlines, n_procs):
-    cpu_time = 0
-    sys_time = 0
+def search_times(searchlines, type="pw"):
     wall_time = 0
     execution_time = 0
 
-    time = False
+    search_string = {"pw": "PWSCF        :", 
+                     "ph": "PHONON       :"}
 
-    if searchlines[-1].split(" ")[0] == "sys" and time == True:
-        match_systime = re.search("\d+.\d{2}", searchlines[-1])
-        match_cputime = re.search("\d+.\d{2}", searchlines[-2])
-        match_walltime = re.search("\d+.\d{2}", searchlines[-3])
-        if match_systime:
-            sys_time = float(match_systime[0])
-        if match_cputime:
-            cpu_time = float(match_cputime[0])
-        if match_walltime:
-            wall_time = float(match_walltime[0])
+    for line in searchlines:
+        if search_string[type] in line:
+            execution_time_string = re.search("(?<=:).*(?=CPU)", line)[0].strip()
+            wall_time_string = re.search("(?<=CPU).*(?=WALL)", line)[0].strip()
 
-        if n_procs >= 20:
-            execution_time = (cpu_time / 20) + sys_time
-        else:
-            execution_time = (cpu_time / n_procs) + sys_time
-
-    else:
-        print("Time was not measured using time. Defaulting on Quantum Espresso times instead.")
-        for line in searchlines:
-            if "PWSCF        :" in line:
-                #execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-                #wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m)?([ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
-                #execution_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[0])
-                #wall_time = convert_to_seconds(*re.findall("([ ,0-9]{1,2}h)?([ ,0-9]{1,2}m|[ ,0-9]{1,2}.[0-9]{1,2}s)", line)[1])
-
-                execution_time_string = re.search("(?<=:).*(?=CPU)", line)[0].strip()
-                wall_time_string = re.search("(?<=CPU).*(?=WALL)", line)[0].strip()
-
-                print(separate_time_string(execution_time_string))
-
-                execution_time = convert_to_seconds(*separate_time_string(execution_time_string))
-                wall_time = convert_to_seconds(*separate_time_string(wall_time_string))
+            execution_time = convert_to_seconds(*separate_time_string(execution_time_string))
+            wall_time = convert_to_seconds(*separate_time_string(wall_time_string))
 
     return execution_time, wall_time
 
@@ -76,7 +49,7 @@ def search_nprocs(searchlines):
 
     return n_procs
 
-def extract_times(out_files_path, multiple_runs=False):
+def extract_times(out_files_path, type="pw", multiple_runs=False):
     if multiple_runs:
         runs = os.listdir(out_files_path)
     else:
@@ -94,7 +67,7 @@ def extract_times(out_files_path, multiple_runs=False):
             with open(filepath, "r") as f:
                 searchlines = f.readlines()
             n_procs[file_index] = search_nprocs(searchlines)
-            cputimes[run_index, file_index], walltimes[run_index, file_index] = search_times(searchlines, n_procs[file_index])
+            cputimes[run_index, file_index], walltimes[run_index, file_index] = search_times(searchlines, type)
 
         cputimes[run_index] = np.array(cputimes[run_index, n_procs.argsort()])
         walltimes[run_index] = np.array(walltimes[run_index, n_procs.argsort()])
@@ -102,7 +75,7 @@ def extract_times(out_files_path, multiple_runs=False):
 
     return cputimes.mean(0), walltimes.mean(0), n_procs
 
-def extract_times_nk(out_files_path, multiple_runs=False):
+def extract_times_nk(out_files_path, type="pw", multiple_runs=False):
     runs_nk = os.listdir(out_files_path)
 
     n_procs = {}
@@ -121,7 +94,7 @@ def extract_times_nk(out_files_path, multiple_runs=False):
             with open(filepath, "r") as f:
                 searchlines = f.readlines()
             n_procs[nk][file_index] = search_nprocs(searchlines)
-            cputimes[nk][file_index], walltimes[nk][file_index] = search_times(searchlines, n_procs[nk][file_index])
+            cputimes[nk][file_index], walltimes[nk][file_index] = search_times(searchlines, type)
 
         cputimes[nk] = np.array(cputimes[nk][n_procs[nk].argsort()])
         walltimes[nk] =  np.array(walltimes[nk][n_procs[nk].argsort()])
