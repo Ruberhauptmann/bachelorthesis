@@ -1,10 +1,10 @@
 TaS2
 &INPUTPH
     prefix = 'TaS2_phonons'
-    outdir   = '/fastscratch/tsievers/QE_TMP_DIR/'
+    outdir   = '/fastscratch/tsievers/TaS2_phonons/'
 
-    fildyn   = '/fastscratch/tsievers/QE_TMP_DIR/TaS2_ph.dyn'
-    fildyn   = '/fastscratch/tsievers/QE_TMP_DIR/TaS2_ph.dvscf'
+    fildyn   = '/fastscratch/tsievers/TaS2_phonons/TaS2_ph.dyn'
+    fildyn   = '/fastscratch/tsievers/TaS2_phonons/TaS2_ph.dvscf'
 
     ldisp = .true.
     nq1 = 12

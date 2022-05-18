@@ -1,11 +1,10 @@
 #!/bin/bash
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/phonons/bench_nk_const_poolsize/2
+#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/phonons
 #$ -l h_cpu=40:00:00
-#$ -l excl=TRUE
-#$ -pe mpi 16
-#$ -N si_ph_bench_poolsize_2_n_procs_16_0
+#$ -pe mpi 200
+#$ -N TaS2_phonons
 #$ -cwd
 #$ -S /bin/bash
 #$ -M tsievers@physnet.uni-hamburg.de -m as
@@ -14,6 +13,6 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-mpirun $QEPREFIX/bin/pw.x -nk 8 -nd 9 -i in_files/si_ph_bench_poolsize_2_n_procs_16_0.scf
+mpirun $QEPREFIX/bin/pw.x -nk 20 -i TaS2_cdw.scf
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -nk 8 -nd 9 -i in_files/si_ph_bench_poolsize_2_n_procs_16_0.ph
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni 10 -nk 2 -i TaS2.ph
