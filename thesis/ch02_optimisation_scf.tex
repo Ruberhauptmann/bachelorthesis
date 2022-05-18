@@ -18,11 +18,20 @@ The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which c
 \end{subfigure}
 \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_absolute.pdf}
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
 \end{subfigure}
 \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
+\end{subfigure}
+\caption{XXX}
+\label{fig:scaling_ompi_nprocs_si}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_absolute.pdf}
 \end{subfigure}
 \begin{subfigure}[b]{0.3\textwidth}
     \centering
@@ -30,14 +39,10 @@ The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which c
 \end{subfigure}
 \begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
-\end{subfigure}
-\begin{subfigure}[b]{0.3\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
 \caption{XXX}
-\label{fig:scaling_ompi_nprocs}
+\label{fig:scaling_ompi_nprocs_tas2}
 \end{figure}
 
 \todo{caption}
@@ -66,13 +71,13 @@ These scaling tests pose now two questions to be answered:
 
 A first strategy for solving issues with parallelization is trying different compilers and mathematical libraries.
 In the PHYSnet cluster a variety of software packages is available.
-For the compilation of \QE a 
+For the compilation of \QE a \todo{missing}
 
 For testing \QE will be compiled using the following software combinations:
 \begin{itemize}
     \item OpenMPI 4.1.0 and OpenBLAS
     \item OpenMPI 4.1.0 and Scalapack
-    \item Intel oneAPI 2021.4
+    \item Intel oneAPI 2021.4 (includes Intel MPI, Fortran and C compilers as well as Intel MKL, a scalable mathematical library)
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -86,7 +91,7 @@ For testing \QE will be compiled using the following software combinations:
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
+    \includegraphics[width=\textwidth]{plots_scf/si_scalapack_bench_nprocs_speedup.pdf}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
@@ -101,11 +106,22 @@ For testing \QE will be compiled using the following software combinations:
 \subsection{Using the parallelisation parameters of \QE}
 
 As detailed in section \ref{sec:qe}, \QE offers ways to manage how the workload is distributed among the processors.
-In \texttt{pw.x} k-point-parallelization and linear-algebra parallelisation are implemented.
+In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
+
+\begin{figure}[htbp]
+\begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_speedup.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
+\end{subfigure}
+\caption{XXX}
+\label{fig:scaling_nk}
+\end{figure}
 
 \subsection{Comparison with calculations on the HLRN cluster}
-
-\subsection{Scaling over 40 processors}
 
 \subsection{Conclusion: Parameters for optimal scaling}
 
