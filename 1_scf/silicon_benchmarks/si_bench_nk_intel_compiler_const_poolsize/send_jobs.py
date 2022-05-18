@@ -15,7 +15,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 4000
-    max_number_procs = 40
+    max_number_procs = 80
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -35,7 +35,7 @@ def main():
     for run in range(1):
         #for poolsize in poolsize_list:
         for poolsize in [2, 8, 16]:
-            for n_procs in range(1, max_number_procs+1):
+            for n_procs in range(40, max_number_procs+1):
                 log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_intel_compiler_const_poolsize/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
