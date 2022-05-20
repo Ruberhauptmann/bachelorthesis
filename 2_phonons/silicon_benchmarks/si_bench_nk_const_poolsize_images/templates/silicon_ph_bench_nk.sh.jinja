@@ -16,4 +16,4 @@ module load intel/oneAPI-2021.4
 
 mpirun $QEPREFIX/bin/pw.x -nk {{ nk_pw }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.scf
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni {{ ni }} -nk {{ nk_ph }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.ph
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni {{ ni }} -nk 1 -nd 9 -i {{ in_files_path }}/{{ job_name }}.ph

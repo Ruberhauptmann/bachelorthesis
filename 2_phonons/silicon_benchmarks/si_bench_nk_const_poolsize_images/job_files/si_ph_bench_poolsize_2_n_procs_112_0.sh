@@ -16,4 +16,4 @@ module load intel/oneAPI-2021.4
 
 mpirun $QEPREFIX/bin/pw.x -nk 56 -nd 9 -i in_files/si_ph_bench_poolsize_2_n_procs_112_0.scf
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni 2 -nk 28 -nd 9 -i in_files/si_ph_bench_poolsize_2_n_procs_112_0.ph
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni 2 -nk 1 -nd 9 -i in_files/si_ph_bench_poolsize_2_n_procs_112_0.ph
