@@ -1,9 +1,7 @@
 \documentclass[main.tex]{subfiles}
 
 \begin{document}
-\chapter{Results}
-
-\section{Parallelisation of self-consistent calculations of electronic-structure properties}
+\chapter{Parallelisation of self-consistent calculations of electronic-structure properties\label{ch:optimisation_scf}}
 
 \subsection{First scaling tests}
 
@@ -12,15 +10,15 @@ In Fig. \ref{fig:scaling_ompi_nprocs} two scaling tests on the earlier mentioned
 The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which compiler?}, without any further compilation or runtime optimisation parameters used.
 
 \begin{figure}[htbp]
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_absolute.pdf}
 \end{subfigure}
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
 \end{subfigure}
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
@@ -28,16 +26,16 @@ The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which c
 \label{fig:scaling_ompi_nprocs_si}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{figure}[h!]
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_absolute.pdf}
 \end{subfigure}
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
 \end{subfigure}
-\begin{subfigure}[b]{0.3\textwidth}
+\begin{subfigure}[b]{0.32\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
@@ -51,7 +49,7 @@ Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_npr
 \begin{itemize}
     \item runtime: absolute runtime of the compute job
     \item speedup: runtime divided by runtime of the job on a single core
-    \item system time: percentage of wall time used by system tasks, e.g. writing to disk, etc.
+    \item system time: percentage of wall time used by system tasks, e.g. writing to disk, etc. (calculated as walltime - cputime)
 \end{itemize}
 For further analysis mainly speedup will be used as a metric of scalability, because it lends itself to easy interpretation: optimal scalability is achieved when the speedup scales linearly with the number of processors (with a slope of one), as discussed in ch. \ref{sec:parallel_computing}.
 
@@ -80,7 +78,7 @@ For testing \QE will be compiled using the following software combinations:
     \item Intel oneAPI 2021.4 (includes Intel MPI, Fortran and C compilers as well as Intel MKL, a scalable mathematical library)
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
@@ -108,7 +106,13 @@ For testing \QE will be compiled using the following software combinations:
 As detailed in section \ref{sec:qe}, \QE offers ways to manage how the workload is distributed among the processors.
 In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
 
-\begin{figure}[htbp]
+The benchmark pictured in \ref{fig:scaling_nk_si} is set up as follows: for a given number of processors \(N_p\), the parameter \(N_k\) splits the \(N_p\) processors into \(N_k\) processors pools.
+As the number of processors in one pool has to be a whole number, only certain combinations of \(N_p\) and \(N_k\) are possible, for example \(N_p = 32\) could be split into processor pools of size 2 with \(N_k = 16\), size 8 with \(N_k = 4\) or size 16 with \(N_k = 2\).
+This leads to choosing the size of the processor pools as a variable, not the parameter \texttt{nk}.
+Fig. \ref{fig:scaling_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE being compiled with OpenMPI/Scalapack and Intel oneAPI.
+This choice of pool sizes showcases the smallest pool size possibly (namely 2), as well as a bigger pool size with 16, that still gives rise to a few data points over the chosen range of processors.
+
+\begin{figure}[h!]
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_speedup.pdf}
@@ -118,8 +122,34 @@ In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
 \end{subfigure}
 \caption{XXX}
-\label{fig:scaling_nk}
+\label{fig:scaling_nk_si}
 \end{figure}
+
+Fig. \ref{fig:scaling_nk_si} shows 
+
+The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
+    \caption{XXX}
+    \label{fig:scaling_nk_tas2}
+\end{figure}
+
+Remarkably, the scaling behavior is swapped in comparison to \ref{fig:scaling_nk_si}, as the pool size 2 saturates fast and the bigger pool sizes showing way better scaling behavior.
+
+
+It can also be instructive to look at the idle time for this benchmark to judge the quality of parallelization. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
+    \caption{XXX}
+    \label{fig:scaling_nk_tas2_wait}
+\end{figure}
+
+Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between \(\SI{1}{\percent}\) and \(\SI{4}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
+This means the parallelization is as good as possible for these 
 
 \subsection{Comparison with calculations on the HLRN cluster}
 

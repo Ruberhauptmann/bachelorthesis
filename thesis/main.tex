@@ -8,6 +8,8 @@
 
 \input{preamble.tex}
 
+\loadglsentries[main]{glossary.tex}
+
 \newcommand{\QE}{\textsc{Quantum} ESPRESSO }
 
 \usepackage{subfiles}
@@ -26,14 +28,18 @@
     % Einbinden einer kurzen Zusammenfassung
     \subfile{01_abstract.tex}
     %
+    % Erstellen des Inhaltsverzeichnisses ohne Hyperlinkboxen
+    {\hypersetup{hidelinks}\tableofcontents}%
+
+    \clearpage
+    \printglossary[type=\acronymtype]
+    %
     % Laden einer Danksagung
     \subfile{02_acknowledgement.tex}
     %
     % Laden der Motivation
     \subfile{03_motivation.tex}
-    %
-    % Erstellen des Inhaltsverzeichnisses ohne Hyperlinkboxen
-    {\hypersetup{hidelinks}\tableofcontents}%
+
     \section*{Conventions}
     Throughout the text of this thesis scalars are written in italic $s$, vectors in bold italic $\vec v$ and matrices in bold $\textbf M$ fonts. The summation/multiplication over nearest neighbour sites $i$ and $j$ is $\left\langle ij \right\rangle$ as a subscript to $\sum$/$\prod$. Furthermore, Hartree atomic units are used in general and only in selected instances it is deviated from this: $\hbar = m_\mathrm{e} = \mathrm e = \nicefrac{4\pi}{\varepsilon_0} = 1$. 
     \newpage
@@ -43,9 +49,13 @@
     % Beginn des eigentlichen Inhalts: Seitennummern arabisch, Kapitel und Abschnitte werden numeriert
     \mainmatter
     \renewcommand{\thechapter}{\Roman{chapter}}
-    \subfile{ch01_basics.tex}
+    \subfile{many-body-physics.tex}
 
-    \subfile{ch02_optimisation_scf.tex}
+    \subfile{computation.tex}
+
+    \subfile{optimisation_scf.tex}
+
+    \subfile{optimisation_ph.tex}
 
     %
     % Ende des Inhalts und Übergang zur Literatur sowie anderen Listen
@@ -53,12 +63,13 @@
     \phantomsection
     \addcontentsline{toc}{chapter}{Literaturverzeichnis}
     \printbibliography
+
     %
     % Nicht nötig, aber zur Vollständigkeit: Einbindung einer Liste aller Grafiken und Tabellen
-    %\chapter*{Listings}
-    %\addcontentsline{toc}{chapter}{Listings}
-    %\listoffigures
-    %\listoftables
+    \chapter*{Listings}
+    \addcontentsline{toc}{chapter}{Listings}
+    \listoffigures
+    \listoftables
     %
     % Eine Selbstständigkeitserklärung (in aller Regel nötig)
     %\input{selbst.tex}
