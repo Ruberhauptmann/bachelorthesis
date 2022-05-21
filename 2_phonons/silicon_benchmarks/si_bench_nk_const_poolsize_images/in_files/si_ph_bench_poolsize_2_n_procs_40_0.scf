@@ -1,6 +1,6 @@
 &control
    calculation = 'scf'
-   prefix='si_ph_bench_poolsize_2_n_procs_32_0',
+   prefix='si_ph_bench_poolsize_2_n_procs_40_0',
    tprnfor     = .true.
    pseudo_dir  = './pseudos/'
    outdir='/fastscratch/tsievers/QE_TMP_DIR/'
