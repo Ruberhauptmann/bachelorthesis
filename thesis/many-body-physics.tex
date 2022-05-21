@@ -1,0 +1,64 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\chapter{Many-body physics\label{chap:many-body-physics}}
+%\epigraph{It's a secret to everybody.}{a Moblin in \textit{The Legend of Zelda}}
+
+\section{The electronic structure problem\label{sec:theory_schrödinger}}
+
+In solid state physics, one general problem we are concerned with is finding the properties of the ground state of an isolated system of \(N\) interacting electrons in an external potential.
+The system is described by the Schrödinger equation
+\begin{equation}
+    \ope{H} \Psi (\vb{r}_1, \ldots, \vb{r}_N) = E \Psi (\vb{r}_1, \ldots, \vb{r}_N)
+\end{equation}
+with the Hamiltonian in first quantization (\(i\) running over the electrons, \(\alpha, \beta\) over the nuclei)
+\begin{align}
+    \ope{H} &= \ope{T}_e + \ope{V}_{n-e} + \ope{V}_{e-e} + \ope{V}_{n-n} \\
+    &= -\sum_i \frac{1}{2} \nabla^2_i - \sum_i \sum_{\alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i - \vb{R}_{\alpha} \vert} + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{R_{\alpha \beta}}
+\end{align}
+where:
+\begin{itemize}
+    \item \(\ope{T}_e\) is the kinetic energy of the electrons
+    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
+    \item \(\ope{U}_{e-e}\) is the Coulomb interaction between the electrons and
+    \item \(\ope{W}_{n-n}\) is the Coulomb interaction between the nuclei
+\end{itemize}
+
+\section{Density Functional Theory\label{sec:theory_dft}}
+
+A direct solution to the electronic structure problem, this meaning obtaining the ground-state many-body wavefunction \(\Psi (\vb{r_1}, \ldots, \vb{r}_N)\) for a given potential is analytically impossible even for a small number of electrons compared to the number of electrons in a macroscopic crystal.
+As such, the need for good approximations to obtain results for real world
+systems is high.
+One particularly successful approach is \acrfull{dft}.
+In the following section, the theoretical framework of \acrshort{dft} will be developed, following \cite{marzari_ab-initio_1996}.
+
+\subsection{Hohenberg-Kohn theorems}
+
+The basis for DFT lies in the exact reformulation of the outlined electronic structure problem by Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964}.
+This reformulation uses the ground state density of the electronic system as the basic variable. 
+\todo{stuff missing}
+
+Hohenberg-Kohn theorems:
+
+\begin{enumerate}[I]
+    \item The external potential (and by extension the ground state wave function and the ground state energy) are  unique functionals of the ground state density (except for an additive constant).
+    \item The ground state energy minimizes the energy functional,
+    \[E[n(r)] > E_0 \;\forall n(r) \neq n_0 (r)\].
+\end{enumerate}
+
+\subsection{Kohn-Sham equations}
+
+One way of approximating the functional \(F[n]\) was given by Kohn and Sham \cite{kohn_self-consistent_1965}.
+The idea is to use a non-interacting auxiliary system of electrons 
+\begin{equation}
+    H_0 = \sum_i^{N_e} \frac{p_i^2}{2m} + v_{KS} (\vb{r}_i)
+\end{equation}
+With a correction potential \(v_{KS}\) such that the ground state charge density for the auxiliary and the interacting system are the same.
+This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
+This gives rise to a kinetic energy 
+
+\subsection{Pseudopotentials}
+
+\section{Density Functional Perturbation Theory}
+
+\end{document}
