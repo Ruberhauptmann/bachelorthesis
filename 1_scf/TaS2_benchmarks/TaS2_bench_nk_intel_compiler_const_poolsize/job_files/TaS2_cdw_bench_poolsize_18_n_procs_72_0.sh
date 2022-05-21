@@ -4,8 +4,8 @@
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/18
 #$ -l h_cpu=60:00:00
 #$ -l h_vmem=3G
-#$ -pe mpi 180
-#$ -N TaS2_cdw_bench_poolsize_18_n_procs_180_0
+#$ -pe mpi 72
+#$ -N TaS2_cdw_bench_poolsize_18_n_procs_72_0
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
@@ -15,4 +15,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nd 1 -nk 10 -i in_files/TaS2_cdw_bench_poolsize_18_n_procs_180_0.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nd 1 -nk 4 -i in_files/TaS2_cdw_bench_poolsize_18_n_procs_72_0.scf
