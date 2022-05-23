@@ -3,11 +3,11 @@
 \begin{document}
 \chapter{Parallelisation of self-consistent calculations of electronic-structure properties\label{ch:optimisation_scf}}
 
-\subsection{First scaling tests}
+\section{First scaling tests}
 
-The first step in analysing the scaling of \QE is to perform a baseline scaling test without any optimisations yet appplied. 
-In Fig. \ref{fig:scaling_ompi_nprocs} two scaling tests on the earlier mentioned benchmarking systems Si and TaS2 are pictured. 
-The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which compiler?}, without any further compilation or runtime optimisation parameters used.
+The first step in analysing the scaling of \QE is to perform a baseline scaling test without any optimisations appplied. 
+In Fig. \ref{fig:scaling_ompi_nprocs_si} and \ref{fig:scaling_ompi_nprocs_tas2} two scaling tests on the earlier mentioned benchmarking systems Si and TaS2 are pictured. 
+The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \gls{openmpi} 4.1.0, without any of compilation or runtime optimisation parameters mentioned in section \ref{sec:qe} used.
 
 \begin{figure}[htbp]
 \begin{subfigure}[b]{0.32\textwidth}
@@ -22,7 +22,7 @@ The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which c
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
-\caption{XXX}
+\caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_ompi_nprocs_si}
 \end{figure}
 
@@ -39,69 +39,77 @@ The \QE version used is compiled using OpenMPI 4.1.0 \todo{What exactly? Which c
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
-\caption{XXX}
+\caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_ompi_nprocs_tas2}
 \end{figure}
 
-\todo{caption}
-
 Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_nprocs}.
 \begin{itemize}
-    \item runtime: absolute runtime of the compute job
+    \item runtime: absolute runtime (walltime) of the compute job
     \item speedup: runtime divided by runtime of the job on a single core
-    \item system time: percentage of wall time used by system tasks, e.g. writing to disk, etc. (calculated as walltime - cputime)
+    \item system time: percentage of wall time used by system tasks, e.g. writing to disk, etc. (calculated as (walltime - cputime) / walltime)
 \end{itemize}
 For further analysis mainly speedup will be used as a metric of scalability, because it lends itself to easy interpretation: optimal scalability is achieved when the speedup scales linearly with the number of processors (with a slope of one), as discussed in ch. \ref{sec:parallel_computing}.
+This on the one hand necessarily implies good parallelization and a lower runtime for more processors used, but the other two parameters should also always be considered.
 
-On a single node, both the Si and TaS2 calculations show good, but not perfect scaling behavior: the speedup does approximately scale linearly with the number of processors, but the slope is round about \(\frac{1}{2}\).
-Even though the scaling behavior is not perfect, there is just a small, almost constant amount of runtime used by system calls, this speaks for good parallelisation: as discussed in ch. \ref{sec:parallel_computing}, startup time is part of every \todo{missing}
+As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
+Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
+
+On a single node, both the Si and TaS2 calculations show good, but not perfect scaling behavior: the speedup does approximately scale linearly with the number of processors, but the slope is closer to \(\frac{1}{2}\), than 1.
+Even though the scaling behavior is not perfect, there is just a small, almost constant amount of runtime used by system calls, this speaks for good parallelization.
+As discussed in sec. \ref{sec:parallel_computing}, startup time is an unavoidable part of every parallel program, so a constant amount of time used not for calculations is expected, bad parallelization on the other hand shows itself by introducing waiting times between processors, which makes the waiting time in some way dependent on the number of processors.
 
 When using more than one node, not only does the scaling get worse, the execution needs longer than on a single core for the Si system, with a marginally better performance for the TaS2 system.
-This is also seen in the plots of system time. The percentage of time used for tasks not directly related to calculations (mostly exchange of data in this case, which induces long waiting time when the connection between processors is not as fast as on one motherboard) goes from a near constant value for under 20 processors to 50\% of the execution time for the Si system and 35\% for the TaS2 system.
+This is also seen in the plots of system time. The percentage of time used for tasks not directly related to calculations goes from a near constant value for under 20 processors to 50\% of the execution time for the Si system and 35\% for the TaS2 system.
 
 These scaling tests pose now two questions to be answered:
 \begin{itemize}
     \item Is better scaling on a single node possible?
-    \item How can scaling over more than one node be achieved?
+    \item How can acceptable scaling over more than one node be achieved?
 \end{itemize}
 
-\subsection{Testing different compilers and mathematical libraries}
+\section{Testing different compilers and mathematical libraries}
 
 A first strategy for solving issues with parallelization is trying different compilers and mathematical libraries.
 In the PHYSnet cluster a variety of software packages is available.
-For the compilation of \QE a \todo{missing}
+As discussed in sec. \ref{sec:qe}, for the compilation of \QE 
 
 For testing \QE will be compiled using the following software combinations:
 \begin{itemize}
-    \item OpenMPI 4.1.0 and OpenBLAS
-    \item OpenMPI 4.1.0 and Scalapack
-    \item Intel oneAPI 2021.4 (includes Intel MPI, Fortran and C compilers as well as Intel MKL, a scalable mathematical library)
+    \item \gls{openmpi} 4.1.0 and \gls{openblas}
+    \item \gls{openmpi} 4.1.0 and \gls{scalapack}
+    \item \gls{oneapi} 2021.4 (includes Intel MPI, Fortran and C compilers as well as Intel MKL, a scalable mathematical library)
 \end{itemize}
 
 \begin{figure}[h!]
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
+    \subcaption{\gls{openmpi}}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_openblas_bench_nprocs_speedup.pdf}
+    \subcaption{\gls{openmpi} + \gls{openblas}}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_scalapack_bench_nprocs_speedup.pdf}
+    \subcaption{\gls{openmpi} + \gls{scalapack}}
 \end{subfigure}
 \begin{subfigure}[b]{0.4\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
+    \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{XXX}
+\caption{Baseline scaling test with different combinations of compilers and mathematical libraries}
 \label{fig:scaling_compilers_nprocs}
 \end{figure}
 
-\todo{caption}
+\todo{analysis}
 
-\subsection{Using the parallelisation parameters of \QE}
+\section{Using the parallelisation parameters of \QE}
 
 As detailed in section \ref{sec:qe}, \QE offers ways to manage how the workload is distributed among the processors.
 In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
@@ -113,31 +121,33 @@ Fig. \ref{fig:scaling_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE
 This choice of pool sizes showcases the smallest pool size possibly (namely 2), as well as a bigger pool size with 16, that still gives rise to a few data points over the chosen range of processors.
 
 \begin{figure}[h!]
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_speedup.pdf}
+    \subcaption{\gls{openmpi} + \gls{scalapack}}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
+    \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{XXX}
+\caption{Benchmark with k-point parallelization for the Si benchmarking system}
 \label{fig:scaling_nk_si}
 \end{figure}
 
-Fig. \ref{fig:scaling_nk_si} shows 
+Fig. \ref{fig:scaling_nk_si} shows the significant difference between using \todo{analysis}
 
 The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
-    \caption{XXX}
+    \caption{Benchmark with k-point parallelization for the TaS2 benchmarking system}
     \label{fig:scaling_nk_tas2}
 \end{figure}
 
-Remarkably, the scaling behavior is swapped in comparison to \ref{fig:scaling_nk_si}, as the pool size 2 saturates fast and the bigger pool sizes showing way better scaling behavior.
-
+Remarkably, the scaling behavior is swapped in comparison to \ref{fig:scaling_nk_si}, as the pool size 2 saturates fast and the bigger pool sizes show way better scaling behavior.
+Furthermore, there are instances of better than linear scaling, which according to \QE docs can be attributed to better caching of data.
 
 It can also be instructive to look at the idle time for this benchmark to judge the quality of parallelization. 
 
