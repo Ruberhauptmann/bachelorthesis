@@ -1,0 +1,33 @@
+! Input file taken and edited from Quantum Espresso 7.0 examples
+! Pseudo potential for silicon taken from pseudo-dojo.org, ONCVPSP v0.4.1
+! changes from example input:
+! @system
+! ecutwfc
+! @electrons
+! diagonalization
+! conv_thr
+! K_POINTS
+
+ &control
+    calculation = 'scf'
+    restart_mode='from_scratch',
+    prefix='silicon_bench_ompi_n_procs_22_3',
+    pseudo_dir = './pseudos/',
+    outdir='/fastscratch/tsievers/QE_TMP_DIR/'
+ /
+ &system
+    ibrav = 2, celldm(1) = 10.20, nat = 2, ntyp= 1,
+    ecutwfc = 70.0,
+ /
+ &electrons
+    mixing_mode = 'plain'
+    mixing_beta = 0.7
+    conv_thr =  1.0d-12
+ /
+ATOMIC_SPECIES
+ Si  28.086  Si_pbe_v0.4.1.nc.sr.upf
+ATOMIC_POSITIONS alat
+ Si 0.00 0.00 0.00
+ Si 0.25 0.25 0.25
+K_POINTS automatic
+40 40 40 0 0 0
