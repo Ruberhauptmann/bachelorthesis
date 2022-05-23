@@ -39,9 +39,6 @@ def search_times(searchlines, type="pw"):
     return execution_time, wall_time
 
 def search_nprocs(searchlines):
-    """
-    
-    """
     n_procs = 0
     for line in searchlines:
         if "running on" in line:
@@ -73,7 +70,7 @@ def extract_times(out_files_path, type="pw", multiple_runs=False):
         walltimes[run_index] = np.array(walltimes[run_index, n_procs.argsort()])
         n_procs = n_procs[n_procs.argsort()]
 
-    return cputimes.mean(0), walltimes.mean(0), n_procs
+    return cputimes, walltimes, n_procs
 
 def extract_times_nk(out_files_path, type="pw", multiple_runs=False):
     runs_nk = os.listdir(out_files_path)
@@ -101,4 +98,3 @@ def extract_times_nk(out_files_path, type="pw", multiple_runs=False):
         n_procs[nk] = n_procs[nk][n_procs[nk].argsort()]
 
     return cputimes, walltimes, n_procs
-
