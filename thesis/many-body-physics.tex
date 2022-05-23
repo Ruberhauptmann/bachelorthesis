@@ -6,45 +6,68 @@
 
 \section{The electronic structure problem\label{sec:theory_schrödinger}}
 
-In solid state physics, one general problem we are concerned with is finding the properties of the ground state of an isolated system of \(N\) interacting electrons in an external potential.
-The system is described by the Schrödinger equation
-\begin{equation}
+In solid state physics, the Hamiltonian describing the interacting nuclei and electrons in the solid is well known, as all interactions except Coulomb interaction can safely be ignored at the mass and energy scales at which the electrons and nuclei reside.
+This very general problem consisting of both the electronic and nuclei degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation.
+The approximation assumes the nuclei to be fixed point charges which create a potential for the \(N\) interacting electrons, so that the electronic part can be solved independently using the nuclei positions \(\vb{R}_{\alpha}\) as a parameter.
+
+This problem is described by the time-independent Schrödinger equation
+\begin{equation}\label{}
     \ope{H} \Psi (\vb{r}_1, \ldots, \vb{r}_N) = E \Psi (\vb{r}_1, \ldots, \vb{r}_N)
 \end{equation}
 with the Hamiltonian in first quantization (\(i\) running over the electrons, \(\alpha, \beta\) over the nuclei)
 \begin{align}
-    \ope{H} &= \ope{T}_e + \ope{V}_{n-e} + \ope{V}_{e-e} + \ope{V}_{n-n} \\
-    &= -\sum_i \frac{1}{2} \nabla^2_i - \sum_i \sum_{\alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i - \vb{R}_{\alpha} \vert} + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{R_{\alpha \beta}}
+    \ope{H} &= \ope{T}_e + \ope{U}_{e-e} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
+    &= -\sum_i \frac{1}{2} \nabla^2_i 
+    + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} 
+    - \sum_i \sum_{\alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i 
+    - \vb{R}_{\alpha} \vert} 
+    + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{R_{\alpha \beta}} 
 \end{align}
 where:
 \begin{itemize}
     \item \(\ope{T}_e\) is the kinetic energy of the electrons
-    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
     \item \(\ope{U}_{e-e}\) is the Coulomb interaction between the electrons and
+    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
     \item \(\ope{W}_{n-n}\) is the Coulomb interaction between the nuclei
 \end{itemize}
+The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) can then be combined into an external potential \(V\) for the interacting electrons, so that the Hamiltonian reads
+\begin{equation}\label{eq:solid_state_hamiltonian}
+    \ope{H} = \ope{T} + \ope{U} + \ope{V}
+\end{equation}
+This Hamiltonian will be used in the further development of the underlying theory for this thesis.
 
 \section{Density Functional Theory\label{sec:theory_dft}}
 
-A direct solution to the electronic structure problem, this meaning obtaining the ground-state many-body wavefunction \(\Psi (\vb{r_1}, \ldots, \vb{r}_N)\) for a given potential is analytically impossible even for a small number of electrons compared to the number of electrons in a macroscopic crystal.
+A direct solution to the electronic structure problem, this meaning obtaining the ground-state many-body wave function \(\Psi (\vb{r_1}, \ldots, \vb{r}_N)\) for a given potential is analytically impossible even for a small number of electrons compared to the number of electrons in a macroscopic crystal.
 As such, the need for good approximations to obtain results for real world
 systems is high.
 One particularly successful approach is \acrfull{dft}.
-In the following section, the theoretical framework of \acrshort{dft} will be developed, following \cite{marzari_ab-initio_1996}.
+In the following section, the theoretical framework of \acrshort{dft} will be developed, the outline of which can be found in any literature on solid state physics \cite{marzari_ab-initio_1996}.
 
 \subsection{Hohenberg-Kohn theorems}
 
-The basis for DFT lies in the exact reformulation of the outlined electronic structure problem by Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964}.
-This reformulation uses the ground state density of the electronic system as the basic variable. 
-\todo{stuff missing}
-
-Hohenberg-Kohn theorems:
-
+The starting for DFT is the exact reformulation of the outlined electronic structure problem by Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964}.
+This reformulation uses the ground state density of the electronic system \(n_o (r)\) as the basic variable.
+To achieve this, Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964} formulated two theorems, which demonstrate that the ground state properties of an electronic system can be described using the ground state density (the proof of those theorems is omitted here, but can be found in the original paper \cite{hohenberg_inhomogeneous_1964} or any publication on \acrshort{dft} \cite{marzari_ab-initio_1996}):
 \begin{enumerate}[I]
-    \item The external potential (and by extension the ground state wave function and the ground state energy) are  unique functionals of the ground state density (except for an additive constant).
+    \item The external potential (and via the Schrödinger equation also the ground state wave function and the ground state energy) is a unique functional of the ground state density (except for an additive constant).
     \item The ground state energy minimizes the energy functional,
-    \[E[n(r)] > E_0 \;\forall n(r) \neq n_0 (r)\].
+    \[E[n(\vb{r})] > E_0 \;\forall\; n(\vb{r}) \neq n_0 (\vb{r})\].
 \end{enumerate}
+The proof of those theorems show the existence of the energy functional \(E[n(\vb{r})]\), but a concrete expression for it cannot be given.
+As the ground state wave function is a functional of the ground state density, a formal definition of the energy functional can be written as
+\begin{align*}
+    E[n(\vb{r})] &= \expval{\ope{H}}{\Psi} \\
+    &= \expval{\ope{T} + \ope{U} + \ope{V}}{\Psi} \\
+    &= \expval{\ope{T} + \ope{U}}{\Psi} + \int \dd{\vb{r}^{\prime}} \Psi^* (\vb{r}^{\prime}) V(\vb{r}^{\prime}) \Psi (\vb{r}^{\prime})
+\end{align*}
+Defining the universal functional \(F[n(\vb{r})] = \expval{T + U}{\Psi}\), which is material independent and writing \(n (\vb{r}^{\prime}) = \Psi^* (\vb{r}^{\prime}) \Psi (\vb{r}^{\prime})\), the energy functional becomes
+\begin{equation}\label{eq:hohenberg_kohn_energy_functional}
+    E[n(\vb{r})] = F[n(\vb{r})] + \int \dd{\vb{r}^{\prime}} V(\vb{r}^{\prime}) n (\vb{r}^{\prime})
+\end{equation}
+This is just a formal definition, as all the formerly mentioned complication of the Hamiltonian \ref{eq:solid_state_hamiltonian} now lie in the functional \(F[n(\vb{r})]\).
+With a known or well approximated universal functional \(F[n(\vb{r})]\), the Hohenberg-Kohn theorems provide a great simplification for finding the ground state properties of a solid state system, as the problem is now only a variational problem with 3 spatial coordinates instead of \(3N\) coordinates with the full Hamiltonian.
+
 
 \subsection{Kohn-Sham equations}
 
@@ -57,8 +80,16 @@ With a correction potential \(v_{KS}\) such that the ground state charge density
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
 This gives rise to a kinetic energy 
 
-\subsection{Pseudopotentials}
+\todo{this is shit}
+
+
+\subsection{Choice of basis set and pseudopotentials}
+
+\todo{this whole thing}
+
 
 \section{Density Functional Perturbation Theory}
+
+\todo{hate thinking about it}
 
 \end{document}
