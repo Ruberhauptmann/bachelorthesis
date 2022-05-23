@@ -7,8 +7,10 @@ TaS2
     fildyn   = 'TaS2_ph.dyn'
     fildvscf  = 'TaS2_ph.dvscf'
 
-    !ldisp = .true.
+    ldisp = .true.
+    nq1 = 12
+    nq2 = 12
+    nq3 = 1
 
     tr2_ph = 1e-21
 /
-0.000   0.000   0.000 !Gamma
