@@ -15,4 +15,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk {{ nk }} -i in_files/{{ job_name }}.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nd 1 -nk {{ nk }} -i in_files/{{ job_name }}.scf
