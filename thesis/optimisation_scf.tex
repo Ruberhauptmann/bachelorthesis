@@ -43,6 +43,8 @@ The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \
 \label{fig:scaling_ompi_nprocs_tas2}
 \end{figure}
 
+\todo{graphics dont look good like that: different heights and too small when 3 side to side}
+
 Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_nprocs}.
 \begin{itemize}
     \item runtime: absolute runtime (walltime) of the compute job
@@ -131,11 +133,15 @@ This choice of pool sizes showcases the smallest pool size possibly (namely 2), 
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Benchmark with k-point parallelization for the Si benchmarking system}
+\caption{Benchmark with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools}
 \label{fig:scaling_nk_si}
 \end{figure}
 
-Fig. \ref{fig:scaling_nk_si} shows the significant difference between using \todo{analysis}
+Fig. \ref{fig:scaling_nk_si} shows that using k parallelization with a pool size of 2 significantly improves the scaling behavior, not only on one node, but especially over more than one node.
+
+\todo{analysis}
+
+Another important conclusion to draw out of fig. \ref{fig:scaling_nk_si} is the impact of using Intels compiler instead of OpenMPI, as that factor alone speeds up the calculation by a factor of 2 over the whole range of processors.
 
 The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
 
@@ -154,7 +160,7 @@ It can also be instructive to look at the idle time for this benchmark to judge 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
-    \caption{XXX}
+    \caption{Idle time for the k point parallelization benchmark for the TaS2 system}
     \label{fig:scaling_nk_tas2_wait}
 \end{figure}
 

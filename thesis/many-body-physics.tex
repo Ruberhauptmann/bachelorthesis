@@ -52,7 +52,7 @@ To achieve this, Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964} formulat
 \begin{enumerate}[I]
     \item The external potential (and via the Schrödinger equation also the ground state wave function and the ground state energy) is a unique functional of the ground state density (except for an additive constant).
     \item The ground state energy minimizes the energy functional,
-    \[E[n(\vb{r})] > E_0 \;\forall\; n(\vb{r}) \neq n_0 (\vb{r})\].
+    \[E[n(\vb{r})] > E_0 \;\forall\; n(\vb{r}) \neq n_0 (\vb{r})\]
 \end{enumerate}
 The proof of those theorems show the existence of the energy functional \(E[n(\vb{r})]\), but a concrete expression for it cannot be given.
 As the ground state wave function is a functional of the ground state density, a formal definition of the energy functional can be written as
@@ -66,7 +66,7 @@ Defining the universal functional \(F[n(\vb{r})] = \expval{T + U}{\Psi}\), which
     E[n(\vb{r})] = F[n(\vb{r})] + \int \dd{\vb{r}^{\prime}} V(\vb{r}^{\prime}) n (\vb{r}^{\prime})
 \end{equation}
 This is just a formal definition, as all the formerly mentioned complication of the Hamiltonian \ref{eq:solid_state_hamiltonian} now lie in the functional \(F[n(\vb{r})]\).
-With a known or well approximated universal functional \(F[n(\vb{r})]\), the Hohenberg-Kohn theorems provide a great simplification for finding the ground state properties of a solid state system, as the problem is now only a variational problem with 3 spatial coordinates instead of \(3N\) coordinates with the full Hamiltonian.
+With a known or well approximated universal functional \(F[n(\vb{r})]\), the Hohenberg-Kohn theorems provide a great simplification for finding the ground state properties of a solid state system, as the problem is now only a variational problem with 3 spatial coordinates instead of \(3N\) coordinates when trying to solve the full Hamiltonian.
 
 
 \subsection{Kohn-Sham equations}
@@ -78,9 +78,41 @@ The idea is to use a non-interacting auxiliary system of electrons
 \end{equation}
 With a correction potential \(v_{KS}\) such that the ground state charge density for the auxiliary and the interacting system are the same.
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
-This gives rise to a kinetic energy 
+The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons:
 
-\todo{this is shit}
+\todo{density of auxiliary states}
+
+\begin{equation}
+    T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})
+\end{equation}
+With the help of this system and the classical electrostatic energy 
+\begin{equation}
+    E_H [n(\vb{r})] = \frac{1}{2} \int \int \dd[3]{r_1} \dd[3]{r_2} \frac{n(\vb{r}_1) n(\vb{r}_2)}{\vert \vb{r}_1 - \vb{r}_2 \vert}
+\end{equation}
+an ansatz for the universal functional can be written as
+\begin{equation}
+    F[n(\vb{r})] = T_S [n(\vb{r})] + E_H [n(\vb{r})] + E_{XC} [n(\vb{r})]
+\end{equation}
+where now \(E_{XC} [n(\vb{r})]\) is a functional of the density accounting for all exchange and correlation effects not present in the non-interacting electron system.
+The success of \acrshort{dft} lies in the fact that \(E_{XC}\) only contributes only a small part of the total energy and can be surprisingly well approximated.
+
+Using that form of \(F[n(\vb{r})]\), from the variational problem (with a Lagrange parameter introduced to ensure the orthonormality of the states \(\Psi_i\))
+\begin{align}
+     \delta \left( E [n(\vb{r})] - \sum_j \lambda_j \left[\int \dd[3]{r} \vert \Psi_j \vert^2 - 1 \right] \right) = 0
+\end{align}
+single particle, Schrödinger-like equations can be derived:
+\begin{equation}\label{eq:kohn-sham-equations}
+    \left(-\frac{1}{2} \Delta + \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{XC}}{n(\vb{r})} + V\right) \Psi_i (\vb{r}) = \lambda_i \Psi_i (\vb{r})
+\end{equation}
+Schrödinger-like in this context means, that with the identification
+\begin{equation}
+    v_{KS} = V_H + V_{XC} + V = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{XC}}{n(\vb{r})} + V
+\end{equation}
+eq. \ref{eq:kohn-sham-equations} becomes
+\begin{equation}
+    \left(- \frac{1}{2} \Delta + v_{KS}\right) \Psi_i (\vb{r}) = \epsilon_i \Psi_i (\vb{r})
+\end{equation}
+Importantly, the potential \(v_{KS}\) depends on the solutions \(\Psi (\vb{r})\), as the Hartree potential \(V_H\) and the XC potential \(V_{XC}\) include the density \(n(\vb{r})\), so the problem becomes a self-consistency problem.
 
 
 \subsection{Choice of basis set and pseudopotentials}
