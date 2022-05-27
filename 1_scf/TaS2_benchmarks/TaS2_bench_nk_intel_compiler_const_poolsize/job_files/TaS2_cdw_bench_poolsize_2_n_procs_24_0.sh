@@ -2,7 +2,7 @@
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/0/2
-#$ -l h_cpu=01:00:00
+#$ -l h_cpu=02:00:00
 #$ -l h_vmem=3G
 #$ -pe mpi 24
 #$ -N TaS2_cdw_bench_poolsize_2_n_procs_24_0
