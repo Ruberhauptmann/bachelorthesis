@@ -73,28 +73,37 @@ def extract_times(out_files_path, type="pw", multiple_runs=False):
     return cputimes, walltimes, n_procs
 
 def extract_times_nk(out_files_path, type="pw", multiple_runs=False):
-    runs_nk = os.listdir(out_files_path)
+    if multiple_runs:
+        runs = os.listdir(out_files_path)
+    else:
+        runs = [""]
 
     n_procs = {}
     walltimes = {}
     cputimes = {}
 
+    runs_nk = os.listdir(out_files_path + "/" + runs[0])
+
     for nk in runs_nk:
-        n_procs[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
-        walltimes[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
-        cputimes[nk] = np.zeros(len(os.listdir(out_files_path + "/" + nk)))
+        n_procs[nk] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + nk))))
+        walltimes[nk] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + nk))))
+        cputimes[nk] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + nk))))
 
-        files = os.listdir(out_files_path + "/" + nk)
+    for run_index, run in enumerate(runs):
+        runs_nk = os.listdir(out_files_path + "/" + run)
 
-        for file_index, file in enumerate(files):
-            filepath = out_files_path + "/" + nk + "/" + file
-            with open(filepath, "r") as f:
-                searchlines = f.readlines()
-            n_procs[nk][file_index] = search_nprocs(searchlines)
-            cputimes[nk][file_index], walltimes[nk][file_index] = search_times(searchlines, type)
+        for nk in runs_nk:
+            files = os.listdir(out_files_path + "/" + run + "/" + nk)
 
-        cputimes[nk] = np.array(cputimes[nk][n_procs[nk].argsort()])
-        walltimes[nk] =  np.array(walltimes[nk][n_procs[nk].argsort()])
-        n_procs[nk] = n_procs[nk][n_procs[nk].argsort()]
+            for file_index, file in enumerate(files):
+                filepath = out_files_path + "/" + run + "/" + nk + "/" + file
+                with open(filepath, "r") as f:
+                    searchlines = f.readlines()
+                n_procs[nk][run_index][file_index] = search_nprocs(searchlines)
+                cputimes[nk][run_index][file_index], walltimes[nk][run_index][file_index] = search_times(searchlines, type)
+
+            cputimes[nk][run_index] = np.array(cputimes[nk][run_index][n_procs[nk][run_index].argsort()])
+            walltimes[nk][run_index] =  np.array(walltimes[nk][run_index][n_procs[nk][run_index].argsort()])
+            n_procs[nk][run_index] = n_procs[nk][run_index][n_procs[nk][run_index].argsort()]
 
     return cputimes, walltimes, n_procs

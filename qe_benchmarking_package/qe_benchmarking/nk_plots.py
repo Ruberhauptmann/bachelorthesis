@@ -1,16 +1,36 @@
-from matplotlib import markers
 import numpy as np
 import matplotlib.pyplot as plt
+from sympy import MutableSparseMatrix
 plt.style.use('seaborn-colorblind')
 
-def plot(y, n_procs, prefix, type):
+def take_mean(y):
+    y_std = {}
+    y_mean = {}
+    for nk in y:
+        y_std[nk] = np.std(y[nk], axis=0)
+        y_mean[nk] = np.mean(y[nk], axis=0)
+
+    return y_std, y_mean
+
+def plot(y, n_procs, prefix, type, plot_error=False):
+    y_std, y_mean = take_mean(y)
+
     fig, ax1 = plt.subplots()
 
     for nk in n_procs:
-        ax1.plot(n_procs[nk], y[nk], label=nk, marker='o', linestyle='dashed')
+        if plot_error:
+            ax1.fill_between(n_procs[nk][0], y_mean[nk]-y_std[nk], y_mean[nk]+y_std[nk], alpha=0.2)
+            ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed')
+        else:
+            ax1.plot(n_procs[nk], y_mean[nk], label=nk, marker='o', linestyle='dashed')
+
+    max_nprocs = 0
+    for nk in n_procs:
+        if np.max(n_procs[nk].flatten()) > max_nprocs:
+            max_nprocs = np.max(n_procs[nk].flatten())
     
     if type == "speedup":
-        linear_nprocs = np.linspace(0, n_procs[list(n_procs)[-1]][-1])
+        linear_nprocs = np.linspace(0, max_nprocs)
         ax1.plot(linear_nprocs, linear_nprocs)
 
     ax1.set_xlabel("Number of processors")
