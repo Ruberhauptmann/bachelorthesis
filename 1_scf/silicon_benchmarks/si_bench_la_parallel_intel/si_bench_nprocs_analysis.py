@@ -1,85 +1,42 @@
-from multiprocessing.context import SpawnProcess
-import os
-from turtle import speed
-import matplotlib
 import numpy as np
-import sys
-import matplotlib.pyplot as plt
-plt.style.use('seaborn-colorblind')
 
-sys.path.append("../../")
-
-from helper import qe_helper
-from helper.plot_helper import nprocs_plots
+from qe_benchmarking import qe_helper, nk_plots
 
 if __name__ == "__main__":
-    runs_nk = os.listdir("out_files")
-
-    n_procs = {}
-    walltimes = {}
-    cputimes = {}
-
-    n_procs_counter = {}
-
-    nk_list = []
-
-    for run in runs_nk:
-        n_procs[run] = np.zeros(len(os.listdir("out_files/" + run)))
-        walltimes[run] = np.zeros(len(os.listdir("out_files/" + run)))
-        cputimes[run] = np.zeros(len(os.listdir("out_files/" + run)))
-
-    for i, run in enumerate(runs_nk):
-        files = os.listdir("out_files/" + run)
-
-        for file_index, file in enumerate(files):
-            with open("out_files/" + run + "/" + file, "r") as f:
-                searchlines = f.readlines()
-            n_procs[run][file_index] = qe_helper.extract_nprocs(searchlines)
-            cputimes[run][file_index], walltimes[run][file_index] = qe_helper.extract_times(searchlines, n_procs[run][file_index])
-
-        cputimes[run] = np.array(cputimes[run][n_procs[run].argsort()])
-        walltimes[run] = np.array(walltimes[run][n_procs[run].argsort()])
-        n_procs[run] = n_procs[run][n_procs[run].argsort()]
-
     ### Plot absolute times
 
-    fig, ax1 = plt.subplots()
+    cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=False)
 
-    for i, run in enumerate(n_procs):
-        ax1.plot(n_procs[run], cputimes[run], label=run, marker='o', linestyle='dashed')
-        #ax1.plot(n_procs[run], walltimes[run], label="WALL " + run, marker='o', linestyle='dashed')
-
-    ax1.set_xlabel("Number of processors")
-    ax1.set_ylabel("runtime [s]")
-
-    ax1.legend()
-
-    fig.savefig("si_bench_nprocs_absolute.pdf", bbox_inches="tight")
+    nk_plots.plot(walltimes, n_procs, "si_intel_mkl", "absolute")
 
     ### Plot speedup
 
-    with open ("out_files_singlecore/" + os.listdir("out_files_singlecore")[0]) as f:
-        searchlines = f.readlines()
-    
+    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
 
-    cputime_singlecore, walltime_singlecore = qe_helper.extract_times(searchlines, 1)
+    cputime_singlecore = np.mean(cputimes_singlecore)
+    walltime_singlecore = np.mean(walltimes_singlecore)
 
-    speedup_cpu = {}
-    speedup_wall = {}
+    speedup = {}
 
-    for i, run in enumerate(n_procs):
-        speedup_cpu[run] = cputime_singlecore / cputimes[run]
-        speedup_wall[run] =  walltime_singlecore / walltimes[run]
+    for nk in n_procs:
+        speedup[nk] = walltime_singlecore / walltimes[nk]
 
-    fig, ax1 = plt.subplots()
+    nk_plots.plot(speedup, n_procs, "si_intel_mkl", "speedup")
 
-    for i, run in enumerate(n_procs):
-        ax1.plot(n_procs[run], speedup_cpu[run], label=run, marker='o', linestyle='dashed')
-        #ax1.plot(n_procs[run], walltimes[run], label="WALL " + run, marker='o', linestyle='dashed')
+    ### Plot idle time
 
-    ax1.set_xlabel("Number of processors")
-    ax1.set_ylabel("speedup")
+    wait_time = {}
 
-    ax1.legend()
+    for nk in n_procs:
+        wait_time[nk] = (walltimes[nk] - cputimes[nk]) / walltimes[nk]
 
-    fig.savefig("si_bench_nprocs_speedup.pdf", bbox_inches="tight")
+    nk_plots.plot(wait_time, n_procs, "si_intel_mkl", "wait")
+
+    ### Plot efficiency
+
+    efficiency = {}
+
+    for nk in n_procs:
+        efficiency[nk] = speedup[nk] / n_procs[nk]
+
+    nk_plots.plot(efficiency, n_procs, "si_intel_mkl", "efficiency")
