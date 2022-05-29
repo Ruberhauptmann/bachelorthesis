@@ -56,7 +56,7 @@ This on the one hand necessarily implies good parallelization and a lower runtim
 
 As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
 Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
-On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources. \todo{explanation of wait time}
 
 On a single node, both the Si and TaS2 calculations show good, but not perfect scaling behavior: the speedup does approximately scale linearly with the number of processors, but the slope is closer to \(\frac{1}{2}\), than 1.
 Even though the scaling behavior is not perfect, there is just a small, almost constant amount of runtime used by system calls, this speaks for good parallelization.
@@ -75,7 +75,7 @@ These scaling tests pose now two questions to be answered:
 
 A first strategy for solving issues with parallelization is trying different compilers and mathematical libraries.
 In the PHYSnet cluster a variety of software packages is available.
-As discussed in sec. \ref{sec:qe}, for the compilation of \QE 
+As discussed in sec. \ref{sec:qe}, for the compilation of \QE \todo{missing}
 
 For testing \QE will be compiled using the following software combinations:
 \begin{itemize}
@@ -165,7 +165,9 @@ It can also be instructive to look at the idle time for this benchmark to judge 
 \end{figure}
 
 Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between \(\SI{1}{\percent}\) and \(\SI{4}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
-This means the parallelization is as good as possible for these 
+This means the parallelization is as good as possible for these \todo{missing}
+
+\todo{Linear Algebra}
 
 \subsection{Comparison with calculations on the HLRN cluster}
 
