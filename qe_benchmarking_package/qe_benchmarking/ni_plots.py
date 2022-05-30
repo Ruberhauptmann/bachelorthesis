@@ -5,9 +5,9 @@ plt.style.use('seaborn-colorblind')
 def take_mean(y):
     y_std = {}
     y_mean = {}
-    for nk in y:
-        y_std[nk] = np.std(y[nk], axis=0, ddof=1)
-        y_mean[nk] = np.mean(y[nk], axis=0)
+    for ni in y:
+        y_std[ni] = np.std(y[ni], axis=0, ddof=1)
+        y_mean[ni] = np.mean(y[ni], axis=0)
 
     return y_std, y_mean
 
@@ -16,17 +16,17 @@ def plot(y, n_procs, prefix, type, plot_error=False):
 
     fig, ax1 = plt.subplots()
 
-    for nk in n_procs:
+    for ni in n_procs:
         if plot_error:
-            ax1.fill_between(n_procs[nk][0], y_mean[nk]-y_std[nk], y_mean[nk]+y_std[nk], alpha=0.2)
-            ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed')
+            ax1.fill_between(n_procs[ni][0], y_mean[ni]-y_std[ni], y_mean[ni]+y_std[ni], alpha=0.2)
+            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed')
         else:
-            ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed')
+            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed')
 
     max_nprocs = 0
-    for nk in n_procs:
-        if np.max(n_procs[nk].flatten()) > max_nprocs:
-            max_nprocs = np.max(n_procs[nk].flatten())
+    for ni in n_procs:
+        if np.max(n_procs[ni].flatten()) > max_nprocs:
+            max_nprocs = np.max(n_procs[ni].flatten())
     
     if type == "speedup":
         linear_nprocs = np.linspace(0, max_nprocs)
@@ -46,6 +46,6 @@ def plot(y, n_procs, prefix, type, plot_error=False):
 
     ax1.legend()
 
-    filename = prefix + "_bench_nk_" + type + ".pdf"
+    filename = prefix + "_bench_ni_" + type + ".pdf"
 
     fig.savefig(filename, bbox_inches="tight")
