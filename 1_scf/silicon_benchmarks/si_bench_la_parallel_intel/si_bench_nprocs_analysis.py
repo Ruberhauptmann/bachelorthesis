@@ -1,3 +1,4 @@
+from matplotlib.pyplot import plot
 import numpy as np
 
 from qe_benchmarking import qe_helper, nk_plots
@@ -5,9 +6,9 @@ from qe_benchmarking import qe_helper, nk_plots
 if __name__ == "__main__":
     ### Plot absolute times
 
-    cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=False)
+    cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=True)
 
-    nk_plots.plot(walltimes, n_procs, "si_intel_mkl", "absolute")
+    nk_plots.plot(walltimes, n_procs, "si_intel_mkl", "absolute", plot_error=True)
 
     ### Plot speedup
 
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     for nk in n_procs:
         speedup[nk] = walltime_singlecore / walltimes[nk]
 
-    nk_plots.plot(speedup, n_procs, "si_intel_mkl", "speedup")
+    nk_plots.plot(speedup, n_procs, "si_intel_mkl", "speedup", plot_error=True)
 
     ### Plot idle time
 

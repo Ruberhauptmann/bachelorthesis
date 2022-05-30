@@ -27,7 +27,8 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('silicon_bench_nd.sh.jinja')
 
-    for nd in find_square_numbers(max_number_procs):
+    #for nd in find_square_numbers(max_number_procs):
+    for nd in [4, 9, 16, 25]:
         log_path = os.getenv('HOME') + '/job_logs/silicon/bench_la_parallel_intel/nd_' + str(nd)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):
