@@ -14,7 +14,7 @@ def find_square_numbers(maximum):
     return squares
 
 def main():
-    max_number_procs = 80
+    max_number_procs = 200
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -29,30 +29,31 @@ def main():
     job_template = env.get_template('TaS2_cdw_bench_nd.sh.jinja')
 
     poolsize = 18
+    
+    for run in range(2):
+        for nd in [4, 9, 16]:
+            log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
+            os.makedirs(log_path, exist_ok=True)
+            for file in glob.glob(log_path + '/*'):
+                os.remove(file)
 
-    for nd in find_square_numbers(max_number_procs):
-        log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/nd_' + str(nd)
-        os.makedirs(log_path, exist_ok=True)
-        for file in glob.glob(log_path + '/*'):
-            os.remove(file)
+            for n_procs in range(36, max_number_procs + 1, 18):
+                if poolsize >= nd and n_procs % poolsize == 0.:
+                    job_name = 'TaS2_bench_nd_' + str(nd) + '_n_procs_' + str(n_procs) + '_' + str(run)
+                    prefix = '\'' + job_name +  '\''
 
-        for n_procs in range(2, max_number_procs + 1, 2):
-            if poolsize >= nd and n_procs % poolsize == 0.:
-                job_name = 'TaS2_bench_nd_' + str(nd) + '_n_procs_' + str(n_procs)
-                prefix = '\'' + job_name +  '\''
+                    input_file = input_template.render(prefix=prefix)
+                    job_file = job_template.render(nd=nd,
+                    nk=int(n_procs / poolsize),
+                    n_procs=n_procs,
+                    log_path=log_path,
+                    job_name=job_name)
+                    with open('in_files/' + job_name + '.scf'  , 'w') as fh:
+                        fh.write(input_file)
+                    with open('job_files/' + job_name + '.sh'  , 'w') as fh:
+                        fh.write(job_file)
 
-                input_file = input_template.render(prefix=prefix)
-                job_file = job_template.render(nd=nd,
-                nk=int(n_procs / poolsize),
-                n_procs=n_procs,
-                log_path=log_path,
-                job_name=job_name)
-                with open('in_files/' + job_name + '.scf'  , 'w') as fh:
-                    fh.write(input_file)
-                with open('job_files/' + job_name + '.sh'  , 'w') as fh:
-                    fh.write(job_file)
-
-                subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nd_auto.sh.jinja')
@@ -62,21 +63,22 @@ def main():
     for file in glob.glob(log_path + '/*'):
         os.remove(file)
 
-    for n_procs in range(18, max_number_procs + 1, 18):
-        job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs)
-        prefix = '\'' + job_name +  '\''
+    for run in range(2):
+        for n_procs in range(36, max_number_procs + 1, 18):
+            job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs)
+            prefix = '\'' + job_name +  '\''
 
-        input_file = input_template.render(prefix=prefix)
-        job_file = job_template.render(nd=nd,
-        n_procs=n_procs,
-        log_path=log_path,
-        job_name=job_name)
-        with open('in_files/' + job_name + '.scf'  , 'w') as fh:
-            fh.write(input_file)
-        with open('job_files/' + job_name + '.sh'  , 'w') as fh:
-            fh.write(job_file)
+            input_file = input_template.render(prefix=prefix)
+            job_file = job_template.render(nd=nd,
+            n_procs=n_procs,
+            log_path=log_path,
+            job_name=job_name)
+            with open('in_files/' + job_name + '.scf'  , 'w') as fh:
+                fh.write(input_file)
+            with open('job_files/' + job_name + '.sh'  , 'w') as fh:
+                fh.write(job_file)
 
-        subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()
