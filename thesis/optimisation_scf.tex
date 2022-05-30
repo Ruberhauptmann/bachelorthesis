@@ -43,6 +43,8 @@ The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \
 \label{fig:scaling_ompi_nprocs_tas2}
 \end{figure}
 
+\todo{graphics dont look good like that: different heights and too small when 3 side to side}
+
 Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_nprocs}.
 \begin{itemize}
     \item runtime: absolute runtime (walltime) of the compute job
@@ -54,7 +56,7 @@ This on the one hand necessarily implies good parallelization and a lower runtim
 
 As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
 Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
-On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources. \todo{explanation of wait time}
 
 On a single node, both the Si and TaS2 calculations show good, but not perfect scaling behavior: the speedup does approximately scale linearly with the number of processors, but the slope is closer to \(\frac{1}{2}\), than 1.
 Even though the scaling behavior is not perfect, there is just a small, almost constant amount of runtime used by system calls, this speaks for good parallelization.
@@ -73,7 +75,7 @@ These scaling tests pose now two questions to be answered:
 
 A first strategy for solving issues with parallelization is trying different compilers and mathematical libraries.
 In the PHYSnet cluster a variety of software packages is available.
-As discussed in sec. \ref{sec:qe}, for the compilation of \QE 
+As discussed in sec. \ref{sec:qe}, for the compilation of \QE \todo{missing}
 
 For testing \QE will be compiled using the following software combinations:
 \begin{itemize}
@@ -131,11 +133,15 @@ This choice of pool sizes showcases the smallest pool size possibly (namely 2), 
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Benchmark with k-point parallelization for the Si benchmarking system}
+\caption{Benchmark with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools}
 \label{fig:scaling_nk_si}
 \end{figure}
 
-Fig. \ref{fig:scaling_nk_si} shows the significant difference between using \todo{analysis}
+Fig. \ref{fig:scaling_nk_si} shows that using k parallelization with a pool size of 2 significantly improves the scaling behavior, not only on one node, but especially over more than one node.
+
+\todo{analysis}
+
+Another important conclusion to draw out of fig. \ref{fig:scaling_nk_si} is the impact of using Intels compiler instead of OpenMPI, as that factor alone speeds up the calculation by a factor of 2 over the whole range of processors.
 
 The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
 
@@ -154,12 +160,14 @@ It can also be instructive to look at the idle time for this benchmark to judge 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
-    \caption{XXX}
+    \caption{Idle time for the k point parallelization benchmark for the TaS2 system}
     \label{fig:scaling_nk_tas2_wait}
 \end{figure}
 
 Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between \(\SI{1}{\percent}\) and \(\SI{4}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
-This means the parallelization is as good as possible for these 
+This means the parallelization is as good as possible for these \todo{missing}
+
+\todo{Linear Algebra}
 
 \subsection{Comparison with calculations on the HLRN cluster}
 

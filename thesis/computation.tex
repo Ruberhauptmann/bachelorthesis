@@ -9,6 +9,8 @@
 The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
 The information presented can be found in any textbook on parallel or high-perfomance computing \cite{hager_introduction_2010}.
 
+\todo{functional/data parallelism?}
+
 \subsection{On scalabilty}
 
 In scientific computing, one can identify two distinct reasons to distribute workloads to multiple processors:
@@ -37,8 +39,16 @@ On the other hand, faster parallel code execution can come from:
     \item \emph{Better caching}: when the data the program is working with is distributed among processors (assuming constant problem size), it may enable the data to be stored in faster cache memory. Modern computers typically have three layers of cache memory, with level 1 cache being the smallest and fastest and level 3 being the largest and slowest, so smaller data chunks per processor can lead to the data not being stored in main memory, but completely in cache or in a faster cache level
 \end{itemize}
 
-\section{Quantum ESPRESSO}\label{sec:qe}
+\todo{strong/weak scaling?}
 
-\QE \cite{giannozzi_quantum_2009,giannozzi_advanced_2017}
+\section{\QE}\label{sec:qe}
+
+\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties 
+
+\todo{what is needed for compilation? also in next subsection!}
+
+\subsection{Parallelization of \QE calculations}
+
+\todo{uff}
 
 \end{document}
