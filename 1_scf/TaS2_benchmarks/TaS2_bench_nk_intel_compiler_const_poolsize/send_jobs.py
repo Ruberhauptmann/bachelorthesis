@@ -14,7 +14,7 @@ def find_all_divisors(number, maximum):
 
 def main():
     number_k_points = 144
-    max_number_procs = 24
+    max_number_procs = 200
 
     for file in glob.glob('in_files/*'):
         os.remove(file)
@@ -31,7 +31,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(2):
+    for run in range(3, 6):
         #for poolsize in poolsize_list:
         for poolsize in [2, 8]:
             for n_procs in range(8, max_number_procs+1, 8):
