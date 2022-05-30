@@ -1,8 +1,7 @@
 TaS2
 &INPUTPH
     prefix = 'TaS2_phonons'
-    outdir   = '/fastscratch/tsievers/TaS2_phonons/'
-    max_seconds = 170000
+    outdir   = '/fastscratch/tsievers/TaS2_24_phonons/'
 
     fildyn   = 'TaS2_ph.dyn'
     fildvscf  = 'TaS2_ph.dvscf'

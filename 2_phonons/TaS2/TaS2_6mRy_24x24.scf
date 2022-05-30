@@ -1,6 +1,6 @@
 &CONTROL
-    prefix = 'TaS2'
-    outdir = 'work'
+    prefix = 'TaS2_phonons'
+    outdir   = '/fastscratch/tsievers/TaS2_24_phonons/'
     pseudo_dir = './pseudos/'
 /
 &SYSTEM
@@ -25,8 +25,8 @@
 /
 
 ATOMIC_SPECIES
-Ta 180.95 Ta_pbe_v1.uspp.F.UPF
-S   32.06  s_pbe_v1.4.uspp.F.UPF
+Ta 180.95 Ta.pbe-hgh.UPF
+S   32.06  S.pbe-hgh.UPF
 
 ATOMIC_POSITIONS crystal
 S   0.3333333333  0.6666666667  0.1041867992
