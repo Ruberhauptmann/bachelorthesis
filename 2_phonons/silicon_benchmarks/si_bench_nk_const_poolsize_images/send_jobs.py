@@ -32,17 +32,17 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    nimages = 20
     poolsize = 2
 
     for run in range(1):
         #for poolsize in poolsize_list:
         #for poolsize in [2, 8]:
-        for nimages in [2, 4, 10, 20]:
+        #for nimages in [2, 4, 10, 20]:
+        for nimages in [18]:
         #for nk in [2]:
             #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
             #for n_procs in range(20, max_number_procs+1, 10):
-            for n_procs in [280, 400, 480]:
+            for n_procs in [200, 220]:
                 log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize_images/' + str(nimages)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
