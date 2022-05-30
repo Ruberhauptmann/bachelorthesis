@@ -33,22 +33,24 @@ def main():
     print(poolsize_list)
 
     nimages = 20
+    poolsize = 2
 
     for run in range(1):
         #for poolsize in poolsize_list:
         #for poolsize in [2, 8]:
-        for poolsize in [2, 8]:
+        for nimages in [2, 4, 10, 20]:
         #for nk in [2]:
             #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
-            for n_procs in range(20, max_number_procs+1, 10):
-                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize_images/' + str(poolsize)
+            #for n_procs in range(20, max_number_procs+1, 10):
+            for n_procs in [280, 400, 480]:
+                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize_images/' + str(nimages)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)
 
                 #if n_procs % poolsize == 0 and n_procs % 5 == 0:
                 if (n_procs / nimages ) % poolsize == 0:
-                    job_name = 'si_ph_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
+                    job_name = 'si_ph_bench_nimages_' + str(nimages) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
 
                     input_file_scf = input_template_scf.render(prefix=prefix)
