@@ -1,5 +1,4 @@
 import glob
-from multiprocessing import pool
 import os
 import subprocess
 from jinja2 import Environment, FileSystemLoader
@@ -32,7 +31,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(4, 9):
+    for run in range(10, 20):
         #for poolsize in poolsize_list:
         for poolsize in [2, 8, 16]:
             for n_procs in range(8, max_number_procs+1, 8):
