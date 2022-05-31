@@ -33,8 +33,8 @@ def main():
 
     for run in range(3, 6):
         #for poolsize in poolsize_list:
-        for poolsize in [2, 8]:
-            for n_procs in range(8, max_number_procs+1, 8):
+        for poolsize in [18]:
+            for n_procs in range(36, max_number_procs+1, 18):
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
