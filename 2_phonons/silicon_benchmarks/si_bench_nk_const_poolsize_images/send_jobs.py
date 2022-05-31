@@ -2,75 +2,102 @@ import glob
 import os
 import subprocess
 from jinja2 import Environment, FileSystemLoader
-
-def find_all_divisors(number, maximum):
-    divisors = []
-
-    for i in range(1, maximum+1):
-        if number % i == 0:
-            divisors.append(i)
-
-    return divisors
+from distutils.dir_util import copy_tree
+from shutil import rmtree
 
 def main():
     number_k_points = 216
     max_number_procs = 200
-
-    for file in glob.glob('in_files/*'):
-        os.remove(file)
-
-    for file in glob.glob('job_files/*'):
-        os.remove(file)
 
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader)
 
     input_template_scf = env.get_template('input.scf.jinja')
     input_template_ph = env.get_template('input.ph.jinja')
+    input_template_ph_recover = env.get_template('input_recover.ph.jinja')
+    input_template_q2r = env.get_template('input.q2r.jinja')
+    input_template_md = env.get_template('input.md.jinja')
     job_template = env.get_template('silicon_ph_bench_nk.sh.jinja')
-
-    poolsize_list = find_all_divisors(number_k_points, max_number_procs)
-    print(poolsize_list)
 
     poolsize = 2
 
-    for run in range(1):
-        #for poolsize in poolsize_list:
-        #for poolsize in [2, 8]:
-        #for nimages in [2, 4, 10, 20]:
-        for nimages in [18]:
-        #for nk in [2]:
-            #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
-            #for n_procs in range(20, max_number_procs+1, 10):
-            for n_procs in [200, 220]:
-                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize_images/' + str(nimages)
-                os.makedirs(log_path, exist_ok=True)
-                for file in glob.glob(log_path + '/*'):
-                    os.remove(file)
+    job_directory = '/fastscratch/tsievers/si_ph_benchmark_images/'
+    rmtree(job_directory)
+    os.makedirs(job_directory + '/tmp', exist_ok=True)
+    os.makedirs(job_directory + '/frq', exist_ok=True)
+    copy_tree('pseudos', job_directory + '/pseudos')
 
-                #if n_procs % poolsize == 0 and n_procs % 5 == 0:
+    for run in range(1):
+        for nimages in [2, 8, 24]:
+            for n_procs in range(8, max_number_procs+1, 8):
                 if (n_procs / nimages ) % poolsize == 0:
                     job_name = 'si_ph_bench_nimages_' + str(nimages) + '_n_procs_' + str(n_procs) + '_' + str(run)
-                    prefix = '\'' + job_name +  '\''
 
-                    input_file_scf = input_template_scf.render(prefix=prefix)
-                    input_file_ph = input_template_ph.render(prefix=prefix,
-                    fildyn="\'/fastscratch/tsievers/QE_TMP_DIR/" + job_name + ".dyn\'")
-                    job_file = job_template.render(ni=nimages,
-                    nk_ph=int((n_procs / nimages) / poolsize),
-                    nk_pw=int(n_procs / poolsize),
-                    n_procs=n_procs,
-                    log_path=log_path,
-                    job_name=job_name,
-                    in_files_path="in_files")
-                    with open('in_files/' + job_name + '.ph'  , 'w') as fh:
-                        fh.write(input_file_ph)
-                    with open('in_files/' + job_name + '.scf'  , 'w') as fh:
+                    out_directory = os.path.join(job_directory, 'run_' + str(run), str(nimages), str(job_name))
+
+                    os.makedirs(out_directory, exist_ok=True)
+
+                    for file in glob.glob(out_directory + '/*'):
+                        os.remove(file)
+
+                    prefix = job_name
+                    fildyn = os.path.join(job_directory + 'tmp', job_name + ".dyn")
+                    flfrc = os.path.join(job_directory + 'tmp', job_name + '.FC')
+                    flvec = os.path.join(job_directory + 'tmp', job_name + '.modes')
+                    flfrq = os.path.join(job_directory + 'frq', job_name + '.frq')
+
+                    input_file_scf = input_template_scf.render(
+                        prefix=prefix,
+                        job_directory=job_directory
+                    )
+
+                    input_file_ph = input_template_ph.render(
+                        prefix=prefix,
+                        fildyn=fildyn
+                    )
+
+                    input_file_ph_recover = input_template_ph_recover.render(
+                        prefix=prefix,
+                        fildyn=fildyn
+                    )
+
+                    input_file_q2r = input_template_q2r.render(
+                        fildyn=fildyn,
+                        flfrc=flfrc
+                    )
+
+                    input_file_md = input_template_md.render(
+                        flfrc=flfrc,
+                        flvec=flvec,
+                        flfrq=flfrq
+                    )
+
+                    job_file = job_template.render(
+                        image_size=int(n_procs / nimages),
+                        ni=nimages,
+                        nk=int((n_procs / nimages) / poolsize),
+                        n_procs=n_procs,
+                        out_directory=out_directory,
+                        job_directory=job_directory,
+                        job_name=job_name
+                    )
+
+                    with open(job_directory + job_name + '.scf', 'w') as fh:
                         fh.write(input_file_scf)
-                    with open('job_files/' + job_name + '.sh'  , 'w') as fh:
+                    with open(job_directory + job_name + '.ph', 'w') as fh:
+                        fh.write(input_file_ph)
+                    with open(job_directory + job_name + '_recover' + '.ph', 'w') as fh:
+                        fh.write(input_file_ph_recover)
+                    with open(job_directory + job_name + '.q2r', 'w') as fh:
+                        fh.write(input_file_q2r)
+                    with open(job_directory + job_name + '.md', 'w') as fh:
+                        fh.write(input_file_md)
+                    with open(job_directory + job_name + '.sh', 'w') as fh:
                         fh.write(job_file)
 
-                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    os.chdir(out_directory)
+
+                    subprocess.call('qsub ../../../' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()
