@@ -1,8 +1,8 @@
 &control
    calculation = 'scf'
-   prefix={{ prefix }},
+   prefix='{{ prefix }}',
    tprnfor     = .true.
-   pseudo_dir  = './pseudos/'
+   pseudo_dir  = '{{ job_directory }}/pseudos/'
    outdir='/fastscratch/tsievers/QE_TMP_DIR/'
 /
 &system

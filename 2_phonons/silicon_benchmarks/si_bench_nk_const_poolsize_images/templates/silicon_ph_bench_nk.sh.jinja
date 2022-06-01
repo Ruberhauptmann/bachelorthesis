@@ -1,7 +1,7 @@
 #!/bin/bash
-#$ -q infinix.q
+#$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o {{ log_path }}
+#$ -o {{ out_directory }}/out.0_0
 #$ -l h_cpu=02:00:00
 #$ -l excl=TRUE
 #$ -pe mpi {{ n_procs }}
@@ -14,6 +14,12 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-mpirun $QEPREFIX/bin/pw.x -nk {{ nk_pw }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.scf
+mpirun -np {{ image_size }} $QEPREFIX/bin/pw.x -nk {{ nk }} -nd 9 -i {{ job_directory}}{{ job_name }}.scf
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/ph.x -ni {{ ni }} -nk {{ nk_ph }} -nd 9 -i {{ in_files_path }}/{{ job_name }}.ph
+mpirun -np {{ n_procs }} $QEPREFIX/bin/ph.x -ni {{ ni }} -nk {{ nk }} -nd 9 -i {{ job_directory}}{{ job_name }}.ph
+
+mpirun -np {{ image_size }} $QEPREFIX/bin/ph.x -nk {{ nk }} -nd 9 -i {{ job_directory}}{{ job_name }}_recover.ph
+
+mpirun $QEPREFIX/bin/q2r.x -i {{ job_directory}}{{ job_name }}.q2r
+
+mpirun $QEPREFIX/bin/matdyn.x -i {{ job_directory}}{{ job_name }}.md

@@ -22,7 +22,7 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('silicon_bench_nprocs.sh.jinja')
 
-    for run in range(1):
+    for run in range(1, 10):
         log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs_intel_compiler/' + str(run)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):
