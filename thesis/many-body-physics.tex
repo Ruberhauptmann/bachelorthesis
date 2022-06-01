@@ -80,7 +80,7 @@ With a correction potential \(v_{KS}\) such that the ground state charge density
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons:
 
-\todo{density of auxiliary states}
+\todo{density of KS states}
 
 \begin{equation}
     T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})
@@ -108,17 +108,26 @@ Schrödinger-like in this context means, that with the identification
 \begin{equation}
     v_{KS} = V_H + V_{XC} + V = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{XC}}{n(\vb{r})} + V
 \end{equation}
-eq. \ref{eq:kohn-sham-equations} becomes
+eq. \ref{eq:kohn-sham-equations} become the \acrshort{kohn_sham} equations:
 \begin{equation}
     \left(- \frac{1}{2} \Delta + v_{KS}\right) \Psi_i (\vb{r}) = \epsilon_i \Psi_i (\vb{r})
 \end{equation}
-Importantly, the potential \(v_{KS}\) depends on the solutions \(\Psi (\vb{r})\), as the Hartree potential \(V_H\) and the XC potential \(V_{XC}\) include the density \(n(\vb{r})\), so the problem becomes a self-consistency problem.
+Importantly, the potential \(v_{KS}\) depends on the solutions \(\Psi_i (\vb{r})\), as the Hartree potential \(V_H\) and the XC potential \(V_{XC}\) include the density \(n(\vb{r})\), so the problem becomes a self-consistency problem.
 
 
-\subsection{Choice of basis set and pseudopotentials}
+\subsection{Pseudopotentials and basis set}
 
-\todo{this whole thing}
+In order to represent the states and operators in eq. \ref{eq:kohn-sham-equations}, a basis set has to be chosen.
+A natural choice, at least for delocalized (higher energy) orbitals is the discrete set of plane waves \(\ket{\vb{G}}\)
+\begin{equation}
+    \bra{\vb{r}} \ket{\vb{k} + \vb{G}} = \frac{1}{\sqrt{V}} e^{i (\vb{k} + \vb{G}) \vb{r}}
+\end{equation}
+where \(\vb{G}\) is a reciprocal lattice vector.
+One problem of this approach lies in the fact that the lower energy core electrons are in contrast very localized around the cores and as such need a lot of basis functions.
+Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
 
+Importantly, the core electrons don't contribute much to the electronic structure problem, so an approach to make the calculations more economically is to introduce an effective screened potential which describes the nuclear potential as well as the states close to the nucleus.
+These potentials are called \acrfull{pp} and \todo{not finished}
 
 \section{Density Functional Perturbation Theory} \label{sec:theory_dfpt}
 
