@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     wait_time = (walltimes - cputimes) / walltimes
 
-    nprocs_plots.plot(wait_time, n_procs, "si_intel", "wait", plot_error=True)
+    nprocs_plots.plot(wait_time, n_procs, "si_intel", "wait")
 
     ### Plot efficiency
 
