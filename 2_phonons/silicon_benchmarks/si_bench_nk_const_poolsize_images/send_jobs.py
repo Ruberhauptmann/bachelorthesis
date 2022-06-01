@@ -33,7 +33,7 @@ def main():
                 if (n_procs / nimages ) % poolsize == 0:
                     job_name = 'si_ph_bench_nimages_' + str(nimages) + '_n_procs_' + str(n_procs) + '_' + str(run)
 
-                    out_directory = os.path.join(job_directory, 'run_' + str(run), str(nimages), str(job_name))
+                    out_directory = os.path.join(job_directory, 'output', str(run), str(nimages), str(job_name))
 
                     os.makedirs(out_directory, exist_ok=True)
 
@@ -44,7 +44,7 @@ def main():
                     fildyn = os.path.join(job_directory + 'tmp', job_name + ".dyn")
                     flfrc = os.path.join(job_directory + 'tmp', job_name + '.FC')
                     flvec = os.path.join(job_directory + 'tmp', job_name + '.modes')
-                    flfrq = os.path.join(job_directory + 'frq', job_name + '.frq')
+                    flfrq = os.path.join(job_directory + 'frq', run, job_name + '.frq')
 
                     input_file_scf = input_template_scf.render(
                         prefix=prefix,
