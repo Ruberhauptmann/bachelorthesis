@@ -33,9 +33,9 @@
 \usepackage{floatrow}
 \usepackage{ragged2e}
 \usepackage{framed}
-\usepackage[titles]{tocloft}
-    \newfloatcommand{capbtabbox}{table}[][\FBwidth]
-    \floatsetup[table]{capposition=top}
+%\usepackage[titles]{tocloft}
+%    \newfloatcommand{capbtabbox}{table}[][\FBwidth]
+%    \floatsetup[table]{capposition=top}
 \usepackage{perpage}
 \usepackage[defaultlines=2,all]{nowidow}
 \usepackage{lipsum,blindtext}
@@ -89,6 +89,7 @@
     \usepackage{letltxmacro}
     \LetLtxMacro{\oldmissingfigure}{\missingfigure}
     \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[#1]{#2}\tikzexternalenable}
+\usepackage{float}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliographie

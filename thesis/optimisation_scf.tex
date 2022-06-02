@@ -9,43 +9,49 @@ The first step in analysing the scaling of \QE is to perform a baseline scaling 
 In Fig. \ref{fig:scaling_ompi_nprocs_si} and \ref{fig:scaling_ompi_nprocs_tas2} two scaling tests on the earlier mentioned benchmarking systems Si and TaS2 are pictured. 
 The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \gls{openmpi} 4.1.0, without any of compilation or runtime optimisation parameters mentioned in section \ref{sec:qe} used.
 
-\begin{figure}[htbp]
-\begin{subfigure}[b]{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_absolute.pdf}
-\end{subfigure}
-\begin{subfigure}[b]{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
-\end{subfigure}
-\begin{subfigure}[b]{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
-\end{subfigure}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.8\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
 \caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_ompi_nprocs_si}
 \end{figure}
 
-\begin{figure}[h!]
-\begin{subfigure}[b]{0.32\textwidth}
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_absolute.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
+\end{subfigure}
+\caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\label{fig:scaling_ompi_nprocs_si_absolute_wait}
+\end{figure}
+
+\todo{talk a bit about silicon there, then introduce TaS2}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.8\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
+\caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\label{fig:scaling_ompi_nprocs_tas2_speedup}
+\end{figure}
+
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_absolute.pdf}
 \end{subfigure}
-\begin{subfigure}[b]{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
-\end{subfigure}
-\begin{subfigure}[b]{0.32\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
 \caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
-\label{fig:scaling_ompi_nprocs_tas2}
+\label{fig:scaling_ompi_nprocs_tas2_absolute_wait}
 \end{figure}
 
-\todo{graphics dont look good like that: different heights and too small when 3 side to side}
-
-Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_nprocs}.
+Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_nprocs}. \todo{formulate differently with new figure structure!}
 \begin{itemize}
     \item runtime: absolute runtime (walltime) of the compute job
     \item speedup: runtime divided by runtime of the job on a single core
@@ -84,23 +90,23 @@ For testing \QE will be compiled using the following software combinations:
     \item \gls{oneapi} 2021.4 (includes Intel MPI, Fortran and C compilers as well as Intel MKL, a scalable mathematical library)
 \end{itemize}
 
-\begin{figure}[h!]
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
     \subcaption{\gls{openmpi}}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_openblas_bench_nprocs_speedup.pdf}
     \subcaption{\gls{openmpi} + \gls{openblas}}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_scalapack_bench_nprocs_speedup.pdf}
     \subcaption{\gls{openmpi} + \gls{scalapack}}
 \end{subfigure}
-\begin{subfigure}[b]{0.4\textwidth}
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
     \subcaption{\gls{oneapi}}
@@ -122,7 +128,7 @@ This leads to choosing the size of the processor pools as a variable, not the pa
 Fig. \ref{fig:scaling_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE being compiled with OpenMPI/Scalapack and Intel oneAPI.
 This choice of pool sizes showcases the smallest pool size possibly (namely 2), as well as a bigger pool size with 16, that still gives rise to a few data points over the chosen range of processors.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_speedup.pdf}
@@ -145,7 +151,7 @@ Another important conclusion to draw out of fig. \ref{fig:scaling_nk_si} is the 
 
 The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
     \caption{Benchmark with k-point parallelization for the TaS2 benchmarking system}
@@ -157,7 +163,7 @@ Furthermore, there are instances of better than linear scaling, which according 
 
 It can also be instructive to look at the idle time for this benchmark to judge the quality of parallelization. 
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
     \caption{Idle time for the k point parallelization benchmark for the TaS2 system}
@@ -166,6 +172,20 @@ It can also be instructive to look at the idle time for this benchmark to judge 
 
 Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between \(\SI{1}{\percent}\) and \(\SI{4}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
 This means the parallelization is as good as possible for these \todo{missing}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots_scf/si_intel_mkl_bench_speedup.pdf}
+    \caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
+    \label{fig:scaling_nd_si}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_speedup.pdf}
+    \caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
+    \label{fig:scaling_nd_tas2}
+\end{figure}
 
 \todo{Linear Algebra}
 

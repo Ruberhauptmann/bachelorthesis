@@ -123,13 +123,17 @@ A natural choice, at least for delocalized (higher energy) orbitals is the discr
     \bra{\vb{r}} \ket{\vb{k} + \vb{G}} = \frac{1}{\sqrt{V}} e^{i (\vb{k} + \vb{G}) \vb{r}}
 \end{equation}
 where \(\vb{G}\) is a reciprocal lattice vector.
+\todo{expansion of wave function in basis functions}
 One problem of this approach lies in the fact that the lower energy core electrons are in contrast very localized around the cores and as such need a lot of basis functions.
 Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
 
 Importantly, the core electrons don't contribute much to the electronic structure problem, so an approach to make the calculations more economically is to introduce an effective screened potential which describes the nuclear potential as well as the states close to the nucleus.
-These potentials are called \acrfull{pp} and \todo{not finished}
+These potentials are called \acrfull{pp} and the orbitals constructed with them are smooth functions and can be accurately represented with a small number of basis functions.
+This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\vert \vb{k} + \vb{G} \vert \leq E_{cutoff}\).
 
-\section{Density Functional Perturbation Theory} \label{sec:theory_dfpt}
+\todo{not finished: kinetic energy -> fourier transform}
+
+\section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
 
 \todo{hate thinking about it}
 
