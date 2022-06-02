@@ -33,18 +33,47 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(1):
+    for run in range(3):
         #for poolsize in poolsize_list:
-        for poolsize in [2, 8, 18]:
+        for poolsize in [2, 8]:
         #for nk in [2]:
             #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
-            for n_procs in range(16, max_number_procs+1, 4):
-                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(poolsize)
+            for n_procs in range(8, max_number_procs+1, 8):
+                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)
 
                 #if n_procs % poolsize == 0 and n_procs % 5 == 0:
+                if n_procs % poolsize == 0:
+                    job_name = 'si_ph_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
+                    prefix = '\'' + job_name +  '\''
+
+                    input_file_scf = input_template_scf.render(prefix=prefix)
+                    input_file_ph = input_template_ph.render(prefix=prefix,
+                    fildyn="\'/fastscratch/tsievers/QE_TMP_DIR/" + job_name + ".dyn\'")
+                    job_file = job_template.render(nk=int(n_procs / poolsize),
+                    n_procs=n_procs, 
+                    log_path=log_path,
+                    job_name=job_name,
+                    in_files_path="in_files")
+                    with open('in_files/' + job_name + '.ph'  , 'w') as fh:
+                        fh.write(input_file_ph)
+                    with open('in_files/' + job_name + '.scf'  , 'w') as fh:
+                        fh.write(input_file_scf)
+                    with open('job_files/' + job_name + '.sh'  , 'w') as fh:
+                        fh.write(job_file)
+
+                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+
+    for run in range(3):
+        for poolsize in [18]:
+            for n_procs in range(18, max_number_procs+1, 18):
+                log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(run) + '/' + str(poolsize)
+                os.makedirs(log_path, exist_ok=True)
+                for file in glob.glob(log_path + '/*'):
+                    os.remove(file)
+
                 if n_procs % poolsize == 0:
                     job_name = 'si_ph_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''

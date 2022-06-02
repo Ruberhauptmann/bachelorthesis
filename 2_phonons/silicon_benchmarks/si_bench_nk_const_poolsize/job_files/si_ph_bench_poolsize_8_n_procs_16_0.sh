@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/phonons/bench_nk_const_poolsize/8
+#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/phonons/bench_nk_const_poolsize/0/8
 #$ -l h_cpu=02:00:00
 #$ -l excl=TRUE
 #$ -pe mpi 16
