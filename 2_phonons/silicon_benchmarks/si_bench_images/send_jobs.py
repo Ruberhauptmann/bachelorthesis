@@ -25,6 +25,7 @@ def main():
     rmtree(job_directory)
     os.makedirs(job_directory + '/tmp', exist_ok=True)
     os.makedirs(job_directory + '/frq', exist_ok=True)
+    os.makedirs(job_directory + '/logs', exist_ok=True)
     copy_tree('pseudos', job_directory + '/pseudos')
 
     for run in range(1):
@@ -44,7 +45,7 @@ def main():
                     fildyn = os.path.join(job_directory + 'tmp', job_name + ".dyn")
                     flfrc = os.path.join(job_directory + 'tmp', job_name + '.FC')
                     flvec = os.path.join(job_directory + 'tmp', job_name + '.modes')
-                    flfrq = os.path.join(job_directory + 'frq', run, job_name + '.frq')
+                    flfrq = os.path.join(job_directory + 'frq', str(run), job_name + '.frq')
 
                     input_file_scf = input_template_scf.render(
                         prefix=prefix,
@@ -79,6 +80,7 @@ def main():
                         n_procs=n_procs,
                         out_directory=out_directory,
                         job_directory=job_directory,
+                        log_directory=job_directory + 'logs',
                         job_name=job_name
                     )
 
@@ -97,7 +99,7 @@ def main():
 
                     os.chdir(out_directory)
 
-                    subprocess.call('qsub ../../../' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub ../../../../' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()
