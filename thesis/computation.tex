@@ -43,14 +43,47 @@ On the other hand, faster parallel code execution can come from:
 
 \section{\QE}\label{sec:qe}
 
-\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties 
+\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties as well as phonon frequencies and eigenvectors.
 
-\todo{what is needed for compilation? also in next subsection!}
+\subsection{Compilation of \QE}\label{sub:qe_compilation}
 
-\subsection{Parallelization of \QE calculations}
+As the core of this thesis is an in depth examination of the \QE software and ways its performance can be optimized, a discussion of the way is is compiled is needed.
+The information in this section is taken from the \QE 7.0 user guide \cite{noauthor_quantum_nodate}.
 
-\todo{where to put k points? BZ integration?}
+The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make} \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
+For parallel execution, also \gls{mpi} libraries and an \gls{mpi} aware compiler need to be provided.
 
-\todo{uff}
+\QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear algebra as well as an implementation of \gls{fft} for fourier transforms.
+In order to make the installation as easy as possible, \QE comes with publicly available reference implementations \todo{what exactly does that mean?} of \gls{blas} and \gls{lapack} and an older version of FFTW (Fastest Fourier Transform in the West, an open source implementation of \gls{fft}).
+Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries which can use more specific CPU optimizations can significantly improve performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
+
+On the PHYSnet cluster, a variety of software packages are available as modules.
+The benchmark in this thesis were made using the following modules:
+\begin{itemize}
+    \item \texttt{openmpi/4.1.1.gcc10.2-infiniband}: \gls{openmpi} 4.1.0 (implies usage of \QE provided \gls{blas}/\gls{lapack})
+    \item \texttt{openmpi/4.1.1.gcc10.2-infiniband openblas/0.3.20}: \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
+    \item \texttt{scalapack/2.2.0}: \gls{openmpi} 4.1.0, \gls{openblas} 0.3.20 and \gls{scalapack} 2.2.0
+    \item \texttt{intel/oneAPI-2021.4}: \gls{oneapi} 2021.4
+\end{itemize}
+
+\QE offers an configuration script to automatically find all required libraries.
+As the default options of the \texttt{configure} script work well in the use case of this thesis, all compilations were made using the minimal commands
+\begin{verbatim}
+    module load <module names>
+    ./configure --with-scalapack=no|yes|intel
+\end{verbatim}
+with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (when using \\ \texttt{intel/oneAPI-2021.4}) and no otherwise.
+
+
+\todo{what to look out for in configure output: when are the internal copies of blas and lapack used?}
+
+
+\subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
+
+\todo{k points, BZ integration!}
+
+\section{Hardware configuration of the PHYSnet cluster}
+
+\todo{is this good here?}
 
 \end{document}
