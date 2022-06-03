@@ -77,18 +77,20 @@
     \pgfplotsset{compat = 1.15}
 \usepackage{rotating}
 \usepackage{graphicx}
+\usepackage{epsfig}
 \graphicspath{{images/}}
 \usepackage{tikz}
+\usepackage{wrapfig}
 \usetikzlibrary{calc,shapes.geometric,shapes.arrows,arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
-\usetikzlibrary{external}
-    \tikzexternalize[prefix=imgs/]
+%\usetikzlibrary{external}
+    %\tikzexternalize[prefix=images/diagrams/]
 % Fixing the todonotes for tikzexternalize since it depends on tikz XD
-\makeatletter
-    \renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
-\makeatother
-    \usepackage{letltxmacro}
-    \LetLtxMacro{\oldmissingfigure}{\missingfigure}
-    \renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[#1]{#2}\tikzexternalenable}
+%\makeatletter
+    %\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+%\makeatother
+\usepackage{letltxmacro}
+\LetLtxMacro{\oldmissingfigure}{\missingfigure}
+\renewcommand{\missingfigure}[2][]{\tikzexternaldisable\oldmissingfigure[#1]{#2}\tikzexternalenable}
 \usepackage{float}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -173,7 +175,7 @@
     }%
 \makeatother
     \hypersetup{
-      linkcolor = purple,
+      linkcolor = UHHblue,
       citecolor  = purple,
       urlcolor   = myblue,
       colorlinks = true,

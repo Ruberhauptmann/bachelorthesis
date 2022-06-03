@@ -80,7 +80,36 @@ with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (whe
 
 \subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
 
-\todo{k points, BZ integration!}
+\begin{wrapfigure}{l}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+    squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=3cm,},
+    node distance=0.5cm]
+    %Nodes
+    \node[squarednode]      (init)          {initial \(n(\vb{r})\)};
+    \node[squarednode]      (step_1)    [below= of init]  {calculate potentials \(v_H [n(\vb{r})]\), \(v_{XC} [n(\vb{r})]\)};
+    \node[squarednode]      (step_2)    [below= of step_1]      {fourier transform potentials};
+    \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
+    \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
+    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb{r})\) and other physical properties (\(E [n(\vb{r})]\))};
+    \node[squarednode]      (done)      [below= of step_5]      {Done if change in \(E\) is small enough};
+    
+    %Lines
+    \draw[->] (init.south) -- (step_1.north);
+    \draw[->] (step_1.south) -- (step_2.north);
+    \draw[->] (step_2.south) -- (step_3.north);
+    \draw[->] (step_3.south) -- (step_4.north);
+    \draw[->] (step_4.south) -- (step_5.north);
+    \draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
+    \draw[->] (step_5.south) -- (done.north);
+\end{tikzpicture}
+\label{fig:diagram_scf_calculations}
+\caption{Flowchart of the algorithm to solve the \acrshort{kohn_sham} equations}
+\end{wrapfigure}
+
+Fig. \ref{fig:diagram_scf_calculations} \todo{finish}
+
+\clearpage
 
 \section{Hardware configuration of the PHYSnet cluster}
 
