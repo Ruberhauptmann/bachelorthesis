@@ -2,7 +2,7 @@
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/phonons/bench_la_parallel_intel/0/nd_auto
-#$ -l h_cpu=02:00:00
+#$ -l h_cpu=10:00:00
 #$ -l excl=TRUE
 #$ -pe mpi 40
 #$ -N silicon_ph_bench_nd_auto_n_procs_40_0
