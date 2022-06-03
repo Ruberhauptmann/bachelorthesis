@@ -31,7 +31,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(6, 10):
+    for run in range(2, 3):
         for poolsize in [2, 8]:
             for n_procs in range(8, max_number_procs+1, 16):
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
