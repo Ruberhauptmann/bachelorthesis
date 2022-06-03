@@ -30,7 +30,7 @@ def main():
 
     #for nd in find_square_numbers(max_number_procs):
     for run in range(1):
-        for nd in [4, 9, 16, 25]:
+        for nd in [4, 9, 16]:
             log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
             for file in glob.glob(log_path + '/*'):

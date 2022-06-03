@@ -17,11 +17,11 @@ if __name__ == "__main__":
     env = Environment(loader=file_loader)
 
     input_template = env.get_template('input.scf.jinja')
-    job_template = env.get_template('TaS2_cdw_bench_nprocs.sh.jinja')
+    job_template = env.get_template('TaS2_cdw_bench_nprocs_singlecore.sh.jinja')
 
     n_procs = 1
 
-    for run in range(9):
+    for run in range(10):
         job_name = 'TaS2_bench_ompi_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 
