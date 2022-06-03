@@ -37,10 +37,8 @@
     \printglossaries
     %\printglossary[type=\acronymtype]
 
-    %\printglossary
+    \printglossary
     %
-    % Laden einer Danksagung
-    \subfile{02_acknowledgement.tex}
     %
     % Laden der Motivation
     \subfile{03_motivation.tex}
@@ -66,7 +64,7 @@
     % Ende des Inhalts und Übergang zur Literatur sowie anderen Listen
     \cleardoublepage
     \phantomsection
-    \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+    \addcontentsline{toc}{chapter}{Bibliography}
     \printbibliography
 
     %
@@ -75,6 +73,11 @@
     \addcontentsline{toc}{chapter}{Listings}
     \listoffigures
     \listoftables
+
+    % Laden einer Danksagung
+    \chapter*{Acknowledgement}
+    \addcontentsline{toc}{chapter}{Acknowledgement}
+    \subfile{02_acknowledgement.tex}
     %
     % Eine Selbstständigkeitserklärung (in aller Regel nötig)
     %\input{selbst.tex}
