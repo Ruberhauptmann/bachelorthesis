@@ -22,10 +22,10 @@ if __name__ == "__main__":
     n_procs = 1
 
     for run in range(10):
-        job_name = 'silicon_bench_ompi_singlecore_' + str(run)
+        job_name = 'silicon_bench_openblas_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 
-        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs/singlecore/' + str(run)
+        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs_openblas/singlecore/' + str(run)
         os.makedirs(log_path, exist_ok=True)
 
         for file in glob.glob(log_path + '/*'):

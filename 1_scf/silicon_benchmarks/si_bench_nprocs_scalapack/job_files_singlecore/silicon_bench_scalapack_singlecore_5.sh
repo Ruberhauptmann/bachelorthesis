@@ -1,7 +1,7 @@
 #!/bin/bash
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/bench_nprocs/singlecore/5
+#$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/bench_nprocs_scalapack/singlecore/5
 #$ -pe mpi 1
 #$ -N silicon_bench_scalapack_singlecore_5
 #$ -l h_cpu=00:30:00

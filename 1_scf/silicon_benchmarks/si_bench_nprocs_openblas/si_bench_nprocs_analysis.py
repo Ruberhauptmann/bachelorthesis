@@ -1,3 +1,4 @@
+from matplotlib.pyplot import plot
 import numpy as np
 
 from qe_benchmarking import qe_helper, nprocs_plots
@@ -5,19 +6,19 @@ from qe_benchmarking import qe_helper, nprocs_plots
 if __name__ == "__main__":
     ### Plot absolute times
 
-    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=False)
+    cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=True)
 
-    nprocs_plots.plot(walltimes, n_procs, "si_openblas", "absolute")
+    nprocs_plots.plot(walltimes, n_procs, "si_openblas", "absolute", plot_error=True)
 
     ### Plot speedup
 
-    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
+    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=True)[0:2]
 
     walltime_singlecore = np.mean(walltimes_singlecore)
 
     speedup = walltime_singlecore / walltimes
 
-    nprocs_plots.plot(speedup, n_procs, "si_openblas", "speedup")
+    nprocs_plots.plot(speedup, n_procs, "si_openblas", "speedup", plot_error=True)
 
     ### Plot idle time
 

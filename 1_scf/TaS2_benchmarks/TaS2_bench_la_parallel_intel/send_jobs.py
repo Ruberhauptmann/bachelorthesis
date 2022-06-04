@@ -30,7 +30,7 @@ def main():
 
     poolsize = 18
     
-    for run in range(2):
+    for run in range(1):
         for nd in [4, 9, 16]:
             log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
@@ -53,7 +53,7 @@ def main():
                     with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                         fh.write(job_file)
 
-                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nd_auto.sh.jinja')
@@ -63,13 +63,14 @@ def main():
     for file in glob.glob(log_path + '/*'):
         os.remove(file)
 
-    for run in range(2):
+    for run in range(1):
         for n_procs in range(36, max_number_procs + 1, 18):
             job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs)
             prefix = '\'' + job_name +  '\''
 
             input_file = input_template.render(prefix=prefix)
             job_file = job_template.render(nd=nd,
+            nk=int(n_procs / poolsize),
             n_procs=n_procs,
             log_path=log_path,
             job_name=job_name)

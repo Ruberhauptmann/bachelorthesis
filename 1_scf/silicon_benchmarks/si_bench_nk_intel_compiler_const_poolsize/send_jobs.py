@@ -31,17 +31,18 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(10, 20):
+    for run in range(9, 19):
         #for poolsize in poolsize_list:
-        for poolsize in [2, 8, 16]:
-            for n_procs in range(8, max_number_procs+1, 8):
+        for poolsize in [2]:
+            #for n_procs in range(8, max_number_procs+1, 8):
+            for n_procs in [2, 4]:
                 log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
                     os.remove(file)
 
                 if n_procs % poolsize == 0.:
-                    job_name = 'silicon_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
+                    job_name = 'silicon_bench_intel_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
 
                     input_file = input_template.render(prefix=prefix)

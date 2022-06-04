@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", type="ph", multiple_runs=True)
 
-    nk_plots.plot(walltimes, n_procs, "si_ph", "absolute", plot_error=True)
+    nk_plots.plot(walltimes, n_procs, "si_ph_nd", "absolute", plot_error=True)
 
     ### Plot speedup
 
@@ -23,7 +23,7 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             speedup[nk][run_index] = walltime_singlecore / walltime_nk
 
-    nk_plots.plot(speedup, n_procs, "si_ph", "speedup", plot_error=True)
+    nk_plots.plot(speedup, n_procs, "si_ph_nd", "speedup", plot_error=True)
 
     ### Plot idle time
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             wait_time[nk][run_index] = (walltime_nk - cputimes[nk][run_index]) / walltime_nk
 
-    nk_plots.plot(wait_time, n_procs, "si_ph", "wait", plot_error=True)
+    nk_plots.plot(wait_time, n_procs, "si_ph_nd", "wait")
 
     ### Plot efficiency
 
@@ -45,4 +45,4 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             efficiency[nk][run_index] = speedup[nk][run_index] / n_procs[nk][run_index]
 
-    nk_plots.plot(efficiency, n_procs, "si_ph", "efficiency", plot_error=True)
+    nk_plots.plot(efficiency, n_procs, "si_ph_nd", "efficiency")

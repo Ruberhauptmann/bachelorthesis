@@ -25,7 +25,7 @@ if __name__ == "__main__":
         job_name = 'silicon_bench_scalapack_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 
-        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs/singlecore/' + str(run)
+        log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs_scalapack/singlecore/' + str(run)
         os.makedirs(log_path, exist_ok=True)
 
         for file in glob.glob(log_path + '/*'):
