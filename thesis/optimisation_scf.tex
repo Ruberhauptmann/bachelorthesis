@@ -121,10 +121,10 @@ The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following 
 
 \section{Using the parallelization parameters of \QE}
 
-\subsection{k-points parallelization}
-
 As detailed in section \ref{sub:qe_parallelization}, \QE offers ways to manage how the workload is distributed among the processors.
 In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
+
+\subsection{k point parallelization}
 
 The benchmark pictured in \ref{fig:scaling_nk_si} is set up as follows: for a given number of processors \(N_p\), the parameter \(N_k\) splits the \(N_p\) processors into \(N_k\) processors pools.
 As the number of processors in one pool has to be a whole number, only certain combinations of \(N_p\) and \(N_k\) are possible, for example \(N_p = 32\) could be split into processor pools of size 2 with \(N_k = 16\), size 8 with \(N_k = 4\) or size 16 with \(N_k = 2\).
@@ -193,7 +193,7 @@ This means the parallelization is as good as possible for these \todo{more analy
     \label{fig:scaling_nd_tas2}
 \end{figure}
 
-\subsection{Linear Algebra Parallelisation}
+\subsection{Linear algebra parallelization}
 
 \todo{Linear Algebra}
 

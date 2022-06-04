@@ -54,8 +54,8 @@ The \QE distribution is packaged with everything needed for simple, non-parallel
 For parallel execution, also \gls{mpi} libraries and an \gls{mpi} aware compiler need to be provided.
 
 \QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear algebra as well as an implementation of \gls{fft} for fourier transforms.
-In order to make the installation as easy as possible, \QE comes with publicly available reference implementations \todo{what exactly does that mean?} of \gls{blas} and \gls{lapack} and an older version of FFTW (Fastest Fourier Transform in the West, an open source implementation of \gls{fft}).
-Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries which can use more specific CPU optimizations can significantly improve performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
+In order to make the installation as easy as possible, \QE comes with a publicly available reference implementation \todo{what exactly does that mean?} of the \gls{blas} routines, the publicly available \gls{lapack} package and an older version of FFTW (Fastest Fourier Transform in the West, an open source implementation of \gls{fft}).
+Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations significantly improves performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
 
 On the PHYSnet cluster, a variety of software packages are available as modules.
 The benchmark in this thesis were made using the following modules:
@@ -80,7 +80,36 @@ with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (whe
 
 \subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
 
-\todo{k points, BZ integration!}
+\begin{wrapfigure}{l}{0.5\textwidth}
+\centering
+\begin{tikzpicture}[
+    squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=3cm,},
+    node distance=0.5cm]
+    %Nodes
+    \node[squarednode]      (init)          {initial \(n(\vb{r})\)};
+    \node[squarednode]      (step_1)    [below= of init]  {calculate potentials \(v_H [n(\vb{r})]\), \(v_{XC} [n(\vb{r})]\)};
+    \node[squarednode]      (step_2)    [below= of step_1]      {fourier transform potentials};
+    \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
+    \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
+    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb{r})\) and other physical properties (\(E [n(\vb{r})]\))};
+    \node[squarednode]      (done)      [below= of step_5]      {Done if change in \(E\) is small enough};
+    
+    %Lines
+    \draw[->] (init.south) -- (step_1.north);
+    \draw[->] (step_1.south) -- (step_2.north);
+    \draw[->] (step_2.south) -- (step_3.north);
+    \draw[->] (step_3.south) -- (step_4.north);
+    \draw[->] (step_4.south) -- (step_5.north);
+    \draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
+    \draw[->] (step_5.south) -- (done.north);
+\end{tikzpicture}
+\label{fig:diagram_scf_calculations}
+\caption{Flowchart of the algorithm to solve the \acrshort{kohn_sham} equations}
+\end{wrapfigure}
+
+Fig. \ref{fig:diagram_scf_calculations} \todo{finish}
+
+\clearpage
 
 \section{Hardware configuration of the PHYSnet cluster}
 
