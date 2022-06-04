@@ -80,7 +80,7 @@ With a correction potential \(v_{KS}\) such that the ground state charge density
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons:
 
-\todo{density of KS states}
+\todo{density as calculated with KS states}
 
 \begin{equation}
     T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})
@@ -123,7 +123,7 @@ A natural choice, at least for delocalized (higher energy) orbitals is the discr
     \bra{\vb{r}} \ket{\vb{k} + \vb{G}} = \frac{1}{\sqrt{V}} e^{i (\vb{k} + \vb{G}) \vb{r}}
 \end{equation}
 where \(\vb{G}\) is a reciprocal lattice vector.
-\todo{expansion of wave function in basis functions}
+\todo{expansion of wave function in basis functions, also periodicity -> integrals over BZ}
 One problem of this approach lies in the fact that the lower energy core electrons are in contrast very localized around the cores and as such need a lot of basis functions.
 Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
 
@@ -135,6 +135,6 @@ This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{
 
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
 
-\todo{hate thinking about it}
+\todo{whole section}
 
 \end{document}
