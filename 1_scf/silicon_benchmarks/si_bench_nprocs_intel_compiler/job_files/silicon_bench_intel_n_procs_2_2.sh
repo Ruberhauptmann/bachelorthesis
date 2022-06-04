@@ -5,7 +5,7 @@
 #$ -pe mpi 2
 #$ -N silicon_bench_intel_n_procs_2_2
 #$ -l h_cpu=00:30:00
-#$ -l h_vmem=1G
+#$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash

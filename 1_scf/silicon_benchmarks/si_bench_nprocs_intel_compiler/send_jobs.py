@@ -28,7 +28,8 @@ def main():
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
 
-        for n_procs in range(2, max_number_procs + 1, 2):
+        #for n_procs in range(2, max_number_procs + 1, 2):
+        for n_procs in [2, 22]:
             job_name = 'silicon_bench_intel_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 

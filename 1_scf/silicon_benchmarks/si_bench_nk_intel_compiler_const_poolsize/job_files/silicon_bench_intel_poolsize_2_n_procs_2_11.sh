@@ -3,7 +3,7 @@
 #$ -e $HOME/job_logs/error_logs/
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/silicon/bench_nk_intel_compiler_const_poolsize/11/2
 #$ -l h_cpu=01:00:00
-#$ -l h_vmem=1G
+#$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -pe mpi 2
 #$ -N silicon_bench_intel_poolsize_2_n_procs_2_11

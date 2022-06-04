@@ -1,0 +1,48 @@
+Module for intel-oneAPI 2021.4 loaded.
+ 
+:: initializing oneAPI environment ...
+   2810880: BASH_VERSION = 4.4.20(1)-release
+:: advisor -- latest
+:: ccl -- latest
+:: clck -- latest
+:: compiler -- latest
+:: dal -- latest
+:: debugger -- latest
+:: dev-utilities -- latest
+:: dnnl -- latest
+:: dpcpp-ct -- latest
+:: dpl -- latest
+:: inspector -- latest
+:: intelpython -- latest
+:: ipp -- latest
+:: ippcp -- latest
+:: ipp -- latest
+:: itac -- latest
+:: LPOT -- latest
+:: mkl -- latest
+:: modelzoo -- latest
+:: mpi -- latest
+:: pytorch -- latest
+:: tbb -- latest
+:: tensorflow -- latest
+:: vpl -- latest
+:: vtune -- latest
+:: oneAPI environment initialized ::
+ 
+[20] MPI startup(): Unable to allocate virtual shared memory segment (virtual size 3301936 KB)
+  (  2 ranks) * (1048576 KB per rank) =  2097152 KB shm heap virtual size (I_MPI_SHM_HEAP_VSIZE)
+  (  2 ranks) * (  12 fwd cells) * (  768 KB fwd cell size) =    18432 KB fwd cells virtual size (I_MPI_SHM_CELL_FWD_SIZE, I_MPI_SHM_CELL_FWD_NUM)
+  (  2 ranks) * (  32 bwd cells) * ( 1024 KB bwd cell size) =   131072 KB bwd cells virtual size (I_MPI_SHM_CELL_BWD_SIZE, I_MPI_SHM_CELL_BWD_NUM)
+                (1024 ext cells) * ( 1024 KB ext cell size) =  1048576 KB ext cells virtual size (I_MPI_SHM_CELL_EXT_SIZE, I_MPI_SHM_CELL_EXT_NUM_TOTAL)
+
+Abort(2664079) on node 20 (rank 20 in comm 0): Fatal error in PMPI_Init: Other MPI error, error stack:
+MPIR_Init_thread(138).........: 
+MPID_Init(1161)...............: 
+MPIDI_SHMI_mpi_init_hook(29)..: 
+MPIDI_POSIX_mpi_init_hook(131): 
+MPIDI_POSIX_eager_init(2523)..: 
+MPIDU_shm_seg_commit(261).....: unable to allocate shared memory
+Command exited with non-zero status 143
+real 1.23
+user 0.04
+sys 0.18

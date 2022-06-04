@@ -3,7 +3,7 @@
 #$ -e $HOME/job_logs/error_logs/
 #$ -o {{ log_path }}
 #$ -l h_cpu=01:00:00
-#$ -l h_vmem=1G
+#$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -pe mpi {{ n_procs }}
 #$ -N {{ job_name }}

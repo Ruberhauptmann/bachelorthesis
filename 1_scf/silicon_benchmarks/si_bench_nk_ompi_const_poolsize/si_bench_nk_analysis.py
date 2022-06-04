@@ -34,7 +34,7 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             wait_time[nk][run_index] = (walltime_nk - cputimes[nk][run_index]) / walltime_nk
 
-    nk_plots.plot(wait_time, n_procs, "si_ompi", "wait", plot_error=True)
+    nk_plots.plot(wait_time, n_procs, "si_ompi", "wait")
 
     ### Plot efficiency
 
@@ -45,4 +45,4 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             efficiency[nk][run_index] = speedup[nk][run_index] / n_procs[nk][run_index]
 
-    nk_plots.plot(efficiency, n_procs, "si_ompi", "efficiency", plot_error=True)
+    nk_plots.plot(efficiency, n_procs, "si_ompi", "efficiency")
