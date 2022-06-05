@@ -31,7 +31,7 @@ def main():
     for run in range(1):
         os.makedirs(job_directory + '/frq/' + str(run), exist_ok=True)
         for nimages in [2, 8, 24]:
-            for n_procs in range(8, max_number_procs+1, 8):
+            for n_procs in range(16, max_number_procs+1, 16):
                 if (n_procs / nimages ) % poolsize == 0:
                     job_name = 'si_ph_bench_nimages_' + str(nimages) + '_n_procs_' + str(n_procs) + '_' + str(run)
 
