@@ -29,6 +29,7 @@ def main():
     copy_tree('pseudos', job_directory + '/pseudos')
 
     for run in range(1):
+        os.makedirs(job_directory + '/frq/' + str(run), exist_ok=True)
         for nimages in [2, 8, 24]:
             for n_procs in range(8, max_number_procs+1, 8):
                 if (n_procs / nimages ) % poolsize == 0:
