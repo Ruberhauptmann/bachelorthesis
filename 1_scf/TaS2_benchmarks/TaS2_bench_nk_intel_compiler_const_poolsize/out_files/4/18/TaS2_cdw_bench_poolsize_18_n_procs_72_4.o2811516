@@ -1,7 +1,7 @@
 Module for intel-oneAPI 2021.4 loaded.
  
 :: initializing oneAPI environment ...
-   2793830: BASH_VERSION = 4.4.20(1)-release
+   2811516: BASH_VERSION = 4.4.20(1)-release
 :: advisor -- latest
 :: ccl -- latest
 :: clck -- latest
@@ -30,7 +30,7 @@ Module for intel-oneAPI 2021.4 loaded.
 :: oneAPI environment initialized ::
  
 
-     Program PWSCF v.7.0 starts on 27May2022 at 16:24: 4 
+     Program PWSCF v.7.0 starts on  5Jun2022 at  9: 7:51 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -46,9 +46,9 @@ Module for intel-oneAPI 2021.4 loaded.
      MPI processes distributed on     4 nodes
      K-points division:     npool     =       4
      R & G space division:  proc/nbgrp/npool/nimage =      18
-     6343 MiB available memory on the printing compute node when the environment starts
+     1618 MiB available memory on the printing compute node when the environment starts
  
-     Reading input from in_files/TaS2_cdw_bench_poolsize_18_n_procs_72_0.scf
+     Reading input from in_files/TaS2_cdw_bench_poolsize_18_n_procs_72_4.scf
 
      Current dimensions of program PWSCF are:
      Max number of different atomic species (ntypx) = 10
@@ -196,7 +196,7 @@ Module for intel-oneAPI 2021.4 loaded.
      negative rho (up, down):  4.640E-05 0.000E+00
      Starting wfcs are  243 randomized atomic wfcs
 
-     total cpu time spent up to now is       18.2 secs
+     total cpu time spent up to now is       22.7 secs
 
      Self-consistent Calculation
 
@@ -204,7 +204,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-02,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       36.6 secs
+     total cpu time spent up to now is       47.2 secs
 
      total energy              =    -454.41919094 Ry
      estimated scf accuracy    <       8.87423448 Ry
@@ -213,7 +213,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.80E-03,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is       68.1 secs
+     total cpu time spent up to now is       88.7 secs
 
      total energy              =    -451.99219893 Ry
      estimated scf accuracy    <      61.32541638 Ry
@@ -222,7 +222,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.80E-03,  avg # of iterations =  3.9
 
-     total cpu time spent up to now is       91.2 secs
+     total cpu time spent up to now is      119.0 secs
 
      total energy              =    -459.17578725 Ry
      estimated scf accuracy    <       0.93131684 Ry
@@ -231,7 +231,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.09E-04,  avg # of iterations =  6.6
 
-     total cpu time spent up to now is      119.8 secs
+     total cpu time spent up to now is      156.5 secs
 
      total energy              =    -459.68327940 Ry
      estimated scf accuracy    <       1.08684201 Ry
@@ -240,7 +240,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.09E-04,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is      136.6 secs
+     total cpu time spent up to now is      179.0 secs
 
      total energy              =    -459.75044326 Ry
      estimated scf accuracy    <       0.23562887 Ry
@@ -249,7 +249,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.54E-04,  avg # of iterations =  6.1
 
-     total cpu time spent up to now is      156.6 secs
+     total cpu time spent up to now is      205.6 secs
 
      total energy              =    -459.76803379 Ry
      estimated scf accuracy    <       0.15248779 Ry
@@ -258,7 +258,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  9.97E-05,  avg # of iterations =  1.9
 
-     total cpu time spent up to now is      173.0 secs
+     total cpu time spent up to now is      227.7 secs
 
      total energy              =    -459.77519033 Ry
      estimated scf accuracy    <       0.05290137 Ry
@@ -268,7 +268,7 @@ Module for intel-oneAPI 2021.4 loaded.
      c_bands:  1 eigenvalues not converged
      ethr =  3.46E-05,  avg # of iterations =  8.8
 
-     total cpu time spent up to now is      197.1 secs
+     total cpu time spent up to now is      258.3 secs
 
      total energy              =    -459.78227245 Ry
      estimated scf accuracy    <       0.00757837 Ry
@@ -282,7 +282,7 @@ Module for intel-oneAPI 2021.4 loaded.
 
      negative rho (up, down):  6.011E-08 0.000E+00
 
-     total cpu time spent up to now is      251.1 secs
+     total cpu time spent up to now is      319.3 secs
 
      total energy              =    -459.78613369 Ry
      estimated scf accuracy    <       0.00357198 Ry
@@ -292,7 +292,7 @@ Module for intel-oneAPI 2021.4 loaded.
      c_bands:  3 eigenvalues not converged
      ethr =  2.33E-06,  avg # of iterations = 12.5
 
-     total cpu time spent up to now is      275.3 secs
+     total cpu time spent up to now is      353.3 secs
 
      total energy              =    -459.78625487 Ry
      estimated scf accuracy    <       0.00079454 Ry
@@ -301,7 +301,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.19E-07,  avg # of iterations = 10.9
 
-     total cpu time spent up to now is      301.8 secs
+     total cpu time spent up to now is      389.9 secs
 
      total energy              =    -459.78642997 Ry
      estimated scf accuracy    <       0.00003391 Ry
@@ -310,7 +310,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  2.22E-08,  avg # of iterations =  9.4
 
-     total cpu time spent up to now is      345.9 secs
+     total cpu time spent up to now is      442.9 secs
 
      total energy              =    -459.78644453 Ry
      estimated scf accuracy    <       0.00026936 Ry
@@ -319,7 +319,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  2.22E-08,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is      370.7 secs
+     total cpu time spent up to now is      474.6 secs
 
      total energy              =    -459.78647716 Ry
      estimated scf accuracy    <       0.00000651 Ry
@@ -328,7 +328,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  4.25E-09,  avg # of iterations =  6.1
 
-     total cpu time spent up to now is      401.3 secs
+     total cpu time spent up to now is      514.4 secs
 
      total energy              =    -459.78648196 Ry
      estimated scf accuracy    <       0.00000739 Ry
@@ -337,7 +337,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  4.25E-09,  avg # of iterations =  1.2
 
-     total cpu time spent up to now is      416.8 secs
+     total cpu time spent up to now is      535.4 secs
 
      total energy              =    -459.78648172 Ry
      estimated scf accuracy    <       0.00000388 Ry
@@ -346,7 +346,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  2.54E-09,  avg # of iterations =  1.5
 
-     total cpu time spent up to now is      432.8 secs
+     total cpu time spent up to now is      557.1 secs
 
      total energy              =    -459.78648158 Ry
      estimated scf accuracy    <       0.00000142 Ry
@@ -355,7 +355,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  9.30E-10,  avg # of iterations =  5.3
 
-     total cpu time spent up to now is      452.8 secs
+     total cpu time spent up to now is      583.9 secs
 
      total energy              =    -459.78648175 Ry
      estimated scf accuracy    <       0.00000032 Ry
@@ -364,7 +364,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  2.12E-10,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is      479.6 secs
+     total cpu time spent up to now is      619.2 secs
 
      total energy              =    -459.78648191 Ry
      estimated scf accuracy    <       0.00000015 Ry
@@ -373,7 +373,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.01E-10,  avg # of iterations =  1.8
 
-     total cpu time spent up to now is      496.0 secs
+     total cpu time spent up to now is      641.7 secs
 
      total energy              =    -459.78648189 Ry
      estimated scf accuracy    <       0.00000009 Ry
@@ -382,7 +382,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.60E-11,  avg # of iterations =  2.8
 
-     total cpu time spent up to now is      513.2 secs
+     total cpu time spent up to now is      664.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <       0.00000001 Ry
@@ -391,7 +391,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  8.68E-12,  avg # of iterations =  6.2
 
-     total cpu time spent up to now is      538.9 secs
+     total cpu time spent up to now is      698.0 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.1E-09 Ry
@@ -400,7 +400,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  7.02E-13,  avg # of iterations =  8.6
 
-     total cpu time spent up to now is      566.0 secs
+     total cpu time spent up to now is      731.2 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          2.8E-10 Ry
@@ -409,7 +409,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.82E-13,  avg # of iterations =  5.1
 
-     total cpu time spent up to now is      587.8 secs
+     total cpu time spent up to now is      760.1 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          7.1E-11 Ry
@@ -418,7 +418,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  2.3
 
-     total cpu time spent up to now is      605.0 secs
+     total cpu time spent up to now is      782.9 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          8.5E-12 Ry
@@ -427,7 +427,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      620.3 secs
+     total cpu time spent up to now is      803.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.9E-12 Ry
@@ -436,7 +436,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      635.7 secs
+     total cpu time spent up to now is      824.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          2.6E-12 Ry
@@ -445,7 +445,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      651.1 secs
+     total cpu time spent up to now is      845.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.4E-12 Ry
@@ -454,7 +454,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      666.5 secs
+     total cpu time spent up to now is      866.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          7.0E-13 Ry
@@ -463,7 +463,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      682.0 secs
+     total cpu time spent up to now is      887.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          3.9E-13 Ry
@@ -472,7 +472,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      697.4 secs
+     total cpu time spent up to now is      908.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          2.9E-14 Ry
@@ -481,7 +481,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      712.8 secs
+     total cpu time spent up to now is      929.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.4E-15 Ry
@@ -490,7 +490,7 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      728.1 secs
+     total cpu time spent up to now is      950.7 secs
 
      End of self-consistent calculation
 
@@ -794,53 +794,53 @@ Module for intel-oneAPI 2021.4 loaded.
 
      convergence has been achieved in  32 iterations
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_cdw_bench_poolsize_18_n_procs_72_0.save/
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_cdw_bench_poolsize_18_n_procs_72_4.save/
  
-     init_run     :     17.29s CPU     17.80s WALL (       1 calls)
-     electrons    :    707.06s CPU    710.81s WALL (       1 calls)
+     init_run     :     17.45s CPU     18.12s WALL (       1 calls)
+     electrons    :    925.13s CPU    929.31s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :     15.61s CPU     15.89s WALL (       1 calls)
-     potinit      :      0.69s CPU      0.87s WALL (       1 calls)
+     wfcinit      :     15.61s CPU     16.14s WALL (       1 calls)
+     potinit      :      0.75s CPU      0.79s WALL (       1 calls)
      hinit0       :      0.51s CPU      0.54s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :    608.29s CPU    610.56s WALL (      32 calls)
-     sum_band     :     90.73s CPU     91.23s WALL (      32 calls)
-     v_of_rho     :      5.18s CPU      5.23s WALL (      33 calls)
-     mix_rho      :      1.85s CPU      1.91s WALL (      32 calls)
+     c_bands      :    774.44s CPU    776.78s WALL (      32 calls)
+     sum_band     :    139.55s CPU    140.03s WALL (      32 calls)
+     v_of_rho     :      7.39s CPU      7.43s WALL (      33 calls)
+     mix_rho      :      2.61s CPU      2.72s WALL (      32 calls)
 
      Called by c_bands:
-     init_us_2    :      5.80s CPU      5.84s WALL (     325 calls)
-     init_us_2:cp :      5.79s CPU      5.83s WALL (     325 calls)
-     cegterg      :    537.86s CPU    540.01s WALL (     162 calls)
+     init_us_2    :      4.34s CPU      4.53s WALL (     325 calls)
+     init_us_2:cp :      4.34s CPU      4.53s WALL (     325 calls)
+     cegterg      :    546.10s CPU    548.19s WALL (     162 calls)
 
      Called by *egterg:
-     cdiaghg      :      9.62s CPU      9.63s WALL (     876 calls)
-     h_psi        :    441.54s CPU    443.66s WALL (     881 calls)
-     g_psi        :      1.57s CPU      1.58s WALL (     714 calls)
+     cdiaghg      :      9.64s CPU      9.66s WALL (     876 calls)
+     h_psi        :    435.64s CPU    437.75s WALL (     881 calls)
+     g_psi        :      2.14s CPU      2.14s WALL (     714 calls)
 
      Called by h_psi:
-     h_psi:calbec :     39.52s CPU     39.59s WALL (     881 calls)
-     vloc_psi     :    357.14s CPU    359.02s WALL (     881 calls)
-     add_vuspsi   :     41.46s CPU     41.52s WALL (     881 calls)
+     h_psi:calbec :     39.86s CPU     39.94s WALL (     881 calls)
+     vloc_psi     :    348.50s CPU    350.27s WALL (     881 calls)
+     add_vuspsi   :     40.74s CPU     40.79s WALL (     881 calls)
 
      General routines
-     calbec       :     39.51s CPU     39.59s WALL (     881 calls)
-     fft          :      3.78s CPU      3.83s WALL (     329 calls)
-     ffts         :      0.33s CPU      0.34s WALL (      32 calls)
-     fftw         :    319.37s CPU    320.73s WALL (   98052 calls)
+     calbec       :     39.86s CPU     39.93s WALL (     881 calls)
+     fft          :      4.72s CPU      4.76s WALL (     329 calls)
+     ffts         :      0.47s CPU      0.48s WALL (      32 calls)
+     fftw         :    310.45s CPU    311.82s WALL (   98052 calls)
  
      Parallel routines
  
-     PWSCF        :  12m 5.38s CPU  12m46.68s WALL
+     PWSCF        :  15m48.19s CPU  16m29.04s WALL
 
  
-   This run was terminated on:  16:36:51  27May2022            
+   This run was terminated on:   9:24:20   5Jun2022            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
-real 771.06
-user 15170.46
-sys 60.97
+real 993.28
+user 19614.53
+sys 66.80

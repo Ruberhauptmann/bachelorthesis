@@ -1,7 +1,7 @@
 Module for intel-oneAPI 2021.4 loaded.
  
 :: initializing oneAPI environment ...
-   2793831: BASH_VERSION = 4.4.20(1)-release
+   2811524: BASH_VERSION = 4.4.20(1)-release
 :: advisor -- latest
 :: ccl -- latest
 :: clck -- latest
@@ -30,7 +30,7 @@ Module for intel-oneAPI 2021.4 loaded.
 :: oneAPI environment initialized ::
  
 
-     Program PWSCF v.7.0 starts on 27May2022 at 16:38:24 
+     Program PWSCF v.7.0 starts on  5Jun2022 at  9:50:51 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -41,14 +41,14 @@ Module for intel-oneAPI 2021.4 loaded.
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
 
-     Parallel version (MPI), running on    90 processors
+     Parallel version (MPI), running on    54 processors
 
-     MPI processes distributed on     5 nodes
-     K-points division:     npool     =       5
+     MPI processes distributed on     3 nodes
+     K-points division:     npool     =       3
      R & G space division:  proc/nbgrp/npool/nimage =      18
-     4783 MiB available memory on the printing compute node when the environment starts
+     4087 MiB available memory on the printing compute node when the environment starts
  
-     Reading input from in_files/TaS2_cdw_bench_poolsize_18_n_procs_90_0.scf
+     Reading input from in_files/TaS2_cdw_bench_poolsize_18_n_procs_54_5.scf
 
      Current dimensions of program PWSCF are:
      Max number of different atomic species (ntypx) = 10
@@ -185,9 +185,9 @@ Module for intel-oneAPI 2021.4 loaded.
 
      Dense  grid:  1222357 G-vectors     FFT dimensions: ( 125, 125, 192)
 
-     Estimated max dynamical RAM per process >     201.87 MB
+     Estimated max dynamical RAM per process >     237.63 MB
 
-     Estimated total dynamical RAM >      16.58 GB
+     Estimated total dynamical RAM >      11.95 GB
 
      Initial potential from superposition of free atoms
 
@@ -196,7 +196,7 @@ Module for intel-oneAPI 2021.4 loaded.
      negative rho (up, down):  4.640E-05 0.000E+00
      Starting wfcs are  243 randomized atomic wfcs
 
-     total cpu time spent up to now is       30.1 secs
+     total cpu time spent up to now is       40.1 secs
 
      Self-consistent Calculation
 
@@ -204,375 +204,302 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-02,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       45.1 secs
+     total cpu time spent up to now is       66.4 secs
 
-     total energy              =    -454.42036928 Ry
-     estimated scf accuracy    <       8.87347307 Ry
+     total energy              =    -454.41907070 Ry
+     estimated scf accuracy    <       8.87447412 Ry
 
      iteration #  2     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  5.80E-03,  avg # of iterations =  6.1
+     ethr =  5.80E-03,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is       70.8 secs
+     total cpu time spent up to now is      111.4 secs
 
-     total energy              =    -451.98908045 Ry
-     estimated scf accuracy    <      61.34536474 Ry
+     total energy              =    -451.98690370 Ry
+     estimated scf accuracy    <      61.36064655 Ry
 
      iteration #  3     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  5.80E-03,  avg # of iterations =  4.0
+     ethr =  5.80E-03,  avg # of iterations =  3.9
 
-     total cpu time spent up to now is       89.5 secs
+     total cpu time spent up to now is      143.9 secs
 
-     total energy              =    -459.17862854 Ry
-     estimated scf accuracy    <       0.92945610 Ry
+     total energy              =    -459.18092950 Ry
+     estimated scf accuracy    <       0.92312299 Ry
 
      iteration #  4     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  6.07E-04,  avg # of iterations =  6.6
+     ethr =  6.03E-04,  avg # of iterations =  6.6
 
-     total cpu time spent up to now is      114.2 secs
+     total cpu time spent up to now is      185.0 secs
 
-     total energy              =    -459.68387669 Ry
-     estimated scf accuracy    <       1.09040973 Ry
+     total energy              =    -459.68590794 Ry
+     estimated scf accuracy    <       1.09083033 Ry
 
      iteration #  5     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  6.07E-04,  avg # of iterations =  2.0
+     ethr =  6.03E-04,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is      127.7 secs
+     total cpu time spent up to now is      208.5 secs
 
-     total energy              =    -459.75022473 Ry
-     estimated scf accuracy    <       0.23210653 Ry
+     total energy              =    -459.75060196 Ry
+     estimated scf accuracy    <       0.23289577 Ry
 
      iteration #  6     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.52E-04,  avg # of iterations =  6.3
+     ethr =  1.52E-04,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is      144.6 secs
+     total cpu time spent up to now is      237.6 secs
 
-     total energy              =    -459.76643092 Ry
-     estimated scf accuracy    <       0.18974503 Ry
+     total energy              =    -459.76734637 Ry
+     estimated scf accuracy    <       0.15996544 Ry
 
      iteration #  7     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.24E-04,  avg # of iterations =  1.8
+     ethr =  1.05E-04,  avg # of iterations =  1.9
 
-     total cpu time spent up to now is      157.7 secs
+     total cpu time spent up to now is      260.6 secs
 
-     total energy              =    -459.77600456 Ry
-     estimated scf accuracy    <       0.04871953 Ry
+     total energy              =    -459.77578069 Ry
+     estimated scf accuracy    <       0.04874906 Ry
 
      iteration #  8     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  3.18E-05,  avg # of iterations = 10.7
+     c_bands:  1 eigenvalues not converged
+     ethr =  3.19E-05,  avg # of iterations = 10.9
 
-     total cpu time spent up to now is      179.6 secs
+     total cpu time spent up to now is      297.5 secs
 
-     total energy              =    -459.78234235 Ry
-     estimated scf accuracy    <       0.00696671 Ry
+     total energy              =    -459.78275902 Ry
+     estimated scf accuracy    <       0.00705550 Ry
 
      iteration #  9     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      c_bands:  2 eigenvalues not converged
+     c_bands:  2 eigenvalues not converged
+     c_bands:  4 eigenvalues not converged
      c_bands:  1 eigenvalues not converged
-     c_bands:  3 eigenvalues not converged
-     ethr =  4.55E-06,  avg # of iterations = 22.0
+     c_bands:  2 eigenvalues not converged
+     c_bands:  2 eigenvalues not converged
+     ethr =  4.61E-06,  avg # of iterations = 21.9
 
-     negative rho (up, down):  2.346E-08 0.000E+00
+     negative rho (up, down):  4.127E-08 0.000E+00
 
-     total cpu time spent up to now is      224.4 secs
+     total cpu time spent up to now is      362.5 secs
 
-     total energy              =    -459.78608891 Ry
-     estimated scf accuracy    <       0.00472600 Ry
+     total energy              =    -459.78616665 Ry
+     estimated scf accuracy    <       0.00352226 Ry
 
      iteration # 10     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      c_bands:  1 eigenvalues not converged
      c_bands:  1 eigenvalues not converged
-     ethr =  3.09E-06,  avg # of iterations = 11.5
+     c_bands:  1 eigenvalues not converged
+     c_bands:  2 eigenvalues not converged
+     ethr =  2.30E-06,  avg # of iterations = 14.3
 
-     total cpu time spent up to now is      243.8 secs
+     total cpu time spent up to now is      396.2 secs
 
-     total energy              =    -459.78623113 Ry
-     estimated scf accuracy    <       0.00097133 Ry
+     total energy              =    -459.78626459 Ry
+     estimated scf accuracy    <       0.00082180 Ry
 
      iteration # 11     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  6.35E-07,  avg # of iterations =  8.3
+     c_bands:  2 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
+     ethr =  5.37E-07,  avg # of iterations =  8.1
 
-     total cpu time spent up to now is      263.9 secs
+     total cpu time spent up to now is      429.5 secs
 
-     total energy              =    -459.78639508 Ry
-     estimated scf accuracy    <       0.00006642 Ry
+     total energy              =    -459.78641827 Ry
+     estimated scf accuracy    <       0.00004463 Ry
 
      iteration # 12     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  4.34E-08,  avg # of iterations =  9.1
+     ethr =  2.92E-08,  avg # of iterations = 10.8
 
-     total cpu time spent up to now is      297.1 secs
+     total cpu time spent up to now is      489.4 secs
 
-     total energy              =    -459.78644203 Ry
-     estimated scf accuracy    <       0.00030787 Ry
+     total energy              =    -459.78644882 Ry
+     estimated scf accuracy    <       0.00023948 Ry
 
      iteration # 13     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  4.34E-08,  avg # of iterations =  4.4
+     ethr =  2.92E-08,  avg # of iterations =  5.7
 
-     total cpu time spent up to now is      315.4 secs
+     total cpu time spent up to now is      523.9 secs
 
-     total energy              =    -459.78647556 Ry
-     estimated scf accuracy    <       0.00001017 Ry
+     total energy              =    -459.78647777 Ry
+     estimated scf accuracy    <       0.00000564 Ry
 
      iteration # 14     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  6.65E-09,  avg # of iterations =  5.9
+     ethr =  3.69E-09,  avg # of iterations =  7.2
 
-     total cpu time spent up to now is      338.3 secs
+     total cpu time spent up to now is      567.3 secs
 
-     total energy              =    -459.78648179 Ry
-     estimated scf accuracy    <       0.00000434 Ry
+     total energy              =    -459.78648183 Ry
+     estimated scf accuracy    <       0.00000571 Ry
 
      iteration # 15     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  2.84E-09,  avg # of iterations =  2.2
+     ethr =  3.69E-09,  avg # of iterations =  1.3
 
-     total cpu time spent up to now is      352.2 secs
+     total cpu time spent up to now is      589.5 secs
 
-     total energy              =    -459.78648176 Ry
-     estimated scf accuracy    <       0.00000324 Ry
+     total energy              =    -459.78648170 Ry
+     estimated scf accuracy    <       0.00000280 Ry
 
      iteration # 16     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  2.12E-09,  avg # of iterations =  1.5
+     ethr =  1.83E-09,  avg # of iterations =  1.9
 
-     total cpu time spent up to now is      365.2 secs
+     total cpu time spent up to now is      612.3 secs
 
-     total energy              =    -459.78648172 Ry
-     estimated scf accuracy    <       0.00000122 Ry
+     total energy              =    -459.78648162 Ry
+     estimated scf accuracy    <       0.00000089 Ry
 
      iteration # 17     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  7.98E-10,  avg # of iterations =  4.4
+     ethr =  5.80E-10,  avg # of iterations =  5.5
 
-     total cpu time spent up to now is      379.9 secs
+     total cpu time spent up to now is      644.4 secs
 
-     total energy              =    -459.78648174 Ry
-     estimated scf accuracy    <       0.00000052 Ry
+     total energy              =    -459.78648186 Ry
+     estimated scf accuracy    <       0.00000012 Ry
 
      iteration # 18     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  3.38E-10,  avg # of iterations =  6.6
+     ethr =  7.83E-11,  avg # of iterations =  6.0
 
-     total cpu time spent up to now is      399.0 secs
+     total cpu time spent up to now is      679.2 secs
 
-     total energy              =    -459.78648187 Ry
-     estimated scf accuracy    <       0.00000003 Ry
+     total energy              =    -459.78648191 Ry
+     estimated scf accuracy    <       0.00000010 Ry
 
      iteration # 19     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.85E-11,  avg # of iterations =  8.8
+     ethr =  6.32E-11,  avg # of iterations =  1.1
 
-     total cpu time spent up to now is      426.1 secs
+     total cpu time spent up to now is      701.1 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <       0.00000004 Ry
+     estimated scf accuracy    <       0.00000007 Ry
 
      iteration # 20     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.85E-11,  avg # of iterations =  2.1
+     ethr =  4.36E-11,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is      440.9 secs
+     total cpu time spent up to now is      724.5 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          2.2E-09 Ry
+     estimated scf accuracy    <       0.00000001 Ry
 
      iteration # 21     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.41E-12,  avg # of iterations =  6.7
+     ethr =  6.87E-12,  avg # of iterations =  5.6
 
-     total cpu time spent up to now is      466.2 secs
+     total cpu time spent up to now is      760.4 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.0E-09 Ry
+     estimated scf accuracy    <          8.3E-10 Ry
 
      iteration # 22     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  6.68E-13,  avg # of iterations =  3.0
+     c_bands:  1 eigenvalues not converged
+     ethr =  5.40E-13,  avg # of iterations =  7.8
 
-     total cpu time spent up to now is      481.2 secs
+     total cpu time spent up to now is      797.4 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          2.5E-11 Ry
+     estimated scf accuracy    <          3.8E-11 Ry
 
      iteration # 23     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     c_bands:  2 eigenvalues not converged
-     ethr =  1.00E-13,  avg # of iterations =  8.4
+     ethr =  1.00E-13,  avg # of iterations =  6.6
 
-     total cpu time spent up to now is      501.4 secs
+     total cpu time spent up to now is      830.3 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          6.4E-11 Ry
+     estimated scf accuracy    <          5.5E-12 Ry
 
      iteration # 24     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  2.6
+     ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      514.8 secs
+     total cpu time spent up to now is      852.0 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.2E-11 Ry
+     estimated scf accuracy    <          2.2E-12 Ry
 
      iteration # 25     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      527.2 secs
+     total cpu time spent up to now is      873.8 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          5.9E-13 Ry
+     estimated scf accuracy    <          5.6E-13 Ry
 
      iteration # 26     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      539.6 secs
+     total cpu time spent up to now is      895.5 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.6E-13 Ry
+     estimated scf accuracy    <          8.2E-14 Ry
 
      iteration # 27     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      551.9 secs
+     total cpu time spent up to now is      917.2 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          2.5E-13 Ry
+     estimated scf accuracy    <          6.7E-14 Ry
 
      iteration # 28     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      564.3 secs
+     total cpu time spent up to now is      938.9 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          3.2E-13 Ry
+     estimated scf accuracy    <          6.2E-14 Ry
 
      iteration # 29     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      576.6 secs
+     total cpu time spent up to now is      960.6 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.6E-13 Ry
+     estimated scf accuracy    <          4.3E-14 Ry
 
      iteration # 30     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      589.0 secs
+     total cpu time spent up to now is      982.3 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.3E-13 Ry
+     estimated scf accuracy    <          5.1E-15 Ry
 
      iteration # 31     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      601.4 secs
+     total cpu time spent up to now is     1004.1 secs
 
      total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          4.3E-13 Ry
+     estimated scf accuracy    <          1.6E-15 Ry
 
      iteration # 32     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is      613.8 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          5.3E-13 Ry
-
-     iteration # 33     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      626.1 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          5.5E-13 Ry
-
-     iteration # 34     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      638.5 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          4.4E-13 Ry
-
-     iteration # 35     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      650.8 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          5.7E-13 Ry
-
-     iteration # 36     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      663.2 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          7.7E-13 Ry
-
-     iteration # 37     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      675.6 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.8E-13 Ry
-
-     iteration # 38     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      688.0 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          1.3E-13 Ry
-
-     iteration # 39     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      700.3 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          5.7E-14 Ry
-
-     iteration # 40     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      712.7 secs
-
-     total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          4.5E-14 Ry
-
-     iteration # 41     ecut=   100.00 Ry     beta= 0.70
-     Davidson diagonalization with overlap
-     ethr =  1.00E-13,  avg # of iterations =  1.0
-
-     total cpu time spent up to now is      725.0 secs
+     total cpu time spent up to now is     1025.7 secs
 
      End of self-consistent calculation
 
@@ -588,8 +515,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.4135  -2.2358  -2.1761  -2.1567  -2.1567  -2.1198  -2.1198  -2.0707
     -2.0707  -2.0571  -1.9285  -1.8999  -1.8999  -1.8475  -1.8411  -1.8411
     -0.9618  -0.9236  -0.9236  -0.8745  -0.8538  -0.8538   0.0850   0.1105
-     0.4130   1.6733   1.6733   2.3390   2.3390   2.4169   2.4619   2.4619
-     2.4775   2.4775   2.5699   2.5729
+     0.4130   1.6733   1.6733   2.3390   2.3390   2.4168   2.4619   2.4620
+     2.4775   2.4775   2.5699   2.5741
 
           k = 0.0000 0.0962 0.0000 (152927 PWs)   bands (ev):
 
@@ -603,8 +530,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.3992  -2.2857  -2.2037  -2.1950  -2.1589  -2.1386  -2.1056  -2.0937
     -2.0794  -2.0460  -1.9446  -1.9035  -1.8869  -1.8768  -1.8427  -1.7741
     -0.9605  -0.9283  -0.9176  -0.8574  -0.8225  -0.7939   0.0545   0.0779
-     0.4024   1.7148   1.7160   2.3202   2.3232   2.3978   2.4366   2.4664
-     2.4673   2.4995   2.5144   2.5428
+     0.4024   1.7148   1.7160   2.3202   2.3232   2.3978   2.4363   2.4661
+     2.4673   2.4995   2.5144   2.5411
 
           k = 0.0000 0.1925 0.0000 (152915 PWs)   bands (ev):
 
@@ -618,8 +545,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.3779  -2.3616  -2.3004  -2.2835  -2.2227  -2.1755  -2.1567  -2.1267
     -2.0745  -1.9990  -1.9551  -1.9357  -1.8998  -1.8286  -1.8225  -1.7000
     -0.9501  -0.9069  -0.8868  -0.7987  -0.7551  -0.6817  -0.0244  -0.0069
-     0.3698   1.8219   1.8285   2.2693   2.2733   2.3634   2.3850   2.4422
-     2.4652   2.4686   2.5444   2.5634
+     0.3698   1.8219   1.8285   2.2693   2.2733   2.3634   2.3849   2.4422
+     2.4650   2.4685   2.5426   2.5634
 
           k = 0.0000 0.2887 0.0000 (152931 PWs)   bands (ev):
 
@@ -633,8 +560,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.4745  -2.3869  -2.3360  -2.3181  -2.3159  -2.3121  -2.2443  -2.1625
     -2.0621  -1.9874  -1.9552  -1.9330  -1.8831  -1.7734  -1.7717  -1.6405
     -0.9233  -0.8565  -0.8347  -0.7335  -0.6785  -0.5396  -0.1249  -0.1176
-     0.3126   1.9520   1.9721   2.2076   2.2082   2.3315   2.3442   2.4157
-     2.4336   2.4838   2.5374   2.5501
+     0.3126   1.9520   1.9721   2.2076   2.2082   2.3315   2.3442   2.4158
+     2.4335   2.4838   2.5361   2.5500
 
           k = 0.0000 0.3849 0.0000 (152889 PWs)   bands (ev):
 
@@ -649,7 +576,7 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.1230  -2.0013  -1.9477  -1.9084  -1.8321  -1.7196  -1.7148  -1.6011
     -0.8868  -0.7970  -0.7783  -0.6798  -0.6046  -0.3859  -0.2317  -0.2159
      0.2273   2.0344   2.0665   2.1876   2.1889   2.2996   2.3456   2.4018
-     2.4036   2.4927   2.5332   2.6434
+     2.4036   2.4921   2.5284   2.5762
 
           k = 0.0000 0.4811 0.0000 (152797 PWs)   bands (ev):
 
@@ -663,8 +590,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.7194  -2.6289  -2.5380  -2.5284  -2.4476  -2.2708  -2.2528  -2.1810
     -2.1514  -2.0040  -1.9542  -1.8922  -1.7835  -1.6880  -1.6687  -1.5789
     -0.8561  -0.7448  -0.7342  -0.6472  -0.5369  -0.3329  -0.3280  -0.1825
-     0.1134   2.0317   2.0540   2.1993   2.2291   2.3556   2.3634   2.3739
-     2.4172   2.4855   2.5253   2.5441
+     0.1134   2.0317   2.0540   2.1993   2.2292   2.3556   2.3635   2.3739
+     2.4173   2.4856   2.5255   2.5442
 
           k = 0.0000-0.5774 0.0000 (152718 PWs)   bands (ev):
 
@@ -679,7 +606,7 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.1451  -2.0065  -1.9586  -1.8866  -1.7630  -1.6797  -1.6514  -1.5712
     -0.8442  -0.7217  -0.7172  -0.6377  -0.4945  -0.3887  -0.3488  -0.0555
     -0.0034   2.0224   2.0420   2.1933   2.2475   2.3627   2.3754   2.4111
-     2.4504   2.4806   2.4817   2.5130
+     2.4504   2.4806   2.4817   2.5129
 
           k = 0.0833 0.1443 0.0000 (152889 PWs)   bands (ev):
 
@@ -693,8 +620,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.3733  -2.3513  -2.2707  -2.2570  -2.2167  -2.1535  -2.1376  -2.0841
     -2.0839  -2.0120  -1.9722  -1.9249  -1.8977  -1.8418  -1.8336  -1.7178
     -0.9472  -0.9311  -0.8838  -0.8317  -0.7548  -0.7253  -0.0009   0.0205
-     0.3809   1.7865   1.7958   2.2835   2.2984   2.3667   2.3900   2.4490
-     2.4645   2.4969   2.5286   2.5432
+     0.3809   1.7865   1.7958   2.2835   2.2984   2.3667   2.3899   2.4490
+     2.4646   2.4971   2.5285   2.5432
 
           k = 0.0833 0.2406 0.0000 (152861 PWs)   bands (ev):
 
@@ -709,7 +636,7 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.0636  -1.9874  -1.9829  -1.9503  -1.8936  -1.8026  -1.7860  -1.6555
     -0.9252  -0.8901  -0.8418  -0.7762  -0.6726  -0.6102  -0.0942  -0.0709
      0.3360   1.9031   1.9247   2.2248   2.2520   2.3214   2.3546   2.4215
-     2.4357   2.4951   2.5241   2.5612
+     2.4357   2.4951   2.5241   2.5609
 
           k = 0.0833 0.3368 0.0000 (152826 PWs)   bands (ev):
 
@@ -724,7 +651,7 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.1030  -2.0064  -1.9679  -1.9273  -1.8548  -1.7545  -1.7250  -1.6068
     -0.8912  -0.8313  -0.7923  -0.7114  -0.6007  -0.4651  -0.1975  -0.1724
      0.2648   2.0164   2.0457   2.1754   2.2104   2.2915   2.3397   2.4002
-     2.4174   2.4885   2.5149   2.5676
+     2.4174   2.4885   2.5149   2.5674
 
           k = 0.0833 0.4330 0.0000 (152798 PWs)   bands (ev):
 
@@ -739,7 +666,7 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.1532  -2.0033  -1.9490  -1.9339  -1.8002  -1.7088  -1.6740  -1.5750
     -0.8557  -0.7797  -0.7407  -0.6566  -0.5407  -0.3433  -0.2844  -0.2346
      0.1652   2.0436   2.0750   2.1871   2.2165   2.3190   2.3412   2.3989
-     2.4045   2.4823   2.5159   2.5773
+     2.4045   2.4823   2.5156   2.5773
 
           k = 0.0833 0.5292 0.0000 (152718 PWs)   bands (ev):
 
@@ -753,8 +680,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.7125  -2.6659  -2.5829  -2.5088  -2.4686  -2.3413  -2.2501  -2.1840
     -2.1410  -1.9997  -1.9469  -1.9388  -1.7649  -1.6819  -1.6487  -1.5576
     -0.8334  -0.7507  -0.6988  -0.6313  -0.4880  -0.3784  -0.3419  -0.1160
-     0.0404   2.0258   2.0619   2.1948   2.2277   2.3542   2.3926   2.3972
-     2.4249   2.4777   2.4928   2.5155
+     0.0404   2.0258   2.0619   2.1949   2.2277   2.3543   2.3929   2.3973
+     2.4249   2.4778   2.4928   2.5147
 
           k = 0.1667 0.2887 0.0000 (152845 PWs)   bands (ev):
 
@@ -768,8 +695,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.5394  -2.4819  -2.4423  -2.3192  -2.3116  -2.2666  -2.1666  -2.1434
     -2.1032  -2.0806  -2.0108  -1.8956  -1.8791  -1.7685  -1.7292  -1.6056
     -0.8843  -0.8501  -0.7926  -0.7330  -0.5555  -0.5315  -0.1881  -0.1514
-     0.2773   2.0040   2.0341   2.1790   2.2356   2.2862   2.3284   2.3968
-     2.4065   2.4963   2.5227   2.5508
+     0.2773   2.0040   2.0342   2.1790   2.2356   2.2862   2.3284   2.3969
+     2.4065   2.4964   2.5228   2.5505
 
           k = 0.1667 0.3849 0.0000 (152808 PWs)   bands (ev):
 
@@ -783,8 +710,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.6821  -2.6187  -2.5316  -2.3930  -2.3039  -2.2931  -2.2243  -2.2050
     -2.1537  -2.0907  -2.0047  -1.8889  -1.8338  -1.7208  -1.6721  -1.5643
     -0.8457  -0.8008  -0.7471  -0.6717  -0.4887  -0.4100  -0.2663  -0.2334
-     0.1918   2.0668   2.0855   2.1532   2.2366   2.2968   2.3400   2.3829
-     2.3932   2.4803   2.5092   2.5903
+     0.1918   2.0668   2.0855   2.1532   2.2366   2.2968   2.3401   2.3829
+     2.3932   2.4805   2.5099   2.5903
 
           k = 0.1667 0.4811 0.0000 (152784 PWs)   bands (ev):
 
@@ -798,8 +725,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.6975  -2.6510  -2.5959  -2.5205  -2.4502  -2.3667  -2.2612  -2.1907
     -2.1351  -2.0803  -1.9897  -1.9099  -1.7946  -1.6791  -1.6334  -1.5360
     -0.8169  -0.7660  -0.7049  -0.6194  -0.4579  -0.3651  -0.3223  -0.1999
-     0.0802   2.0476   2.0915   2.1706   2.2235   2.3463   2.3708   2.3912
-     2.4149   2.4640   2.5022   2.5056
+     0.0802   2.0476   2.0915   2.1706   2.2235   2.3463   2.3709   2.3912
+     2.4149   2.4640   2.5023   2.5057
 
           k = 0.1667 0.5774 0.0000 (152766 PWs)   bands (ev):
 
@@ -813,8 +740,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.7379  -2.6706  -2.6304  -2.5649  -2.4795  -2.4546  -2.2611  -2.1850
     -2.1228  -2.0762  -1.9758  -1.9279  -1.7803  -1.6619  -1.6219  -1.5250
     -0.8060  -0.7541  -0.6831  -0.6042  -0.4255  -0.4075  -0.3411  -0.0846
-    -0.0301   2.0360   2.0865   2.1785   2.2179   2.3560   2.4035   2.4146
-     2.4214   2.4507   2.4721   2.5747
+    -0.0301   2.0360   2.0865   2.1785   2.2179   2.3560   2.4087   2.4146
+     2.4221   2.4507   2.4743   2.5774
 
           k = 0.2500 0.4330 0.0000 (152805 PWs)   bands (ev):
 
@@ -828,8 +755,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.7657  -2.7300  -2.5910  -2.4509  -2.3820  -2.3045  -2.2669  -2.2605
     -2.1931  -2.1328  -1.9862  -1.8664  -1.8378  -1.6731  -1.6263  -1.5263
     -0.8127  -0.7667  -0.7100  -0.6170  -0.4336  -0.3531  -0.3118  -0.2492
-     0.0941   2.0734   2.0948   2.1462   2.2376   2.3488   2.3691   2.3771
-     2.3911   2.4656   2.5015   2.5053
+     0.0941   2.0734   2.0948   2.1462   2.2376   2.3488   2.3691   2.3770
+     2.3911   2.4656   2.5014   2.5053
 
           k = 0.2500 0.5292 0.0000 (152763 PWs)   bands (ev):
 
@@ -843,8 +770,8 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.7007  -2.6907  -2.6304  -2.5217  -2.5190  -2.4862  -2.2755  -2.2697
     -2.1871  -2.1115  -1.9532  -1.8931  -1.8265  -1.6424  -1.6004  -1.5028
     -0.7956  -0.7447  -0.6888  -0.5761  -0.4366  -0.3869  -0.2806  -0.1640
-    -0.0216   2.0638   2.0955   2.1392   2.2494   2.3543   2.3892   2.3902
-     2.4450   2.4454   2.4593   2.5040
+    -0.0216   2.0638   2.0955   2.1392   2.2494   2.3541   2.3871   2.3892
+     2.4377   2.4451   2.4546   2.4939
 
           k = 0.3333 0.5774 0.0000 (152790 PWs)   bands (ev):
 
@@ -858,71 +785,71 @@ Module for intel-oneAPI 2021.4 loaded.
     -2.6807  -2.6542  -2.6274  -2.5523  -2.5180  -2.4905  -2.4858  -2.2723
     -2.1866  -2.1031  -1.9152  -1.8978  -1.8521  -1.6288  -1.5870  -1.4897
     -0.7891  -0.7337  -0.6883  -0.5517  -0.4325  -0.4174  -0.1794  -0.1787
-    -0.0949   2.0829   2.0959   2.1107   2.2749   2.3548   2.3838   2.3907
-     2.4251   2.4675   2.4711   2.5046
+    -0.0949   2.0829   2.0959   2.1106   2.2744   2.3548   2.3832   2.3907
+     2.4251   2.4414   2.4681   2.4708
 
      the Fermi energy is    -0.5551 ev
 
 !    total energy              =    -459.78648190 Ry
-     estimated scf accuracy    <          8.4E-16 Ry
+     estimated scf accuracy    <          3.9E-16 Ry
      smearing contrib. (-TS)   =      -0.01757274 Ry
      internal energy E=F+TS    =    -459.76890916 Ry
 
      The total energy is F=E-TS. E is the sum of the following terms:
-     one-electron contribution =   -1841.35425257 Ry
-     hartree contribution      =     959.20608243 Ry
+     one-electron contribution =   -1841.35425228 Ry
+     hartree contribution      =     959.20608214 Ry
      xc contribution           =    -108.38158673 Ry
      ewald contribution        =     530.76084771 Ry
 
-     convergence has been achieved in  41 iterations
+     convergence has been achieved in  32 iterations
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_cdw_bench_poolsize_18_n_procs_90_0.save/
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_cdw_bench_poolsize_18_n_procs_54_5.save/
  
-     init_run     :     14.27s CPU     14.74s WALL (       1 calls)
-     electrons    :    691.98s CPU    695.47s WALL (       1 calls)
+     init_run     :     24.24s CPU     24.88s WALL (       1 calls)
+     electrons    :    980.89s CPU    989.06s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :     12.62s CPU     12.95s WALL (       1 calls)
-     potinit      :      0.69s CPU      0.79s WALL (       1 calls)
-     hinit0       :      0.53s CPU      0.55s WALL (       1 calls)
+     wfcinit      :     22.59s CPU     23.16s WALL (       1 calls)
+     potinit      :      0.69s CPU      0.70s WALL (       1 calls)
+     hinit0       :      0.52s CPU      0.56s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :    586.73s CPU    589.10s WALL (      41 calls)
-     sum_band     :     93.90s CPU     94.41s WALL (      41 calls)
-     v_of_rho     :      7.59s CPU      7.64s WALL (      42 calls)
-     mix_rho      :      2.51s CPU      2.59s WALL (      41 calls)
+     c_bands      :    845.67s CPU    849.53s WALL (      32 calls)
+     sum_band     :    126.15s CPU    126.84s WALL (      32 calls)
+     v_of_rho     :      5.25s CPU      5.29s WALL (      33 calls)
+     mix_rho      :      1.82s CPU      1.95s WALL (      32 calls)
 
      Called by c_bands:
-     init_us_2    :      5.87s CPU      5.92s WALL (     332 calls)
-     init_us_2:cp :      5.87s CPU      5.92s WALL (     332 calls)
-     cegterg      :    517.23s CPU    519.48s WALL (     165 calls)
+     init_us_2    :      8.12s CPU      8.17s WALL (     455 calls)
+     init_us_2:cp :      8.12s CPU      8.16s WALL (     455 calls)
+     cegterg      :    770.84s CPU    773.97s WALL (     227 calls)
 
      Called by *egterg:
-     cdiaghg      :      8.70s CPU      8.72s WALL (     811 calls)
-     h_psi        :    418.70s CPU    420.90s WALL (     815 calls)
-     g_psi        :      1.85s CPU      1.86s WALL (     646 calls)
+     cdiaghg      :     15.47s CPU     15.48s WALL (    1357 calls)
+     h_psi        :    625.05s CPU    628.17s WALL (    1364 calls)
+     g_psi        :      2.23s CPU      2.24s WALL (    1130 calls)
 
      Called by h_psi:
-     h_psi:calbec :     37.83s CPU     37.91s WALL (     815 calls)
-     vloc_psi     :    336.34s CPU    338.21s WALL (     815 calls)
-     add_vuspsi   :     38.32s CPU     38.38s WALL (     815 calls)
+     h_psi:calbec :     57.31s CPU     57.44s WALL (    1364 calls)
+     vloc_psi     :    501.60s CPU    504.22s WALL (    1364 calls)
+     add_vuspsi   :     59.69s CPU     59.79s WALL (    1364 calls)
 
      General routines
-     calbec       :     37.82s CPU     37.91s WALL (     815 calls)
-     fft          :      5.63s CPU      5.67s WALL (     419 calls)
-     ffts         :      0.43s CPU      0.44s WALL (      41 calls)
-     fftw         :    300.07s CPU    301.46s WALL (   95364 calls)
+     calbec       :     57.30s CPU     57.43s WALL (    1364 calls)
+     fft          :      3.81s CPU      3.87s WALL (     329 calls)
+     ffts         :      0.25s CPU      0.26s WALL (      32 calls)
+     fftw         :    442.36s CPU    444.31s WALL (  136480 calls)
  
      Parallel routines
  
-     PWSCF        :  12m 2.88s CPU  12m41.77s WALL
+     PWSCF        :  17m 1.38s CPU  17m55.92s WALL
 
  
-   This run was terminated on:  16:51: 6  27May2022            
+   This run was terminated on:  10: 8:47   5Jun2022            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
-real 766.06
-user 15078.59
-sys 60.95
+real 1080.33
+user 21330.98
+sys 85.92
