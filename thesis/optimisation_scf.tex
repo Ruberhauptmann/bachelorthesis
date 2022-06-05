@@ -3,17 +3,18 @@
 \begin{document}
 \chapter{Parallelisation of electronic-structure calculations\label{ch:optimisation_scf}}
 
-\todo{little introduction}
+The \texttt{PWscf} (Plane-Wave Self-Consistend Field) package is one of the core modules of \QE, as many other modules need the variables ground state density or total energy as input.
+This chapter deals with examining the best ways to run \texttt{PWscf} calculations in the \texttt{scf} mode.
 
-\section{First scaling tests}
+\section{First scaling tests}\label{sec:scf_first_scaling}
 
-The first step in analysing the scaling of \QE is to perform a baseline scaling test without any optimisations appplied. 
+The first step in analysing the scaling of the \texttt{PWscf} is to perform a baseline scaling test without any optimisations appplied. 
 In Fig. \ref{fig:scaling_ompi_nprocs_si_speedup} to \ref{fig:scaling_ompi_nprocs_tas2_absolute_wait} two scaling tests on the earlier mentioned benchmarking systems Si and TaS2 are pictured. 
 The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \gls{openmpi} 4.1.0, without any of the compilation or runtime optimisation parameters mentioned in section \ref{sec:qe} used.
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.8\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
+\includegraphics[width=0.75\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
 \caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_ompi_nprocs_si_speedup}
 \end{figure}
@@ -41,15 +42,13 @@ Three different metrics of scalability are pictured in \ref{fig:scaling_ompi_npr
 For further analysis mainly speedup will be used as a metric of scalability, because it lends itself to easy interpretation: optimal scalability is achieved when the speedup scales linearly with the number of processors (with a slope of one), as discussed in ch. \ref{sec:parallel_computing}.
 This on the one hand necessarily implies good parallelization and a lower runtime for more processors used, but the other two parameters should also always be considered.
 
-\todo{formulate differently with new figure structure!}
-
 As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
 Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
-On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources. \todo{explanation of wait time}
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources. \todo{explanation of wait time, also this all would probably fit better in the computation chapter? so there is a central reference?}
 
 \begin{figure}[ht!]
 \centering
-\includegraphics[width=0.8\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
+\includegraphics[width=0.75\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
 \caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_ompi_nprocs_tas2_speedup}
 \end{figure}
@@ -69,10 +68,11 @@ On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour
 
 On a single node, both the Si and TaS2 calculations show good, but not perfect scaling behavior: the speedup does approximately scale linearly with the number of processors, but the slope is closer to \(\frac{1}{2}\), than 1.
 Even though the scaling behavior is not perfect, there is just a small, almost constant amount of runtime used by system calls, this speaks for good parallelization.
-As discussed in sec. \ref{sec:parallel_computing}, startup time is an unavoidable part of every parallel program, so a constant amount of time used not for calculations is expected, bad parallelization on the other hand shows itself by introducing waiting times between processors, which makes the waiting time in some way dependent on the number of processors.
+As discussed in sec. \ref{sec:parallel_computing}, startup time is an unavoidable part of every parallel program, so a constant amount of time used not for calculations is expected.
 
-When using more than one node, not only does the scaling get worse, the execution needs longer than on a single core for the Si system, with a marginally better performance for the TaS2 system.
-This is also seen in the plots of system time. The percentage of time used for tasks not directly related to calculations goes from a near constant value for under 20 processors to 50\% of the execution time for the Si system and 35\% for the TaS2 system.
+When using more than one node, not only does the scaling get worse, the execution needs longer than on a single core for the Si system (resulting in a speedup smaller than 1), with a marginally better, but still worse performance than on a single node for the TaS2 system.
+The reason for this can be seen in the plots for system time, as bad parallelization shows itself by introducing waiting times between processors, which makes the system time in some way grow with the the number of processors, as can be seen especially well in \ref{fig:scaling_ompi_nprocs_tas2_absolute_wait}.
+Here the percentage of time used for tasks not directly related to calculations goes from a near constant value for under 20 processors to 35\% of the execution time for the TaS2 system.
 
 These scaling tests pose now two questions to be answered:
 \begin{itemize}
@@ -86,7 +86,7 @@ A first strategy for solving issues with parallelization is trying different com
 As discussed in sec. \ref{sub:qe_compilation}, \QE can make use of a variety of software packages available on the PHYSnet cluster.
 The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following software combinations:
 \begin{itemize}
-    \item \gls{openmpi} 4.1.0 and \QE provided \gls{blas}/\gls{lapack}
+    \item \gls{openmpi} 4.1.0 and \QE provided \gls{blas}/\gls{lapack}, so the baseline test discussed in sec. \ref{sec:scf_first_scaling}
     \item \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
     \item \gls{openmpi} 4.1.0, \gls{openblas} 0.3.20 and \gls{scalapack} 2.2.0
     \item \gls{oneapi} 2021.4
@@ -113,11 +113,17 @@ The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following 
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Baseline scaling test with different combinations of compilers and mathematical libraries}
+\caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
 \label{fig:scaling_compilers_nprocs}
 \end{figure}
 
-\todo{analysis}
+\todo{analysis with right plots for ompi, ompi+openblas, maybe kick out scalapack? it should be the same}
+
+Fig. \ref{fig:scaling_compilers_nprocs} shows that using Intels \gls{oneapi} packages provides optimal scaling for up to round about 6 processors, which means those calculations ran about twice as fast as the calculations with just \gls{openmpi}.
+This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors
+The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
+
+\todo{absolute runtimes! so comparison is possible! (singlecore runtimes could also be differen!)}
 
 \section{Using the parallelization parameters of \QE}
 
@@ -153,7 +159,7 @@ Fig. \ref{fig:scaling_nk_si} shows that using k parallelization with a pool size
 
 Another important conclusion to draw out of fig. \ref{fig:scaling_nk_si} is the impact of using Intels compiler instead of OpenMPI, as that factor alone speeds up the calculation by a factor of 2 over the whole range of processors.
 
-The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with the same list of pool sizes, but over a wider range of processors.
+The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_nk_tas2}, with a similar list of pool sizes, but over a wider range of processors.
 
 \begin{figure}[ht!]
     \centering
@@ -174,26 +180,27 @@ It can also be instructive to look at the idle time for this benchmark to judge 
     \label{fig:scaling_nk_tas2_wait}
 \end{figure}
 
-Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between \(\SI{1}{\percent}\) and \(\SI{4}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
-This means the parallelization is as good as possible for these \todo{more analysis: difference between poolsizes}
-
-\begin{figure}[ht!]
-    \centering
-    %\includegraphics[width=0.8\textwidth]{plots_scf/si_intel_mkl_bench_speedup.pdf}
-    \includegraphics[width=0.8\textwidth]{example-image-a}
-    \caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
-    \label{fig:scaling_nd_si}
-\end{figure}
-
-\begin{figure}[ht!]
-    \centering
-    %\includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_speedup.pdf}
-    \includegraphics[width=0.8\textwidth]{example-image-a}
-    \caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
-    \label{fig:scaling_nd_tas2}
-\end{figure}
+Fig. \ref{fig:scaling_nk_tas2_wait} shows a distribution of idle times between about \(\SI{4}{\percent}\) and \(\SI{6}{\percent}\) of the whole wall time, without any kind of systemic increase over any range of processors.
+%This means the parallelization is as good as possible for these 
+\todo{more analysis: difference between poolsizes}
 
 \subsection{Linear algebra parallelization}
+
+%\begin{figure}[ht!]
+%    \centering
+    %\includegraphics[width=0.8\textwidth]{plots_scf/si_intel_mkl_bench_speedup.pdf}
+    %\includegraphics[width=0.8\textwidth]{example-image-a}
+    %\caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
+    %\label{fig:scaling_nd_si}
+%\end{figure}
+
+%\begin{figure}[ht!]
+    %\centering
+    %\includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_speedup.pdf}
+    %\includegraphics[width=0.8\textwidth]{example-image-a}
+    %\caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
+    %\label{fig:scaling_nd_tas2}
+%\end{figure}
 
 \todo{Linear Algebra}
 
