@@ -94,6 +94,7 @@ def extract_times_nk(out_files_path, type="pw", multiple_runs=False):
 
         for nk in runs_nk:
             files = os.listdir(out_files_path + "/" + run + "/" + nk)
+            print("Currently reading: ", run, nk)
 
             for file_index, file in enumerate(files):
                 filepath = out_files_path + "/" + run + "/" + nk + "/" + file
@@ -121,25 +122,28 @@ def extract_times_ni(out_files_path, type="pw", multiple_runs=False):
     runs_ni = os.listdir(out_files_path + "/" + runs[0])
 
     for ni in runs_ni:
+        n_images = int(ni)
         n_procs[ni] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + ni))))
-        walltimes[ni] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + ni))))
-        cputimes[ni] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + ni))))
+        walltimes[ni] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + ni)), n_images))
+        cputimes[ni] = np.zeros((len(runs), len(os.listdir(out_files_path + "/" + runs[0] + "/" + ni)), n_images))
 
     for run_index, run in enumerate(runs):
         runs_ni = os.listdir(out_files_path + "/" + run)
 
         for ni in runs_ni:
-            files = os.listdir(out_files_path + "/" + run + "/" + ni)
-
-            for file_index, file in enumerate(files):
-                filepath = out_files_path + "/" + run + "/" + ni + "/" + file
-                with open(filepath, "r") as f:
-                    searchlines = f.readlines()
-                n_procs[ni][run_index][file_index] = search_nprocs(searchlines)
-                cputimes[ni][run_index][file_index], walltimes[ni][run_index][file_index] = search_times(searchlines, type)
+            image_dirs = os.listdir(out_files_path + "/" + run + "/" + ni)
+            for image_dir_index , image_dir in enumerate(image_dirs):
+                image_files = os.listdir(out_files_path + "/" + run + "/" + ni + "/" + image_dir)
+                for file_index, file in enumerate(image_files):
+                    filepath = out_files_path + "/" + run + "/" + ni + "/" + image_dir + "/" + file
+                    with open(filepath, "r") as f:
+                        searchlines = f.readlines()
+                    n_procs[ni][run_index][image_dir_index] = search_nprocs(searchlines)
+                    cputimes[ni][run_index][image_dir_index][file_index], walltimes[ni][run_index][image_dir_index][file_index] = search_times(searchlines, type)
 
             cputimes[ni][run_index] = np.array(cputimes[ni][run_index][n_procs[ni][run_index].argsort()])
             walltimes[ni][run_index] =  np.array(walltimes[ni][run_index][n_procs[ni][run_index].argsort()])
             n_procs[ni][run_index] = n_procs[ni][run_index][n_procs[ni][run_index].argsort()]
+
 
     return cputimes, walltimes, n_procs
