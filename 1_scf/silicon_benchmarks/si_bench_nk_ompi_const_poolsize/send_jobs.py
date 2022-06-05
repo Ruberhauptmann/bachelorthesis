@@ -32,11 +32,12 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(9, 19):
+    #for run in range(9, 19):
+    for run in [10]:
         #for poolsize in poolsize_list:
-        for poolsize in [2]:
+        for poolsize in [2, 8]:
             #for n_procs in range(8, max_number_procs+1, 8):
-            for n_procs in [2, 4]:
+            for n_procs in [32]:
                 log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_ompi_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):

@@ -22,13 +22,14 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('silicon_bench_nprocs.sh.jinja')
 
-    for run in range(10):
+    for run in [0, 1, 2, 3]:
         log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nprocs_scalapack/' + str(run)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
 
-        for n_procs in range(2, max_number_procs + 1, 2):
+        #for n_procs in range(2, max_number_procs + 1, 2):
+        for n_procs in [2, 4, 22, 24, 26, 28, 30]:
             job_name = 'silicon_bench_scalapack_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 
