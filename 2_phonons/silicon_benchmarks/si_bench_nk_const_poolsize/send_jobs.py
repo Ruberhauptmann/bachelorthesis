@@ -33,7 +33,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(3):
+    for run in range(4, 6):
         #for poolsize in poolsize_list:
         for poolsize in [2, 8]:
         #for nk in [2]:

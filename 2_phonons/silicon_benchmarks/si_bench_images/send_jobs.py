@@ -28,7 +28,7 @@ def main():
     os.makedirs(job_directory + '/logs', exist_ok=True)
     copy_tree('pseudos', job_directory + '/pseudos')
 
-    for run in range(1):
+    for run in range(2):
         os.makedirs(job_directory + '/frq/' + str(run), exist_ok=True)
         for nimages in [2, 8, 24]:
             for n_procs in range(16, max_number_procs+1, 16):
