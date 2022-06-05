@@ -43,7 +43,12 @@ def main():
     [1, 18, 18],
     [3, 2, 8],
     [3, 2, 88],
-    [3, 8, 88]]
+    [3, 8, 88],
+    [3, 18, 18],
+    [3, 18, 54],
+    [3, 18, 72],
+    [3, 18, 90],
+    [3, 18, 108]]
 
     for run, poolsize, n_procs in missing_runs:
         log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
@@ -62,8 +67,9 @@ def main():
             with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                 fh.write(job_file)
 
-            #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
+    """
     for run in [4, 5]:
         for poolsize in [2, 8]:
             #for n_procs in range(8, max_number_procs+1, 16):
@@ -106,6 +112,7 @@ def main():
                         fh.write(job_file)
 
                     subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+    """
 
 if __name__ == "__main__":
     main()
