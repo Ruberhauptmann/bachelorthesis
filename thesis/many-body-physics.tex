@@ -82,6 +82,10 @@ The kinetic energy of such a non-interacting problem can be easily calculated as
 
 \todo{density as calculated with KS states}
 
+\begin{equation}\label{eq:density_ks_states}
+    D
+\end{equation}
+
 \begin{equation}
     T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})
 \end{equation}
@@ -118,23 +122,34 @@ Importantly, the potential \(v_{KS}\) depends on the solutions \(\Psi_i (\vb{r})
 \subsection{Pseudopotentials and basis set}
 
 In order to represent the states and operators in eq. \ref{eq:kohn-sham-equations}, a basis set has to be chosen.
-A natural choice, at least for delocalized (higher energy) orbitals is the discrete set of plane waves \(\ket{\vb{G}}\)
+Bloch's theorem states that the in case of a periodic external potential, which makes the Hamiltonian commute with translation operators for translation by a lattice vector, the common eigenstates of these operators are:
 \begin{equation}
-    \bra{\vb{r}} \ket{\vb{k} + \vb{G}} = \frac{1}{\sqrt{V}} e^{i (\vb{k} + \vb{G}) \vb{r}}
+    \Psi (\vb{r}) = \Psi_{n \vb{k}} (\vb{r}) = e^{i \vb{k} \cdot \vb{r}} u_{n \vb{k}} (\vb{r})
 \end{equation}
+where \(\vb{k}\) is the quasi-momentum and \(u_{n \vb{k}} (\vb{r})\) has the periodicity of the unit cell.
+A natural choice to represent \(u_{n \vb{k}} (\vb{r})\) is the discrete set of plane waves \(\ket{\vb{G}}\)
+\begin{align}
+    \bra{\vb{r}} \ket{\vb{G}} &= \frac{1}{\sqrt{V}} e^{i \vb{G} \vb{r}} \\
+    \Psi_{n \vb{k}} (\vb{r}) &= \sum_{\vb{G}} c_{n \vb{k}, \vb{G}} e^{i (\vb{k} + \vb{G}) \vb{r}}
+\end{align}
 where \(\vb{G}\) is a reciprocal lattice vector.
-\todo{expansion of wave function in basis functions, also periodicity -> integrals over BZ}
-One problem of this approach lies in the fact that the lower energy core electrons are in contrast very localized around the cores and as such need a lot of basis functions.
+With that choice of basis set, the kinetic energy is easily calculated:
+\begin{equation}
+    \bra{\Psi_{n \vb{k}} (\vb{r})} - \nabla^2 \ket{\Psi_{n \vb{k}} (\vb{r})} = \sum_{\vb{G}} c_{n \vb{k}, \vb{G}}^2 \vert \vb{k} + \vb{G} \vert^2
+\end{equation}
+Another important consequence of this choice of basis set is that the electron density (eq. \ref{eq:density_ks_states}) now become integrals over the Brillouin zone, which for numerical computation has to be approximated by a sum over a select number of k points.
+
+One problem of this choice of basis set lies in the fact that the lower energy core electrons are very localized around the cores and as such need a lot of basis functions.
 Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
 
 Importantly, the core electrons don't contribute much to the electronic structure problem, so an approach to make the calculations more economically is to introduce an effective screened potential which describes the nuclear potential as well as the states close to the nucleus.
 These potentials are called \acrfull{pp} and the orbitals constructed with them are smooth functions and can be accurately represented with a small number of basis functions.
-This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\vert \vb{k} + \vb{G} \vert \leq E_{cutoff}\).
+This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\vert \vb{k} + \vb{G} \vert \leq E_{cutoff}\). Besides the number of k points, this is the second variable which can influences the computation time of \acrshort{dft} calculations.
 
-\todo{not finished: kinetic energy -> fourier transform}
+With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transform from (discrete) real to (discrete) reciprocal space so every expectation value can be calculated in the optimal representation: in reciprocal space for the kinetic energy and in real space for the pseudopotentials.
 
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
 
-\todo{whole section}
+\todo{dfpt!!!}
 
 \end{document}
