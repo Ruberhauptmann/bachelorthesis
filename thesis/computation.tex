@@ -92,7 +92,7 @@ with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (whe
     \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
     \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
     \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb{r})\) and other physical properties (\(E [n(\vb{r})]\))};
-    \node[squarednode]      (done)      [below= of step_5]      {Done if change in \(E\) is small enough};
+    \node[squarednode]      (done)      [below= of step_5]      {done if change in \(E\) is small enough};
     
     %Lines
     \draw[->] (init.south) -- (step_1.north);
@@ -104,14 +104,23 @@ with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (whe
     \draw[->] (step_5.south) -- (done.north);
 \end{tikzpicture}
 \label{fig:diagram_scf_calculations}
-\caption{Flowchart of the algorithm to solve the \acrshort{kohn_sham} equations}
+\caption{Flowchart of an algorithm to solve the \acrshort{kohn_sham} equations}
 \end{wrapfigure}
 
-Fig. \ref{fig:diagram_scf_calculations} 
+Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
+This opens a few possibilities for parallelization of calculations: first of all, the orbitals in the plane wave basis set as well as charges and densities can be distributed among processors.
+This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
+Going further, \QE automatically parallelizes all linear algebra operations on real space/reciprocal grid.
+The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from both representation in order to transform between them.
 
-\todo{finish}
+To remedy this problem, \todo{k point parallelization}
 
-\clearpage
+In another level of parallelization, \QE can use \gls{scalapack} to parallelize among other things the iterative orthonormalization of \acrshort{kohn_sham} states.
+This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group}.
+Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
+Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra has to be \(n^2\), where \(n\) is an integer.
+
+\todo{short conclusion: which parameters, how can they be chose?}
 
 \section{Hardware configuration of the PHYSnet cluster}
 
