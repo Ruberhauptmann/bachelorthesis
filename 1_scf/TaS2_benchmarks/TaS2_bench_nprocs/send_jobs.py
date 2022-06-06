@@ -22,7 +22,7 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nprocs.sh.jinja')
 
-    for run in range(10):
+    for run in range(1):
         log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nprocs/' + str(run)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):

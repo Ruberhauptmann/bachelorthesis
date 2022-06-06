@@ -29,7 +29,7 @@ def main():
     job_template = env.get_template('TaS2_cdw_bench_nd.sh.jinja')
 
     poolsize = 18
-    
+
     for run in range(1):
         for nd in [4, 9, 16]:
             log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
@@ -79,7 +79,7 @@ def main():
             with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                 fh.write(job_file)
 
-            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+            #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()

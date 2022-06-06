@@ -3,8 +3,8 @@
 #$ -o /afs/physnet.uni-hamburg.de/users/th1_we/tsievers/job_logs/TaS2/bench_nprocs/0
 #$ -pe mpi 16
 #$ -N TaS2_bench_ompi_n_procs_16_0
-#$ -l h_cpu=25:00:00
-#$ -l h_vmem=8G
+#$ -l h_cpu=6:00:00
+#$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
