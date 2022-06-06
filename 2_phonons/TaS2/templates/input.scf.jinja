@@ -1,0 +1,37 @@
+&CONTROL
+    prefix='{{ prefix }}',
+    pseudo_dir  = '{{ job_directory }}/pseudos/'
+    outdir='/fastscratch/tsievers/QE_TMP_DIR/'
+/
+&SYSTEM
+    ibrav = 4
+    ntyp = 2
+    nat = 3
+
+    a = 3.34
+    c = 15.0
+
+    assume_isolated = '2D'
+
+    ecutwfc = 50.0
+    ecutrho = 400.0
+
+    occupations = 'smearing'
+    smearing = 'marzari-vanderbilt'
+    degauss = 0.006
+/
+&ELECTRONS
+    conv_thr = 1e-18
+/
+
+ATOMIC_SPECIES
+Ta 180.95 Ta.pbe-hgh.UPF
+S   32.06  S.pbe-hgh.UPF
+
+ATOMIC_POSITIONS crystal
+S   0.3333333333  0.6666666667  0.1041867992
+Ta  0.0000000000  0.0000000000  0.0000000000
+S   0.3333333333  0.6666666667 -0.1041867992
+
+K_POINTS automatic
+24 24 1 0 0 0
