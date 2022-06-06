@@ -1,5 +1,5 @@
 
-     Program PHONON v.7.0 starts on  5Jun2022 at  2: 7:15 
+     Program PHONON v.7.0 starts on  5Jun2022 at 22: 9:55 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -16,7 +16,7 @@
      path-images division:  nimage    =       8
      K-points division:     npool     =       9
      R & G space division:  proc/nbgrp/npool/nimage =       2
-     3772 MiB available memory on the printing compute node when the environment starts
+     11252 MiB available memory on the printing compute node when the environment starts
  
       Title line not specified: using 'default'.
 
@@ -163,7 +163,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 12.8
 
-     total cpu time spent up to now is       13.9 secs
+     total cpu time spent up to now is        5.6 secs
 
      End of band structure calculation
 
@@ -252,7 +252,7 @@
      Compute atoms:     1,    2,
 
 
-     PHONON       :     11.73s CPU     15.37s WALL
+     PHONON       :      6.02s CPU      8.51s WALL
 
 
 
@@ -260,28 +260,28 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :    17.0 secs   av.it.:   6.3
+      iter #   1 total cpu time :    10.2 secs   av.it.:   6.3
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  4.691E-06
 
-      iter #   2 total cpu time :    21.7 secs   av.it.:  10.6
+      iter #   2 total cpu time :    13.4 secs   av.it.:  10.6
       thresh= 2.166E-04 alpha_mix =  0.700 |ddv_scf|^2 =  7.710E-06
 
-      iter #   3 total cpu time :    25.1 secs   av.it.:   9.7
+      iter #   3 total cpu time :    16.7 secs   av.it.:   9.7
       thresh= 2.777E-04 alpha_mix =  0.700 |ddv_scf|^2 =  9.885E-09
 
-      iter #   4 total cpu time :    28.6 secs   av.it.:  10.3
+      iter #   4 total cpu time :    21.0 secs   av.it.:  10.3
       thresh= 9.942E-06 alpha_mix =  0.700 |ddv_scf|^2 =  4.928E-10
 
-      iter #   5 total cpu time :    31.2 secs   av.it.:  10.4
+      iter #   5 total cpu time :    24.3 secs   av.it.:  10.4
       thresh= 2.220E-06 alpha_mix =  0.700 |ddv_scf|^2 =  6.074E-12
 
-      iter #   6 total cpu time :    34.3 secs   av.it.:  10.6
+      iter #   6 total cpu time :    27.3 secs   av.it.:  10.6
       thresh= 2.465E-07 alpha_mix =  0.700 |ddv_scf|^2 =  9.447E-14
 
-      iter #   7 total cpu time :    41.1 secs   av.it.:  10.5
+      iter #   7 total cpu time :    34.0 secs   av.it.:  10.5
       thresh= 3.074E-08 alpha_mix =  0.700 |ddv_scf|^2 =  7.244E-15
 
-      iter #   8 total cpu time :    43.3 secs   av.it.:  10.5
+      iter #   8 total cpu time :    36.8 secs   av.it.:  10.5
       thresh= 8.511E-09 alpha_mix =  0.700 |ddv_scf|^2 =  3.808E-16
 
      End of self-consistent calculation
@@ -293,28 +293,28 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :    45.4 secs   av.it.:   6.3
+      iter #   1 total cpu time :    39.8 secs   av.it.:   6.3
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  4.805E-06
 
-      iter #   2 total cpu time :    50.2 secs   av.it.:  10.6
+      iter #   2 total cpu time :    47.8 secs   av.it.:  10.6
       thresh= 2.192E-04 alpha_mix =  0.700 |ddv_scf|^2 =  8.001E-06
 
-      iter #   3 total cpu time :    55.6 secs   av.it.:   9.6
+      iter #   3 total cpu time :    52.5 secs   av.it.:   9.6
       thresh= 2.829E-04 alpha_mix =  0.700 |ddv_scf|^2 =  1.197E-08
 
-      iter #   4 total cpu time :    58.8 secs   av.it.:  10.4
+      iter #   4 total cpu time :    55.0 secs   av.it.:  10.4
       thresh= 1.094E-05 alpha_mix =  0.700 |ddv_scf|^2 =  2.319E-10
 
-      iter #   5 total cpu time :    64.1 secs   av.it.:  10.5
+      iter #   5 total cpu time :    57.5 secs   av.it.:  10.5
       thresh= 1.523E-06 alpha_mix =  0.700 |ddv_scf|^2 =  3.082E-12
 
-      iter #   6 total cpu time :    67.4 secs   av.it.:  10.5
+      iter #   6 total cpu time :    61.7 secs   av.it.:  10.5
       thresh= 1.755E-07 alpha_mix =  0.700 |ddv_scf|^2 =  3.743E-14
 
-      iter #   7 total cpu time :    73.3 secs   av.it.:  10.6
+      iter #   7 total cpu time :    65.3 secs   av.it.:  10.6
       thresh= 1.935E-08 alpha_mix =  0.700 |ddv_scf|^2 =  2.216E-15
 
-      iter #   8 total cpu time :    75.6 secs   av.it.:  10.5
+      iter #   8 total cpu time :    67.5 secs   av.it.:  10.5
       thresh= 4.707E-09 alpha_mix =  0.700 |ddv_scf|^2 =  4.385E-16
 
      End of self-consistent calculation
@@ -326,31 +326,31 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :    79.5 secs   av.it.:   6.6
+      iter #   1 total cpu time :    72.1 secs   av.it.:   6.6
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  5.382E-06
 
-      iter #   2 total cpu time :    82.1 secs   av.it.:  10.8
+      iter #   2 total cpu time :    79.3 secs   av.it.:  10.8
       thresh= 2.320E-04 alpha_mix =  0.700 |ddv_scf|^2 =  6.825E-06
 
-      iter #   3 total cpu time :    88.4 secs   av.it.:   9.9
+      iter #   3 total cpu time :    82.1 secs   av.it.:   9.9
       thresh= 2.612E-04 alpha_mix =  0.700 |ddv_scf|^2 =  7.812E-08
 
-      iter #   4 total cpu time :    92.0 secs   av.it.:  10.1
+      iter #   4 total cpu time :    84.9 secs   av.it.:  10.1
       thresh= 2.795E-05 alpha_mix =  0.700 |ddv_scf|^2 =  3.929E-10
 
-      iter #   5 total cpu time :    95.1 secs   av.it.:  10.5
+      iter #   5 total cpu time :    87.5 secs   av.it.:  10.5
       thresh= 1.982E-06 alpha_mix =  0.700 |ddv_scf|^2 =  9.976E-12
 
-      iter #   6 total cpu time :    99.1 secs   av.it.:  10.6
+      iter #   6 total cpu time :    92.4 secs   av.it.:  10.6
       thresh= 3.158E-07 alpha_mix =  0.700 |ddv_scf|^2 =  5.883E-14
 
-      iter #   7 total cpu time :   102.0 secs   av.it.:  10.4
+      iter #   7 total cpu time :    96.1 secs   av.it.:  10.4
       thresh= 2.426E-08 alpha_mix =  0.700 |ddv_scf|^2 =  7.228E-15
 
-      iter #   8 total cpu time :   104.9 secs   av.it.:  10.5
+      iter #   8 total cpu time :    99.2 secs   av.it.:  10.5
       thresh= 8.502E-09 alpha_mix =  0.700 |ddv_scf|^2 =  2.391E-15
 
-      iter #   9 total cpu time :   107.1 secs   av.it.:  10.0
+      iter #   9 total cpu time :   101.3 secs   av.it.:  10.0
       thresh= 4.890E-09 alpha_mix =  0.700 |ddv_scf|^2 =  3.465E-16
 
      End of self-consistent calculation
@@ -362,28 +362,28 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :   111.0 secs   av.it.:   6.3
+      iter #   1 total cpu time :   105.4 secs   av.it.:   6.3
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  2.529E-06
 
-      iter #   2 total cpu time :   117.0 secs   av.it.:  10.7
+      iter #   2 total cpu time :   110.0 secs   av.it.:  10.7
       thresh= 1.590E-04 alpha_mix =  0.700 |ddv_scf|^2 =  2.774E-06
 
-      iter #   3 total cpu time :   120.6 secs   av.it.:   9.8
+      iter #   3 total cpu time :   114.8 secs   av.it.:   9.8
       thresh= 1.665E-04 alpha_mix =  0.700 |ddv_scf|^2 =  6.791E-08
 
-      iter #   4 total cpu time :   137.1 secs   av.it.:  10.0
+      iter #   4 total cpu time :   118.4 secs   av.it.:  10.0
       thresh= 2.606E-05 alpha_mix =  0.700 |ddv_scf|^2 =  2.216E-10
 
-      iter #   5 total cpu time :   141.7 secs   av.it.:  10.4
+      iter #   5 total cpu time :   121.4 secs   av.it.:  10.4
       thresh= 1.489E-06 alpha_mix =  0.700 |ddv_scf|^2 =  4.175E-12
 
-      iter #   6 total cpu time :   147.5 secs   av.it.:  10.5
+      iter #   6 total cpu time :   124.9 secs   av.it.:  10.5
       thresh= 2.043E-07 alpha_mix =  0.700 |ddv_scf|^2 =  1.952E-14
 
-      iter #   7 total cpu time :   150.0 secs   av.it.:  10.5
+      iter #   7 total cpu time :   128.0 secs   av.it.:  10.5
       thresh= 1.397E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.114E-15
 
-      iter #   8 total cpu time :   152.1 secs   av.it.:  10.7
+      iter #   8 total cpu time :   130.3 secs   av.it.:  10.7
       thresh= 3.338E-09 alpha_mix =  0.700 |ddv_scf|^2 =  1.537E-17
 
      End of self-consistent calculation
@@ -480,7 +480,7 @@
 
      ethr =  1.25E-10,  avg # of iterations = 12.8
 
-     total cpu time spent up to now is       17.0 secs
+     total cpu time spent up to now is       10.5 secs
 
      End of band structure calculation
 
@@ -563,7 +563,7 @@
 
 
      Alpha used in Ewald sum =   2.8000
-     PHONON       :   1m46.34s CPU   2m38.22s WALL
+     PHONON       :   1m34.33s CPU   2m16.46s WALL
 
 
 
@@ -571,28 +571,28 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :   160.1 secs   av.it.:   6.2
+      iter #   1 total cpu time :   138.3 secs   av.it.:   6.2
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  5.042E-07
 
-      iter #   2 total cpu time :   164.1 secs   av.it.:  11.4
+      iter #   2 total cpu time :   144.1 secs   av.it.:  11.4
       thresh= 7.101E-05 alpha_mix =  0.700 |ddv_scf|^2 =  5.623E-07
 
-      iter #   3 total cpu time :   167.8 secs   av.it.:  10.8
+      iter #   3 total cpu time :   148.4 secs   av.it.:  10.8
       thresh= 7.499E-05 alpha_mix =  0.700 |ddv_scf|^2 =  4.579E-09
 
-      iter #   4 total cpu time :   172.4 secs   av.it.:  11.0
+      iter #   4 total cpu time :   152.1 secs   av.it.:  11.0
       thresh= 6.766E-06 alpha_mix =  0.700 |ddv_scf|^2 =  9.293E-11
 
-      iter #   5 total cpu time :   178.0 secs   av.it.:  11.1
+      iter #   5 total cpu time :   159.1 secs   av.it.:  11.1
       thresh= 9.640E-07 alpha_mix =  0.700 |ddv_scf|^2 =  1.073E-12
 
-      iter #   6 total cpu time :   181.8 secs   av.it.:  11.3
+      iter #   6 total cpu time :   163.8 secs   av.it.:  11.3
       thresh= 1.036E-07 alpha_mix =  0.700 |ddv_scf|^2 =  2.151E-14
 
-      iter #   7 total cpu time :   186.5 secs   av.it.:  11.2
+      iter #   7 total cpu time :   167.5 secs   av.it.:  11.2
       thresh= 1.467E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.126E-15
 
-      iter #   8 total cpu time :   191.7 secs   av.it.:  11.2
+      iter #   8 total cpu time :   171.6 secs   av.it.:  11.2
       thresh= 3.356E-09 alpha_mix =  0.700 |ddv_scf|^2 =  3.837E-17
 
      End of self-consistent calculation
@@ -604,28 +604,28 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :   194.5 secs   av.it.:   6.4
+      iter #   1 total cpu time :   175.7 secs   av.it.:   6.4
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  9.142E-07
 
-      iter #   2 total cpu time :   199.0 secs   av.it.:  11.4
+      iter #   2 total cpu time :   178.7 secs   av.it.:  11.4
       thresh= 9.562E-05 alpha_mix =  0.700 |ddv_scf|^2 =  1.025E-06
 
-      iter #   3 total cpu time :   202.5 secs   av.it.:  10.8
+      iter #   3 total cpu time :   183.8 secs   av.it.:  10.8
       thresh= 1.012E-04 alpha_mix =  0.700 |ddv_scf|^2 =  8.861E-09
 
-      iter #   4 total cpu time :   207.8 secs   av.it.:  10.9
+      iter #   4 total cpu time :   188.5 secs   av.it.:  10.9
       thresh= 9.413E-06 alpha_mix =  0.700 |ddv_scf|^2 =  9.237E-11
 
-      iter #   5 total cpu time :   213.2 secs   av.it.:  11.1
+      iter #   5 total cpu time :   192.0 secs   av.it.:  11.1
       thresh= 9.611E-07 alpha_mix =  0.700 |ddv_scf|^2 =  2.106E-12
 
-      iter #   6 total cpu time :   217.7 secs   av.it.:  11.3
+      iter #   6 total cpu time :   196.3 secs   av.it.:  11.3
       thresh= 1.451E-07 alpha_mix =  0.700 |ddv_scf|^2 =  1.671E-14
 
-      iter #   7 total cpu time :   222.2 secs   av.it.:  11.2
+      iter #   7 total cpu time :   200.0 secs   av.it.:  11.2
       thresh= 1.293E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.061E-15
 
-      iter #   8 total cpu time :   224.6 secs   av.it.:  11.3
+      iter #   8 total cpu time :   205.1 secs   av.it.:  11.3
       thresh= 3.257E-09 alpha_mix =  0.700 |ddv_scf|^2 =  3.380E-17
 
      End of self-consistent calculation
@@ -637,25 +637,25 @@
 
      Self-consistent Calculation
 
-      iter #   1 total cpu time :   229.2 secs   av.it.:   6.5
+      iter #   1 total cpu time :   209.8 secs   av.it.:   6.5
       thresh= 1.000E-02 alpha_mix =  0.700 |ddv_scf|^2 =  1.211E-06
 
-      iter #   2 total cpu time :   232.1 secs   av.it.:  11.3
+      iter #   2 total cpu time :   213.2 secs   av.it.:  11.3
       thresh= 1.100E-04 alpha_mix =  0.700 |ddv_scf|^2 =  1.329E-06
 
-      iter #   3 total cpu time :   236.5 secs   av.it.:  10.7
+      iter #   3 total cpu time :   218.1 secs   av.it.:  10.7
       thresh= 1.153E-04 alpha_mix =  0.700 |ddv_scf|^2 =  1.072E-08
 
-      iter #   4 total cpu time :   242.7 secs   av.it.:  10.8
+      iter #   4 total cpu time :   222.4 secs   av.it.:  10.8
       thresh= 1.036E-05 alpha_mix =  0.700 |ddv_scf|^2 =  7.281E-11
 
-      iter #   5 total cpu time :   246.5 secs   av.it.:  11.1
+      iter #   5 total cpu time :   226.5 secs   av.it.:  11.1
       thresh= 8.533E-07 alpha_mix =  0.700 |ddv_scf|^2 =  6.923E-13
 
-      iter #   6 total cpu time :   250.2 secs   av.it.:  11.2
+      iter #   6 total cpu time :   229.3 secs   av.it.:  11.2
       thresh= 8.320E-08 alpha_mix =  0.700 |ddv_scf|^2 =  1.214E-14
 
-      iter #   7 total cpu time :   253.3 secs   av.it.:  11.1
+      iter #   7 total cpu time :   234.0 secs   av.it.:  11.1
       thresh= 1.102E-08 alpha_mix =  0.700 |ddv_scf|^2 =  7.287E-16
 
      End of self-consistent calculation
@@ -690,8 +690,8 @@
      freq (    6) =      14.002157 [THz] =     467.061679 [cm-1]
  **************************************************************************
  
-     init_run     :      0.19s CPU      0.20s WALL (       2 calls)
-     electrons    :     13.50s CPU     16.45s WALL (       2 calls)
+     init_run     :      0.18s CPU      0.19s WALL (       2 calls)
+     electrons    :      8.06s CPU      8.19s WALL (       2 calls)
 
      Called by init_run:
      wfcinit      :      0.00s CPU      0.01s WALL (       2 calls)
@@ -699,98 +699,98 @@
      hinit0       :      0.05s CPU      0.05s WALL (       2 calls)
 
      Called by electrons:
-     c_bands      :     13.50s CPU     16.45s WALL (       2 calls)
+     c_bands      :      8.06s CPU      8.19s WALL (       2 calls)
      v_of_rho     :      0.01s CPU      0.01s WALL (       3 calls)
 
      Called by c_bands:
-     init_us_2    :      1.28s CPU      1.34s WALL (    2904 calls)
-     init_us_2:cp :      1.27s CPU      1.33s WALL (    2904 calls)
-     cegterg      :      5.78s CPU      5.85s WALL (     144 calls)
+     init_us_2    :      1.27s CPU      1.32s WALL (    2904 calls)
+     init_us_2:cp :      1.26s CPU      1.31s WALL (    2904 calls)
+     cegterg      :      5.78s CPU      5.87s WALL (     144 calls)
 
      Called by *egterg:
-     cdiaghg      :      0.14s CPU      0.14s WALL (    1984 calls)
-     h_psi        :     89.63s CPU     91.19s WALL (   34209 calls)
+     cdiaghg      :      0.15s CPU      0.16s WALL (    1984 calls)
+     h_psi        :     87.80s CPU     89.10s WALL (   34209 calls)
      g_psi        :      0.06s CPU      0.06s WALL (    1840 calls)
 
      Called by h_psi:
-     h_psi:calbec :      6.10s CPU      6.20s WALL (   34209 calls)
-     vloc_psi     :     77.57s CPU     78.93s WALL (   34209 calls)
-     add_vuspsi   :      5.42s CPU      5.53s WALL (   34209 calls)
+     h_psi:calbec :      5.94s CPU      6.02s WALL (   34209 calls)
+     vloc_psi     :     75.97s CPU     77.10s WALL (   34209 calls)
+     add_vuspsi   :      5.35s CPU      5.45s WALL (   34209 calls)
 
      General routines
-     calbec       :     11.20s CPU     11.44s WALL (   68066 calls)
-     fft          :      0.17s CPU      0.19s WALL (     400 calls)
-     ffts         :      0.18s CPU      0.19s WALL (     378 calls)
-     fftw         :     79.60s CPU     81.21s WALL (  290482 calls)
-     davcio       :      0.50s CPU      9.93s WALL (   13686 calls)
+     calbec       :     10.86s CPU     11.07s WALL (   68066 calls)
+     fft          :      0.17s CPU      0.18s WALL (     400 calls)
+     ffts         :      0.16s CPU      0.16s WALL (     378 calls)
+     fftw         :     77.91s CPU     79.28s WALL (  290482 calls)
+     davcio       :      0.50s CPU     10.00s WALL (   13686 calls)
  
      Parallel routines
  
-     PHONON       :   2m53.69s CPU   4m14.90s WALL
+     PHONON       :   2m35.08s CPU   3m56.00s WALL
 
      INITIALIZATION: 
-     phq_setup    :      0.02s CPU      0.40s WALL (       2 calls)
-     phq_init     :      0.71s CPU      0.80s WALL (       2 calls)
+     phq_setup    :      0.02s CPU      0.05s WALL (       2 calls)
+     phq_init     :      0.72s CPU      0.72s WALL (       2 calls)
  
-     phq_init     :      0.71s CPU      0.80s WALL (       2 calls)
+     phq_init     :      0.72s CPU      0.72s WALL (       2 calls)
      set_drhoc    :      0.38s CPU      0.38s WALL (       4 calls)
      init_vloc    :      0.01s CPU      0.01s WALL (       3 calls)
      init_us_1    :      0.02s CPU      0.02s WALL (       3 calls)
-     init_us_2    :      1.28s CPU      1.34s WALL (    2904 calls)
+     init_us_2    :      1.27s CPU      1.32s WALL (    2904 calls)
  
      DYNAMICAL MATRIX:
-     dynmat0      :      0.25s CPU      0.33s WALL (       1 calls)
-     phqscf       :    158.66s CPU    234.30s WALL (       2 calls)
-     dynmatrix    :     70.65s CPU    100.30s WALL (       1 calls)
+     dynmat0      :      0.25s CPU      0.26s WALL (       1 calls)
+     phqscf       :    145.83s CPU    221.82s WALL (       2 calls)
+     dynmatrix    :     63.98s CPU    104.62s WALL (       1 calls)
  
-     phqscf       :    158.66s CPU    234.30s WALL (       2 calls)
-     solve_linter :    158.23s CPU    232.41s WALL (       7 calls)
-     drhodv       :      0.41s CPU      0.42s WALL (       7 calls)
+     phqscf       :    145.83s CPU    221.82s WALL (       2 calls)
+     solve_linter :    145.43s CPU    220.31s WALL (       7 calls)
+     drhodv       :      0.39s CPU      0.41s WALL (       7 calls)
  
-     dynmat0      :      0.25s CPU      0.33s WALL (       1 calls)
+     dynmat0      :      0.25s CPU      0.26s WALL (       1 calls)
      dynmat_us    :      0.05s CPU      0.05s WALL (       1 calls)
      d2ionq       :      0.00s CPU      0.00s WALL (       1 calls)
      dynmatcc     :      0.20s CPU      0.20s WALL (       1 calls)
  
      dynmat_us    :      0.05s CPU      0.05s WALL (       1 calls)
  
-     phqscf       :    158.66s CPU    234.30s WALL (       2 calls)
-     solve_linter :    158.23s CPU    232.41s WALL (       7 calls)
+     phqscf       :    145.83s CPU    221.82s WALL (       2 calls)
+     solve_linter :    145.43s CPU    220.31s WALL (       7 calls)
  
-     solve_linter :    158.23s CPU    232.41s WALL (       7 calls)
-     dvqpsi_us    :      1.47s CPU      1.51s WALL (     336 calls)
-     sth_kernel   :    115.45s CPU    124.03s WALL (      56 calls)
-     apply_dpot_b :      6.14s CPU      6.37s WALL (    2352 calls)
+     solve_linter :    145.43s CPU    220.31s WALL (       7 calls)
+     dvqpsi_us    :      1.45s CPU      1.47s WALL (     336 calls)
+     sth_kernel   :    114.20s CPU    125.43s WALL (      56 calls)
+     apply_dpot_b :      6.03s CPU      6.23s WALL (    2352 calls)
      ortho        :      0.22s CPU      0.23s WALL (    2688 calls)
-     cgsolve      :     94.76s CPU     96.46s WALL (    2688 calls)
-     incdrhoscf   :      7.35s CPU      7.60s WALL (    2688 calls)
-     dv_of_drho   :      0.13s CPU      0.13s WALL (      79 calls)
-     mix_pot      :      0.21s CPU     40.63s WALL (      56 calls)
-     psymdvscf    :      0.50s CPU      0.54s WALL (      56 calls)
+     cgsolve      :     92.70s CPU     94.08s WALL (    2688 calls)
+     incdrhoscf   :      7.21s CPU      7.46s WALL (    2688 calls)
+     dv_of_drho   :      0.12s CPU      0.13s WALL (      79 calls)
+     mix_pot      :      0.17s CPU     30.78s WALL (      56 calls)
+     psymdvscf    :      0.51s CPU      0.53s WALL (      56 calls)
  
-     dvqpsi_us    :      1.47s CPU      1.51s WALL (     336 calls)
-     dvqpsi_us_on :      0.36s CPU      0.37s WALL (     336 calls)
+     dvqpsi_us    :      1.45s CPU      1.47s WALL (     336 calls)
+     dvqpsi_us_on :      0.37s CPU      0.37s WALL (     336 calls)
  
-     cgsolve      :     94.76s CPU     96.46s WALL (    2688 calls)
-     ch_psi       :     92.41s CPU     94.04s WALL (   32081 calls)
+     cgsolve      :     92.70s CPU     94.08s WALL (    2688 calls)
+     ch_psi       :     90.39s CPU     91.72s WALL (   32081 calls)
  
-     ch_psi       :     92.41s CPU     94.04s WALL (   32081 calls)
-     h_psi        :     89.63s CPU     91.19s WALL (   34209 calls)
-     last         :      7.75s CPU      7.89s WALL (   32081 calls)
+     ch_psi       :     90.39s CPU     91.72s WALL (   32081 calls)
+     h_psi        :     87.80s CPU     89.10s WALL (   34209 calls)
+     last         :      7.56s CPU      7.68s WALL (   32081 calls)
  
-     h_psi        :     89.63s CPU     91.19s WALL (   34209 calls)
-     add_vuspsi   :      5.42s CPU      5.53s WALL (   34209 calls)
+     h_psi        :     87.80s CPU     89.10s WALL (   34209 calls)
+     add_vuspsi   :      5.35s CPU      5.45s WALL (   34209 calls)
  
-     incdrhoscf   :      7.35s CPU      7.60s WALL (    2688 calls)
+     incdrhoscf   :      7.21s CPU      7.46s WALL (    2688 calls)
  
  
       General routines
-     calbec       :     11.20s CPU     11.44s WALL (   68066 calls)
-     fft          :      0.17s CPU      0.19s WALL (     400 calls)
-     ffts         :      0.18s CPU      0.19s WALL (     378 calls)
-     fftw         :     79.60s CPU     81.21s WALL (  290482 calls)
-     davcio       :      0.50s CPU      9.93s WALL (   13686 calls)
-     write_rec    :      0.09s CPU     26.49s WALL (      63 calls)
+     calbec       :     10.86s CPU     11.07s WALL (   68066 calls)
+     fft          :      0.17s CPU      0.18s WALL (     400 calls)
+     ffts         :      0.16s CPU      0.16s WALL (     378 calls)
+     fftw         :     77.91s CPU     79.28s WALL (  290482 calls)
+     davcio       :      0.50s CPU     10.00s WALL (   13686 calls)
+     write_rec    :      0.07s CPU     33.85s WALL (      63 calls)
  
-     PHONON       :   2m53.69s CPU   4m14.90s WALL
+     PHONON       :   2m35.08s CPU   3m56.00s WALL
 
