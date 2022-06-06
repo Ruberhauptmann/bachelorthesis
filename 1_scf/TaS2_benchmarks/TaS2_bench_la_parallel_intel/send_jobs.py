@@ -53,7 +53,7 @@ def main():
                     with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                         fh.write(job_file)
 
-                    #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nd_auto.sh.jinja')
@@ -65,7 +65,8 @@ def main():
 
     for run in range(1):
         for n_procs in range(36, max_number_procs + 1, 18):
-            job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs)
+            job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs) + '_' +
+            str(run
             prefix = '\'' + job_name +  '\''
 
             input_file = input_template.render(prefix=prefix)
@@ -79,7 +80,7 @@ def main():
             with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                 fh.write(job_file)
 
-            #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()

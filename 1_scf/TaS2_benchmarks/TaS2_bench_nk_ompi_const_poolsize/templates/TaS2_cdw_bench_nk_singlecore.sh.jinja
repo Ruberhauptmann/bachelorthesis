@@ -11,8 +11,8 @@
 #$ -S /bin/bash
 #$ -M tsievers@physnet.uni-hamburg.de -m as
 
-QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
+QEPREFIX=/fastscratch/tsievers/qe-7.0
 
-module load intel/oneAPI-2021.4
+module load openmpi/4.1.0.gcc10.2-infiniband
 
 /usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nd 1 -i {{ in_files_path}}/{{ job_name }}.scf
