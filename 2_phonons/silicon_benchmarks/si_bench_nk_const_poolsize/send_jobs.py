@@ -53,7 +53,7 @@ def main():
                     input_file_ph = input_template_ph.render(prefix=prefix,
                     fildyn="\'/fastscratch/tsievers/QE_TMP_DIR/" + job_name + ".dyn\'")
                     job_file = job_template.render(nk=int(n_procs / poolsize),
-                    n_procs=n_procs, 
+                    n_procs=n_procs,
                     log_path=log_path,
                     job_name=job_name,
                     in_files_path="in_files")
@@ -64,9 +64,8 @@ def main():
                     with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                         fh.write(job_file)
 
-                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
-    for run in range(3):
         for poolsize in [18]:
             for n_procs in range(18, max_number_procs+1, 18):
                 log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(run) + '/' + str(poolsize)
@@ -82,7 +81,7 @@ def main():
                     input_file_ph = input_template_ph.render(prefix=prefix,
                     fildyn="\'/fastscratch/tsievers/QE_TMP_DIR/" + job_name + ".dyn\'")
                     job_file = job_template.render(nk=int(n_procs / poolsize),
-                    n_procs=n_procs, 
+                    n_procs=n_procs,
                     log_path=log_path,
                     job_name=job_name,
                     in_files_path="in_files")
