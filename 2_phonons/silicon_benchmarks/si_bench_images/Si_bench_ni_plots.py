@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     ni_plots.plot_images(walltimes, n_procs, "si_ph")
 
-    walltimes_max, cputimes_max = ni_plots.take_image_max(walltimes), ni_plots.take_image_max(walltimes)
+    walltimes_max, cputimes_max = ni_plots.take_image_max(walltimes), ni_plots.take_image_max(cputimes)
 
     ni_plots.plot(walltimes_max, n_procs, "si_ph", "absolute", plot_error=True)
 
@@ -27,16 +27,24 @@ if __name__ == "__main__":
         for run_index, walltime_ni in enumerate(walltimes_max[ni]):
             speedup[ni][run_index] = walltime_singlecore / walltime_ni
 
-    ni_plots.plot(speedup, n_procs, "si_ph", "speedup", plot_error=False)
+    ni_plots.plot(speedup, n_procs, "si_ph", "speedup", plot_error=True)
 
     ### Plot idle time
 
     wait_time = {}
 
+    print(n_procs)
+
     for ni in n_procs:
         wait_time[ni] = np.zeros(walltimes_max[ni].shape)
+
+    for ni in n_procs:
         for run_index, walltime_ni in enumerate(walltimes_max[ni]):
+            print(walltime_ni)
+            print(cputimes_max[ni][run_index])
             wait_time[ni][run_index] = (walltime_ni - cputimes_max[ni][run_index]) / walltime_ni
+
+    print(wait_time)
 
     ni_plots.plot(wait_time, n_procs, "si_ph", "wait")
 
