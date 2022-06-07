@@ -1,13 +1,10 @@
 TaS2
 &INPUTPH
-    prefix = 'TaS2_phonons'
-    outdir   = '/fastscratch/tsievers/TaS2_phonons/'
-    max_seconds = 170000
+    prefix = 'TaS2_cdw_phonons'
+    outdir   = '/fastscratch/tsievers/TaS2_cdw_phonons/'
 
-    fildyn   = 'TaS2_ph.dyn'
-    fildvscf  = 'TaS2_ph.dvscf'
-
-    !ldisp = .true.
+    fildyn   = '/fastscratch/tsievers/TaS2_cdw_phonons/TaS2_cdw.dyn'
+    fildvscf  = 'TaS2_cdw.dvscf'
 
     tr2_ph = 1e-21
 /
