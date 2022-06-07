@@ -6,7 +6,7 @@ from distutils.dir_util import copy_tree
 from shutil import rmtree
 
 def main():
-    number_k_points = 216
+    number_k_points = 576
     max_number_procs = 200
 
     file_loader = FileSystemLoader('templates')
@@ -19,9 +19,10 @@ def main():
     input_template_md = env.get_template('input.md.jinja')
     job_template = env.get_template('TaS2_ph_bench_nk.sh.jinja')
 
-    poolsize = 2
+    poolsize = 18
 
     job_directory = '/fastscratch/tsievers/TaS2_24_ph_benchmark_images/'
+    os.makedirs(job_directory, exist_ok=True)
     rmtree(job_directory)
     os.makedirs(job_directory + '/tmp', exist_ok=True)
     os.makedirs(job_directory + '/frq', exist_ok=True)
@@ -30,8 +31,8 @@ def main():
 
     for run in range(1):
         os.makedirs(job_directory + '/frq/' + str(run), exist_ok=True)
-        for nimages in [2, 8, 24]:
-            for n_procs in range(48, max_number_procs+1, 24):
+        for nimages in [2, 8]:
+            for n_procs in range(36, max_number_procs+1, 36):
                 if (n_procs / nimages ) % poolsize == 0:
                     job_name = 'TaS2_24_ph_bench_nimages_' + str(nimages) + '_n_procs_' + str(n_procs) + '_' + str(run)
 
@@ -62,7 +63,8 @@ def main():
 
                     input_file_ph_recover = input_template_ph_recover.render(
                         prefix=prefix,
-                        fildyn=fildyn
+                        fildyn=fildyn,
+                        fildvscf=fildvscf
                     )
 
                     input_file_q2r = input_template_q2r.render(
@@ -102,7 +104,7 @@ def main():
 
                     os.chdir(out_directory)
 
-                    #subprocess.call('qsub ../../../../' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub ../../../../' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()

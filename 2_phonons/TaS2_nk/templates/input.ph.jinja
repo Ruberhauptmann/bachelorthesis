@@ -1,0 +1,15 @@
+TaS2
+&INPUTPH
+    prefix   = '{{ job_name }}',
+    outdir   = '/fastscratch/tsievers/QE_TMP_DIR/'
+
+    fildyn   = '/fastscratch/tsievers/QE_TMP_DIR/{{ job_name }}.dyn'
+    fildvscf   = '/fastscratch/tsievers/QE_TMP_DIR/{{ job_name }}.dvscf'
+
+    ldisp = .true.
+    nq1 = 12
+    nq2 = 12
+    nq3 = 1
+
+    tr2_ph = 1e-21
+/
