@@ -3,12 +3,12 @@
 \begin{document}
 \chapter{Parallelisation of electronic-structure calculations\label{ch:optimisation_scf}}
 
-The \texttt{PWscf} (Plane-Wave Self-Consistend Field) package is one of the core modules of \QE, as many other modules need the variables ground state density or total energy as input.
+The \texttt{PWscf} (Plane-Wave Self-Consistend Field) package is one of the core modules of \QE, as many other modules need ground state density and total energy as input.
 This chapter deals with examining the best ways to run \texttt{PWscf} calculations in the \texttt{scf} mode.
 
 \section{First scaling tests}\label{sec:scf_first_scaling}
 
-The first step in analysing the scaling of the \texttt{PWscf} is to perform a baseline scaling test without any optimisations appplied. 
+The first step in analysing the scaling of the \texttt{PWscf} module is to perform a baseline scaling test without any optimisations appplied. 
 In Fig. \ref{fig:scaling_ompi_nprocs_si_speedup} to \ref{fig:scaling_ompi_nprocs_tas2_absolute_wait} two scaling tests on the earlier mentioned benchmarking systems Si and TaS2 are pictured. 
 The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \gls{openmpi} 4.1.0, without any of the compilation or runtime optimisation parameters mentioned in section \ref{sec:qe} used.
 
@@ -88,7 +88,6 @@ The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following 
 \begin{itemize}
     \item \gls{openmpi} 4.1.0 and \QE provided \gls{blas}/\gls{lapack}, so the baseline test discussed in sec. \ref{sec:scf_first_scaling}
     \item \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
-    \item \gls{openmpi} 4.1.0, \gls{openblas} 0.3.20 and \gls{scalapack} 2.2.0
     \item \gls{oneapi} 2021.4
 \end{itemize}
 
@@ -105,11 +104,6 @@ The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following 
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_scalapack_bench_nprocs_speedup.pdf}
-    \subcaption{\gls{openmpi} + \gls{scalapack}}
-\end{subfigure}
-\begin{subfigure}[b]{0.49\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
@@ -117,13 +111,40 @@ The benchmarks in \ref{fig:scaling_compilers_nprocs} are run with the following 
 \label{fig:scaling_compilers_nprocs}
 \end{figure}
 
-\todo{analysis with right plots for ompi, ompi+openblas, maybe kick out scalapack? it should be the same}
+Fig. \ref{fig:scaling_compilers_nprocs} shows that just dropping in another \gls{blas} library (\gls{openblas} in this case) does not change the scaling behavior, in contrast to using Intels \gls{oneapi} packages.
+Here, optimal scaling behavior is seen for up to 6 processors, which means those calculations ran about twice as fast as the calculations with just \gls{openmpi}.
 
-Fig. \ref{fig:scaling_compilers_nprocs} shows that using Intels \gls{oneapi} packages provides optimal scaling for up to round about 6 processors, which means those calculations ran about twice as fast as the calculations with just \gls{openmpi}.
-This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_absolute.pdf}
+    \subcaption{\gls{openmpi}}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_openblas_bench_nprocs_absolute.pdf}
+    \subcaption{\gls{openmpi} + \gls{openblas}}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_absolute.pdf}
+    \subcaption{\gls{oneapi}}
+\end{subfigure}
+\caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
+\label{fig:scaling_runtime_compilers_nprocs}
+\end{figure}
+
+\todo{analyse absolute runtime -> speedup can be deceiving}
+
+Fig. \ref{fig:scaling_runtime_compilers_nprocs} shows 
+
+\todo{efficiency maybe?}
+
+\todo{TaS2 intel scaling?}
+
+This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors:
 The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
 
-\todo{absolute runtimes! so comparison is possible! (singlecore runtimes could also be differen!)}
 
 \section{Using the parallelization parameters of \QE}
 
