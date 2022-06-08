@@ -1,5 +1,5 @@
 #!/bin/bash
-#$ -q infinix.q
+#$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
 #$ -o /fastscratch/tsievers/TaS2_cdw_phonons_180/
 #$ -l h_cpu=150:00:00
