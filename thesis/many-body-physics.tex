@@ -79,15 +79,12 @@ The idea is to use a non-interacting auxiliary system of electrons
 With a correction potential \(v_{KS}\) such that the ground state charge density for the auxiliary and the interacting system are the same.
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons:
-
-\todo{density as calculated with KS states}
-
-\begin{equation}\label{eq:density_ks_states}
-    D
-\end{equation}
-
 \begin{equation}
     T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})
+\end{equation}
+with the density
+\begin{equation}\label{eq:density_ks_states}
+    n(\vb{r}) = \sum_{i=1}^N \vert \Psi_i (\vb{r}) \vert^2
 \end{equation}
 With the help of this system and the classical electrostatic energy 
 \begin{equation}

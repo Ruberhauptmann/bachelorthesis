@@ -7,6 +7,12 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=True)
 
+    walltimes_std, walltimes_mean = nk_plots.take_mean(walltimes)
+
+    minimum_time = np.min(walltimes_mean["2"])
+    print("Minimum time: ", minimum_time)
+    print("With processors: ", int(n_procs["2"][0][np.where(walltimes_mean["2"] == minimum_time)][0]))
+
     nk_plots.plot(walltimes, n_procs, "si_ompi", "absolute", plot_error=True)
 
     ### Plot speedup
