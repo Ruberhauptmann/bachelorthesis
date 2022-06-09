@@ -1,7 +1,7 @@
 Module for intel-oneAPI 2021.4 loaded.
  
 :: initializing oneAPI environment ...
-   2696892: BASH_VERSION = 4.4.20(1)-release
+   2803313: BASH_VERSION = 4.4.20(1)-release
 :: advisor -- latest
 :: ccl -- latest
 :: clck -- latest
@@ -30,7 +30,7 @@ Module for intel-oneAPI 2021.4 loaded.
 :: oneAPI environment initialized ::
  
 
-     Program PWSCF v.7.0 starts on 13May2022 at 16: 7: 7 
+     Program PWSCF v.7.0 starts on  2Jun2022 at  8:17:47 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -41,13 +41,13 @@ Module for intel-oneAPI 2021.4 loaded.
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
 
-     Parallel version (MPI), running on    22 processors
+     Parallel version (MPI), running on    24 processors
 
      MPI processes distributed on     2 nodes
-     R & G space division:  proc/nbgrp/npool/nimage =      22
-     59277 MiB available memory on the printing compute node when the environment starts
+     R & G space division:  proc/nbgrp/npool/nimage =      24
+     9233 MiB available memory on the printing compute node when the environment starts
  
-     Reading input from in_files/si_bench_22.scf
+     Reading input from in_files/silicon_bench_intel_n_procs_24_2.scf
 
      Current dimensions of program PWSCF are:
      Max number of different atomic species (ntypx) = 10
@@ -61,8 +61,8 @@ Module for intel-oneAPI 2021.4 loaded.
      Parallelization info
      --------------------
      sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
-     Min          45      45     13                  947      947     156
-     Max          46      46     14                  950      950     159
+     Min          41      41     12                  868      868     143
+     Max          42      42     13                  871      871     146
      Sum        1003    1003    301                20875    20875    3479
  
      Using Slab Decomposition
@@ -130,16 +130,16 @@ Module for intel-oneAPI 2021.4 loaded.
 
      Dense  grid:    20875 G-vectors     FFT dimensions: (  40,  40,  40)
 
-     Estimated max dynamical RAM per process >      14.13 MB
+     Estimated max dynamical RAM per process >      13.07 MB
 
-     Estimated total dynamical RAM >     310.82 MB
+     Estimated total dynamical RAM >     313.77 MB
 
      Initial potential from superposition of free atoms
 
      starting charge       7.9988, renormalised to       8.0000
      Starting wfcs are    8 randomized atomic wfcs
 
-     total cpu time spent up to now is        2.4 secs
+     total cpu time spent up to now is        2.9 secs
 
      Self-consistent Calculation
 
@@ -153,70 +153,70 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.86E-04,  avg # of iterations =  2.0
 
-     total cpu time spent up to now is       11.7 secs
+     total cpu time spent up to now is       13.5 secs
 
-     total energy              =     -16.92149514 Ry
-     estimated scf accuracy    <       0.05529021 Ry
+     total energy              =     -16.92149477 Ry
+     estimated scf accuracy    <       0.05529513 Ry
 
      iteration #  2     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  6.91E-04,  avg # of iterations =  1.0
 
-     total cpu time spent up to now is       15.3 secs
+     total cpu time spent up to now is       17.6 secs
 
-     total energy              =     -16.92319952 Ry
-     estimated scf accuracy    <       0.00291019 Ry
+     total energy              =     -16.92319870 Ry
+     estimated scf accuracy    <       0.00291012 Ry
 
      iteration #  3     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  3.64E-05,  avg # of iterations =  2.3
 
-     total cpu time spent up to now is       20.3 secs
+     total cpu time spent up to now is       23.2 secs
 
-     total energy              =     -16.92386802 Ry
-     estimated scf accuracy    <       0.00006631 Ry
+     total energy              =     -16.92386789 Ry
+     estimated scf accuracy    <       0.00006634 Ry
 
      iteration #  4     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  8.29E-07,  avg # of iterations =  5.1
 
-     total cpu time spent up to now is       27.5 secs
+     total cpu time spent up to now is       31.4 secs
 
-     total energy              =     -16.92395272 Ry
+     total energy              =     -16.92395273 Ry
      estimated scf accuracy    <       0.00000026 Ry
 
      iteration #  5     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  3.26E-09,  avg # of iterations =  6.5
+     ethr =  3.28E-09,  avg # of iterations =  6.5
 
-     total cpu time spent up to now is       36.1 secs
+     total cpu time spent up to now is       41.4 secs
 
      total energy              =     -16.92395445 Ry
-     estimated scf accuracy    <          7.9E-09 Ry
+     estimated scf accuracy    <          8.4E-09 Ry
 
      iteration #  6     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  9.89E-11,  avg # of iterations =  3.7
+     ethr =  1.06E-10,  avg # of iterations =  3.7
 
-     total cpu time spent up to now is       42.1 secs
+     total cpu time spent up to now is       48.1 secs
 
      total energy              =     -16.92395445 Ry
-     estimated scf accuracy    <          6.4E-10 Ry
+     estimated scf accuracy    <          6.7E-10 Ry
 
      iteration #  7     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  7.97E-12,  avg # of iterations =  3.4
+     ethr =  8.41E-12,  avg # of iterations =  3.5
 
-     total cpu time spent up to now is       47.8 secs
+     total cpu time spent up to now is       54.6 secs
 
      total energy              =     -16.92395445 Ry
-     estimated scf accuracy    <          1.3E-10 Ry
+     estimated scf accuracy    <          1.2E-10 Ry
 
      iteration #  8     ecut=    70.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
-     ethr =  1.57E-12,  avg # of iterations =  2.2
+     ethr =  1.53E-12,  avg # of iterations =  2.3
 
-     total cpu time spent up to now is       52.3 secs
+     total cpu time spent up to now is       59.8 secs
 
      End of self-consistent calculation
 
@@ -225,63 +225,63 @@ Module for intel-oneAPI 2021.4 loaded.
      highest occupied level (ev):     6.4228
 
 !    total energy              =     -16.92395445 Ry
-     estimated scf accuracy    <          9.2E-14 Ry
+     estimated scf accuracy    <          1.1E-13 Ry
 
      The total energy is the sum of the following terms:
-     one-electron contribution =       5.10086351 Ry
-     hartree contribution      =       1.07923921 Ry
-     xc contribution           =      -6.20429861 Ry
+     one-electron contribution =       5.10086349 Ry
+     hartree contribution      =       1.07923926 Ry
+     xc contribution           =      -6.20429863 Ry
      ewald contribution        =     -16.89975857 Ry
 
      convergence has been achieved in   8 iterations
 
-     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_bench_nprocs_22.save/
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/silicon_bench_intel_n_procs_24_2.save/
  
-     init_run     :      2.24s CPU      2.36s WALL (       1 calls)
-     electrons    :     47.31s CPU     49.90s WALL (       1 calls)
+     init_run     :      2.65s CPU      2.82s WALL (       1 calls)
+     electrons    :     54.23s CPU     56.97s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      2.20s CPU      2.29s WALL (       1 calls)
-     potinit      :      0.01s CPU      0.01s WALL (       1 calls)
-     hinit0       :      0.01s CPU      0.05s WALL (       1 calls)
+     wfcinit      :      2.61s CPU      2.74s WALL (       1 calls)
+     potinit      :      0.00s CPU      0.01s WALL (       1 calls)
+     hinit0       :      0.02s CPU      0.05s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     42.79s CPU     45.09s WALL (       9 calls)
-     sum_band     :      4.49s CPU      4.76s WALL (       9 calls)
+     c_bands      :     48.99s CPU     51.44s WALL (       9 calls)
+     sum_band     :      5.22s CPU      5.46s WALL (       9 calls)
      v_of_rho     :      0.02s CPU      0.02s WALL (       9 calls)
      mix_rho      :      0.00s CPU      0.00s WALL (       9 calls)
 
      Called by c_bands:
-     init_us_2    :      1.41s CPU      1.48s WALL (   31559 calls)
-     init_us_2:cp :      1.33s CPU      1.42s WALL (   31559 calls)
-     cegterg      :     36.81s CPU     38.76s WALL (   14949 calls)
+     init_us_2    :      1.34s CPU      1.40s WALL (   31559 calls)
+     init_us_2:cp :      1.25s CPU      1.33s WALL (   31559 calls)
+     cegterg      :     43.36s CPU     45.50s WALL (   14949 calls)
 
      Called by *egterg:
-     cdiaghg      :      2.61s CPU      2.78s WALL (   60292 calls)
-     h_psi        :     31.11s CPU     32.74s WALL (   63614 calls)
-     g_psi        :      0.17s CPU      0.18s WALL (   47004 calls)
+     cdiaghg      :      2.65s CPU      2.82s WALL (   60416 calls)
+     h_psi        :     38.03s CPU     39.91s WALL (   63738 calls)
+     g_psi        :      0.16s CPU      0.17s WALL (   47128 calls)
 
      Called by h_psi:
-     h_psi:calbec :      2.87s CPU      3.02s WALL (   63614 calls)
-     vloc_psi     :     26.55s CPU     27.94s WALL (   63614 calls)
-     add_vuspsi   :      1.19s CPU      1.27s WALL (   63614 calls)
+     h_psi:calbec :      2.63s CPU      2.76s WALL (   63738 calls)
+     vloc_psi     :     33.75s CPU     35.42s WALL (   63738 calls)
+     add_vuspsi   :      1.15s CPU      1.23s WALL (   63738 calls)
 
      General routines
-     calbec       :      2.70s CPU      2.87s WALL (   63614 calls)
+     calbec       :      2.44s CPU      2.60s WALL (   63738 calls)
      fft          :      0.02s CPU      0.05s WALL (      91 calls)
      ffts         :      0.00s CPU      0.00s WALL (       9 calls)
-     fftw         :     28.33s CPU     29.85s WALL (  491366 calls)
+     fftw         :     36.22s CPU     38.03s WALL (  491728 calls)
  
      Parallel routines
  
-     PWSCF        :     50.97s CPU   1m40.76s WALL
+     PWSCF        :     58.46s CPU   1m18.92s WALL
 
  
-   This run was terminated on:  16: 8:48  13May2022            
+   This run was terminated on:   8:19: 6   2Jun2022            
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
-real 104.34
-user 1927.60
-sys 50.72
+real 82.32
+user 1518.35
+sys 53.70

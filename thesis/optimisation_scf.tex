@@ -223,27 +223,41 @@ Fig. \ref{fig:scaling_scf_nk_tas2_wait} shows a distribution of idle times betwe
 \subsection{Linear algebra parallelization}
 
 \begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=0.8\textwidth]{plots_scf/si_intel_mkl_bench_speedup.pdf}
-    \caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
-    \label{fig:scaling_scf_nd_si}
+    \includegraphics[width=\textwidth]{plots_scf/si_intel_mkl_bench_speedup.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_intel_mkl_bench_absolute.pdf}
+\end{subfigure}
+\label{fig:scaling_scf_nd_si}
+\caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
 \end{figure}
 
-\todo{Linear Algebra silicon}
+Fig. \ref{fig:scaling_scf_nd_si} shows the scaling behavior for different values of the parameter \texttt{nd}.
+Here, nd\_auto means that no value for \texttt{nd} is specified so \QE automatically chooses the biggest square number smaller than the number of processors.
+It is clearly shown that using linear algebra parallelization slows the calculation down significantly for the silicon system.
 
 \begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_speedup.pdf}
-    \caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
-    \label{fig:scaling_scf_nd_tas2}
+    \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_speedup.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_absolute.pdf}
+\end{subfigure}
+\label{fig:scaling_scf_nd_tas2}
+\caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
 \end{figure}
 
-\begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_absolute.pdf}
-    \caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
-    \label{fig:scaling_scf_nd_tas2_absolute}
-\end{figure}
+Interestingly, this again is not reproduced for the more expensive TaS2 benchmarking system.
+Fig. \ref{fig:scaling_scf_nd_tas2} shows a pretty much consistent times across all values for \texttt{nd}.
+
+Those results are already hinted at in the \texttt{PWscf} user guide \cite{noauthor_pwscf_nodate}.
+Here, in the guide for choosing parallelization parameters, using linear algebra parallelization is recommended when the number of \gls{kohn_sham} states is a few hundred or more.
+The silicon system has 8 electrons and is as such described with 8 \gls{kohn_sham} states, the TaS2 system has 153 electrons, so \QE uses 92 \gls{kohn_sham} states (in case of metallic materials, the band occupation is smeared around the Fermi energy to avoid level crossings, so more \gls{kohn_sham} states than \(\frac{1}{2} * (\textrm{number of electrons})\) are needed to account for that).
 
 \section{Comparison with calculations on the HLRN cluster}
 
