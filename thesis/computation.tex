@@ -9,22 +9,24 @@
 The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
 The information presented can be found in any textbook on parallel or high-perfomance computing \cite{hager_introduction_2010}.
 
-\todo{functional/data parallelism?}
-
-\subsection{On scalabilty}
+\subsection{On scalabilty}\label{sub:scalability_general}
 
 In scientific computing, one can identify two distinct reasons to distribute workloads to multiple processors:
 \begin{itemize}
     \item The execution time on a single core is not sufficient. The definition of sufficient is dependent on the specific task and can range from \enquote{over lunch} to \enquote{multiple weeks}
     \item The memory requirements grow outside the capabilities of a single core
 \end{itemize}
+
+\todo{functional/data parallelism?}
+
 In order to judge how well a task can parallelized, usually some sort of scalabilty metric is employed, for example:
 \begin{itemize}
     \item How fast can a problem be solved with \(N\) processors instead of one?
     \item What kind of bigger problem (finer resolution, more particles, etc.) can be solved with \(N\) processors?
-    \item How much of the resources is used for solving the problem?
+    \item How efficiently are the resources utilized?
 \end{itemize}
-The speedup by using \(N\) workers to solve a problem instead of one is defined as \(S = \frac{T_1}{T_N}\), where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
+In this thesis, the main concern is speeding up the calculation of very time expensive calculations with a fixed problem size, so the first metric will be used to judge the quality of parallelization.
+This metric is called speedup and is defined as \(S = \frac{T_1}{T_N}\), where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
 In the ideal case, where all the work can be perfectly distributed among the processors, all processors need the same time for their respective workloads and don't have to wait for others processors to finish their workload to continue, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so the speedup would be \(S = \frac{T_1}{\frac{T_1}{N}} = N\).
 
 In reality, there are many factors either limiting or in some cases supporting parallel code scalability. Limiting factors include:
@@ -39,11 +41,36 @@ On the other hand, faster parallel code execution can come from:
     \item \emph{Better caching}: when the data the program is working with is distributed among processors (assuming constant problem size), it may enable the data to be stored in faster cache memory. Modern computers typically have three layers of cache memory, with level 1 cache being the smallest and fastest and level 3 being the largest and slowest, so smaller data chunks per processor can lead to the data not being stored in main memory, but completely in cache or in a faster cache level
 \end{itemize}
 
-\todo{more details strong/weak scaling?}
+\todo{amdahl}
+
+\subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
+
+In the \QE output, a time report listing the whole module as well as on a per-function level is always printed at the end.
+This time report includes \gls{cpu_time} and \gls{wall_time}, from those three different metrics of scalability can be calculated:
+\begin{itemize}
+    \item runtime: absolute runtime (\gls{wall_time}) of the compute job
+    \item speedup: runtime divided by runtime of the job on a single core
+    \item \gls{wait_time}: percentage of \gls{wall_time} not used by \QE process, so writing to disk, waiting for IO devices or other processes, etc. (calculated as (\gls{wall_time} - \gls{cpu_time}) / \gls{wall_time})
+\end{itemize}
+For further analysis mainly speedup will be used to evaluate the scalability of \QE calculation, because it makes comparing the scaling of calculations with different absolute runtimes easy: optimal scaling is achieved when the speedup has a slope of one, as discussed in sec. \ref{sub:scalability_general}, independent of the runtime.
+
+The other two parameters should also always be considered: in the end, absolute runtime is the most important factor and should govern the decision of how much resources are used for solving a particular problem.
+As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
+Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
+
+As for the \gls{wait_time}, this metric can be used to separate the different factors of poor parallelization discussed in \ref{sub:scalability_general}.
+\todo{how do different factors show?}
+
+Importantly, for this interpretation to be meaningful, the cpu and \gls{wall_time}s reported by \QE have to accurate.
+When executing programs on multiple processors in parallel, \gls{cpu_time} is measured per processor, so some kind of truncation is done when a single number (such as in \QE) is reported.
+Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
+
+However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), so it will be used a such in this thesis.
 
 \section{\QE}\label{sec:qe}
 
-\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties as well as phonon frequencies and eigenvectors.
+\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties (module \texttt{PWscf}) as well as phonon frequencies and eigenvectors (module \texttt{PHonon}).
 
 \subsection{Compilation of \QE}\label{sub:qe_compilation}
 
@@ -74,11 +101,20 @@ As the default options of the \texttt{configure} script work well in the use cas
 \end{verbatim}
 with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (when using \\ \texttt{intel/oneAPI-2021.4}) and no otherwise.
 
-
-\todo{what to look out for in configure output: when are the internal copies of blas and lapack used?}
-
+The output of the configuration script gives information about the libraries it found.
+In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas} and \gls{scalapack} libraries from that package will be used, whereas the included \gls{fft} library will be used:
+\begin{verbatim}
+    The following libraries have been found:
+    BLAS_LIBS=  -lmkl_intel_lp64  -lmkl_sequential -lmkl_core
+    LAPACK_LIBS=
+    SCALAPACK_LIBS=-lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
+    FFT_LIBS= 
+\end{verbatim}
 
 \subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
+
+\QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
+This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE.
 
 \begin{wrapfigure}{l}{0.5\textwidth}
 \centering
@@ -111,19 +147,34 @@ Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the
 This opens a few possibilities for parallelization of calculations: first of all, the orbitals in the plane wave basis set as well as charges and densities can be distributed among processors.
 This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
 Going further, \QE automatically parallelizes all linear algebra operations on real space/reciprocal grid.
-The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from both representation in order to transform between them.
+The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from and to the whole reciprocal/real grid in order to transform between them.
+This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
 
-To remedy this problem, \todo{k point parallelization}
+As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb{r})\).
+\QE can use this fact and separate the total number of processors into smaller pools, each doing the calculations for a set of k points, so called \emph{k point parallelization}.
+The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into, so the resulting number of processors in one pool is \(\frac{N}{N_k}\).
+Within one k point processor pool, the PW parallelization with its heavy communication is automatically applied.
 
-In another level of parallelization, \QE can use \gls{scalapack} to parallelize among other things the iterative orthonormalization of \acrshort{kohn_sham} states.
-This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group}.
+In an level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
+This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group>}.
 Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
-Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra has to be \(n^2\), where \(n\) is an integer.
+Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra group has to be a square number.
 
-\todo{short conclusion: which parameters, how can they be chose?}
+\todo{parallelization ph.x}
 
 \section{Hardware configuration of the PHYSnet cluster}
 
-\todo{is this good here?}
+All calculations were run on the \texttt{infinix} queue on the PHYSnet compute cluster. 
+As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip.
+
+Knowing the specific hardware configuration the calculations are run on is important, as that provides a scale of different communication speeds:
+\begin{itemize}
+    \item between processors on one chip:
+    \item between processors on one motherboard:
+    \item between processors on different nodes:
+\end{itemize}
+\todo{speed comparison between processors on one chip, on one motherboard, between nodes (infiniband)}
+This gives guidelines on how well calculations can be parallelized on different numbers of processors.
+As an example, any calculation with a massive need for communication, for example the calculations one the PW 
 
 \end{document}
