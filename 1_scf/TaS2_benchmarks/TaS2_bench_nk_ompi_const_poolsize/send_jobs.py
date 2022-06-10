@@ -31,7 +31,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(1):
+    for run in range(1, 3):
         for poolsize in [18]:
             for n_procs in range(18, max_number_procs+1, 18):
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_ompi_const_poolsize/' + str(run) + '/' + str(poolsize)
