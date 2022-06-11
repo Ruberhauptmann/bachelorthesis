@@ -32,6 +32,7 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
+    """
     missing_runs = [[0, 2, 200],
     [0, 8, 104],
     [0, 8, 200],
@@ -68,12 +69,12 @@ def main():
                 fh.write(job_file)
 
             subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
-
     """
-    for run in [4, 5]:
+
+    for run in [1]:
         for poolsize in [2, 8]:
             #for n_procs in range(8, max_number_procs+1, 16):
-            for n_procs in [88, 104]:
+            for n_procs in [272, 360]:
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 #for file in glob.glob(log_path + '/*'):
@@ -94,7 +95,7 @@ def main():
 
         for poolsize in [18]:
             #for n_procs in range(18, max_number_procs+1, 18):
-            for n_procs in [18, 54, 72, 90, 108]:
+            for n_procs in [270, 360]:
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
@@ -112,7 +113,6 @@ def main():
                         fh.write(job_file)
 
                     subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
-    """
 
 if __name__ == "__main__":
     main()
