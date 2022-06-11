@@ -41,7 +41,27 @@ On the other hand, faster parallel code execution can come from:
     \item \emph{Better caching}: when the data the program is working with is distributed among processors (assuming constant problem size), it may enable the data to be stored in faster cache memory. Modern computers typically have three layers of cache memory, with level 1 cache being the smallest and fastest and level 3 being the largest and slowest, so smaller data chunks per processor can lead to the data not being stored in main memory, but completely in cache or in a faster cache level
 \end{itemize}
 
-\todo{amdahl}
+A simple ansatz for modeling speedup was first derived by Gene Amdahl.
+Assuming the work that needs to be done is split into a part which cannot be parallelized \(s\) and a part which can be parallelized ideally \(p\), we can normalize the serial time to 1:
+\begin{equation}
+    T_1 = s + p = 1
+\end{equation}
+The time for solving the problem on \(N\) processors is then
+\begin{equation}
+    T_N = s + \frac{p}{N}
+\end{equation}
+The speedup is now
+\begin{equation}\label{eq:amdahls_law}
+    S = \frac{T_s}{T_p} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}
+\end{equation}
+This equation is called \emph{Amdahl's law} and is plotted in fig. \ref{fig:amdahl} over a range of processors for a few different values of \(s\).
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{amdahl.pdf}
+    \label{fig:amdahl}
+    \caption{Amdahl's law for different values of \(s\)}
+\end{figure}
 
 \subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
 
@@ -162,7 +182,7 @@ Furthermore, the arrays on which the calculations are performed on are distribut
 
 \todo{parallelization ph.x}
 
-\section{Hardware configuration of the PHYSnet cluster}
+\section{Hardware configuration of the PHYSnet cluster}\label{sec:hardware_physnet}
 
 All calculations were run on the \texttt{infinix} queue on the PHYSnet compute cluster. 
 As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip.
