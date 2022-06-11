@@ -35,7 +35,7 @@ def main():
         #for poolsize in poolsize_list:
         for poolsize in [2]:
             #for n_procs in range(8, max_number_procs+1, 8):
-            for n_procs in [100]:
+            for n_procs in [40]:
                 log_path = os.getenv('HOME') + '/job_logs/silicon/bench_nk_intel_compiler_const_poolsize_idefix/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):

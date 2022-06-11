@@ -4,7 +4,7 @@
  &control
     calculation = 'scf'
     restart_mode='from_scratch',
-    prefix='silicon_bench_intel_poolsize_2_n_procs_2_10',
+    prefix='silicon_bench_intel_poolsize_2_n_procs_40_0',
     pseudo_dir = './pseudos/',
     outdir='/fastscratch/tsievers/QE_TMP_DIR/'
  /

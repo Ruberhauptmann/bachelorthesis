@@ -5,8 +5,8 @@
 #$ -l h_cpu=01:00:00
 #$ -l h_vmem=3G
 #$ -l excl=TRUE
-#$ -pe mpi 100
-#$ -N silicon_bench_intel_poolsize_2_n_procs_100_0
+#$ -pe mpi 40
+#$ -N silicon_bench_intel_poolsize_2_n_procs_40_0
 #$ -cwd
 #$ -S /bin/bash
 #$ -M tsievers@physnet.uni-hamburg.de -m as
@@ -15,4 +15,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 50 -i in_files/silicon_bench_intel_poolsize_2_n_procs_100_0.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 20 -i in_files/silicon_bench_intel_poolsize_2_n_procs_40_0.scf

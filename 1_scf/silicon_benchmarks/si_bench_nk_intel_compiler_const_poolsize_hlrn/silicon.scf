@@ -4,9 +4,9 @@
  &control
     calculation = 'scf'
     restart_mode='from_scratch',
-    prefix='silicon_bench_intel_poolsize_2_n_procs_2_13',
+    prefix='silicon',
     pseudo_dir = './pseudos/',
-    outdir='/fastscratch/tsievers/QE_TMP_DIR/'
+    outdir='QE_TMP_DIR'
  /
  &system
     ibrav = 2, celldm(1) = 10.20, nat = 2, ntyp= 1,

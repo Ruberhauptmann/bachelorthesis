@@ -1,0 +1,5 @@
+{% for directory in directories %}
+mkdir -p {{ directory }}
+{% endfor %}
+
+sbatch TaS2_nk_benchmark_hlrn.sh
