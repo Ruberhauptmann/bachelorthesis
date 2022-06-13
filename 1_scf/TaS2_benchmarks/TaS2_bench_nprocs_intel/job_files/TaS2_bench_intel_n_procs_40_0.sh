@@ -4,7 +4,7 @@
 #$ -pe mpi 40
 #$ -N TaS2_bench_intel_n_procs_40_0
 #$ -l h_cpu=6:00:00
-#$ -l h_vmem=8G
+#$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
