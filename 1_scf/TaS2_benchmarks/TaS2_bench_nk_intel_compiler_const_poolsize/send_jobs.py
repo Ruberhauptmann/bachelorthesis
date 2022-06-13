@@ -72,6 +72,7 @@ def main():
     """
 
     for run in [1]:
+        """
         for poolsize in [2, 8]:
             #for n_procs in range(8, max_number_procs+1, 16):
             for n_procs in [272, 360]:
@@ -92,10 +93,11 @@ def main():
                         fh.write(job_file)
 
                     subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+        """
 
-        for poolsize in [18]:
-            #for n_procs in range(18, max_number_procs+1, 18):
-            for n_procs in [270, 360]:
+        for poolsize in [36]:
+            for n_procs in range(36, max_number_procs+1, 36):
+            #for n_procs in [270, 360]:
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
