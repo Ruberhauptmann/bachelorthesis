@@ -19,7 +19,7 @@ def main():
     input_template_md = env.get_template('input.md.jinja')
     job_template = env.get_template('silicon_ph_bench_nk.sh.jinja')
 
-    poolsize = 2
+    poolsize = 8
 
     job_directory = '/fastscratch/tsievers/si_ph_benchmark_images/'
     rmtree(job_directory)
