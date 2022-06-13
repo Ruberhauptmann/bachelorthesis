@@ -46,7 +46,10 @@ def plot_images(y, n_procs, prefix):
     fig, ax1 = plt.subplots()
 
     for ni in n_procs:
-        ax1.fill_between(n_procs[ni][0], y_run_mean[ni]-y_run_std[ni], y_run_mean[ni]+y_run_std[ni], alpha=0.2)
+        if len(n_procs[ni][0]) == 1:
+            ax1.errorbar(n_procs[ni][0], y_run_mean[ni], y_run_std[ni])
+        else:
+            ax1.fill_between(n_procs[ni][0], y_run_mean[ni]-y_run_std[ni], y_run_mean[ni]+y_run_std[ni], alpha=0.2)
         ax1.plot(n_procs[ni][0], y_run_mean[ni], label=ni, marker='o', linestyle='dashed')
 
     ax1.set_ylabel("runtime [s]")
