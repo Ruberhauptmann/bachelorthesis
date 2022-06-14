@@ -28,7 +28,8 @@ def main():
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
 
-        for n_procs in range(4, max_number_procs + 1, 4):
+        #for n_procs in range(4, max_number_procs + 1, 4):
+        for n_procs in [4]:
             job_name = 'TaS2_bench_ompi_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 

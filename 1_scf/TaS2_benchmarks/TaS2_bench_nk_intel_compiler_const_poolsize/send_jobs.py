@@ -95,8 +95,8 @@ def main():
                     subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
         """
 
-        for poolsize in [36]:
-            for n_procs in range(36, max_number_procs+1, 36):
+        for poolsize in [48]:
+            for n_procs in range(48, max_number_procs+1, 48):
             #for n_procs in [270, 360]:
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
