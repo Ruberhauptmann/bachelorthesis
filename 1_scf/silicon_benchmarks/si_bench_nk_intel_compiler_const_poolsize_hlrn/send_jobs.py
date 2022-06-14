@@ -33,18 +33,19 @@ def main():
     jobs = []
     out_directories = []
 
-    for run in range(1):
-        out_directory = "out_file_silicon/" + str(run) + "/singlecore"
+    for run in range(10):
+        out_directory = "out_file_silicon/singlecore/" + str(run)
         out_directories.append(out_directory)
         job = "mpirun -np 1 pw.x -nk 1 < silicon.scf > " + out_directory + "/silicon_bench_singlecore_" + str(run) + ".log"
         jobs.append(job)
         for poolsize in [2, 8, 16]:
             out_directory = "out_files_silicon/" + str(run) + "/" + str(poolsize)
             out_directories.append(out_directory)
-            for n_procs in range(8, 81, 8):
+            for n_procs in [4, *range(8, 81, 8)]:
+            #for n_procs in [4]:
                 if n_procs % poolsize == 0.:
                     nk = str(int(n_procs / poolsize))
-                    job = "mpirun -np " + str(n_procs) + " pw.x -nk " + nk + " -nd 1 < silicon.scf > " + out_directory + "/" + "silicon_bench_nk_" + nk + "_n_procs_" + str(n_procs) + "_" + str(run) + ".log"
+                    job = "mpirun -np " + str(n_procs) + " pw.x -nk " + nk + " -nd 1 < silicon.scf > " + out_directory + "/" + "silicon_bench_poolsize_" + str(poolsize) + "_n_procs_" + str(n_procs) + "_" + str(run) + ".log"
 
                     jobs.append(job)
 

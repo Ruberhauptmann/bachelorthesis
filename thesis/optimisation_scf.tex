@@ -264,6 +264,26 @@ Apparently, this number of \acrshort{kohn_sham} states is on the edge of linear 
 
 \section{Comparison with calculations on the HLRN cluster}
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=0.75\textwidth]{plots_scf/si_hlrn_bench_nk_speedup.pdf}
+\caption{CAPTION}
+\label{fig:scaling_scf_hlrn_nk_si_speedup}
+\end{figure}
+
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_hlrn_bench_nk_absolute.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/si_hlrn_bench_nk_wait.pdf}
+\end{subfigure}
+\caption{CAPTION}
+\label{fig:scaling_scf_hlrn_nprocs_nk_absolute_wait}
+\end{figure}
+
 \section{Conclusion: Parameters for optimal scaling}
 
 \end{document}
