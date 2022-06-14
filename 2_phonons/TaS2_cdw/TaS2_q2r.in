@@ -1,0 +1,4 @@
+&input
+   fildyn = 'TaS2_cdw.dyn'
+   flfrc  = 'TaS2_cdw.FC'
+/
