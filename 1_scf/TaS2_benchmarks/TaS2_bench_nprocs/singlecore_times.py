@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     n_procs = 1
 
-    for run in range(10):
+    for run in range(1):
         job_name = 'TaS2_bench_ompi_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 

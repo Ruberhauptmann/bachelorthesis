@@ -16,4 +16,4 @@ module load intel/oneAPI-2021.4
 
 mpirun -np 160 $QEPREFIX/bin/pw.x -nk 80 -nd 1 -i in_files/TaS2_ph_bench_poolsize_2_n_procs_160_0.scf
 
-mpirun -np 160 $QEPREFIX/bin/ph.x -ni  -nk 80 -nd 1 -i in_files/TaS2_ph_bench_poolsize_2_n_procs_160_0.ph
+mpirun -np 160 $QEPREFIX/bin/ph.x -nk 80 -nd 1 -i in_files/TaS2_ph_bench_poolsize_2_n_procs_160_0.ph

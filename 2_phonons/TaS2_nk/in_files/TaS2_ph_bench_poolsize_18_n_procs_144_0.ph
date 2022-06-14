@@ -4,7 +4,7 @@ TaS2
     outdir   = '/fastscratch/tsievers/QE_TMP_DIR/'
 
     fildyn   = '/fastscratch/tsievers/QE_TMP_DIR/TaS2_ph_bench_poolsize_18_n_procs_144_0.dyn'
-    fildvscf   = '/fastscratch/tsievers/QE_TMP_DIR/TaS2_ph_bench_poolsize_18_n_procs_144_0.dvscf'
+    fildvscf   = 'TaS2_ph_bench_poolsize_18_n_procs_144_0.dvscf'
 
     ldisp = .true.
     nq1 = 12

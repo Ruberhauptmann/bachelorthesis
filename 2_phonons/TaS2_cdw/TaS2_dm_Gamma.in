@@ -1,0 +1,7 @@
+&input
+   fildyn = '/afs/physnet.uni-hamburg.de/users/th1_we/tsievers/Projects/TaS2_cdw_phonons/Gamma/TaS2_cdw.dyn'
+   asr    = 'crystal'
+   filout = 'TaS2_Gamma.modes' 
+   filmol = 'TaS2_Gamma.molden'
+   filxsf = 'TaS2_Gamma.axsf'
+/

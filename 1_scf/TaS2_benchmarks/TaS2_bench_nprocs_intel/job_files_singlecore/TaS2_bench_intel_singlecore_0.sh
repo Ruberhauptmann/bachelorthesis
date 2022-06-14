@@ -4,13 +4,15 @@
 #$ -pe mpi 1
 #$ -N TaS2_bench_intel_singlecore_0
 #$ -l h_cpu=25:00:00
-#$ -l h_vmem=40G
+#$ -l h_vmem=10G
 #$ -l excl=TRUE
 #$ -cwd
 #$ -S /bin/bash
 #$ -M tsievers@physnet.uni-hamburg.de -m as
 
 QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
+
+ulimit -l unlimited
 
 module load intel/oneAPI-2021.4
 

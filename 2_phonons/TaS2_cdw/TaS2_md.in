@@ -1,0 +1,10 @@
+&input
+   flfrc            = 'TaS2_cdw.FC'
+   q_in_band_form   = .true.
+   q_in_cryst_coord = .true.
+   asr              = 'simple'
+   flvec            = 'TaS2_cdw.modes'
+/
+2
+0.000 1.000 0.000 100 ! Gamma*
+0.500 1.000 0.500 100 ! X*
