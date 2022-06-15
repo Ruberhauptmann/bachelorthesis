@@ -67,10 +67,10 @@ Pictured in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_speedup} and \ref{fig:sca
 \caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait}
 \end{figure}
-Both benchmarks share a key feature in the linear scaling in speedup with a slope of \(\frac{1}{2}\) up to 10 processors, the tests on TaS2 actually continue this trend up until 20 processors, resulting in a maximal speedup of 10.
-Beyond 20 processors the scaling also gets worse, but there still is a speedup of 2 to 3.
-Looking at the wait time plot in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait} shows the quality of parallelization: for up to 20 processors, the wait time is independent of the number of processors, which is the unavoidable startup overhead for tasks like data distribution.
-After that, the wait time scales with the number of processors, which hints to communication being a factor limiting speedup here as discussed in sec. \ref{sub:scalability_general}.
+%Both benchmarks share a key feature in the linear scaling in speedup with a slope of \(\frac{1}{2}\) up to 10 processors, the tests on TaS2 actually continue this trend up until 20 processors, resulting in a maximal speedup of 10.
+%Beyond 20 processors the scaling also gets worse, but there still is a speedup of 2 to 3.
+%Looking at the wait time plot in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait} shows the quality of parallelization: for up to 20 processors, the wait time is independent of the number of processors, which is the unavoidable startup overhead for tasks like data distribution.
+%After that, the wait time scales with the number of processors, which hints to communication being a factor limiting speedup here as discussed in sec. \ref{sub:scalability_general}.
 
 In conclusion, systems with more electrons and by extension bigger matrices and longer iteration times seem to be parallelize better and as such profit more from using more processors than systems with just a few number of electrons.
 
@@ -140,13 +140,31 @@ Here, optimal scaling behavior is seen for up to 6 processors, which means those
 
 Fig. \ref{fig:scaling_scf_runtime_compilers_nprocs} shows 
 
-\todo{efficiency maybe?}
-
-
 This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors:
 The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
 
-\todo{TaS2 intel scaling?}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_intel_bench_nprocs_speedup.pdf}
+    \caption{CAPTION}
+    \label{fig:scaling_scf_intel_nprocs_tas2_speedup}
+\end{figure}
+
+\begin{figure}[ht!]
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_bench_nprocs_absolute.pdf}
+\end{subfigure}
+\begin{subfigure}[b]{0.49\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_bench_nprocs_wait.pdf}
+\end{subfigure}
+\caption{CAPTION}
+\label{fig:scaling_scf_intel_nprocs_tas2_absolute_wait}
+\end{figure}
+
+\todo{TaS2 intel scaling}
 
 \section{Using the parallelization parameters of \QE}
 
@@ -260,7 +278,7 @@ Fig. \ref{fig:scaling_scf_nd_tas2} shows a pretty much consistent times across a
 Those results are already hinted at in the \texttt{PWscf} user guide \cite{noauthor_pwscf_nodate}.
 Here, in the guide for choosing parallelization parameters, using linear algebra parallelization is recommended when the number of \acrshort{kohn_sham} states is a few hundred or more.
 The silicon system has 8 electrons and is as such described with 8 \gls{kohn_sham} states, the TaS2 system has 153 electrons, so \QE uses 92 \gls{kohn_sham} states (in case of metallic materials, the band occupation is smeared around the Fermi energy to avoid level crossings, so more \gls{kohn_sham} states than \(\frac{1}{2} * (\textrm{number of electrons})\) are needed to account for that).
-Apparently, this number of \acrshort{kohn_sham} states is on the edge of linear algebra parallelization actually speeding up calculations.
+Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear algebra parallelization actually speeding up calculations.
 
 \section{Comparison with calculations on the HLRN cluster}
 
