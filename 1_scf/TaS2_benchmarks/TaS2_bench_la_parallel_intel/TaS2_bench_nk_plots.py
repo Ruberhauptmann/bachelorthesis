@@ -12,7 +12,9 @@ if __name__ == "__main__":
 
     ### Plot speedup
 
-    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=False)[0:2]
+    cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=True)[0:2]
+
+    walltimes_singlecore = walltimes_singlecore * 4
 
     cputime_singlecore = np.mean(cputimes_singlecore)
     walltime_singlecore = np.mean(walltimes_singlecore)

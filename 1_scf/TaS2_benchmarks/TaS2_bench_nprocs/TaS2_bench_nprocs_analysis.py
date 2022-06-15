@@ -13,6 +13,7 @@ if __name__ == "__main__":
 
     cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=True)[0:2]
 
+    walltimes_singlecore = walltimes_singlecore * 4
     walltime_singlecore = np.mean(walltimes_singlecore)
 
     speedup = walltime_singlecore / walltimes
