@@ -1,5 +1,5 @@
 &CONTROL
-    outdir = '/fastscratch/tsievers/TaS2_cdw_phonons_180'
+    outdir = '/fastscratch/tsievers/TaS2_cdw_phonons_Gamma_180'
     prefix = 'TaS2_cdw_phonons'
 
     pseudo_dir = './pseudos'

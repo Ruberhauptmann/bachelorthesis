@@ -1,9 +1,9 @@
 TaS2
 &INPUTPH
     prefix = 'TaS2_cdw_phonons'
-    outdir   = '/fastscratch/tsievers/TaS2_cdw_phonons_180/'
+    outdir   = '/fastscratch/tsievers/TaS2_cdw_phonons_full_180/'
 
-    fildyn   = '/fastscratch/tsievers/TaS2_cdw_phonons_180/TaS2_cdw.dyn'
+    fildyn   = '/fastscratch/tsievers/TaS2_cdw_phonons_full_180/TaS2_cdw.dyn'
     fildvscf  = 'TaS2_cdw.dvscf'
 
     ldisp    = .true.

@@ -1,8 +1,8 @@
 #!/bin/bash
 #$ -q th1prio.q
 #$ -e $HOME/job_logs/error_logs/
-#$ -o /fastscratch/tsievers/TaS2_cdw_phonons_180
-#$ -l h_cpu=100:00:00
+#$ -o /fastscratch/tsievers/TaS2_cdw_phonons_full_180
+#$ -l h_cpu=150:00:00
 #$ -l h_vmem=3G
 #$ -l excl=TRUE
 #$ -pe mpi 180
