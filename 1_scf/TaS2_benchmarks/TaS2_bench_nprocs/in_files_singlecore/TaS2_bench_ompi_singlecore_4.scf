@@ -1,6 +1,6 @@
 &CONTROL
     outdir = '/fastscratch/tsievers/QE_TMP_DIR'
-    prefix = 'TaS2_bench_ompi_singlecore_0'
+    prefix = 'TaS2_bench_ompi_singlecore_4'
 
     pseudo_dir = './pseudos'
 /
