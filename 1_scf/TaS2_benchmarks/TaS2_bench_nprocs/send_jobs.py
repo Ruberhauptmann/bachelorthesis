@@ -22,14 +22,13 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nprocs.sh.jinja')
 
-    for run in range(1):
+    for run in range(9):
         log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nprocs/' + str(run)
         os.makedirs(log_path, exist_ok=True)
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
 
-        #for n_procs in range(4, max_number_procs + 1, 4):
-        for n_procs in [4]:
+        for n_procs in range(4, max_number_procs + 1, 4):
             job_name = 'TaS2_bench_ompi_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 

@@ -32,71 +32,9 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    """
-    missing_runs = [[0, 2, 200],
-    [0, 8, 104],
-    [0, 8, 200],
-    [0, 18, 18],
-    [1, 2, 8],
-    [1, 2, 200],
-    [1, 8, 104],
-    [1, 8, 200],
-    [1, 18, 18],
-    [3, 2, 8],
-    [3, 2, 88],
-    [3, 8, 88],
-    [3, 18, 18],
-    [3, 18, 54],
-    [3, 18, 72],
-    [3, 18, 90],
-    [3, 18, 108]]
-
-    for run, poolsize, n_procs in missing_runs:
-        log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
-        os.makedirs(log_path, exist_ok=True)
-        #for file in glob.glob(log_path + '/*'):
-        #    os.remove(file)
-
-        if n_procs % poolsize == 0.:
-            job_name = 'TaS2_cdw_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
-            prefix = '\'' + job_name +  '\''
-
-            input_file = input_template.render(prefix=prefix)
-            job_file = job_template.render(nk=int(n_procs / poolsize), n_procs=n_procs, log_path=log_path, job_name=job_name)
-            with open('in_files/' + job_name + '.scf'  , 'w') as fh:
-                fh.write(input_file)
-            with open('job_files/' + job_name + '.sh'  , 'w') as fh:
-                fh.write(job_file)
-
-            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
-    """
-
-    for run in [1]:
-        """
-        for poolsize in [2, 8]:
-            #for n_procs in range(8, max_number_procs+1, 16):
-            for n_procs in [272, 360]:
-                log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
-                os.makedirs(log_path, exist_ok=True)
-                #for file in glob.glob(log_path + '/*'):
-                #    os.remove(file)
-
-                if n_procs % poolsize == 0.:
-                    job_name = 'TaS2_cdw_bench_poolsize_' + str(poolsize) + '_n_procs_' + str(n_procs) + '_' + str(run)
-                    prefix = '\'' + job_name +  '\''
-
-                    input_file = input_template.render(prefix=prefix)
-                    job_file = job_template.render(nk=int(n_procs / poolsize), n_procs=n_procs, log_path=log_path, job_name=job_name)
-                    with open('in_files/' + job_name + '.scf'  , 'w') as fh:
-                        fh.write(input_file)
-                    with open('job_files/' + job_name + '.sh'  , 'w') as fh:
-                        fh.write(job_file)
-
-                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
-        """
-
-        for poolsize in [48]:
-            for n_procs in range(48, max_number_procs+1, 48):
+    for run in range(9):
+        for poolsize in [24, 36, 48]:
+            for n_procs in range(24, max_number_procs+1, 12):
             #for n_procs in [270, 360]:
                 log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_nk_intel_compiler_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)

@@ -33,12 +33,15 @@ def main():
     poolsize_list = find_all_divisors(number_k_points, max_number_procs)
     print(poolsize_list)
 
-    for run in range(4, 6):
+    for run in range(5):
         #for poolsize in poolsize_list:
-        for poolsize in [2, 8]:
+        #for poolsize in [2, 8]:
+        for poolsize in [2]:
         #for nk in [2]:
             #for n_procs in range(poolsize_list[-1], max_number_procs, poolsize_list[-1]):
-            for n_procs in range(8, max_number_procs+1, 8):
+            #for n_procs in [2, 4, *range(8, max_number_procs+1, 8)]:
+            for n_procs in [2, 4]:
+
                 log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(run) + '/' + str(poolsize)
                 os.makedirs(log_path, exist_ok=True)
                 for file in glob.glob(log_path + '/*'):
@@ -64,8 +67,9 @@ def main():
                     with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                         fh.write(job_file)
 
-                    #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
+        """
         for poolsize in [18]:
             for n_procs in range(18, max_number_procs+1, 18):
                 log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_nk_const_poolsize/' + str(run) + '/' + str(poolsize)
@@ -93,6 +97,7 @@ def main():
                         fh.write(job_file)
 
                     subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+        """
 
 if __name__ == "__main__":
     main()
