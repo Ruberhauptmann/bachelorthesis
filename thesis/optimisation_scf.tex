@@ -42,11 +42,14 @@ These are pictured in fig. \ref{fig:scaling_scf_ompi_nprocs_si_speedup} and \ref
 
 On a single node, the speedup does scale linearly with the number of processors until around 10 processors, but with a slope of \(\frac{1}{2}\) instead of 1 (which would mean ideal scaling).
 Beyond that number, the slope decreases even more so that a maximal speedup of around 7 is achieved for 20 processors used.
-As discussed in sec. \ref{sec:hardware_physnet}, one node is equipped with 20 cores, so trying to scale the communication intensive calculations beyond that threshold makes the calculations run even slower than on a single core.
+One compute node is equipped with 20 cores, so trying to scale the communication intensive calculations beyond that threshold makes the calculations run even slower than on a single core.
 Interestingly, the wait time plot in \ref{fig:scaling_scf_ompi_nprocs_si_absolute_wait} shows that a significant amount (\(\SI{10}{\percent}\) to \(\SI{40}{\percent}\)) of runtime is taken up by wait time already for less than 20 processors.
-As discussed in sec. \ref{sub:scalability_general}, this hints to poor parallelization, which is a reason for the poor scaling seen in fig. \ref{fig:scaling_scf_ompi_nprocs_si_speedup}.
+As discussed in sec. \ref{sub:scalability_general}, this is a sign of poor parallelization, which can explain the poor scaling seen in fig. \ref{fig:scaling_scf_ompi_nprocs_si_speedup}.
 
 Pictured in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_speedup} and \ref{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait} are the same scaling test run for the TaS2 benchmarking system.
+Here, the speedup is not taken as runtime divided by runtime on a single core, as the memory required is more than what can be accessed by a single core.
+Instead, an estimate of the single core runtime is made by multiplying the runtime of the job running on 4 cores by 4.
+This assumes perfect scaling for 1-4 processors, but the relative scaling is accurate, no matter the accuracy of this assumption.
 
 \begin{figure}[ht!]
 \centering
@@ -67,18 +70,13 @@ Pictured in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_speedup} and \ref{fig:sca
 \caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait}
 \end{figure}
-Both benchmarks share a key feature in the linear scaling in speedup with a slope of \(\frac{1}{2}\) up to 10 processors, the tests on TaS2 actually continue this trend up until 20 processors, resulting in a maximal speedup of 10.
-Beyond 20 processors the scaling also gets worse, but there still is a speedup of 2 to 3.
-Looking at the wait time plot in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait} shows the quality of parallelization: for up to 20 processors, the wait time is independent of the number of processors, which is the unavoidable startup overhead for tasks like data distribution.
-After that, the wait time scales with the number of processors, which hints to communication being a factor limiting speedup here as discussed in sec. \ref{sub:scalability_general}.
+The scaling test on the TaS2 system shows much better scaling.
+For up to 20 processors, the speedup follows the ideal scaling with a stark decline with more processors.
+This is also reflected in the wait time in fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait}, as it goes from a small constant value for under 20 processors to some kind of dependence of the number of processors, which hints to communication or bottlenecks being a limiting factor here.
 
 In conclusion, systems with more electrons and by extension bigger matrices and longer iteration times seem to be parallelize better and as such profit more from using more processors than systems with just a few number of electrons.
 
-These scaling tests pose now two questions to be answered:
-\begin{itemize}
-    \item Is better scaling on a single node possible?
-    \item How can acceptable scaling over more than one node be achieved?
-\end{itemize}
+These scaling tests poses now the question how better scaling over more than one node can be achieved.
 
 \section{Testing different compilers and mathematical libraries}
 
@@ -108,11 +106,12 @@ The benchmarks in \ref{fig:scaling_scf_compilers_nprocs} are run with the follow
     \subcaption{\gls{oneapi}}
 \end{subfigure}
 \caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
-\label{fig:scaling_scf_compilers_nprocs}
+\label{fig:scaling_scf_compilers_si}
 \end{figure}
 
 Fig. \ref{fig:scaling_scf_compilers_nprocs} shows that just dropping in another \gls{blas} library (\gls{openblas} in this case) does not change the scaling behavior, in contrast to using Intels \gls{oneapi} packages.
-Here, optimal scaling behavior is seen for up to 6 processors, which means those calculations ran about twice as fast as the calculations with just \gls{openmpi}.
+Here, optimal scaling behavior is seen for up to 6 processors.
+It is however important to also look at the total runtime in this context.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
@@ -122,31 +121,55 @@ Here, optimal scaling behavior is seen for up to 6 processors, which means those
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{plots_scf/si_openblas_bench_nprocs_absolute.pdf}
-    \subcaption{\gls{openmpi} + \gls{openblas}}
-\end{subfigure}
-\begin{subfigure}[b]{0.49\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_absolute.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
 \caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
-\label{fig:scaling_scf_runtime_compilers_nprocs}
+\label{fig:scaling_scf_compilers_runtime_si}
+\end{figure}
+Fig. \ref{fig:scaling_scf_runtime_compilers_nprocs} shows the absolute runtimes for both the \gls{openmpi} and \gls{oneapi} benchmarks.
+This explains the difference in scaling seen in the speedup plots: the runtime on a single core is significantly higher for the \gls{oneapi} benchmark, so even though the runtime between both benchmarks is about the same starting from around 10 processors there is a difference in speedup.
+To assess this more quantitatively, tab. \ref{tab:runtimes_si_scf_compilers} lists the average runtime for some selected number of processors.
+Importantly, the runtime for the \gls{oneapi} is faster for smaller numbers of processors (except 1), but only \SI{15}{\percent} for 2 cores and even smaller differences for more cores, with the \gls{openmpi} calculation being even a little faster for 20 processors.
+
+\begin{table}[ht!]
+    \begin{tabular}{@{}lll@{}}
+    \toprule
+    \begin{tabular}[c]{@{}l@{}}Number of\\ processors\end{tabular} & \gls{openmpi} & \gls{oneapi}  \\ \midrule
+    1                                                              & \SI{466}{\s}  & \SI{587}{\s}  \\
+    2                                                              & \SI{286}{\s}  & \SI{242}{\s}  \\
+    4                                                              & \SI{170}{\s}  & \SI{141}{\s}  \\
+    10                                                             & \SI{97.9}{\s} & \SI{91.3}{\s} \\
+    20                                                             & \SI{70.2}{\s} & \SI{82.8}{\s} \\ \bottomrule
+    \end{tabular}
+    \caption{CAPTION}
+    \label{tab:runtimes_si_scf_compilers}
+\end{table}
+
+The same benchmark with the \gls{oneapi} compiled version of \QE is shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_speedup}.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_intel_bench_nprocs_speedup.pdf}
+    \caption{CAPTION}
+    \label{fig:scaling_scf_intel_nprocs_tas2_speedup}
 \end{figure}
 
-\todo{analyse absolute runtime -> speedup can be deceiving}
-
-\todo{why intel? seems to work best with the infiniband hardware, absolute runtime faster for like 2-4 processors? -> can hint to better perfomance with k point parallelization}
-
-Fig. \ref{fig:scaling_scf_runtime_compilers_nprocs} shows 
-
-\todo{efficiency maybe?}
 
 
-This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors:
-The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_intel_bench_nprocs_wait.pdf}
+    \caption{CAPTION}
+    \label{fig:scaling_scf_intel_nprocs_tas2_wait}
+\end{figure}
 
-\todo{TaS2 intel scaling?}
+\todo{TaS2 intel scaling}
+
+\todo{why choose intel? seems to work best with the infiniband hardware, huge difference for TaS2}
+
+% So schreiben dass es für beide Systeme gilt! -> section conclusion
+%This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond this apparent optimal range of 6 processors:
+%The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
 
 \section{Using the parallelization parameters of \QE}
 
@@ -260,7 +283,7 @@ Fig. \ref{fig:scaling_scf_nd_tas2} shows a pretty much consistent times across a
 Those results are already hinted at in the \texttt{PWscf} user guide \cite{noauthor_pwscf_nodate}.
 Here, in the guide for choosing parallelization parameters, using linear algebra parallelization is recommended when the number of \acrshort{kohn_sham} states is a few hundred or more.
 The silicon system has 8 electrons and is as such described with 8 \gls{kohn_sham} states, the TaS2 system has 153 electrons, so \QE uses 92 \gls{kohn_sham} states (in case of metallic materials, the band occupation is smeared around the Fermi energy to avoid level crossings, so more \gls{kohn_sham} states than \(\frac{1}{2} * (\textrm{number of electrons})\) are needed to account for that).
-Apparently, this number of \acrshort{kohn_sham} states is on the edge of linear algebra parallelization actually speeding up calculations.
+Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear algebra parallelization actually speeding up calculations.
 
 \section{Comparison with calculations on the HLRN cluster}
 

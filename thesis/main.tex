@@ -13,6 +13,8 @@
 \loadglsentries[main]{glossary.tex}
 
 \newcommand{\QE}{\textsc{Quantum} ESPRESSO }
+\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\TaS}{\chem{TaS_2}}
 
 \usepackage{subfiles}
 
@@ -31,7 +33,7 @@
     \clearpage
     %
     % Einbinden einer kurzen Zusammenfassung
-    \subfile{01_abstract.tex}
+    \subfile{abstract.tex}
     %
     % Erstellen des Inhaltsverzeichnisses ohne Hyperlinkboxen
     {\hypersetup{hidelinks}\tableofcontents}%
@@ -44,7 +46,7 @@
     %
     %
     % Laden der Motivation
-    \subfile{03_motivation.tex}
+    \subfile{motivation.tex}
 
     %\section*{Conventions}
     %Throughout the text of this thesis scalars are written in italic $s$, vectors in bold italic $\vec v$ and matrices in bold $\textbf M$ fonts. The summation/multiplication over nearest neighbour sites $i$ and $j$ is $\left\langle ij \right\rangle$ as a subscript to $\sum$/$\prod$. Furthermore, Hartree atomic units are used in general and only in selected instances it is deviated from this: $\hbar = m_\mathrm{e} = \mathrm e = \nicefrac{4\pi}{\varepsilon_0} = 1$. 
@@ -80,7 +82,7 @@
     % Laden einer Danksagung
     \chapter*{Acknowledgement}
     \addcontentsline{toc}{chapter}{Acknowledgement}
-    \subfile{02_acknowledgement.tex}
+    \subfile{acknowledgement.tex}
     %
     % Eine Selbstständigkeitserklärung
     \includepdf{eidesstattlicheerklaerung.pdf}

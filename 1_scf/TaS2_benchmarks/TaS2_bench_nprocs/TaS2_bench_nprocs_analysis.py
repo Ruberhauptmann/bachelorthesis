@@ -14,9 +14,13 @@ if __name__ == "__main__":
     cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=True)[0:2]
 
     walltimes_singlecore = walltimes_singlecore * 4
+    print(walltimes_singlecore)
     walltime_singlecore = np.mean(walltimes_singlecore)
+    print(walltime_singlecore)
+    print(walltimes)
 
     speedup = walltime_singlecore / walltimes
+    print(speedup)
 
     nprocs_plots.plot(speedup, n_procs, "TaS2_ompi", "speedup")
 
