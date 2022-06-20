@@ -1,7 +1,15 @@
 Module for intel-oneAPI 2021.4 loaded.
  
 :: initializing oneAPI environment ...
+<<<<<<< HEAD
    2990255: BASH_VERSION = 4.4.20(1)-release
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+   2990250: BASH_VERSION = 4.4.20(1)-release
+=======
+   2990255: BASH_VERSION = 4.4.20(1)-release
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 :: advisor -- latest
 :: ccl -- latest
 :: clck -- latest
@@ -30,7 +38,15 @@ Module for intel-oneAPI 2021.4 loaded.
 :: oneAPI environment initialized ::
  
 
+<<<<<<< HEAD
      Program PWSCF v.7.0 starts on 20Jun2022 at  8:21:42 
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     Program PWSCF v.7.0 starts on 20Jun2022 at  8:16: 4 
+=======
+     Program PWSCF v.7.0 starts on 20Jun2022 at  8:21:42 
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -46,9 +62,21 @@ Module for intel-oneAPI 2021.4 loaded.
      MPI processes distributed on     9 nodes
      K-points division:     npool     =       5
      R & G space division:  proc/nbgrp/npool/nimage =      36
+<<<<<<< HEAD
      13354 MiB available memory on the printing compute node when the environment starts
  
      Reading input from in_files/TaS2_bench_nd_25_n_procs_180_0.scf
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     13910 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from in_files/TaS2_bench_nd_16_n_procs_180_0.scf
+=======
+     13354 MiB available memory on the printing compute node when the environment starts
+ 
+     Reading input from in_files/TaS2_bench_nd_25_n_procs_180_0.scf
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      Current dimensions of program PWSCF are:
      Max number of different atomic species (ntypx) = 10
@@ -197,7 +225,15 @@ Module for intel-oneAPI 2021.4 loaded.
      negative rho (up, down):  4.640E-05 0.000E+00
      Starting wfcs are  243 randomized atomic wfcs
 
+<<<<<<< HEAD
      total cpu time spent up to now is        8.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       22.9 secs
+=======
+     total cpu time spent up to now is        8.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      Self-consistent Calculation
 
@@ -205,7 +241,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-02,  avg # of iterations =  2.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is       16.5 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       30.3 secs
+=======
+     total cpu time spent up to now is       16.5 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -454.41992341 Ry
      estimated scf accuracy    <       8.87375473 Ry
@@ -214,7 +258,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.80E-03,  avg # of iterations =  6.2
 
+<<<<<<< HEAD
      total cpu time spent up to now is       29.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       43.6 secs
+=======
+     total cpu time spent up to now is       29.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -452.00827737 Ry
      estimated scf accuracy    <      61.21177438 Ry
@@ -223,7 +275,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.80E-03,  avg # of iterations =  3.9
 
+<<<<<<< HEAD
      total cpu time spent up to now is       39.6 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       53.2 secs
+=======
+     total cpu time spent up to now is       39.6 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.18457851 Ry
      estimated scf accuracy    <       0.92169841 Ry
@@ -232,7 +292,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.02E-04,  avg # of iterations =  6.5
 
+<<<<<<< HEAD
      total cpu time spent up to now is       52.1 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       65.5 secs
+=======
+     total cpu time spent up to now is       52.1 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.68243989 Ry
      estimated scf accuracy    <       1.08357711 Ry
@@ -241,7 +309,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.02E-04,  avg # of iterations =  2.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is       58.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       72.2 secs
+=======
+     total cpu time spent up to now is       58.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.75086894 Ry
      estimated scf accuracy    <       0.23240892 Ry
@@ -250,7 +326,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.52E-04,  avg # of iterations =  6.1
 
+<<<<<<< HEAD
      total cpu time spent up to now is       67.2 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       80.4 secs
+=======
+     total cpu time spent up to now is       67.2 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.76858798 Ry
      estimated scf accuracy    <       0.13469774 Ry
@@ -259,7 +343,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  8.80E-05,  avg # of iterations =  2.3
 
+<<<<<<< HEAD
      total cpu time spent up to now is       73.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       87.1 secs
+=======
+     total cpu time spent up to now is       73.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.77505682 Ry
      estimated scf accuracy    <       0.05459321 Ry
@@ -269,7 +361,15 @@ Module for intel-oneAPI 2021.4 loaded.
      c_bands:  3 eigenvalues not converged
      ethr =  3.57E-05,  avg # of iterations =  9.6
 
+<<<<<<< HEAD
      total cpu time spent up to now is       84.1 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is       97.3 secs
+=======
+     total cpu time spent up to now is       84.1 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78189792 Ry
      estimated scf accuracy    <       0.00747994 Ry
@@ -283,7 +383,15 @@ Module for intel-oneAPI 2021.4 loaded.
 
      negative rho (up, down):  3.567E-08 0.000E+00
 
+<<<<<<< HEAD
      total cpu time spent up to now is      108.3 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      121.2 secs
+=======
+     total cpu time spent up to now is      108.3 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78601726 Ry
      estimated scf accuracy    <       0.00416208 Ry
@@ -295,7 +403,15 @@ Module for intel-oneAPI 2021.4 loaded.
      c_bands:  2 eigenvalues not converged
      ethr =  2.72E-06,  avg # of iterations = 14.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is      119.4 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      132.2 secs
+=======
+     total cpu time spent up to now is      119.4 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78622655 Ry
      estimated scf accuracy    <       0.00064191 Ry
@@ -305,7 +421,15 @@ Module for intel-oneAPI 2021.4 loaded.
      c_bands:  2 eigenvalues not converged
      ethr =  4.20E-07,  avg # of iterations =  8.1
 
+<<<<<<< HEAD
      total cpu time spent up to now is      131.4 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      143.9 secs
+=======
+     total cpu time spent up to now is      131.4 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78647707 Ry
      estimated scf accuracy    <       0.00006056 Ry
@@ -314,7 +438,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  3.96E-08,  avg # of iterations =  8.2
 
+<<<<<<< HEAD
      total cpu time spent up to now is      148.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      156.7 secs
+=======
+     total cpu time spent up to now is      148.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78645451 Ry
      estimated scf accuracy    <       0.00019618 Ry
@@ -323,7 +455,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  3.96E-08,  avg # of iterations =  3.8
 
+<<<<<<< HEAD
      total cpu time spent up to now is      157.8 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      165.4 secs
+=======
+     total cpu time spent up to now is      157.8 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78647652 Ry
      estimated scf accuracy    <       0.00000736 Ry
@@ -332,7 +472,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  4.81E-09,  avg # of iterations =  6.3
 
+<<<<<<< HEAD
      total cpu time spent up to now is      170.7 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      178.3 secs
+=======
+     total cpu time spent up to now is      170.7 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648168 Ry
      estimated scf accuracy    <       0.00000778 Ry
@@ -341,7 +489,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  4.81E-09,  avg # of iterations =  1.5
 
+<<<<<<< HEAD
      total cpu time spent up to now is      177.1 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      184.6 secs
+=======
+     total cpu time spent up to now is      177.1 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648163 Ry
      estimated scf accuracy    <       0.00000285 Ry
@@ -350,7 +506,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.86E-09,  avg # of iterations =  2.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is      183.7 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      191.2 secs
+=======
+     total cpu time spent up to now is      183.7 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648162 Ry
      estimated scf accuracy    <       0.00000089 Ry
@@ -359,7 +523,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  5.85E-10,  avg # of iterations =  5.8
 
+<<<<<<< HEAD
      total cpu time spent up to now is      193.4 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      200.8 secs
+=======
+     total cpu time spent up to now is      193.4 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648185 Ry
      estimated scf accuracy    <       0.00000010 Ry
@@ -368,7 +540,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.28E-11,  avg # of iterations =  7.1
 
+<<<<<<< HEAD
      total cpu time spent up to now is      206.0 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      213.2 secs
+=======
+     total cpu time spent up to now is      206.0 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648192 Ry
      estimated scf accuracy    <       0.00000014 Ry
@@ -377,7 +557,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.28E-11,  avg # of iterations =  1.7
 
+<<<<<<< HEAD
      total cpu time spent up to now is      212.7 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      219.9 secs
+=======
+     total cpu time spent up to now is      212.7 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648189 Ry
      estimated scf accuracy    <       0.00000010 Ry
@@ -386,7 +574,15 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  6.28E-11,  avg # of iterations =  2.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is      219.4 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      226.5 secs
+=======
+     total cpu time spent up to now is      219.4 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <       0.00000001 Ry
@@ -395,25 +591,57 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  7.85E-12,  avg # of iterations =  6.5
 
+<<<<<<< HEAD
      total cpu time spent up to now is      230.2 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      237.2 secs
+=======
+     total cpu time spent up to now is      230.2 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.0E-09 Ry
 
      iteration # 22     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
+<<<<<<< HEAD
      ethr =  6.56E-13,  avg # of iterations =  6.4
 
      total cpu time spent up to now is      242.7 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     ethr =  6.56E-13,  avg # of iterations =  6.5
+
+     total cpu time spent up to now is      249.6 secs
+=======
+     ethr =  6.56E-13,  avg # of iterations =  6.4
+
+     total cpu time spent up to now is      242.7 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          4.9E-10 Ry
 
      iteration # 23     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
+<<<<<<< HEAD
      ethr =  3.20E-13,  avg # of iterations =  2.7
 
      total cpu time spent up to now is      249.6 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     ethr =  3.23E-13,  avg # of iterations =  2.7
+
+     total cpu time spent up to now is      256.4 secs
+=======
+     ethr =  3.20E-13,  avg # of iterations =  2.7
+
+     total cpu time spent up to now is      249.6 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.1E-10 Ry
@@ -422,25 +650,59 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  5.5
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      265.5 secs
+
+     total energy              =    -459.78648190 Ry
+     estimated scf accuracy    <          2.8E-12 Ry
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      total cpu time spent up to now is      258.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          2.6E-12 Ry
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      iteration # 25     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      271.5 secs
+
+     total energy              =    -459.78648190 Ry
+     estimated scf accuracy    <          5.0E-12 Ry
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      total cpu time spent up to now is      264.8 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          4.9E-12 Ry
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      iteration # 26     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is      270.8 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      277.5 secs
+=======
+     total cpu time spent up to now is      270.8 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.7E-12 Ry
@@ -449,34 +711,81 @@ Module for intel-oneAPI 2021.4 loaded.
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      283.5 secs
+
+     total energy              =    -459.78648190 Ry
+     estimated scf accuracy    <          5.3E-14 Ry
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      total cpu time spent up to now is      276.9 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          6.3E-14 Ry
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      iteration # 28     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      289.5 secs
+
+     total energy              =    -459.78648190 Ry
+     estimated scf accuracy    <          1.3E-14 Ry
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      total cpu time spent up to now is      282.9 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.1E-14 Ry
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      iteration # 29     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      295.4 secs
+
+     total energy              =    -459.78648190 Ry
+     estimated scf accuracy    <          1.7E-14 Ry
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      total cpu time spent up to now is      288.9 secs
 
      total energy              =    -459.78648190 Ry
      estimated scf accuracy    <          1.6E-14 Ry
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      iteration # 30     ecut=   100.00 Ry     beta= 0.70
      Davidson diagonalization with overlap
      ethr =  1.00E-13,  avg # of iterations =  1.0
 
+<<<<<<< HEAD
      total cpu time spent up to now is      294.9 secs
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     total cpu time spent up to now is      301.4 secs
+=======
+     total cpu time spent up to now is      294.9 secs
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
      End of self-consistent calculation
 
@@ -768,18 +1077,86 @@ Module for intel-oneAPI 2021.4 loaded.
      the Fermi energy is    -0.5551 ev
 
 !    total energy              =    -459.78648190 Ry
+<<<<<<< HEAD
      estimated scf accuracy    <          7.4E-16 Ry
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     estimated scf accuracy    <          7.7E-16 Ry
+=======
+     estimated scf accuracy    <          7.4E-16 Ry
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      smearing contrib. (-TS)   =      -0.01757274 Ry
      internal energy E=F+TS    =    -459.76890916 Ry
 
      The total energy is F=E-TS. E is the sum of the following terms:
+<<<<<<< HEAD
      one-electron contribution =   -1841.35425315 Ry
      hartree contribution      =     959.20608302 Ry
      xc contribution           =    -108.38158674 Ry
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     one-electron contribution =   -1841.35425323 Ry
+     hartree contribution      =     959.20608310 Ry
+     xc contribution           =    -108.38158673 Ry
+=======
+     one-electron contribution =   -1841.35425315 Ry
+     hartree contribution      =     959.20608302 Ry
+     xc contribution           =    -108.38158674 Ry
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      ewald contribution        =     530.76084771 Ry
 
      convergence has been achieved in  30 iterations
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+     Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_bench_nd_16_n_procs_180_0.save/
+ 
+     init_run     :      6.99s CPU      7.21s WALL (       1 calls)
+     electrons    :    277.63s CPU    279.46s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      5.80s CPU      5.96s WALL (       1 calls)
+     potinit      :      0.43s CPU      0.44s WALL (       1 calls)
+     hinit0       :      0.34s CPU      0.37s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :    245.88s CPU    246.68s WALL (      30 calls)
+     sum_band     :     27.65s CPU     27.78s WALL (      30 calls)
+     v_of_rho     :      2.63s CPU      2.63s WALL (      31 calls)
+     mix_rho      :      0.74s CPU      0.77s WALL (      30 calls)
+
+     Called by c_bands:
+     init_us_2    :      2.14s CPU      2.17s WALL (     244 calls)
+     init_us_2:cp :      2.14s CPU      2.16s WALL (     244 calls)
+     cegterg      :    214.60s CPU    215.36s WALL (     120 calls)
+
+     Called by *egterg:
+     cdiaghg      :     12.02s CPU     12.04s WALL (     712 calls)
+     h_psi        :    156.75s CPU    157.46s WALL (     716 calls)
+     g_psi        :      0.67s CPU      0.67s WALL (     592 calls)
+
+     Called by h_psi:
+     h_psi:calbec :     16.49s CPU     16.57s WALL (     716 calls)
+     vloc_psi     :    121.52s CPU    122.09s WALL (     716 calls)
+     add_vuspsi   :     17.32s CPU     17.36s WALL (     716 calls)
+
+     General routines
+     calbec       :     16.49s CPU     16.56s WALL (     716 calls)
+     fft          :      2.04s CPU      2.07s WALL (     309 calls)
+     ffts         :      0.16s CPU      0.16s WALL (      30 calls)
+     fftw         :    124.71s CPU    125.28s WALL (   73612 calls)
+ 
+     Parallel routines
+ 
+     PWSCF        :   5m 0.95s CPU   5m23.96s WALL
+
+ 
+   This run was terminated on:   8:21:27  20Jun2022            
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
      Writing all to output data dir /fastscratch/tsievers/QE_TMP_DIR/TaS2_bench_nd_25_n_procs_180_0.save/
  
      init_run     :      7.38s CPU      7.58s WALL (       1 calls)
@@ -823,10 +1200,26 @@ Module for intel-oneAPI 2021.4 loaded.
 
  
    This run was terminated on:   8:27:49  20Jun2022            
+<<<<<<< HEAD
+=======
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910
 
 =------------------------------------------------------------------------------=
    JOB DONE.
 =------------------------------------------------------------------------------=
+<<<<<<< HEAD
 real 370.76
 user 7098.90
 sys 28.75
+=======
+<<<<<<< HEAD:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_16/TaS2_bench_nd_16_n_procs_180_0.o2990250
+real 329.67
+user 6401.01
+sys 26.33
+=======
+real 370.76
+user 7098.90
+sys 28.75
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910:1_scf/TaS2_benchmarks/TaS2_bench_la_parallel_intel/out_files/0/nd_25/TaS2_bench_nd_25_n_procs_180_0.o2990255
+>>>>>>> 19ef647dbbf16d59dd83a5bcbc65f400ae196910

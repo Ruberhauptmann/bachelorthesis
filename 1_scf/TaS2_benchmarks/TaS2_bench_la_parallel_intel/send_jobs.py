@@ -28,16 +28,16 @@ def main():
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nd.sh.jinja')
 
-    poolsize = 18
+    poolsize = 36
 
     for run in range(1):
-        for nd in [4, 9, 16]:
+        for nd in [4, 9, 16, 25, 36]:
             log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
             for file in glob.glob(log_path + '/*'):
                 os.remove(file)
 
-            for n_procs in range(36, max_number_procs + 1, 18):
+            for n_procs in range(36, max_number_procs + 1, 36):
                 if poolsize >= nd and n_procs % poolsize == 0.:
                     job_name = 'TaS2_bench_nd_' + str(nd) + '_n_procs_' + str(n_procs) + '_' + str(run)
                     prefix = '\'' + job_name +  '\''
@@ -53,7 +53,7 @@ def main():
                     with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                         fh.write(job_file)
 
-                    #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+                    subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nd_auto.sh.jinja')
@@ -64,7 +64,7 @@ def main():
         os.remove(file)
 
     for run in range(1):
-        for n_procs in range(36, max_number_procs + 1, 18):
+        for n_procs in range(36, max_number_procs + 1, 36):
             job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 

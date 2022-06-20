@@ -15,4 +15,4 @@ QEPREFIX=/fastscratch/tsievers/qe-7.0-intel-compiler
 
 module load intel/oneAPI-2021.4
 
-/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 4 -nd 9 -i in_files/TaS2_bench_nd_9_n_procs_72_0.scf
+/usr/bin/time --format=%e -p mpirun $QEPREFIX/bin/pw.x -nk 2 -nd 9 -i in_files/TaS2_bench_nd_9_n_procs_72_0.scf
