@@ -19,9 +19,9 @@ if __name__ == "__main__":
     input_template = env.get_template('input.scf.jinja')
     job_template = env.get_template('TaS2_cdw_bench_nk_singlecore.sh.jinja')
 
-    n_procs = 1
+    n_procs = 4
 
-    for run in range(9):
+    for run in range(10):
         job_name = 'TaS2_bench_intel_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 
