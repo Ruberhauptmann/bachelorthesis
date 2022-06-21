@@ -106,7 +106,7 @@ In order to make the installation as easy as possible, \QE comes with a publicly
 Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations significantly improves performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
 
 On the PHYSnet cluster, a variety of software packages are available as modules.
-The benchmark in this thesis were made using the following modules:
+The benchmark in this thesis were made using the following module combinations:
 \begin{itemize}
     \item \texttt{openmpi/4.1.1.gcc10.2-infiniband}: \gls{openmpi} 4.1.0 (implies usage of \QE provided \gls{blas}/\gls{lapack})
     \item \texttt{openmpi/4.1.1.gcc10.2-infiniband openblas/0.3.20}: \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
@@ -135,7 +135,9 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
 \subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
 
 \QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
-This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE.
+This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
+
+\todo{no scf loop here, just reference the section}
 
 Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
 This opens a few possibilities for parallelization of calculations: first of all, the orbitals in the plane wave basis set as well as charges and densities can be distributed among processors.

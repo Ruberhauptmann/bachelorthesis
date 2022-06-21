@@ -78,7 +78,7 @@ In conclusion, systems with more electrons and by extension bigger matrices and 
 
 These scaling tests poses now the question how better scaling over more than one node can be achieved.
 
-\section{Testing different compilers and mathematical libraries}
+\section{Testing different compilers and mathematical libraries}\label{sec:scf_scaling_compilers}
 
 A first strategy for solving issues with parallelization is trying different compilers and mathematical libraries.
 As discussed in sec. \ref{sub:qe_compilation}, \QE can make use of a variety of software packages available on the PHYSnet cluster.
@@ -189,8 +189,8 @@ In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization
 The benchmark pictured in \ref{fig:scaling_scf_nk_si} is set up as follows: for a given number of processors \(N_p\), the parameter \(N_k\) splits the \(N_p\) processors into \(N_k\) processors pools.
 As the number of processors in one pool has to be a whole number, only certain combinations of \(N_p\) and \(N_k\) are possible, for example \(N_p = 32\) could be split into processor pools of size 2 with \(N_k = 16\), size 8 with \(N_k = 4\) or size 16 with \(N_k = 2\).
 This leads to choosing the size of the processor pools as a variable, not the parameter \texttt{nk}.
+
 Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE being compiled with OpenMPI/Scalapack and Intel oneAPI.
-This choice of pool sizes showcases the smallest pool size possibly (namely 2), as well as a bigger pool size with 16, that still gives rise to a few data points over the chosen range of processors.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
@@ -230,8 +230,7 @@ Fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool 
 
 \todo{analyse absolute runtimes}
 
-The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_scf_nk_tas2}, with a similar list of pool sizes, but over a wider range of processors.
-
+The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_scf_nk_tas2}.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
@@ -239,11 +238,11 @@ The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_scf
     \label{fig:scaling_scf_nk_tas2}
 \end{figure}
 
-Remarkably, the scaling behavior is swapped in comparison to \ref{fig:scaling_scf_nk_si}, as the pool size 2 saturates fast and the bigger pool sizes show way better scaling behavior.
-Furthermore, there are instances of better than linear scaling, which according to \QE docs can be attributed to better caching of data.
+Remarkably, the scaling behavior is swapped in comparison to fig. \ref{fig:scaling_scf_nk_si}, as the pool size 2 saturates and the bigger pool sizes show way better scaling behavior.
+As already alluded to in sec. \ref{sec:scf_scaling_compilers}, the calculations on the TaS2 system profit more from parallelization and as such scale better for bigger pool sizes up until 36 processors in one pool, which is the upper limit established in the benchmark just over the number of processors.
+
 
 It can also be instructive to look at the idle time for this benchmark to judge the quality of parallelization. 
-
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
@@ -257,6 +256,8 @@ Fig. \ref{fig:scaling_scf_nk_tas2_wait} shows a distribution of idle times betwe
 
 \subsection{Linear algebra parallelization}
 
+Fig. \ref{fig:scaling_scf_nd_si} shows the scaling behavior for different values of the parameter \texttt{nd}.
+Here, nd\_auto means that no value for \texttt{nd} is specified so \QE automatically chooses the biggest square number smaller than the number of processors.
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
@@ -269,9 +270,6 @@ Fig. \ref{fig:scaling_scf_nk_tas2_wait} shows a distribution of idle times betwe
 \label{fig:scaling_scf_nd_si}
 \caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
 \end{figure}
-
-Fig. \ref{fig:scaling_scf_nd_si} shows the scaling behavior for different values of the parameter \texttt{nd}.
-Here, nd\_auto means that no value for \texttt{nd} is specified so \QE automatically chooses the biggest square number smaller than the number of processors.
 It is clearly shown that using linear algebra parallelization slows the calculation down significantly for the silicon system.
 
 \begin{figure}[ht!]
@@ -292,7 +290,7 @@ Fig. \ref{fig:scaling_scf_nd_tas2} shows a pretty much consistent times across a
 
 Those results are already hinted at in the \texttt{PWscf} user guide \cite{noauthor_pwscf_nodate}.
 Here, in the guide for choosing parallelization parameters, using linear algebra parallelization is recommended when the number of \acrshort{kohn_sham} states is a few hundred or more.
-The silicon system has 8 electrons and is as such described with 8 \gls{kohn_sham} states, the TaS2 system has 153 electrons, so \QE uses 92 \gls{kohn_sham} states (in case of metallic materials, the band occupation is smeared around the Fermi energy to avoid level crossings, so more \gls{kohn_sham} states than \(\frac{1}{2} * (\textrm{number of electrons})\) are needed to account for that).
+The silicon system has 8 electrons and is as such described with 4 \gls{kohn_sham} states, the TaS2 system has 153 electrons, so \QE uses 92 \gls{kohn_sham} states (in case of metallic materials, the band occupation is smeared around the Fermi energy to avoid level crossings, so more \gls{kohn_sham} states than \(\frac{1}{2} * (\textrm{number of electrons})\) are needed to account for that).
 Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear algebra parallelization actually speeding up calculations.
 
 \section{Comparison with calculations on the HLRN cluster}
