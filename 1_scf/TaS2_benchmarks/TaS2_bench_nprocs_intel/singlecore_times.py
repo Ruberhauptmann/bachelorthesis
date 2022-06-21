@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     n_procs = 4
 
-    for run in range(1, 5):
+    for run in range(5):
         job_name = 'TaS2_bench_intel_singlecore_' + str(run)
         prefix = '\'' + job_name +  '\''
 
