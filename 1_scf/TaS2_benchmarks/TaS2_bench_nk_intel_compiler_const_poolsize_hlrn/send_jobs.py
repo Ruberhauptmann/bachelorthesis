@@ -33,7 +33,7 @@ def main():
     jobs = []
     out_directories = []
 
-    for run in [3]:
+    for run in [4]:
         out_directory = "out_files_TaS2/" + str(run) + "/singlecore"
         out_directories.append(out_directory)
         job = "mpirun -np 4 pw.x -nk 1 < TaS2_cdw.scf > " + out_directory + "/TaS2_bench_singlecore_" + str(run) + ".log"
