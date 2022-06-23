@@ -3,9 +3,14 @@
 \begin{document}
 \chapter{Parallelization of DFPT calculations}
 
+Calculations with the \texttt{PHonon} package are significantly more time intensive than \texttt{PWscf} calculations, so good parallelization is of the essence to make these calculations manageable.
+
 \section{Optimal parallelization parameters for DFPT calculations}
+The \texttt{PHonon} package offers the same three parallelization levels as the \texttt{PWscf} package, namely plane wave, k point and linear algebra parallelization.
 
 \subsection{k point parallelization}
+
+
 
 \begin{figure}[ht!]
     \centering

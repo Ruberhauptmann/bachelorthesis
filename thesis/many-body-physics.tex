@@ -6,35 +6,36 @@
 
 %\section{The electronic structure problem\label{sec:theory_schrödinger}}
 
-In solid state physics, the Hamiltonian describing the interacting nuclei and electrons in the solid is well known, as all interactions except Coulomb interaction can safely be ignored at the mass and energy scales at which the electrons and nuclei reside.
-This still very general problem consisting of both the electronic and nuclei degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation.
-The approximation assumes the nuclei to be fixed point charges which create a potential for the \(N\) interacting electrons, so that the electronic part can be solved independently using the nuclei positions \(\vb{R}_{\alpha}\) as a parameter.
-
-The problem is then described by the time-independent Schrödinger equation
-\begin{equation}\label{}
-    \ope{H} \Psi (\vb{r}_1, \ldots, \vb{r}_N) = E \Psi (\vb{r}_1, \ldots, \vb{r}_N)
-\end{equation}
-with the Hamiltonian in first quantization (\(i\) running over the electrons, \(\alpha, \beta\) over the nuclei)
+The description of matter from theoretical methods starts from the Hamiltonian of an interacting system of electrons and nuclei (with electrons coordinates \(\vb{r}_i\) and nuclei coordinates \(\vb{R}_{\alpha}\))
 \begin{align}
-    \ope{H} &= \ope{T}_e + \ope{U}_{e-e} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
+    \ope{H} &= \ope{T}_e + \ope{U}_{e-e} + \ope{T}_{n} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
+    &= - \sum_i \frac{1}{2} \nabla^2_i 
+    + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} 
+    - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha}
+    - \sum_{i, \alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i - \vb{R}_{\alpha} \vert} 
+    + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{\vert \vb{R}_{\alpha} - \vb{R}_{\beta} \vert}
+\end{align}
+where
+\begin{itemize}
+    \item \(\ope{T}_e\,, \ope{T}_n\) are the kinetic energies of the electrons and nuclei respectively
+    \item \(\ope{U}_{e-e}\) is the Coulomb interaction between the electrons and the nuclei
+    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
+    \item \(\ope{W}_{n-n}\) is the Coulomb interaction between the nuclei.
+\end{itemize}
+This very general problem consisting of both the electronic and nuclei degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation \cite{born_zur_1927}.
+The approximation assumes the nuclei to be fixed point charges which create a potential for the \(N\) interacting electrons, so that the electronic part can be solved independently using the nuclei positions \(\vb{R}\) as a parameter
+\begin{align}
+    \ope{H}_{BO} &= \ope{T}_e + \ope{U}_{e-e} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
     &= -\sum_i \frac{1}{2} \nabla^2_i 
     + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} 
     - \sum_i \sum_{\alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i 
     - \vb{R}_{\alpha} \vert} 
-    + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{R_{\alpha \beta}} 
+    + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{\vert \vb{R}_{\alpha} - \vb{R}_{\beta} \vert}\,. \label{eq:bo_hamiltonian}
 \end{align}
-where:
-\begin{itemize}
-    \item \(\ope{T}_e\) is the kinetic energy of the electrons
-    \item \(\ope{U}_{e-e}\) is the Coulomb interaction between the electrons and
-    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
-    \item \(\ope{W}_{n-n}\) is the Coulomb interaction between the nuclei
-\end{itemize}
-The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) can then be combined into an external potential \(V\) for the interacting electrons, so that the Hamiltonian reads
+The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) here are just a function of the electronic coordinates \(\vb{r}\) and a constant respectively, so they can then be combined into an external potential \(\ope{V} (\vb{r})\) for the interacting electrons, so that the Hamiltonian reads
 \begin{equation}\label{eq:solid_state_hamiltonian}
-    \ope{H} = \ope{T} + \ope{U} + \ope{V}
+    \ope{H} = \ope{T} + \ope{U} + \ope{V}\,.
 \end{equation}
-This Hamiltonian will be used in the further development of the underlying theory for this thesis.
 
 \section{Density Functional Theory\label{sec:theory_dft}}
 
@@ -185,7 +186,91 @@ With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transfo
 
 tt
 
+\clearpage
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
+
+In the framework of \acrshort{dft} a treatment of lattice vibrations can also be derived.
+\todo{Maybe a bit more introduction?}
+This theory will be outlined in this section, following the review article by Baroni et. al. \cite{baroni_phonons_2001}.
+
+\subsection{Sternheimer equation and Hellman-Feynman theorem}
+
+In a first step, two results  namely the Sternheimer equation to describing corrections to a wave function  and the Hellman-Feynman theorem 
+\todo{missing}
+
+The idea of perturbation theory is to treat a quantum system as an easily solvable system \(\ope{H}_0\) experiencing a small perturbation \(\ope{H}_1\).
+The Hamiltonian for the perturbed system is then
+\begin{equation}
+    \ope{H} = \ope{H}_0 + \lambda \ope{H}_1
+\end{equation}
+with eigenstates und eigenvalues
+\begin{equation}\label{eq:dfpt_perturbation_schrödinger}
+    \ope{H} \ket{n} = \epsilon_n \ket{n}\,.
+\end{equation}
+These eigenstates and eigenvalues can now be expanded in terms of the parameter \(\lambda\),
+\begin{align}
+    \ket{n} &= \ket{n^{0}} + \lambda \ket{n^{1}} + \lambda^2 \ket{n^{2}} + \ldots\,, \\
+    \epsilon_n &= \epsilon_n^{(0)} + \lambda \epsilon_n^{(1)} + \lambda^2 \epsilon_n^{(2)} + \ldots\,.
+\end{align}
+Inserting these expansion into eq. \ref{eq:dfpt_perturbation_schrödinger} and sorting by order of \(\lambda^n\) gives then
+\begin{align}
+    \text{0\textsuperscript{th} order: }\; &H_0 \ket{n^{0}} = \epsilon_n^{(0)} \ket{n^{0}} \\ 
+    \text{1\textsuperscript{st} order: }\; &H_0 \ket{n^{1}} + H_1 \ket{n^{0}} = \epsilon_n^{(1)} \ket{n^{0}} + \epsilon_n^{(0)} \ket{n^{1}} \label{eq:dfpt_perturbation_first_order} \\
+    \text{2\textsuperscript{nd} order: }\; &H_0 \ket{n^{2}} + H_1 \ket{n^{1}} = \epsilon_n^{(0)} \ket{n^{2}} + \epsilon_n^{(1)} \ket{n^{1}} + \epsilon_n^{(2)} \ket{n^{0}} \\
+    &\hspace{3cm} \vdots \nonumber
+\end{align}
+Multiplying eq. \ref{eq:dfpt_perturbation_first_order} with \(\bra{n^{0}}\) from the left leads then to the first order energy correction via
+\begin{align}
+    \bra{n^{0}} H_0 \ket{n^{1}} + \bra{n^{0}} H_1 \ket{n^{0}} &= \epsilon_n^{(1)} \bra{n^{0}} \ket{n^{0}} + \epsilon_n^{(0)} \bra{n^{0}} \ket{n^{1}} \\
+    \implies \epsilon_n^{(1)} &= \bra{n^{0}} H_1 \ket{n^{0}}\,.
+\end{align}
+The first order correction to the eigenstates, also known as the \emph{Sternheimer equation} can be calculated by rearranging eq. \ref{eq:dfpt_perturbation_first_order}
+\begin{equation}\label{eq:dfpt_sternheimer}
+    (H_0 - \epsilon_n^{(0)}) \ket{n^1} = -(H_1 - \epsilon_n^{(1)}) \ket{n^0}\,.
+\end{equation}
+
+The Hellman-Feynman theorem \cite{feynman_forces_1939} links the derivative of the eigenvalue of a Hamiltonian \(\ope{H}_{\lambda}\) depending on a continuos parameter \(\lambda\) with the derivative of the Hamiltonian with respect to that same parameter.
+Starting from the Schrödinger equation
+\begin{equation}
+    \ope{H}_{\lambda} \ket{\psi_{\lambda}} = E_{\lambda} \ket{\psi_{\lambda}}
+\end{equation}
+the derivative of \(E_{\lambda}\) with respect to \(\lambda\) can be calculated using the product rule
+\begin{align}
+    \pdv{E_{\lambda}}{\lambda} &= \pdv{\lambda} \bra{\psi_{\lambda}} \ope{H}_{\lambda} \ket{\psi_{\lambda}} \\
+    &= \bra*{\pdv{\psi_{\lambda}}{\lambda}} \ope{H}_{\lambda} \ket{\psi_{\lambda}} + \bra{\psi_{\lambda}} \ope{H}_{\lambda} \ket*{\pdv{\psi_{\lambda}}{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}\,.
+\end{align}
+\(\ope{H}_{\lambda}\) can now act on the states \(\ket{\psi_{\lambda}}\) to the right or to the left in the first two terms
+\begin{align}
+    &= E_{\lambda} \bra*{\pdv{\psi_{\lambda}}{\lambda}} \ket{\psi_{\lambda}} + E_{\lambda} \bra{\psi_{\lambda}} \ket*{\pdv{\psi_{\lambda}}{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}} \\
+    &= E_{\lambda} \pdv{\lambda} \braket{\psi_{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}} \\
+    &= E_{\lambda} \pdv{\lambda} 1 + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}\,.
+\end{align}
+With that the \emph{Hellman-Feynman theorem} follows:
+\begin{equation}\label{eq:dfpt_hellman_feynman}
+    \pdv{E_{\lambda}}{\lambda} = \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}
+\end{equation}
+
+\subsection{Lattice vibrations from electronic structure}
+
+As discussed in the beginning of this chapter, nucleic and electronic degrees of freedom can be decoupled in the Born-Oppenheimer approximation.
+The lattice dynamics are determined by
+\begin{equation}
+    \left( - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha} + E(\vb{R}) \right) \Phi (\vb{R}) = \mathcal{E} \Phi (\vb{R})\,,
+\end{equation}
+where \(\vb{R}\) is the set of all nuclear coordinates \(\vb{R}_{\alpha}\) and \(E(\vb{R})\) is the ground-state energy of the electronic Hamiltonian \ref{eq:bo_hamiltonian}, which depends parametrically on \(\vb{R}\).
+The system is then in equilibrium, when the forces acting on the nuclei vanish
+\begin{equation}
+    \vb{F}_{\alpha} = - \pdv{E(\vb{R})}{\vb{R}_{\alpha}} = 0\,.
+\end{equation}
+The vibrational frequencies \(\omega\) are determined by
+\begin{equation}
+    \det \left\vert \frac{1}{\sqrt{M_{\alpha} M_{\beta}}} \pdv{E(\vb{R})}{\vb{R}_{\alpha}}{\vb{R}_{\beta}} - \omega^2 \right\vert = 0\,,
+\end{equation}
+so the calculation of the vibrational properties as well as the equilibrium geometry depend on the first and second derivatives of the energies \(E(\vb{R})\).
+These derivatives can be calculated using the Hellman-Feynman theorem \ref{eq:dfpt_hellman_feynman}.
+
+
+\subsection{Density Functional Perturbation Theory}
 
 \todo{dfpt!!!}
 
