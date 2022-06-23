@@ -33,21 +33,22 @@ def main():
     jobs = []
     out_directories = []
 
-    for run in [4]:
-        out_directory = "out_files_TaS2/" + str(run) + "/singlecore"
-        out_directories.append(out_directory)
-        job = "mpirun -np 4 pw.x -nk 1 < TaS2_cdw.scf > " + out_directory + "/TaS2_bench_singlecore_" + str(run) + ".log"
-        jobs.append(job)
-        for poolsize in [2, 8]:
+    for run in range(5):
+        #out_directory = "out_files_TaS2/" + str(run) + "/singlecore"
+        #out_directories.append(out_directory)
+        #job = "mpirun -np 4 pw.x -nk 1 < TaS2_cdw.scf > " + out_directory + "/TaS2_bench_singlecore_" + str(run) + ".log"
+        #jobs.append(job)
+        for poolsize in [24, 36, 48, 72]:
             out_directory = "out_files_TaS2/" + str(run) + "/" + str(poolsize)
             out_directories.append(out_directory)
-            for n_procs in range(8, 97, 16):
+            for n_procs in range(24, 97, 12):
                 if n_procs % poolsize == 0.:
                     nk = str(int(n_procs / poolsize))
                     job = "mpirun -np " + str(n_procs) + " pw.x -nk " + nk + " -nd 1 < TaS2_cdw.scf > " + str(out_directory) + "/" + "TaS2_bench_poolsize_" + str(poolsize) + "_n_procs_" + str(n_procs) + "_" + str(run) + ".log"
 
                     jobs.append(job)
 
+    """
         for poolsize in [18]:
             out_directory = "out_files_TaS2/" + str(run) + "/" + str(poolsize)
             out_directories.append(out_directory)
@@ -57,6 +58,7 @@ def main():
                     job = "mpirun -np " + str(n_procs) + " pw.x -nk " + nk + " -nd 1 < TaS2_cdw.scf > " + str(out_directory) + "/" + "TaS2_bench_poolsize_" + str(poolsize) + "_n_procs_" + str(n_procs) + "_" + str(run) + ".log"
 
                     jobs.append(job)
+    """
 
     job_file = job_template.render(jobs=jobs)
     submit_file = submit_template.render(directories=out_directories)
