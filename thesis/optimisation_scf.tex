@@ -15,7 +15,7 @@ The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
-\caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Scalability for the Si benchmarking system, \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_si_speedup}
 \end{figure}
 
@@ -28,7 +28,7 @@ The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
-\caption{Baseline scaling test on the Si benchmarking system \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Absolute runtime and wait time for the scalability test on the Si benchmarking system, \emph{\QE compiled with \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_si_absolute_wait}
 \end{figure}
 
@@ -54,7 +54,7 @@ This assumes perfect scaling for 1-4 processors, but the relative scaling is acc
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
-\caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Scalability for the TaS2 benchmarking system, \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_tas2_speedup}
 \end{figure}
 
@@ -67,7 +67,7 @@ This assumes perfect scaling for 1-4 processors, but the relative scaling is acc
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_wait.pdf}
 \end{subfigure}
-\caption{Baseline scaling test on the TaS2 benchmarking system \emph{\QE 7.0, OpenMPI 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Absolute runtime and wait time for the scalability test on the TaS2 benchmarking system, \emph{\QE 7.0, \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_tas2_absolute_wait}
 \end{figure}
 The scaling test on the TaS2 system shows much better scaling.
@@ -105,7 +105,7 @@ The benchmarks in \ref{fig:scaling_scf_compilers_nprocs} are run with the follow
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
+\caption{Scalability for the Si benchmarking system with different combinations of compilers and mathematical libraries, \emph{\texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_compilers_si}
 \end{figure}
 
@@ -124,7 +124,7 @@ It is however important to also look at the total runtime in this context.
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_absolute.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Baseline scaling test Si benchmarking system with different combinations of compilers and mathematical libraries}
+\caption{Comparison of absolute runtimes between \QE compiled with \gls{openmpi} and \gls{oneapi} for the Si benchmarking system, \emph{\texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_compilers_runtime_si}
 \end{figure}
 Fig. \ref{fig:scaling_scf_runtime_compilers_nprocs} shows the absolute runtime for both the \gls{openmpi} and \gls{oneapi} benchmarks.
@@ -133,7 +133,7 @@ To assess this more quantitatively, tab. \ref{tab:runtimes_si_scf_compilers} lis
 Importantly, the runtime for the \gls{oneapi} benchmark is faster for smaller numbers of processors (except 1), but only \SI{15}{\percent} for 2 cores and even smaller differences for more cores, with the \gls{openmpi} calculation being even a little faster for 20 processors.
 
 \begin{table}[ht!]
-    \caption{CAPTION}
+    \caption{Selected absolute runtimes of \QE compiled with \gls{openmpi} and \gls{oneapi} for the Si benchmarking system, \emph{\texttt{nk 1} and \texttt{nd 1}}}
     \label{tab:runtimes_si_scf_compilers}
     \begin{tabular}{@{}lll@{}}
     \toprule
@@ -150,7 +150,7 @@ The same benchmark with the \gls{oneapi} compiled version of \QE is shown in fig
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_intel_bench_nprocs_speedup.pdf}
-    \caption{CAPTION}
+    \caption{Scalability for the TaS2 benchmarking system, \emph{\QE 7.0 compiled with \gls{oneapi} 2021.4, \texttt{nk 1} and \texttt{nd 1}}}
     \label{fig:scaling_scf_intel_nprocs_tas2_speedup}
 \end{figure}
 
@@ -166,7 +166,7 @@ In contrast to the benchmark with just \gls{openmpi} (fig. \ref{fig:scaling_scf_
         \centering
         \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_bench_nprocs_wait.pdf}
     \end{subfigure}
-    \caption{CAPTIOn}
+    \caption{Absolute runtime and wait time for the scalability test on the TaS2 benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk 1} and \texttt{nd 1}}}
     \label{fig:scaling_scf_intel_nprocs_tas2_absolute_wait}
 \end{figure}
 Moreover, the absolute runtime shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_absolute_wait} 
@@ -203,7 +203,7 @@ Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Benchmark with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools}
+\caption{Scalability utilizing k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools. The size is determined by the parameter \texttt{nk} via \emph{size of pools = number of processors / nk}.}
 \label{fig:scaling_scf_nk_si}
 \end{figure}
 
@@ -224,7 +224,7 @@ Fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool 
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_absolute.pdf}
     \subcaption{\gls{oneapi}}
 \end{subfigure}
-\caption{Benchmark with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools}
+\caption{Absolute runtime for the scalability test with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools, \emph{\texttt{nd 1}}}
 \label{fig:scaling_scf_nk_si_absolute}
 \end{figure}
 
@@ -234,7 +234,7 @@ The same scaling test is applied to the TaS2 system in fig. \ref{fig:scaling_scf
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
-    \caption{Benchmark with k-point parallelization for the TaS2 benchmarking system}
+    \caption{Scalability utilizing k-point parallelization for the TaS2 benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2}
 \end{figure}
 
@@ -252,7 +252,7 @@ It can also be instructive to look at the idle time for this benchmark to judge 
         \centering
         \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
     \end{subfigure}
-    \caption{CAPTIOn}
+    \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the TaS2 benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2_absolute_wait}
 \end{figure}
 
@@ -275,7 +275,7 @@ Here, nd\_auto means that no value for \texttt{nd} is specified so \QE automatic
     \includegraphics[width=\textwidth]{plots_scf/si_intel_mkl_bench_absolute.pdf}
 \end{subfigure}
 \label{fig:scaling_scf_nd_si}
-\caption{Benchmark with linear algebra parallelization for the silicon benchmarking system}
+\caption{Scalability and runtime utilizing linear algebra parallelization for the Si benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk 1}}}
 \end{figure}
 It is clearly shown that using linear algebra parallelization slows the calculation down significantly for the silicon system.
 
@@ -289,7 +289,7 @@ It is clearly shown that using linear algebra parallelization slows the calculat
     \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_la_parallel_bench_absolute.pdf}
 \end{subfigure}
 \label{fig:scaling_scf_nd_tas2}
-\caption{Benchmark with linear algebra parallelization for the TaS2 benchmarking system}
+\caption{Scalability and runtime utilizing linear algebra parallelization for the TaS2 benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk} chosen such that pool size = 36}}
 \end{figure}
 
 Interestingly, this again is not reproduced for the more expensive TaS2 benchmarking system.

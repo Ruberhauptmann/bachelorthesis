@@ -8,7 +8,7 @@
 
 The description of matter from theoretical methods starts from the Hamiltonian of an interacting system of electrons and nuclei (with electrons coordinates \(\vb{r}_i\) and nuclei coordinates \(\vb{R}_{\alpha}\))
 \begin{align}
-    \ope{H} &= \ope{T}_e + \ope{U}_{e-e} + \ope{T}_{n} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
+    \ope{H} &= \ope{T}_{\mathrm{e}} + \ope{U}_{\mathrm{e-e}} + \ope{T}_{\mathrm{n}} + \ope{V}_{\mathrm{n-e}} + \ope{W}_{\mathrm{n-n}} \\
     &= - \sum_i \frac{1}{2} \nabla^2_i 
     + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} 
     - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha}
@@ -17,15 +17,15 @@ The description of matter from theoretical methods starts from the Hamiltonian o
 \end{align}
 where
 \begin{itemize}
-    \item \(\ope{T}_e\,, \ope{T}_n\) are the kinetic energies of the electrons and nuclei respectively
-    \item \(\ope{U}_{e-e}\) is the Coulomb interaction between the electrons and the nuclei
-    \item \(\ope{V}_{n-e}\) is the potential energy of the electrons in the field of the nuclei
-    \item \(\ope{W}_{n-n}\) is the Coulomb interaction between the nuclei.
+    \item \(\ope{T}_{\mathrm{e}}\,, \ope{T}_{\mathrm{n}}\) are the kinetic energies of the electrons and nuclei respectively
+    \item \(\ope{U}_{\mathrm{e-e}}\) is the Coulomb interaction between the electrons and the nuclei
+    \item \(\ope{V}_{\mathrm{n-e}}\) is the potential energy of the electrons in the field of the nuclei
+    \item \(\ope{W}_{\mathrm{n-n}}\) is the Coulomb interaction between the nuclei.
 \end{itemize}
 This very general problem consisting of both the electronic and nuclei degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation \cite{born_zur_1927}.
 The approximation assumes the nuclei to be fixed point charges which create a potential for the \(N\) interacting electrons, so that the electronic part can be solved independently using the nuclei positions \(\vb{R}\) as a parameter
 \begin{align}
-    \ope{H}_{BO} &= \ope{T}_e + \ope{U}_{e-e} + \ope{V}_{n-e} + \ope{W}_{n-n} \\
+    \ope{H}_{\mathrm{BO}} &= \ope{T}_{\mathrm{e}} + \ope{U}_{\mathrm{e-e}} + \ope{V}_{\mathrm{n-e}} + \ope{W}_{\mathrm{n-n}} \\
     &= -\sum_i \frac{1}{2} \nabla^2_i 
     + \frac{1}{2} \sum_{i \neq j} \frac{1}{\vert \vb{r}_i - \vb{r}_j \vert} 
     - \sum_i \sum_{\alpha} \frac{Z_{\alpha}}{\vert \vb{r}_i 
@@ -74,7 +74,7 @@ With a known or well approximated universal functional \(F[n(\vb{r})]\), the Hoh
 
 Kohn and Sham proposed an approach to handling interacting many-body systems by introducing an auxiliary non-interacting system of electrons \cite{kohn_self-consistent_1965}
 \begin{equation}\label{eq:kohn_sham_hamiltonian}
-    H_0 = \sum_i^{N_e} \frac{p_i^2}{2m} + v_{KS} (\vb{r}_i)\,.
+    H_0 = \sum_i^{N_e} \frac{p_i^2}{2m} + v_{\mathrm{KS}} (\vb{r}_i)\,.
 \end{equation}
 With a correction potential \(v_{KS}\) such that the ground state charge density for the auxiliary and the interacting system are the same.
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
@@ -93,15 +93,15 @@ This connection is shown in fig. \ref{fig:kohn_sham_dft_schema}.
 
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons
 \begin{equation}
-    T_S [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})\,.
+    T_{\mathrm{S}} [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})\,.
 \end{equation}
 With the help of this system and the classical electrostatic energy 
 \begin{equation}
-    E_H [n(\vb{r})] = \frac{1}{2} \int \int \dd[3]{r_1} \dd[3]{r_2} \frac{n(\vb{r}_1) n(\vb{r}_2)}{\vert \vb{r}_1 - \vb{r}_2 \vert}
+    E_{\mathrm{H}} [n(\vb{r})] = \frac{1}{2} \int \int \dd[3]{r_1} \dd[3]{r_2} \frac{n(\vb{r}_1) n(\vb{r}_2)}{\vert \vb{r}_1 - \vb{r}_2 \vert}
 \end{equation}
 an ansatz for the total energy functional in eq. \ref{eq:hohenberg_kohn_energy_functional} can be written as
 \begin{equation}
-    E[n(\vb{r})] = T_S [n(\vb{r})] + E_H [n(\vb{r})] + E_{XC} [n(\vb{r})] + \int \dd{\vb{r}^{\prime}} V(\vb{r}^{\prime}) n (\vb{r}^{\prime})\,.
+    E[n(\vb{r})] = T_{\mathrm{S}} [n(\vb{r})] + E_{\mathrm{H}} [n(\vb{r})] + E_{\mathrm{XC}} [n(\vb{r})] + \int \dd{\vb{r}^{\prime}} V(\vb{r}^{\prime}) n (\vb{r}^{\prime})\,.
 \end{equation}
 where now \(E_{XC} [n(\vb{r})]\) is a functional of the density accounting for all exchange and correlation effects not present in the non-interacting electron system.
 The success of \acrshort{dft} lies in the fact that \(E_{XC}\) contributes only a small part of the total energy and can be approximated in a useful manner. \todo{source, more explanation}
@@ -112,19 +112,20 @@ Using that form of \(E[n(\vb{r})]\), from the variational problem (with a Lagran
 \end{align}
 a set of single particle, Schrödinger-like equations can be derived:
 \begin{equation}\label{eq:kohn-sham-equations}
-    \left(-\frac{1}{2} \Delta + \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{XC}}{n(\vb{r})} + V\right) \Psi_i (\vb{r}) = \lambda_i \Psi_i (\vb{r})\,.
+    \left(-\frac{1}{2} \Delta + \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{\mathrm{XC}}}{n(\vb{r})} + V\right) \Psi_i (\vb{r}) = \lambda_i \Psi_i (\vb{r})\,.
 \end{equation}
-Schrödinger-like in this context means, that with the identification of the Hartree potential \(V_H = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert}\) and the exchange-correlation potential \(V_{XC} = \fdv{E_{XC}}{n(\vb{r})}\) the potential \(v_{KS}\) in eq. \ref{eq:kohn_sham_hamiltonian} is
+Schrödinger-like in this context means, that with the identification of the Hartree potential \(V_{\mathrm{H}} = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert}\) and the exchange-correlation potential \(V_{\mathrm{XC}} = \fdv{E_{\mathrm{XC}}}{n(\vb{r})}\) the potential \(v_{\mathrm{KS}}\) in eq. \ref{eq:kohn_sham_hamiltonian} is
 \begin{equation}
-    v_{KS} =  V_H + V_{XC} + V = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{XC}}{n(\vb{r})} + V\,.
+    v_{\mathrm{KS}} =  V_{\mathrm{H}} + V_{\mathrm{XC}} + V = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \fdv{E_{\mathrm{XC}}}{n(\vb{r})} + V\,.
 \end{equation}
 Eq. \ref{eq:kohn-sham-equations} become the \acrshort{kohn_sham} equations
 \begin{equation}
-    \left(- \frac{1}{2} \Delta + v_{KS}\right) \Psi_i (\vb{r}) = \epsilon_i \Psi_i (\vb{r})\,.
+    \left(- \frac{1}{2} \Delta + v_{\mathrm{KS}}\right) \Psi_i (\vb{r}) = \epsilon_i \Psi_i (\vb{r})\,.
 \end{equation}
-Importantly, the potential \(v_{KS}\) depends on the solutions \(\Psi_i (\vb{r})\), as \(V_H\) and \(V_{XC}\) include the density \(n(\vb{r})\).
+Importantly, the potential \(v_{\mathrm{KS}}\) depends on the solutions \(\Psi_i (\vb{r})\), as \(V_{\mathrm{H}}\) and \(V_{\mathrm{XC}}\) include the density \(n(\vb{r})\).
 The problem thus is a self-consistency problem, meaning the density used for calculating the potentials and the obtained solution only agree for the exact solution.
 Arriving at a solution consists then of iterating the process of obtaining a new set of potentials from the solution and solving the \acrshort{kohn_sham} equations again.
+\todo{Something something good for computation, similaraly to hartree fock methods?}
 
 \subsection{Pseudopotentials and basis set}\label{sub:theory_basis_set}
 
