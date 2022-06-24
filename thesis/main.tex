@@ -13,8 +13,7 @@
 \loadglsentries[main]{glossary.tex}
 
 \newcommand{\QE}{\textsc{Quantum} ESPRESSO }
-\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
-\newcommand{\TaS}{\chem{TaS_2}}
+\newcommand{\TaS}{TaS\textsubscript{2}}
 
 \usepackage{subfiles}
 
@@ -39,10 +38,11 @@
     {\hypersetup{hidelinks}\tableofcontents}%
 
     \clearpage
-    %\printglossaries
+    \setglossarysection{section}
+    \printglossaries
     %\printglossary[type=\acronymtype]
 
-    \printglossary
+    %\printglossary
     %
     %
     % Laden der Motivation
@@ -74,6 +74,7 @@
     \addcontentsline{toc}{chapter}{Bibliography}
     \printbibliography
 
+    \backmatter
     %
     % Nicht nötig, aber zur Vollständigkeit: Einbindung einer Liste aller Grafiken und Tabellen
     \chapter*{Listings}
