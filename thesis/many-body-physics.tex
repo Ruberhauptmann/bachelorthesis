@@ -18,8 +18,8 @@ The description of matter from theoretical methods starts from the Hamiltonian o
 where
 \begin{itemize}
     \item \(\ope{T}_{\mathrm{e}}\,, \ope{T}_{\mathrm{n}}\) are the kinetic energies of the electrons and nuclei respectively
-    \item \(\ope{U}_{\mathrm{e-e}}\) is the Coulomb interaction between the electrons and the nuclei
-    \item \(\ope{V}_{\mathrm{n-e}}\) is the potential energy of the electrons in the field of the nuclei
+    \item \(\ope{U}_{\mathrm{e-e}}\) is the Coulomb interaction between the electrons
+    \item \(\ope{V}_{\mathrm{n-e}}\) is the Coulomb interaction between the electrons and the nuclei
     \item \(\ope{W}_{\mathrm{n-n}}\) is the Coulomb interaction between the nuclei.
 \end{itemize}
 This very general problem consisting of both the electronic and nuclei degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation \cite{born_zur_1927}.
@@ -32,18 +32,18 @@ The approximation assumes the nuclei to be fixed point charges which create a po
     - \vb{R}_{\alpha} \vert} 
     + \frac{1}{2} \sum_{\alpha \beta} \frac{Z_{\alpha} Z_{\beta}}{\vert \vb{R}_{\alpha} - \vb{R}_{\beta} \vert}\,. \label{eq:bo_hamiltonian}
 \end{align}
-The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) here are just a function of the electronic coordinates \(\vb{r}\) and a constant respectively, so they can then be combined into an external potential \(\ope{V} (\vb{r})\) for the interacting electrons, so that the Hamiltonian reads
+The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) here are just a function of the electronic coordinates \(\vb{r}\) and a constant respectively, so they can then be combined into a potential \(\ope{V} (\vb{r})\) for the interacting electrons, so that the Hamiltonian reads
 \begin{equation}\label{eq:solid_state_hamiltonian}
     \ope{H} = \ope{T} + \ope{U} + \ope{V}\,.
 \end{equation}
 
 \section{Density Functional Theory\label{sec:theory_dft}}
 
-A direct solution to the electronic structure problem, this meaning obtaining the ground-state many-body wave function \(\Psi (\vb{r_1}, \ldots, \vb{r}_N)\) for a given potential is analytically impossible even for a small number of electrons compared to the number of electrons in a macroscopic crystal.
+Obtaining solutions to the Schrödinger equation with the Hamiltonian \ref{eq:bo_hamiltonian} is analytically impossible, as it produces a system of \(3N\) coupled differential equations, with \(N \sim N_{\mathrm{Avogadro}} \sim \mathcal{O} (10^{23})\).
 As such, the need for good approximations to obtain results for real world
 systems is high.
 One particularly successful approach is \acrfull{dft}.
-In the following section, the theoretical framework of \acrshort{dft} will be reviewed, the outline of which can be found in any literature on solid state physics \cite{marzari_ab-initio_1996}.
+In the following section, the theoretical framework of \acrshort{dft} will be reviewed following the PhD thesis of Nicola Marzari \cite{marzari_ab-initio_1996}, a more extensive discussion can be found in Richard Martins textbook on electronic structure \cite{martin_electronic_2004}.
 
 \subsection{Hohenberg-Kohn theorems}
 
@@ -80,7 +80,7 @@ With a correction potential \(v_{KS}\) such that the ground state charge density
 This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\Psi_i\).
 The density for this system is calculated as
 \begin{equation}\label{eq:density_ks_states}
-    n(\vb{r}) = \sum_{i=1}^N \vert \Psi_i (\vb{r}) \vert^2\,.
+    n(\vb{r}) = \sum_{i=1}^{N_{\mathrm{e}} / 2} \vert \Psi_i (\vb{r}) \vert^2\,.
 \end{equation}
 The restriction of equality of the ground state densities for the interacting and the non-interacting system makes it possible to calculate all properties of the interacting system just by solving the non-interacting system (using the Hohenberg-Kohn theorems).
 This connection is shown in fig. \ref{fig:kohn_sham_dft_schema}.
@@ -93,7 +93,7 @@ This connection is shown in fig. \ref{fig:kohn_sham_dft_schema}.
 
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons
 \begin{equation}
-    T_{\mathrm{S}} [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_e} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})\,.
+    T_{\mathrm{S}} [n(\vb{r})] = - \frac{1}{2} \sum_{i=1}^{N_{\mathrm{e}} / 2} \int \dd[3]{r} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})\,.
 \end{equation}
 With the help of this system and the classical electrostatic energy 
 \begin{equation}
@@ -188,11 +188,12 @@ With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transfo
 tt
 
 \clearpage
+
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
 
-In the framework of \acrshort{dft} a treatment of lattice vibrations can also be derived.
+Within the framework of \acrshort{dft} a treatment of lattice vibrations can also be derived.
 \todo{Maybe a bit more introduction?}
-This theory will be outlined in this section, following the review article by Baroni et. al. \cite{baroni_phonons_2001}.
+This theory will be outlined in this section, following the review article by Baroni et al. \cite{baroni_phonons_2001}.
 
 \subsection{Sternheimer equation and Hellman-Feynman theorem}
 
@@ -254,6 +255,7 @@ With that the \emph{Hellman-Feynman theorem} follows:
 \subsection{Lattice vibrations from electronic structure}
 
 As discussed in the beginning of this chapter, nucleic and electronic degrees of freedom can be decoupled in the Born-Oppenheimer approximation.
+The connection between lattice dynamics and the electronic structure in the Born-Oppenheimer approximation was first pointed out by De Cicco and Johnson  \cite{decicco_quantum_1969} and Pick, Cohen, Martin \cite{pick_microscopic_1970}.
 The lattice dynamics are determined by
 \begin{equation}
     \left( - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha} + E(\vb{R}) \right) \Phi (\vb{R}) = \mathcal{E} \Phi (\vb{R})\,,
@@ -263,23 +265,54 @@ The system is then in equilibrium, when the forces acting on the nuclei vanish
 \begin{equation}
     \vb{F}_{\alpha} = - \pdv{E(\vb{R})}{\vb{R}_{\alpha}} = 0\,.
 \end{equation}
-The vibrational frequencies \(\omega\) are determined by
+The vibrational frequencies \(\omega\) are determined by the Hessian of \(E(\vb{R})\), usually called the matrix of interatomic force constants:
 \begin{equation}
-    \det \left\vert \frac{1}{\sqrt{M_{\alpha} M_{\beta}}} \pdv{E(\vb{R})}{\vb{R}_{\alpha}}{\vb{R}_{\beta}} - \omega^2 \right\vert = 0\,,
+    \det \left\vert \frac{1}{\sqrt{M_{\alpha} M_{\beta}}} \pdv{E(\vb{R})}{\vb{R}_{\alpha}}{\vb{R}_{\beta}} - \omega^2 \right\vert = 0\,.
 \end{equation}
-so the calculation of the vibrational properties as well as the equilibrium geometry depend on the first and second derivatives of the energies \(E(\vb{R})\).
-These derivatives can be calculated using the Hellman-Feynman theorem \ref{eq:dfpt_hellman_feynman}.
-
+Thus the calculation of the vibrational properties as well as the equilibrium geometry depend on the first and second derivatives of the energies \(E(\vb{R})\).
+These derivatives can be calculated using the Hellman-Feynman theorem \ref{eq:dfpt_hellman_feynman}, where the parameter \(\lambda\) is the nucleic coordinate \(\vb{R}_{\alpha}\). 
+Keeping in mind that in the Born-Oppenheimer Hamiltonian \ref{eq:bo_hamiltonian} only the Coulomb interaction between the electrons and the nuclei and the Coulomb interaction between the nuclei have a dependence on the nucleic coordinates \(\vb{R}\), the force acting on nucleus \(\alpha\) is then
+\begin{align}
+    \vb{F}_{\alpha} = - \pdv{E(\vb{R})}{\vb{R}_{\alpha}} &= - \mel**{\Psi_{\vb{R}}(\vb{r})}{\pdv{\ope{H}_{\mathrm{BO}} (\vb{R})}{\vb{R}_{\alpha}}}{\Psi_{\vb{R}}(\vb{r})} \\
+    &= - \mel**{\Psi_{\vb{R}}(\vb{r})}{\pdv{\ope{V}_{\mathrm{n-e}}}{\vb{R}_{\alpha}} + \pdv{\ope{W}_{\mathrm{n-n}}}{\vb{R}_{\alpha}}}{\Psi_{\vb{R}}(\vb{r})} \\
+    &= - \int \dd{\vb{r}} n_{\vb{R}} (\vb{r}) \pdv{V_{\vb{R}} (\vb{r})}{\vb{R}_{\alpha}} - \pdv{W_{\mathrm{n-n}}}{\vb{R}_{\alpha}}\,,
+\end{align}
+where \(n_{\vb{R}} (\vb{r})\) is the ground state electronic density corresponding to a nucleic configuration \(\vb{R}\).
+The second derivative of \(E(\vb{R})\) is then calculated using the product rule
+\begin{equation}\label{eq:dfpt_second_energy_derivative}
+    \pdv{E(\vb{R})}{\vb{R}_{\alpha}}{\vb{R}_{\beta}} = - \pdv{\vb{F}_{\alpha}}{\vb{R}_{\beta}} = \int \dd{\vb{r}} \pdv{n_{\vb{R}} (\vb{r})}{\vb{R}_{\beta}}  \pdv{V_{\vb{R}} (\vb{r})}{\vb{R}_{\alpha}}
+    + \int \dd{\vb{r}} n_{\vb{R}} (\vb{r}) \pdv{V_{\vb{R}} (\vb{r})}{\vb{R}_{\alpha}}{\vb{R}_{\beta}}
+    + \pdv{W_{\mathrm{n-n}}}{\vb{R}_{\alpha}}{\vb{R}_{\beta}} \,.
+\end{equation}
+The lattice dynamics are thus determined by the electronic density \(n(\vb{r})\) and its linear response to a change in the nuclear geometry \(\pdv{n_{\vb{R}} (\vb{r})}{\vb{R}_{\beta}}\)
 
 \subsection{Density Functional Perturbation Theory}
 
-\todo{dfpt!!!}
+Eq. \ref{eq:dfpt_second_energy_derivative} shows how
+\todo{introduction missing}
 
-\section{Examined systems}
+This approach is called \acrfull{dfpt}, developed by Baroni et al. \cite{baroni_greens-function_1987} and Gonze \cite{gonze_adiabatic_1995}.
 
-\subsection{Silicon}
+In a first step, the electronic density \ref{eq:density_ks_states} will be linearized
+\begin{equation}\label{eq:dfpt_finite_difference_density}
+    \Delta n(\vb{r}) = 4 \Re{\sum_i^{N_{\mathrm{e}} / 2} \Psi_i^* (\vb{r}) \Delta \Psi_i (\vb{r})}
+\end{equation}
+with the finite-difference operator regarding the parameter \(\vb{R}\) (the subscript has been omitted in eq. \ref{eq:dfpt_finite_difference_density})
+\begin{equation}
+    \Delta^{\vb{R}} F = \sum_{\alpha} \pdv{F_{\vb{R}}}{\vb{R}_{\alpha}} \Delta \vb{R}_{\alpha}\,.
+\end{equation}
+The variation of the \acrshort{kohn_sham} orbitals can be obtained with the Sternheimer equation \ref{eq:dfpt_sternheimer}
+\begin{equation}
+    (H_0 - \epsilon_i) \ket{\Delta \Psi_i} = - (\Delta v_{\mathrm{KS}} - \Delta \epsilon_i) \ket{\Psi_i}\,,
+\end{equation}
+where \(H_0\) is the unperturbed \acrshort{kohn_sham} Hamiltonian \ref{eq:kohn_sham_hamiltonian}, \(\Delta v_{\mathrm{KS}}\) is the first-order correction to the potential \(v_{\mathrm{KS}}\)
+\begin{equation}
+    \Delta v_{\mathrm{KS}} = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{\Delta n(\vb{r}^{\prime})}{\vert \vb{r} - \vb{r}^{\prime} \vert} + \left. \pdv{v_{\mathrm{XC}}}{n} \right\vert_{n = n(\vb{r})} + \Delta V
+\end{equation}
+and \(\Delta \epsilon_i = \expval{\Delta v_{\mathrm{KS}}}{\Psi_i}\) is the first-order correction to the \acrshort{kohn_sham} eigenvalue \(\epsilon_i\).
 
-\subsection{\TaS}
+\todo{self-consistency again}
+
 
 
 \end{document}
