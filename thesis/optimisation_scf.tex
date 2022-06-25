@@ -76,7 +76,7 @@ This is also reflected in the wait time in fig. \ref{fig:scaling_scf_ompi_nprocs
 
 In conclusion, systems with more electrons and by extension bigger matrices and longer iteration times seem to be parallelize better and as such profit more from using more processors than systems with just a few number of electrons.
 
-These scaling tests poses now the question how better scaling over more than one node can be achieved.
+These scaling tests now pose the question how better scaling over more than one node can be achieved.
 
 \section{Testing different compilers and mathematical libraries}\label{sec:scf_scaling_compilers}
 
@@ -93,23 +93,23 @@ The benchmarks in \ref{fig:scaling_scf_compilers_nprocs} are run with the follow
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
-    \subcaption{\gls{openmpi}}
+    \subcaption{\gls{openmpi} 4.1.0}
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_scalapack_bench_nprocs_speedup.pdf}
-    \subcaption{\gls{openmpi}, \gls{openblas}, \gls{scalapack}}
+    \subcaption{\gls{openmpi} 4.1.0, \gls{openblas} 0.3.20, \gls{scalapack} 2.2.0}
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_speedup.pdf}
-    \subcaption{\gls{oneapi}}
+    \subcaption{\gls{oneapi} 2021.4}
 \end{subfigure}
 \caption{Scalability for the Si benchmarking system with different combinations of compilers and mathematical libraries, \emph{\texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_compilers_si}
 \end{figure}
 
-Fig. \ref{fig:scaling_scf_compilers_nprocs} shows that just dropping in another \gls{blas} library (\gls{openblas} in this case) does not change the scaling behavior, in contrast to using Intels \gls{oneapi} packages.
+Fig. \ref{fig:scaling_scf_compilers_nprocs} shows that just using another \gls{blas}/\gls{lapack} library (\gls{openblas} in this case) with the same \gls{mpi} version does not change the scaling behavior, in contrast to using Intels \gls{oneapi} packages.
 Here, optimal scaling behavior is seen for up to 6 processors.
 It is however important to also look at the total runtime in this context.
 
@@ -117,12 +117,12 @@ It is however important to also look at the total runtime in this context.
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nprocs_absolute.pdf}
-    \subcaption{\gls{openmpi}}
+    \subcaption{\gls{openmpi} 4.1.0}
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nprocs_absolute.pdf}
-    \subcaption{\gls{oneapi}}
+    \subcaption{\gls{oneapi} 2021.4}
 \end{subfigure}
 \caption{Comparison of absolute runtimes between \QE compiled with \gls{openmpi} and \gls{oneapi} for the Si benchmarking system, \emph{\texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_compilers_runtime_si}
@@ -133,7 +133,7 @@ To assess this more quantitatively, tab. \ref{tab:runtimes_si_scf_compilers} lis
 Importantly, the runtime for the \gls{oneapi} benchmark is faster for smaller numbers of processors (except 1), but only \SI{15}{\percent} for 2 cores and even smaller differences for more cores, with the \gls{openmpi} calculation being even a little faster for 20 processors.
 
 \begin{table}[ht!]
-    \caption{Selected absolute runtimes of \QE compiled with \gls{openmpi} and \gls{oneapi} for the Si benchmarking system, \emph{\texttt{nk 1} and \texttt{nd 1}}}
+    \caption{Selected absolute runtimes of \QE compiled with \gls{openmpi} 4.1.0 and \gls{oneapi} 2021.4 for the Si benchmarking system, \emph{\texttt{nk 1} and \texttt{nd 1}}}
     \label{tab:runtimes_si_scf_compilers}
     \begin{tabular}{@{}lll@{}}
     \toprule
@@ -184,7 +184,7 @@ For the silicon system, the size of pools should be bigger than 6 processors for
 As detailed in section \ref{sub:qe_parallelization}, \QE offers ways to manage how the workload is distributed among the processors.
 In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
 
-\subsection{k point parallelization}
+\subsection{k point parallelization}\label{sub:scf_scaling_k_point}
 
 The benchmark pictured in \ref{fig:scaling_scf_nk_si} is set up as follows: for a given number of processors \(N_p\), the parameter \(N_k\) splits the \(N_p\) processors into \(N_k\) processors pools.
 As the number of processors in one pool has to be a whole number, only certain combinations of \(N_p\) and \(N_k\) are possible, for example \(N_p = 32\) could be split into processor pools of size 2 with \(N_k = 16\), size 8 with \(N_k = 4\) or size 16 with \(N_k = 2\).
@@ -196,14 +196,14 @@ Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_speedup.pdf}
-    \subcaption{\gls{openmpi}}
+    \subcaption{\gls{openmpi} 4.1.0}
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_speedup.pdf}
-    \subcaption{\gls{oneapi}}
+    \subcaption{\gls{oneapi} 2021.4}
 \end{subfigure}
-\caption{Scalability utilizing k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools. The size is determined by the parameter \texttt{nk} via \emph{size of pools = number of processors / nk}.}
+\caption{Scalability utilizing k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools. The size is determined by the parameter \texttt{nk} via \emph{size of pools = number of processors / nk}}
 \label{fig:scaling_scf_nk_si}
 \end{figure}
 
@@ -217,12 +217,12 @@ Fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool 
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_ompi_bench_nk_absolute.pdf}
-    \subcaption{\gls{openmpi}}
+    \subcaption{\gls{openmpi} 4.1.0}
 \end{subfigure}
 \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_intel_bench_nk_absolute.pdf}
-    \subcaption{\gls{oneapi}}
+    \subcaption{\gls{oneapi} 2021.4}
 \end{subfigure}
 \caption{Absolute runtime for the scalability test with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools, \emph{\texttt{nd 1}}}
 \label{fig:scaling_scf_nk_si_absolute}
@@ -234,7 +234,7 @@ The same scaling test is applied to the \TaS system in fig. \ref{fig:scaling_scf
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
-    \caption{Scalability utilizing k-point parallelization for the \TaS benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
+    \caption{Scalability utilizing k-point parallelization for the \TaS benchmarking system over a range of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2}
 \end{figure}
 
@@ -252,7 +252,7 @@ It can also be instructive to look at the idle time for this benchmark to judge 
         \centering
         \includegraphics[width=\textwidth]{plots_scf/TaS2_intel_bench_nk_wait.pdf}
     \end{subfigure}
-    \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
+    \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system over a range of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2_absolute_wait}
 \end{figure}
 
@@ -302,10 +302,18 @@ Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear a
 
 \section{Comparison with calculations on the HLRN cluster}
 
+All calculations so far were exclusively run on the PHYSnet cluster and as such are limited by hardware and configuration present in the cluster.
+To assess this limitation, the k point benchmarks from sec. \ref{sub:scf_scaling_k_point} were run again on the another cluster, the HLRN cluster in particular.
+The North German Supercomputing Alliance (Norddeutscher Verbund für Hoch- und Höchstleistungsrechnen - HLRN) operates a distributed supercomputer system at the Georg-August-Universität Göttingen and the Zuse Institute Berlin.
+The current iteration HLRN-IV has nodes with 2 Intel Cascade Lake Platinum 9242 CPUs (48 cores each) and an Omni-Path (Intel proprietary Infiniband competitor) connection between nodes.
+
+Fig. \ref{fig:scaling_scf_hlrn_nk_si_speedup} and \ref{fig:scaling_scf_hlrn_nk_si_absolute_wait} show the benchmarks for the silicon benchmarking system.
+\todo{compiler and MPI version HLRN!}
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/si_hlrn_bench_nk_speedup.pdf}
-\caption{CAPTION}
+\caption{Scalability utilizing k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_si_speedup}
 \end{figure}
 
@@ -318,14 +326,18 @@ Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear a
     \centering
     \includegraphics[width=\textwidth]{plots_scf/si_hlrn_bench_nk_wait.pdf}
 \end{subfigure}
-\caption{CAPTION}
+\caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the Si benchmarking system run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_si_absolute_wait}
 \end{figure}
+The scaling behavior has some striking differences in comparison with the same benchmarks run on the PHYSnet cluster
+First of all, speedup and runtimes are very consistent across runs, with only a minimal variance across the whole range of processors.
+This is consistent with the observations made on the PHYSnet, where scaling over a single node also was relatively consistent across runs.
+
 
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_hlrn_bench_nk_speedup.pdf}
-\caption{CAPTION}
+\caption{Scalability utilizing k-point parallelization for the \TaS benchmarking system over a range of processor pool sizes run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_TaS2_speedup}
 \end{figure}
 
@@ -338,7 +350,7 @@ Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear a
     \centering
     \includegraphics[width=\textwidth]{plots_scf/TaS2_hlrn_bench_nk_wait.pdf}
 \end{subfigure}
-\caption{CAPTION}
+\caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait}
 \end{figure}
 

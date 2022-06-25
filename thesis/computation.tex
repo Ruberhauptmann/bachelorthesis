@@ -39,14 +39,7 @@ On the other hand, faster parallel code execution can come from:
     \item \emph{Better caching}: optimal performance per core is achieved when all the data can be kept in cache, so distributing data among more processors may lead to better than linear scaling because the data size per processor gets smaller
 \end{itemize}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{amdahl.pdf}
-    \label{fig:amdahl}
-    \caption{Amdahl's law for different portions of not parallelizable workload \(s\)}
-\end{wrapfigure}
-
-A simple ansatz for modeling speedup was first derived by Gene Amdahl.
+A simple ansatz for modeling speedup was first thought of by Gene Amdahl \cite{amdahl_validity_1967}.
 Assuming the work that needs to be done is split into a part which cannot be parallelized \(s\) and a part which can be parallelized ideally \(p\), we can normalize the serial time to 1:
 \begin{equation}
     T_1 = s + p = 1
@@ -60,6 +53,13 @@ The speedup is now
     S = \frac{T_s}{T_p} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}
 \end{equation}
 This equation is called \emph{Amdahl's law} and is plotted in fig. \ref{fig:amdahl} over a range of processors for a few different values of \(s\).
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{amdahl.pdf}
+    \label{fig:amdahl}
+    \caption{Amdahl's law for different portions of not parallelizable workload \(s\)}
+\end{figure}
 
 \subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
 
@@ -153,12 +153,12 @@ This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (rea
     squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=3cm,},
     node distance=0.5cm]
     %Nodes
-    \node[squarednode]      (init)          {initial \(n(\vb{r})\)};
-    \node[squarednode]      (step_1)    [below= of init]  {calculate \(v_H [n(\vb{r})]\) and \(v_{XC} [n(\vb{r})]\)};
+    \node[squarednode]      (init)          {initial \(n(\vb*{r})\)};
+    \node[squarednode]      (step_1)    [below= of init]  {calculate \(v_H [n(\vb*{r})]\) and \(v_{XC} [n(\vb*{r})]\)};
     \node[squarednode]      (step_2)    [below= of step_1]      {fourier transform potentials};
     \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
     \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
-    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb{r})\) and \(E [n(\vb{r})]\)};
+    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb*{r})\) and \(E [n(\vb*{r})]\)};
     \node[squarednode]      (done)      [below= of step_5]      {done if change in \(E\) is small enough};
     
     %Lines
@@ -174,7 +174,7 @@ This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (rea
 \caption{Flowchart of an algorithm to solve the \acrshort{kohn_sham} equations}
 \end{wrapfigure}
 
-As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb{r})\).
+As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
 \QE can use this fact and separate the total number of processors into smaller pools, each doing the calculations for a set of k points, so called \emph{k point parallelization}.
 The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into, so the resulting number of processors in one pool is \(\frac{N}{N_k}\).
 Within one k point processor pool, the PW parallelization with its heavy communication is automatically applied.
@@ -191,6 +191,8 @@ Furthermore, the arrays on which the calculations are performed on are distribut
 All calculations were run on the \texttt{infinix} queue on the PHYSnet compute cluster. 
 As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip.
 
+\todo{speed comparison}
+
 %Knowing the specific hardware configuration the calculations are run on is important, as that provides a scale of different communication speeds:
 %\begin{itemize}
 %    \item between processors on one chip:
@@ -204,6 +206,20 @@ As of time of writing, the nodes in this queue are equipped with two Intel Xeon 
 \section{Examined systems}
 
 \subsection{Silicon}
+
+Silicon is the fundamental material in integrated circuits and as such is one of the pillars of the digital revolution.
+Analogue to the Stone, Bronze or Iron Age, this age of civilization can thus be called the Silicon Age \cite{chabal_fundamental_2001}.
+Consequently, silicon is a well studied material from an experimental and theoretical standpoint with established properties.
+\todo{crystal structure?}
+This combined with the fact that with only 8 electrons per unit cell \acrshort{dft} calculations on silicon are not particularly expensive makes it an ideal system for many introduction to \acrshort{dft} calculation as well as a good benchmarking system.
+All benchmarks in this thesis were run on silicon first and with the information gained from that benchmarks on a more expensive system were run.
+
+The calculations in ch. \ref{ch:optimisation_scf} were made with a plane wave cutoff of
+
+made on a 40x40x40 k point grid, 
+
+All calculations use a PBE XC-functional with a norm-conserving \acrshort{pp} generated using Vanderbilt's method \cite{hamann_erratum_2017}.
+
 
 \subsection{\TaS}
 
