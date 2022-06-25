@@ -30,7 +30,7 @@ def main():
 
     poolsize = 36
 
-    for run in range(1):
+    for run in range(1, 10):
         for nd in [4, 9, 16, 25, 36]:
             log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
