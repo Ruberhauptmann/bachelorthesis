@@ -30,7 +30,7 @@ def main():
 
     poolsize = 36
 
-    for run in range(1):
+    for run in range(1, 10):
         for nd in [4, 9, 16, 25, 36]:
             log_path = os.getenv('HOME') + '/job_logs/TaS2/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
@@ -63,7 +63,7 @@ def main():
     for file in glob.glob(log_path + '/*'):
         os.remove(file)
 
-    for run in range(1):
+    for run in range(1, 10):
         for n_procs in range(36, max_number_procs + 1, 36):
             job_name = 'TaS2_bench_nd_auto_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
