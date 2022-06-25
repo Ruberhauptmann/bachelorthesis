@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times("out_files", multiple_runs=True)
 
-    nprocs_plots.plot(walltimes, n_procs, "TaS2_ompi", "absolute")
+    nprocs_plots.plot(walltimes, n_procs, "TaS2_ompi", "absolute", plot_error=True)
 
     ### Plot speedup
 
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     speedup = walltime_singlecore / walltimes
     print(speedup)
 
-    nprocs_plots.plot(speedup, n_procs, "TaS2_ompi", "speedup")
+    nprocs_plots.plot(speedup, n_procs, "TaS2_ompi", "speedup", plot_error=True)
 
     ### Plot idle time
 

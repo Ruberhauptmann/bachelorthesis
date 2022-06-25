@@ -12,9 +12,8 @@
 
 \loadglsentries[main]{glossary.tex}
 
-\newcommand{\QE}{\textsc{Quantum} ESPRESSO }
-\newcommand*\chem[1]{\ensuremath{\mathrm{#1}}}
-\newcommand{\TaS}{\chem{TaS_2}}
+\newcommand{\QE}{\textsc{Quantum} ESPRESSO\xspace}
+\newcommand{\TaS}{TaS\textsubscript{2}\xspace}
 
 \usepackage{subfiles}
 
@@ -39,17 +38,18 @@
     {\hypersetup{hidelinks}\tableofcontents}%
 
     \clearpage
-    %\printglossaries
+    \setglossarysection{section}
+    \printglossaries
     %\printglossary[type=\acronymtype]
 
-    \printglossary
+    %\printglossary
     %
     %
     % Laden der Motivation
     \subfile{motivation.tex}
 
-    %\section*{Conventions}
-    %Throughout the text of this thesis scalars are written in italic $s$, vectors in bold italic $\vec v$ and matrices in bold $\textbf M$ fonts. The summation/multiplication over nearest neighbour sites $i$ and $j$ is $\left\langle ij \right\rangle$ as a subscript to $\sum$/$\prod$. Furthermore, Hartree atomic units are used in general and only in selected instances it is deviated from this: $\hbar = m_\mathrm{e} = \mathrm e = \nicefrac{4\pi}{\varepsilon_0} = 1$. 
+    \section*{Conventions}
+    Throughout the text of this thesis scalars are written in italic $s$, vectors in bold italic $\vb*{v}$ and matrices in bold $\textbf M$ fonts. The summation/multiplication over nearest neighbour sites $i$ and $j$ is $\left\langle ij \right\rangle$ as a subscript to $\sum$/$\prod$. Furthermore, Hartree atomic units are used in general and only in selected instances it is deviated from this: $\hbar = m_\mathrm{e} = \mathrm e = \nicefrac{4\pi}{\varepsilon_0} = 1$. 
     %\newpage
     \nonfrenchspacing
 
@@ -57,13 +57,15 @@
     % Beginn des eigentlichen Inhalts: Seitennummern arabisch, Kapitel und Abschnitte werden numeriert
     \mainmatter
     \renewcommand{\thechapter}{\Roman{chapter}}
-    \subfile{many-body-physics.tex}
+    \subfile{ab-initio-modeling.tex}
 
     \subfile{computation.tex}
 
     \subfile{optimisation_scf.tex}
 
     \subfile{optimisation_ph.tex}
+
+    \subfile{tas2_sts_gap.tex}
 
     %
     % Ende des Inhalts und Übergang zur Literatur sowie anderen Listen
@@ -72,6 +74,7 @@
     \addcontentsline{toc}{chapter}{Bibliography}
     \printbibliography
 
+    \backmatter
     %
     % Nicht nötig, aber zur Vollständigkeit: Einbindung einer Liste aller Grafiken und Tabellen
     \chapter*{Listings}
