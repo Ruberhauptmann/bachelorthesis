@@ -176,7 +176,7 @@ This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (rea
 
 As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
 \QE can use this fact and separate the total number of processors into smaller pools, each doing the calculations for a set of k points, so called \emph{k point parallelization}.
-The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into, so the resulting number of processors in one pool is \(\frac{N}{N_k}\).
+The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into, so the resulting number of processors in one pool is \(N / N_k\).
 Within one k point processor pool, the PW parallelization with its heavy communication is automatically applied.
 
 In an level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
@@ -184,7 +184,11 @@ This parallelization level is called \emph{linear algebra parallelization} and i
 Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
 Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra group has to be a square number.
 
-\todo{parallelization ph.x}
+In the case of the \texttt{PHonon} module, the representation of states in a plane-wave basis set stays the same, so all three parallelization schemes mentioned for the \texttt{PWscf} module can also be employed.
+Furthermore, as calculations for two phonon wave vectors \(\vb*{q}, \vb*{q}^{\prime}\) are not coupled (as different wave vectors lead to different perturbations and as such independent self-consistent equations), they can be split up into images.
+The concept of image parallelization in \QE is actually more general than just for phonon calculations, as other kinds of independent iterative calculations can also be run with image parallelization.
+The parameter controlling image parallelization is \texttt{ni <number of images>}.
+Following this, the number of processors in one k point pool is then given by \(N / N_i / N_k\).
 
 \section{Hardware configuration of the PHYSnet cluster}\label{sec:hardware_physnet}
 
