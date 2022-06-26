@@ -137,21 +137,12 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
 \QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
 This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
 
-\todo{no scf loop here, just reference the section}
-
-Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
-This opens a few possibilities for parallelization of calculations: first of all, the orbitals in the plane wave basis set as well as charges and densities can be distributed among processors.
-This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
-Going further, \QE automatically parallelizes all linear algebra operations on real space/reciprocal grid.
-The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from and to the whole reciprocal/real grid in order to transform between them.
-This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
-
-%\clearpage
-\begin{wrapfigure}{l}{0.5\textwidth}
-\centering
+\begin{figure}[ht!]
+%\centering
 \begin{tikzpicture}[
-    squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=3cm,},
+    squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=8cm,},
     node distance=0.5cm]
+    \tikzset{every node/.style={inner sep=8pt}}
     %Nodes
     \node[squarednode]      (init)          {initial \(n(\vb*{r})\)};
     \node[squarednode]      (step_1)    [below= of init]  {calculate \(v_H [n(\vb*{r})]\) and \(v_{XC} [n(\vb*{r})]\)};
@@ -171,8 +162,17 @@ This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (rea
     \draw[->] (step_5.south) -- (done.north);
 \end{tikzpicture}
 \label{fig:diagram_scf_calculations}
-\caption{Flowchart of an algorithm to solve the \acrshort{kohn_sham} equations}
-\end{wrapfigure}
+\caption{Flowchart of an algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform}
+\end{figure}
+
+Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
+A few possibilities for parallelization of calculations can be derived from that.
+
+First of all, the real/reciprocal are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the orbitals in the plane wave basis set as well as charges and densities.
+This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
+Going further, \QE automatically parallelizes all linear algebra operations on this real space/reciprocal grid.
+The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from and to the whole reciprocal/real grid in order to transform between them.
+This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
 
 As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
 \QE can use this fact and separate the total number of processors into smaller pools, each doing the calculations for a set of k points, so called \emph{k point parallelization}.
@@ -188,8 +188,8 @@ Furthermore, the arrays on which the calculations are performed on are distribut
 
 \section{Hardware configuration of the PHYSnet cluster}\label{sec:hardware_physnet}
 
-All calculations were run on the \texttt{infinix} queue on the PHYSnet compute cluster. 
-As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip.
+All calculations were run on a reserved subset of the \texttt{infinix} queue on the PHYSnet compute cluster, with 20 nodes.
+As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip and 200 processors in the whole queue.
 
 \todo{speed comparison}
 
@@ -203,9 +203,9 @@ As of time of writing, the nodes in this queue are equipped with two Intel Xeon 
 %This gives guidelines on how well calculations can be parallelized on different numbers of processors.
 %As an example, any calculation with a massive need for communication, for example the calculations one the PW 
 
-\section{Examined systems}
+\section{Examined systems}\label{sec:examined_systems}
 
-\subsection{Silicon}
+\subsection{Silicon}\label{sub:systems_silicon}
 
 Silicon is the fundamental material in integrated circuits and as such is one of the pillars of the digital revolution.
 Analogue to the Stone, Bronze or Iron Age, this age of civilization can thus be called the Silicon Age \cite{chabal_fundamental_2001}.
@@ -221,6 +221,6 @@ made on a 40x40x40 k point grid,
 All calculations use a PBE XC-functional with a norm-conserving \acrshort{pp} generated using Vanderbilt's method \cite{hamann_erratum_2017}.
 
 
-\subsection{\TaS}
+\subsection{\TaS}\label{sub:systems_tas2}
 
 \end{document}

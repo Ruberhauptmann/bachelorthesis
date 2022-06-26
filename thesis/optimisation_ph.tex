@@ -14,20 +14,29 @@ Furthermore parallelization across q points (so called image parallelization) ca
 
 In a first step, the same k point parallelization benchmark as in sec. \ref{sub:scf_scaling_k_point} is run. This is pictured in fig. \ref{fig:scaling_ph_nk_si}.
 
-\begin{figure}[ht!]
+\begin{figure}[htb!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_ph/si_ph_bench_nk_speedup.pdf}
     \caption{Scalability utilizing k-point parallelization for the Si benchmarking system with three sizes of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_ph_nk_si}
 \end{figure}
-Interestingly, the results from sec. \ref{sub:scf_scaling_k_point} is not reproduced here: the smallest pool size of 2 is not the fastest, but instead it is pool size 8.
+Interestingly, the results from sec. \ref{sub:scf_scaling_k_point} is not reproduced here: the smallest pool size of 2 is not the one parallelizing best, but instead it is pool size 8.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{plots_ph/si_ph_bench_nk_absolute.pdf}
-    \caption{Absolute runtime for the scalability test utilizing k-point parallelization for the Si benchmarking system with three sizes of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
-    \label{fig:scaling_ph_nk_si_absolute}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots_ph/si_ph_bench_nk_absolute.pdf}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots_ph/si_ph_bench_nk_wait.pdf}
+    \end{subfigure}
+    \caption{Absolute runtime and wait time for the scalability test utilizing k-point parallelization for the Si benchmarking system with three sizes of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
+    \label{fig:scaling_ph_nk_si_absolute_wait}
 \end{figure}
+The wait time reveals that load balancing for phonon calculations is not as easily done as for the electronic structure calculations, at least with just k point parallelization used.
+
+
 
 \subsection{Linear algebra parallelization}
 
@@ -62,6 +71,25 @@ With the maximum time across images, speedup is then calculated, pictured in fig
     \caption{Wait time calculated from the longest running image for the scalability test utilizing image and k point parallelization on the Si benchmarking system with three values of \emph{\texttt{ni}}, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk, ni} chosen such that poolsize = 8, \texttt{nd 1}}}
     \label{fig:scaling_ph_ni_poolsize_8_si_wait}
 \end{figure}
+
+\section{Phonon calculations on \TaS}
+
+The results from the last section can be used to estimate good parallelization parameters for a phonon calculation at the \(\mathrm{\Gamma}\) point for \TaS in the charge density wave phase.
+The calculations were run on 180 processors, once with the previous established optimal pool size of 36 and once with a pool size of 18 for comparison.
+The relevant benchmark values for this calculation are listed in tab. \ref{tab:tas2_cdw_phonon_times}.
+
+\begin{table}[ht!]
+    \caption{CAPTION}
+    \begin{tabular}{@{}lll@{}}
+    \toprule
+                 & runtime            & wait time \\ \midrule
+    pool size 18 & \SI{3044}{\minute} & 0.16         \\
+    pool size 36 & \SI{2020}{\minute} & 0.074
+    \end{tabular}
+    \label{tab:tas2_cdw_phonon_times}
+\end{table}
+In this calculation the need for a good choice of parallelization parameters becomes especially clear:
+on the on the same number of processors, with the only difference in the choice of the parameter \texttt{nk}, the two calculations have a difference of \(\SI{17}{\hour}\).
 
 \section{Conclusion: Parameters for optimal scaling}
 

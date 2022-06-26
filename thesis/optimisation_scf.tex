@@ -173,18 +173,20 @@ This means that for a more expensive system such as the \TaS benchmarking system
     \label{fig:scaling_scf_intel_nprocs_tas2_absolute_wait}
 \end{figure}
 Moreover, the absolute runtime shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_absolute_wait} shows that the calculations not just scale better than with \gls{openmpi}, but they are significantly faster: whereas the minimum for the \gls{openmpi} benchmark is around \(\SI{1}{\hour} \SI{50}{\minute}\) for 20 processors, the \gls{oneapi} benchmark averages around \(\SI{40}{\minute}\) for 24 processors.
+\todo{wait time tas2}
 While the benchmarks on the silicon benchmarking system do not seem to favor one set of compilers over the other, the tests on the \TaS benchmarking system clearly show the advantages of using \gls{oneapi} on the Intel hardware in the PHYSnet cluster.
 
 The observations on how many processors are optimal for certain kinds of systems not only stand for themselves as a statement about scaling on a single node or a small number of nodes, but also provide a basis for scaling beyond the respective optimal ranges of processors for both systems:
 The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
-Keeping the results of this section in mind, at least an estimate for the quality of k point parallelization can already be made:
+
+Keeping the results of this section in mind, an estimate for the quality of k point parallelization can already be made:
 For the silicon system, the size of pools should not be bigger than 6 processors for optimal scaling and for the \TaS system they should not be bigger than 32 processors.
 
 \section{Using the parallelization parameters of \QE}
 
-\todo{already spoke about k point in the last section, maybe have a better transition here?}
 As detailed in section \ref{sub:qe_parallelization}, \QE offers ways to manage how the workload is distributed among the processors.
-In \texttt{pw.x} the default plane wave parallelization, k-point-parallelization and linear-algebra parallelization are implemented.
+In \texttt{pw.x} the default plane wave parallelization, k point-parallelization and linear-algebra parallelization are implemented.
+While plane wave parallelization is automatically applied, k point and linear algebra parallelization can be controlled and will be tested in this section.
 
 \subsection{k point parallelization}\label{sub:scf_scaling_k_point}
 
@@ -192,7 +194,7 @@ The benchmark pictured in \ref{fig:scaling_scf_nk_si} is set up as follows: for 
 As the number of processors in one pool has to be a whole number, only certain combinations of \(N_p\) and \(N_k\) are possible, for example \(N_p = 32\) could be split into processor pools of size 2 with \(N_k = 16\), size 8 with \(N_k = 4\) or size 16 with \(N_k = 2\).
 This leads to choosing the size of the processor pools as a variable, not the parameter \texttt{nk}.
 
-Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE being compiled with OpenMPI/Scalapack and Intel oneAPI.
+Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for \QE being compiled with \gls{openmpi} and \gls{oneapi}.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
@@ -208,12 +210,9 @@ Fig. \ref{fig:scaling_scf_nk_si} shows the scaling for poolsizes 2, 8 and 16 for
 \caption{Scalability utilizing k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools. The size is determined by the parameter \texttt{nk} via \emph{size of pools = number of processors / nk}}
 \label{fig:scaling_scf_nk_si}
 \end{figure}
-
-Fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool size of 2 significantly improves the scaling behavior, not only on one node, but especially over more than one node.
-
-\todo{more analysis: difference between poolsizes}
-
-%Another important conclusion to draw out of fig. \ref{fig:scaling_scf_nk_si} is the impact of using Intels compiler instead of OpenMPI, as that factor alone speeds up the calculation by a factor of 2 over the whole range of processors.
+The speedup depicted in fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool size of 2 improves the scaling behavior not only on one node, but especially over more than one node.
+While the speedup without k point parallelization hit a plateau when using more than 6 processors, k point parallelization enables scaling up until 24 processors.
+The bigger pool sizes do not scale as well, which is in agreement with the results of the benchmarks without k point parallelization presented in the previous section.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
@@ -229,22 +228,21 @@ Fig. \ref{fig:scaling_scf_nk_si} shows that using k parallelization with a pool 
 \caption{Absolute runtime for the scalability test with k-point parallelization for the Si benchmarking system with 3 different sizes of processor pools, \emph{\texttt{nd 1}}}
 \label{fig:scaling_scf_nk_si_absolute}
 \end{figure}
+The runtime shown in fig. \ref{fig:scaling_scf_nk_si_absolute} show that the choice between using \gls{openmpi} and \gls{oneapi} does not result in a big difference in total execution time, in accordance
+For both benchmarks, the ideal number of processors seems to be around 24, after that the runtime is subject to significant fluctuations and does not decrease in a predictable way.
+The average runtime for 24 processors are \(\SI{45.2}{\second}\) (\gls{openmpi}) and \(\SI{34.4}{\second}\) (\gls{oneapi}) respectively, so about a 10 seconds difference and also around half the minimal time (\(\SI{70.2}{\second}\) and \(\SI{82.8}{\second}\) at 20 processors) in comparison to the benchmark without k point parallelization.
 
-\todo{analyse absolute runtimes}
+The same scaling test is applied to the \TaS benchmarking system in fig. \ref{fig:scaling_scf_nk_tas2} and \ref{fig:scaling_scf_nk_tas2_absolute_wait}.
 
-The same scaling test is applied to the \TaS system in fig. \ref{fig:scaling_scf_nk_tas2}.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.8\textwidth]{plots_scf/TaS2_intel_bench_nk_speedup.pdf}
     \caption{Scalability utilizing k-point parallelization for the \TaS benchmarking system over a range of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2}
 \end{figure}
-
 Remarkably, the scaling behavior is swapped in comparison to fig. \ref{fig:scaling_scf_nk_si}, as the pool size 2 saturates and the bigger pool sizes show way better scaling behavior.
-As already alluded to in sec. \ref{sec:scf_scaling_compilers}, the calculations on the \TaS system profit more from parallelization and as such scale better for bigger pool sizes up until 36 processors in one pool, which is the upper limit established in the benchmark just over the number of processors.
+As already alluded to in sec. \ref{sec:scf_scaling_compilers}, the calculations on the \TaS system profit more from parallelization and as such scale better for bigger pool sizes up until 36 processors in one pool, which is around the upper limit established in the benchmark without k point parallelization.
 
-
-It can also be instructive to look at the idle time for this benchmark to judge the quality of parallelization. 
 \begin{figure}[ht!]
     \begin{subfigure}[b]{0.49\textwidth}
         \centering
@@ -257,11 +255,10 @@ It can also be instructive to look at the idle time for this benchmark to judge 
     \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system over a range of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_scf_nk_tas2_absolute_wait}
 \end{figure}
+\todo{analyse runtimes TaS2 nk}
+Fig. \ref{fig:scaling_scf_nk_tas2_wait} shows a distribution of wait times between about \(\SI{4}{\percent}\) and \(\SI{6}{\percent}\) of the whole \gls{wall_time}, with a slight overall increase when going over 160 processors.
+This suggests very good parallelization across the whole range of processors.
 
-
-Fig. \ref{fig:scaling_scf_nk_tas2_wait} shows a distribution of idle times between about \(\SI{4}{\percent}\) and \(\SI{6}{\percent}\) of the whole \gls{wall_time}, without any kind of systemic increase over any range of processors.
-%This means the parallelization is as good as possible for these 
-\todo{more analysis: difference between poolsizes}
 
 \subsection{Linear algebra parallelization}
 
@@ -335,18 +332,29 @@ First of all, speedup and runtimes are very consistent across runs, with only a 
 On a single node this is similar to the results from the benchmarks run on the PHYSnet, but on the HLRN cluster this also holds true across two nodes (for more than 96 processors).
 This is most likely due to the HLRN cluster being equipped with better communication hardware, which is also the reason for the speedup further increasing over two nodes, whereas in the benchmark on the PHYSnet cluster, the maximum speedup of around 20 was already achieved for 24 processors.
 A distinction between jobs running across on or two nodes can be made through the wait time though.
-\todo{wait time HLRN si}
+\todo{wait time and run time HLRN si}
 
 Another difference lies in the fact that the pool sizes 2 and 8 show a similar speedup with pool size 16 being a bit worse.
 This fact shows that while recommendations for parallelization parameters can be qualitatively made based on system size (more expensive system in terms of iterations, absolute runtime, etc. seem to benefit more from bigger k point pools, while smaller pools work best for smaller systems), the optimal size and processor range can vary depending on the compute cluster the calculations are run on.
 
 Fig. \ref{fig:scaling_scf_hlrn_nk_TaS2_speedup} and \ref{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait} show the benchmarks for the \TaS benchmarking system.
+This benchmark was only run a single time, not averaged over multiple runs.
+
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_hlrn_bench_nk_speedup.pdf}
 \caption{Scalability utilizing k-point parallelization for the \TaS benchmarking system over a range of processor pool sizes run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_TaS2_speedup}
 \end{figure}
+Interestingly, the upper bound for pool size is the same as for the calculations on the PHYSnet.
+In both cases, bigger pool sizes perform better up to 36 processors, with more processors per pool not showing better scaling.
+This suggests that this limit is not dependent on the compute cluster, but instead a property of the \TaS system:
+Just looking at the PHYSnet cluster, 36 as an upper limit might allude to an interpretation involving the size of nodes, where 36 processors is just under 2 full nodes and everything more will be spread over at least 3 nodes, with possibly more communication slowing down calculations.
+On the HLRN, the processor counts per CPU and node are different, so an analogous interpretation would suggest that the scaling gets better for pool sizes up to some multiple of 48 (the number of processors on one CPU).
+This is not the case, the processor pool of size 48 already shows worse scaling than the size 36.
+
+This is an important result, as for the more expensive \TaS system the topology of the compute cluster seems to not be important for the scaling behavior.
+This opens up the possibility of using the PHYSnet not just for calculations but also for first finding the best parameters for a particular system (so just running a few iterations) and then doing the real calculation on a cluster like the HLRN.
 
 \begin{figure}[ht!]
 \begin{subfigure}[b]{0.49\textwidth}
@@ -360,9 +368,17 @@ Fig. \ref{fig:scaling_scf_hlrn_nk_TaS2_speedup} and \ref{fig:scaling_scf_hlrn_nk
 \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait}
 \end{figure}
-
-\todo{HLRN analyse für TaS2}
+While the speedup plots look very similar between the PHYSnet and the HLRN, the absolute runtime in fig. \ref{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait} shows a massive difference between the two clusters.
+\todo{analyse absolute times and wait times HLRN tas2}
 
 \section{Conclusion: Parameters for optimal scaling}
+
+The benchmarks testing \QE 's \texttt{PWscf} module showed that the speedup gained from parallelization of is highly dependent on the specific system.
+While calculations on the relatively inexpensive silicon benchmarking system gained performance just in a range up to 24 processors and were faster by a factor of 2, the more expensive \TaS benchmarking system benefitted more from parallelization itself and as such from all efforts improving parallelization.
+
+Using the compilers and mathematical libraries from the \gls{oneapi} package was shown to improve scalability beyond a single node, with the maximum speedup at around 32 processors for the \TaS benchmarking system.
+This value was then confirmed to be the best choice for the size of processor pools in k point parallelization not just on the PHYSnet cluster, but also on the more capable HLRN cluster.
+
+A generalization for other systems beyond a qualitatively assessment that more expensive system profit more from parallelization than smaller system is not possible, but this chapter gives a guide on how to examine a system in order to get the optimal parameters.
 
 \end{document}
