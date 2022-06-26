@@ -146,16 +146,19 @@ Importantly, the runtime for the \gls{oneapi} benchmark is faster for smaller nu
     \end{tabular}
 \end{table}
 
-The same benchmark with the \gls{oneapi} compiled version of \QE is shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_speedup}.
+The same benchmark with the \gls{oneapi} compiled version of \QE is shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_speedup} and \ref{fig:scaling_scf_intel_nprocs_tas2_absolute_wait}.
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_intel_bench_nprocs_speedup.pdf}
     \caption{Scalability for the \TaS benchmarking system, \emph{\QE 7.0 compiled with \gls{oneapi} 2021.4, \texttt{nk 1} and \texttt{nd 1}}}
     \label{fig:scaling_scf_intel_nprocs_tas2_speedup}
 \end{figure}
-
-For this system, the speedup follows Amdahl's law, discussed in sec. \ref{sub:scalability_general} with a linear growth in speedup up to 32 processors with a saturation and only a small gain in speedup with more processors.
+For this system, the speedup roughly follows Amdahl's law, discussed in sec. \ref{sub:scalability_general} with a linear growth in speedup up to 32 processors with a saturation and only a small gain in speedup with more processors.
 In contrast to the benchmark with just \gls{openmpi} (fig. \ref{fig:scaling_scf_ompi_nprocs_tas2_speedup}) there is no drop in speedup after 20 processors.
+This is remarkable and also a difference to the silicon benchmarking system, where 1 node is a definite upper bound for scalability.
+An explanation for this behavior can be made with the help of Amdahl's law again.
+As discussed in sec. \ref{sub:scalability_general}, the exact form of the speedup is not dependent on absolute times of parallelized and unparallelized parts of a calculations, but rather the proportion between these two (and can thus be characterized by just the purely serial part \(s\)).
+This means that for a more expensive system such as the \TaS benchmarking system, when the absolute time for communication, data distribution and collection stays roughly the same and the time for a single \gls{kohn_sham} iteration (which can be parallelized) is way longer, the proportion of the purely serial part \(s\) gets smaller and the scaling behavior changes significantly.
 
 \begin{figure}[ht!]
     \begin{subfigure}[b]{0.49\textwidth}
@@ -169,14 +172,13 @@ In contrast to the benchmark with just \gls{openmpi} (fig. \ref{fig:scaling_scf_
     \caption{Absolute runtime and wait time for the scalability test on the \TaS benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk 1} and \texttt{nd 1}}}
     \label{fig:scaling_scf_intel_nprocs_tas2_absolute_wait}
 \end{figure}
-Moreover, the absolute runtime shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_absolute_wait} 
+Moreover, the absolute runtime shown in fig. \ref{fig:scaling_scf_intel_nprocs_tas2_absolute_wait} shows that the calculations not just scale better than with \gls{openmpi}, but they are significantly faster: whereas the minimum for the \gls{openmpi} benchmark is around \(\SI{1}{\hour} \SI{50}{\minute}\) for 20 processors, the \gls{oneapi} benchmark averages around \(\SI{40}{\minute}\) for 24 processors.
+While the benchmarks on the silicon benchmarking system do not seem to favor one set of compilers over the other, the tests on the \TaS benchmarking system clearly show the advantages of using \gls{oneapi} on the Intel hardware in the PHYSnet cluster.
 
-\todo{TaS2 intel scaling}
-
-This result not only stands for itself as a statement about scaling on a single node, but also provides a basis for scaling beyond the respective optimal ranges of processors for both systems:
+The observations on how many processors are optimal for certain kinds of systems not only stand for themselves as a statement about scaling on a single node or a small number of nodes, but also provide a basis for scaling beyond the respective optimal ranges of processors for both systems:
 The k point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual k points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
-Keeping the results of this section in mind, at least an for the quality k point parallelization can already be made:
-For the silicon system, the size of pools should be bigger than 6 processors for optimal scaling and for the \TaS system they should not be bigger than 32 processors.
+Keeping the results of this section in mind, at least an estimate for the quality of k point parallelization can already be made:
+For the silicon system, the size of pools should not be bigger than 6 processors for optimal scaling and for the \TaS system they should not be bigger than 32 processors.
 
 \section{Using the parallelization parameters of \QE}
 
@@ -305,11 +307,10 @@ Evidently, this number of \acrshort{kohn_sham} states is on the edge of linear a
 All calculations so far were exclusively run on the PHYSnet cluster and as such are limited by hardware and configuration present in the cluster.
 To assess this limitation, the k point benchmarks from sec. \ref{sub:scf_scaling_k_point} were run again on the another cluster, the HLRN cluster in particular.
 The North German Supercomputing Alliance (Norddeutscher Verbund für Hoch- und Höchstleistungsrechnen - HLRN) operates a distributed supercomputer system at the Georg-August-Universität Göttingen and the Zuse Institute Berlin.
-The current iteration HLRN-IV has nodes with 2 Intel Cascade Lake Platinum 9242 CPUs (48 cores each) and an Omni-Path (Intel proprietary Infiniband competitor) connection between nodes.
+The current iteration HLRN-IV has nodes with 2 Intel Cascade Lake Platinum 9242 CPUs (48 cores each) and an Omni-Path (Intels proprietary Infiniband competitor) connection between nodes.
+\QE is compiled with Intel Parallel Studio XE Composer Edition 2019 Update 5 (which is the predecessor of \gls{oneapi}, bundled without \gls{mpi} on the cluster) and Intel \gls{mpi} 2018.5.
 
 Fig. \ref{fig:scaling_scf_hlrn_nk_si_speedup} and \ref{fig:scaling_scf_hlrn_nk_si_absolute_wait} show the benchmarks for the silicon benchmarking system.
-\todo{compiler and MPI version HLRN!}
-
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/si_hlrn_bench_nk_speedup.pdf}
@@ -331,9 +332,15 @@ Fig. \ref{fig:scaling_scf_hlrn_nk_si_speedup} and \ref{fig:scaling_scf_hlrn_nk_s
 \end{figure}
 The scaling behavior has some striking differences in comparison with the same benchmarks run on the PHYSnet cluster
 First of all, speedup and runtimes are very consistent across runs, with only a minimal variance across the whole range of processors.
-This is consistent with the observations made on the PHYSnet, where scaling over a single node also was relatively consistent across runs.
+On a single node this is similar to the results from the benchmarks run on the PHYSnet, but on the HLRN cluster this also holds true across two nodes (for more than 96 processors).
+This is most likely due to the HLRN cluster being equipped with better communication hardware, which is also the reason for the speedup further increasing over two nodes, whereas in the benchmark on the PHYSnet cluster, the maximum speedup of around 20 was already achieved for 24 processors.
+A distinction between jobs running across on or two nodes can be made through the wait time though.
+\todo{wait time HLRN si}
 
+Another difference lies in the fact that the pool sizes 2 and 8 show a similar speedup with pool size 16 being a bit worse.
+This fact shows that while recommendations for parallelization parameters can be qualitatively made based on system size (more expensive system in terms of iterations, absolute runtime, etc. seem to benefit more from bigger k point pools, while smaller pools work best for smaller systems), the optimal size and processor range can vary depending on the compute cluster the calculations are run on.
 
+Fig. \ref{fig:scaling_scf_hlrn_nk_TaS2_speedup} and \ref{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait} show the benchmarks for the \TaS benchmarking system.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_hlrn_bench_nk_speedup.pdf}
@@ -353,6 +360,8 @@ This is consistent with the observations made on the PHYSnet, where scaling over
 \caption{Absolute runtime and wait time for the scalability test with k-point parallelization for the \TaS benchmarking system run on the HLRN cluster, \emph{\QE compiled with Intel Parallel Studio 2019u5, Intel MPI 2018.5, \texttt{nd 1}}}
 \label{fig:scaling_scf_hlrn_nk_TaS2_absolute_wait}
 \end{figure}
+
+\todo{HLRN analyse für TaS2}
 
 \section{Conclusion: Parameters for optimal scaling}
 
