@@ -1,8 +1,7 @@
 \documentclass[main.tex]{subfiles}
 
 \begin{document}
-\chapter{Ab initio methods for materials modeling\label{chap:ab-initio-modeling}}
-%\epigraph{It's a secret to everybody.}{a Moblin in \textit{The Legend of Zelda}}
+\chapter{Ab initio methods for materials modeling}\label{chap:ab-initio-modeling}
 
 %\section{The electronic structure problem\label{sec:theory_schrödinger}}
 
@@ -105,7 +104,8 @@ an ansatz for the total energy functional in eq. \ref{eq:hohenberg_kohn_energy_f
     E[n(\vb*{r})] = T_{\mathrm{S}} [n(\vb*{r})] + E_{\mathrm{H}} [n(\vb*{r})] + E_{\mathrm{XC}} [n(\vb*{r})] + \int \dd{\vb*{r}^{\prime}} V(\vb*{r}^{\prime}) n (\vb*{r}^{\prime})\,.
 \end{equation}
 where now \(E_{XC} [n(\vb*{r})]\) is a functional of the density accounting for all exchange and correlation effects not present in the non-interacting electron system.
-The success of \acrshort{dft} lies in the fact that \(E_{XC}\) contributes only a small part of the total energy and can be approximated in a useful manner. \todo{source, more explanation}
+The success of \acrshort{dft} lies in the fact that \(E_{XC}\) contributes only a small part of the total energy and can be approximated in a useful manner. 
+Even very simple approximations to \(E_{\mathrm{XC}}\) such as the Local Density Approximation (LDA), which uses the exchange and correlation energy of a homogenous electron gas can give accurate results for very inhomogeneous systems \cite{harris_adiabatic-connection_1984}.
 
 Using that form of \(E[n(\vb*{r})]\), from the variational problem (with a Lagrange parameter introduced to ensure the orthonormality of the states \(\Psi_i\))
 \begin{align}
@@ -126,7 +126,9 @@ Eq. \ref{eq:kohn-sham-equations} become the \acrshort{kohn_sham} equations
 Importantly, the potential \(v_{\mathrm{KS}}\) depends on the solutions \(\Psi_i (\vb*{r})\), as \(V_{\mathrm{H}}\) and \(V_{\mathrm{XC}}\) include the density \(n(\vb*{r})\).
 The problem thus is a self-consistency problem, meaning the density used for calculating the potentials and the obtained solution only agree for the exact solution.
 Arriving at a solution consists then of iterating the process of obtaining a new set of potentials from the solution and solving the \acrshort{kohn_sham} equations again.
-\todo{Something something good for computation, similaraly to hartree fock methods?}
+
+This kind of iterative, self-consistent method lends itself to being implemented in a computational context, as every single step is mathematically simple and the complexity arises from the e.g. size of the matrices occuring or the number of steps needed, which makes calculation by hand tedious but is perfect for execution on a computer.
+Other methods such as the Hartree-Fock method for approximating the wave function of a many-body quantum system are also based on an iterative process.
 
 \subsection{Pseudopotentials and basis set}\label{sub:theory_basis_set}
 
@@ -156,48 +158,19 @@ These potentials are called \acrfull{pp} and the orbitals constructed with them 
 This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\vert \vb*{k} + \vb*{G} \vert \leq E_{cutoff}\) \todo{should be (k+G) to the power of 2 right? also maybe concrete formula for that}. Besides the number of k points, this is the second variable which can influences the computation time of \acrshort{dft} calculations.
 
 With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transform from (discrete) real to (discrete) reciprocal space so every expectation value can be calculated in the optimal representation: in reciprocal space for the kinetic energy and in real space for the pseudopotentials.
-
-\todo{talk about scf loop here!}
-
-\begin{figure}[ht!]
-%\centering
-\begin{tikzpicture}[
-    squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=8cm,},
-    node distance=0.5cm]
-    \tikzset{every node/.style={inner sep=8pt}}
-    %Nodes
-    \node[squarednode]      (init)          {initial \(n(\vb*{r})\)};
-    \node[squarednode]      (step_1)    [below= of init]  {calculate \(v_H [n(\vb*{r})]\) and \(v_{XC} [n(\vb*{r})]\)};
-    \node[squarednode]      (step_2)    [below= of step_1]      {fourier transform potentials};
-    \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
-    \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
-    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb*{r})\) and \(E [n(\vb*{r})]\)};
-    \node[squarednode]      (done)      [below= of step_5]      {done if change in \(E\) is small enough};
-    
-    %Lines
-    \draw[->] (init.south) -- (step_1.north);
-    \draw[->] (step_1.south) -- (step_2.north);
-    \draw[->] (step_2.south) -- (step_3.north);
-    \draw[->] (step_3.south) -- (step_4.north);
-    \draw[->] (step_4.south) -- (step_5.north);
-    \draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
-    \draw[->] (step_5.south) -- (done.north);
-\end{tikzpicture}
-\label{fig:diagram_scf_calculations}
-\caption{Flowchart of an algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform}
-\end{figure}
+Details about the implementation of this will be discussed in sec. \ref{sub:qe_parallelization}.
 
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
 
-Within the framework of \acrshort{dft} a treatment of lattice vibrations can also be derived.
-\todo{Maybe a bit more introduction?}
+Within the framework of \acrshort{dft} a treatment of lattice vibrations can also be derived, as just knowledge of the ground-state density and its linear response to change in nucleic geometry is needed.
+As this is the fundamental quantity in \acrshort{dft}, an extension in \acrshort{dfpt} can be developed for calculating properties of lattice vibrations.
 This theory will be outlined in this section, following the review article by Baroni et al. \cite{baroni_phonons_2001}.
 
 \subsection{Sternheimer equation and Hellman-Feynman theorem}
 
-In a first step, two results  namely the Sternheimer equation to describing corrections to a wave function  and the Hellman-Feynman theorem 
-\todo{missing}
+In a first step, two prerequisite equations are derived, namely the Sternheimer equation describing corrections to a wave function and the Hellman-Feynman theorem linking the derivative of the total energy of a system to the derivative of the Hamiltonian with regards to the same parameter.
 
+The Sternheimer equation follows from standard perturbation theory.
 The idea of perturbation theory is to treat a quantum system as an easily solvable system \(\ope{H}_0\) experiencing a small perturbation \(\ope{H}_1\).
 The Hamiltonian for the perturbed system is then
 \begin{equation}
@@ -282,14 +255,12 @@ The second derivative of \(E(\vb*{R})\) is then calculated using the product rul
     + \int \dd{\vb*{r}} n_{\vb*{R}} (\vb*{r}) \pdv{V_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\alpha}}{\vb*{R}_{\beta}}
     + \pdv{W_{\mathrm{n-n}}}{\vb*{R}_{\alpha}}{\vb*{R}_{\beta}} \,.
 \end{equation}
-The lattice dynamics are thus determined by the electronic density \(n(\vb*{r})\) and its linear response to a change in the nuclear geometry \(\pdv{n_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\beta}}\)
+The lattice dynamics are thus determined by the electronic density \(n(\vb*{r})\) and its linear response to a change in the nuclear geometry \(\pdv{n_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\beta}}\).
 
 \subsection{Density Functional Perturbation Theory}
 
-Eq. \ref{eq:dfpt_second_energy_derivative} shows how
-\todo{introduction missing}
-
-This approach is called \acrfull{dfpt}, developed by Baroni et al. \cite{baroni_greens-function_1987} and Gonze \cite{gonze_adiabatic_1995}.
+The density response \(\pdv{n_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\beta}}\) can be calculated within a \acrshort{kohn_sham} \acrshort{dft} formulation.
+This approach combining perturbation theory, linear response theory and \acrshort{dft} is called \acrfull{dfpt}, developed by Baroni et al. \cite{baroni_greens-function_1987} and Gonze \cite{gonze_adiabatic_1995}.
 
 In a first step, the electronic density \ref{eq:density_ks_states} will be linearized
 \begin{equation}\label{eq:dfpt_finite_difference_density}
@@ -300,17 +271,15 @@ with the finite-difference operator regarding the parameter \(\vb*{R}\) (the sub
     \Delta^{\vb*{R}} F = \sum_{\alpha} \pdv{F_{\vb*{R}}}{\vb*{R}_{\alpha}} \Delta \vb*{R}_{\alpha}\,.
 \end{equation}
 The variation of the \acrshort{kohn_sham} orbitals can be obtained with the Sternheimer equation \ref{eq:dfpt_sternheimer}
-\begin{equation}
+\begin{equation}\label{eq:dfpt_correction_ks_orbitals}
     (H_0 - \epsilon_i) \ket{\Delta \Psi_i} = - (\Delta v_{\mathrm{KS}} - \Delta \epsilon_i) \ket{\Psi_i}\,,
 \end{equation}
 where \(H_0\) is the unperturbed \acrshort{kohn_sham} Hamiltonian \ref{eq:kohn_sham_hamiltonian}, \(\Delta v_{\mathrm{KS}}\) is the first-order correction to the potential \(v_{\mathrm{KS}}\)
-\begin{equation}
+\begin{equation}\label{eq:dfpt_correction_ks_potential}
     \Delta v_{\mathrm{KS}} = \frac{1}{2} \int \dd[3]{r^{\prime}} \frac{\Delta n(\vb*{r}^{\prime})}{\vert \vb*{r} - \vb*{r}^{\prime} \vert} + \left. \pdv{v_{\mathrm{XC}}}{n} \right\vert_{n = n(\vb*{r})} + \Delta V
 \end{equation}
 and \(\Delta \epsilon_i = \expval{\Delta v_{\mathrm{KS}}}{\Psi_i}\) is the first-order correction to the \acrshort{kohn_sham} eigenvalue \(\epsilon_i\).
 
-\todo{self-consistency again}
-
-
+As the right hand site in eq. \ref{eq:dfpt_correction_ks_orbitals} depends again on the perturbed density \(\Delta n(\vb*{r})\) (and as such on \(\ket{\Delta \Psi_i}\)), eq. \ref{eq:dfpt_finite_difference_density}-\ref{eq:dfpt_correction_ks_potential} are again self consistent equations, which can be solved in an iterative manner.
 
 \end{document}
