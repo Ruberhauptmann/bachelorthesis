@@ -29,9 +29,9 @@ def main():
     job_template = env.get_template('silicon_ph_bench_nd.sh.jinja')
 
     #for nd in find_square_numbers(max_number_procs):
-    for run in range(1):
-        #for nd in [1, 4, 9, 16]:
-        for nd in [1]:
+    for run in range(1, 5):
+        for nd in [4, 9, 16]:
+        #for nd in [1]:
             log_path = os.getenv('HOME') + '/job_logs/silicon/phonons/bench_la_parallel_intel/' + str(run) + '/nd_' + str(nd)
             os.makedirs(log_path, exist_ok=True)
             for file in glob.glob(log_path + '/*'):
@@ -68,7 +68,7 @@ def main():
         for file in glob.glob(log_path + '/*'):
             os.remove(file)
 
-        for n_procs in range(4, max_number_procs + 1, 4):
+        for n_procs in range(8, max_number_procs + 1, 4):
             job_name = 'silicon_ph_bench_nd_auto_n_procs_' + str(n_procs) + '_' + str(run)
             prefix = '\'' + job_name +  '\''
 
@@ -86,7 +86,7 @@ def main():
             with open('job_files/' + job_name + '.sh'  , 'w') as fh:
                 fh.write(job_file)
 
-            #subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
+            subprocess.call('qsub job_files/' + job_name + '.sh', shell=True)
 
 if __name__ == "__main__":
     main()
