@@ -3,7 +3,8 @@
 \begin{document}
 \chapter{Parallelization of DFPT calculations}\label{ch:optimization_ph}
 
-Calculations with the \texttt{PHonon} package are significantly more time intensive than \texttt{PWscf} calculations, so good parallelization is of the essence to make these calculations manageable.
+The \texttt{PHonon} package enables calculations of phonon eigenvectors and eigenmodes.
+This chapter examines the best ways to run \texttt{PHonon} calculations.
 
 \section{Optimal parallelization parameters for DFPT calculations}
 
@@ -14,13 +15,13 @@ Furthermore parallelization across q points (so called image parallelization) ca
 
 In a first step, the same k point parallelization benchmark as in sec. \ref{sub:scf_scaling_k_point} is run. This is pictured in fig. \ref{fig:scaling_ph_nk_si}.
 
-\begin{figure}[htb!]
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\textwidth]{plots_ph/si_ph_bench_nk_speedup.pdf}
+    \includegraphics[width=0.75\textwidth]{plots_ph/si_ph_bench_nk_speedup.pdf}
     \caption{Scalability utilizing k-point parallelization for the Si benchmarking system with three sizes of processor pools, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nd 1}}}
     \label{fig:scaling_ph_nk_si}
 \end{figure}
-Interestingly, the results from sec. \ref{sub:scf_scaling_k_point} is not reproduced here: the smallest pool size of 2 is not the one parallelizing best, but instead it is pool size 8.
+Interestingly, the result from the \texttt{PWscf} calculation on silicon from sec. \ref{sub:scf_scaling_k_point} is not reproduced here: the smallest pool size of 2 is not the one parallelizing best, but instead it is pool size 8.
 Furthermore, for more than 50 processors, even the biggest pool size 18 shows better scaling than the pool size 2.
 This is similar to the results in the \texttt{PWscf} benchmark with k point parallelization on the \TaS benchmarking system in sec. \ref{sub:scf_scaling_k_point}, as the separation between the different pool sizes isn't as clear as in the same benchmark on the silicon benchmarking system.
 \todo{some more interpretation possible}
@@ -39,13 +40,26 @@ This is similar to the results in the \texttt{PWscf} benchmark with k point para
 \end{figure}
 
 
-The wait time of up to \(\SI{50}{\percent}\) of the \gls{wall_time} 
+The wait time of up to \(\SI{50}{\percent}\) of the \gls{wall_time} shows that the quality of parallelization is not as good as in \texttt{PWscf} benchmark on \TaS in sec. \ref{sub:scf_scaling_k_point}, there it 
+
+which showed values for the runtime in a similar order of magnitude.
+
 
 reveals that load balancing for phonon calculations is not as easily done as for the electronic structure calculations, at least with just k point parallelization used.
 
 
 
 \subsection{Linear algebra parallelization}
+
+
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots_ph/si_ph_nd_bench_speedup.pdf}
+    \caption{Scalability utilizing linear algebra parallelization for the Si benchmarking system, \emph{\QE compiled with \gls{oneapi} 2021.4, \texttt{nk 1}}}
+    \label{fig:scaling_ph_nd_si}
+\end{figure}
+
 
 \section{Image parallelization}\label{sec:scaling_ph_images}
 
