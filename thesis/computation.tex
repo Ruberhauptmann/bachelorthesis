@@ -7,25 +7,32 @@
 \section{Parallel computing\label{sec:parallel_computing}}
 
 The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
-The information presented can be found in any textbook on parallel or high-perfomance computing \cite{hager_introduction_2010}.
+The information presented in this section comes from the textbook on high-performance computing by Hager and Wellein \cite{hager_introduction_2010}.
 
 \subsection{On scalabilty}\label{sub:scalability_general}
 
-In scientific computing, one can identify two distinct reasons to distribute workloads to multiple processors:
+In scientific computing, one can identify two distinct reasons for distributing workloads to multiple processors:
 \begin{itemize}
-    \item The execution time on a single core is not sufficient. The definition of sufficient is dependent on the specific task and can range from \enquote{over lunch} to \enquote{multiple weeks}
-    \item The memory requirements grow outside the capabilities of a single core
+    \item The execution time on a single core is not sufficient. The definition of sufficient is dependent on the specific task and can range from \enquote{over lunch} to \enquote{multiple weeks}.
+    \item The memory requirements grow outside the capabilities of a single core.
 \end{itemize}
 
-In order to judge how well a task can parallelized, usually some sort of scalabilty metric is employed, for example:
+In order to judge how well a task can be parallelized, usually a scalability metric is employed, for example:
 \begin{itemize}
     \item How fast can a problem be solved with \(N\) processors instead of one?
     \item What kind of bigger problem (finer resolution, more particles, etc.) can be solved with \(N\) processors?
     \item How efficiently are the resources utilized?
 \end{itemize}
-In this thesis, the main concern is speeding up the calculation of very time expensive calculations with a fixed problem size, so the first metric will be used to judge the quality of parallelization.
-This metric is called speedup and is defined as \(S = \frac{T_1}{T_N}\), where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
-In the ideal case, where all the work can be perfectly distributed among the processors, all processors need the same time for their respective workloads and don't have to wait for others processors to finish their workload to continue, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so the speedup would be \(S = \frac{T_1}{\frac{T_1}{N}} = N\).
+In this thesis, the main concern is speeding up the execution of extensively expensive calculations with a fixed problem size, so the first metric will be used to judge the quality of parallelization.
+This metric is called speedup and is defined as 
+\begin{equation}\label{eq:definition_speedup}
+    S = \frac{T_1}{T_N}\,, 
+\end{equation}
+where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
+In the ideal case, where all the work can be perfectly distributed among the processors, all processors need the same time for their respective workloads and don't depend on others processors finishing their workload to continue, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so inserting this into eq. \ref{eq:definition_speedup} gives a speedup of
+\begin{equation}
+    S = \frac{T_1}{\frac{T_1}{N}} = N\,.
+\end{equation}
 
 In reality, there are many factors either limiting or in some cases supporting parallel code scalability. Limiting factors include:
 \begin{itemize}
@@ -34,19 +41,16 @@ In reality, there are many factors either limiting or in some cases supporting p
     \item \emph{Startup Overhead}: introducing parallelization into a programm necessarily introduces an overhead, e.g. for distributing data across all the processors
     \item \emph{Communication}: often solving a problem requires communication between different cores (e.g. exchange of interim results after a step of the calculation). Communication can be implemented very effectively, but can still introduce a big prize in computation time
 \end{itemize}
-On the other hand, faster parallel code execution can come from:
-\begin{itemize}
-    \item \emph{Better caching}: optimal performance per core is achieved when all the data can be kept in cache, so distributing data among more processors may lead to better than linear scaling because the data size per processor gets smaller
-\end{itemize}
+On the other hand, \emph{better caching} can lead to better scaling than \(S = N\): as optimal performance per core is achieved when all the data can be kept in cache, reducing the data size per processor by distributing data among more processors can lead to each individual processor being faster than in the single core case.
 
-A simple ansatz for modeling speedup was first thought of by Gene Amdahl \cite{amdahl_validity_1967}.
-Assuming the work that needs to be done is split into a part which cannot be parallelized \(s\) and a part which can be parallelized ideally \(p\), we can normalize the serial time to 1:
+A simple ansatz for modeling speedup with these limitations in mind was first derived by Gene Amdahl \cite{amdahl_validity_1967}.
+Assuming the work that needs to be done is split into a part which cannot be parallelized \(s\) and a part which can be parallelized ideally \(p\), serial time can be normalized to 1:
 \begin{equation}
     T_1 = s + p = 1
 \end{equation}
 The time for solving the problem on \(N\) processors is then
 \begin{equation}
-    T_N = s + \frac{p}{N}
+    T_N = s + \frac{p}{N}\,.
 \end{equation}
 The speedup is now
 \begin{equation}\label{eq:amdahls_law}
@@ -63,14 +67,17 @@ This equation is called \emph{Amdahl's law} and is plotted in fig. \ref{fig:amda
 
 \subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
 
+
+
 In the \QE output, a time report listing is printed at the end.
 This time report includes \gls{cpu_time} and \gls{wall_time}, from those three different metrics of scalability can be calculated:
 \begin{itemize}
     \item runtime: absolute runtime (\gls{wall_time}) of the compute job
-    \item speedup: runtime divided by runtime of the job on a single core
+    \item speedup: runtime on \(N\) processors divided by runtime on a single core
     \item \gls{wait_time}: percentage of \gls{wall_time} not used by \QE process, so writing to disk, waiting for IO devices or other processes, etc. (calculated as (\gls{wall_time} - \gls{cpu_time}) / \gls{wall_time})
 \end{itemize}
-For further analysis mainly speedup will be used to evaluate the scalability of \QE calculation, because it makes comparing the scaling of calculations with different absolute runtimes easy: optimal scaling is achieved when the speedup has a slope of one, as discussed in sec. \ref{sub:scalability_general}, independent of the runtime.
+For analysis mainly speedup will be used to evaluate the scalability of \QE calculation.
+It makes comparing the scaling of calculations with different absolute runtimes easy: as discussed in sec. \ref{sub:scalability_general}, optimal scaling is achieved when the speedup has a slope of one, independent of the runtime.
 
 Regardless, the other two parameters should also always be considered: in the end, absolute runtime is the most important factor and should govern the decision of how much resources are used for solving a particular problem.
 As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
@@ -83,11 +90,11 @@ This of course can vary depending on how complex data distribution is, but there
 Communication and bottlenecks on the other hand both introduce wait time which depends on the number of processors.
 Differentiating between them is relies on knowledge of the specific hardware of the system running the calculations, so how many cores are on a single chip/motherboard/node, which resources are shared between how many cores, etc.
 
-Importantly, for this interpretation to be meaningful, the cpu and wall times reported by \QE have to accurate, because they are trusted without verification.
+For this interpretation to be meaningful, the CPU and wall times reported by \QE have to accurate, because they are trusted without verification.
 Just as an example for the pitfalls of this approach, when executing programs on multiple processors in parallel, \gls{cpu_time} is measured per processor, so some kind of truncation is done when a single number (such as in \QE) is reported.
 Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
 
-However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), so it will also be used a qualitative measure of good parallelization in this thesis.
+However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), therefore it will also be used as a qualitative measure of good parallelization in this thesis.
 
 \section{\QE}\label{sec:qe}
 
