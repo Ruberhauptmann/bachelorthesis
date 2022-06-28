@@ -33,18 +33,12 @@ if __name__ == "__main__":
 
     wait_time = {}
 
-    print(n_procs)
-
     for ni in n_procs:
         wait_time[ni] = np.zeros(walltimes_max[ni].shape)
 
     for ni in n_procs:
         for run_index, walltime_ni in enumerate(walltimes_max[ni]):
-            print(walltime_ni)
-            print(cputimes_max[ni][run_index])
             wait_time[ni][run_index] = (walltime_ni - cputimes_max[ni][run_index]) / walltime_ni
-
-    print(wait_time)
 
     ni_plots.plot(wait_time, n_procs, "si_ph_poolsize_8", "wait")
 

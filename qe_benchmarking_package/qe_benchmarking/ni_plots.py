@@ -81,21 +81,26 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
         height = 0.75 * width
         fig, ax1 = plt.subplots(figsize=(width, height))
 
-    for ni in n_procs:
-        if plot_error:
-            ax1.fill_between(n_procs[ni][0], y_mean[ni]-y_std[ni], y_mean[ni]+y_std[ni], alpha=0.2)
-            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed')
-        else:
-            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed')
-
     max_nprocs = 0
     for ni in n_procs:
         if np.max(n_procs[ni].flatten()) > max_nprocs:
             max_nprocs = np.max(n_procs[ni].flatten())
-    
+
     if type == "speedup":
         linear_nprocs = np.linspace(0, max_nprocs)
         ax1.plot(linear_nprocs, linear_nprocs)
+
+    for ni in n_procs:
+        color = next(ax1._get_lines.prop_cycler)['color']
+        if plot_error:
+            if len(n_procs[ni][0]) == 1:
+                ax1.errorbar(n_procs[ni][0], y_mean[ni], y_std[ni], color=color)
+            ax1.fill_between(n_procs[ni][0], y_mean[ni]-y_std[ni], y_mean[ni]+y_std[ni], alpha=0.2, color=color)
+            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed', color=color)
+        elif type == "wait":
+            ax1.plot(n_procs[ni][0], y_mean[ni] * 100, label=ni, marker='o', linestyle='dashed', color=color)
+        else:
+            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed', color=color)
 
     ax1.set_xlabel("number of processors $N$")
 
