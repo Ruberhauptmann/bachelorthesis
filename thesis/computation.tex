@@ -67,8 +67,6 @@ This equation is called \emph{Amdahl's law} and is plotted in fig. \ref{fig:amda
 
 \subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
 
-
-
 In the \QE output, a time report listing is printed at the end.
 This time report includes \gls{cpu_time} and \gls{wall_time}, from those three different metrics of scalability can be calculated:
 \begin{itemize}
@@ -144,7 +142,7 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
 \QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
 This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
 
-\begin{figure}[ht!]
+\begin{figure}[htb!]
 \label{fig:diagram-scf-calculations}
 %\centering
 \begin{tikzpicture}[
@@ -171,7 +169,6 @@ This section introduces the parallelization capabilities of the \texttt{PWscf} a
 \end{tikzpicture}
 \caption{Flowchart of an algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform}
 \end{figure}
-
 Fig. \ref{fig:diagram-scf-calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
 A few possibilities for parallelization of calculations can be derived from that.
 
@@ -204,7 +201,7 @@ Following this, the number of processors in one k point pool is then given by \(
 All calculations were run on a reserved subset of the \texttt{infinix} queue on the PHYSnet compute cluster, with 20 nodes.
 As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip and 200 processors in the whole queue.
 
-\todo{speed comparison}
+\todo{speed comparison, why is this important?}
 
 %Knowing the specific hardware configuration the calculations are run on is important, as that provides a scale of different communication speeds:
 %\begin{itemize}
@@ -215,25 +212,5 @@ As of time of writing, the nodes in this queue are equipped with two Intel Xeon 
 %\todo{speed comparison between processors on one chip, on one motherboard, between nodes (infiniband)}
 %This gives guidelines on how well calculations can be parallelized on different numbers of processors.
 %As an example, any calculation with a massive need for communication, for example the calculations one the PW 
-
-\section{Examined systems}\label{sec:examined_systems}
-
-\subsection{Silicon}\label{sub:systems_silicon}
-
-Silicon is the fundamental material in integrated circuits and as such is one of the pillars of the digital revolution.
-Analogue to the Stone, Bronze or Iron Age, this age of civilization can thus be called the Silicon Age \cite{chabal_fundamental_2001}.
-Consequently, silicon is a well studied material from an experimental and theoretical standpoint with established properties.
-\todo{crystal structure?}
-This combined with the fact that with only 8 electrons per unit cell \acrshort{dft} calculations on silicon are not particularly expensive makes it an ideal system for many introduction to \acrshort{dft} calculation as well as a good benchmarking system.
-All benchmarks in this thesis were run on silicon first and with the information gained from that benchmarks on a more expensive system were run.
-
-The calculations in ch. \ref{ch:optimisation_scf} were made with a plane wave cutoff of
-
-made on a 40x40x40 k point grid, 
-
-All calculations use a PBE XC-functional with a norm-conserving \acrshort{pp} generated using Vanderbilt's method \cite{hamann_erratum_2017}.
-
-
-\subsection{\TaS}\label{sub:systems_tas2}
 
 \end{document}

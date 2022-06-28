@@ -385,6 +385,7 @@ The benchmarks testing \QE 's \texttt{PWscf} module showed that the speedup gain
 While calculations on the relatively inexpensive silicon benchmarking system gained performance just in a range up to 24 processors and were faster by a factor of 2, the more expensive \TaS benchmarking system benefitted more from parallelization itself and as such from all efforts improving parallelization.
 
 Using the compilers and mathematical libraries from the \gls{oneapi} package was shown to improve scalability beyond a single node, with the maximum speedup at around 32 processors for the \TaS benchmarking system.
+\todo{linear algebra parallelization}
 This value was then confirmed to be the best choice for the size of processor pools in k point parallelization not just on the PHYSnet cluster, but also on the more capable HLRN cluster.
 
 A generalization for other systems beyond a qualitatively assessment that more expensive system profit more from parallelization than smaller system is not possible, but this chapter gives a guide on how to examine a system in order to get the optimal parameters.

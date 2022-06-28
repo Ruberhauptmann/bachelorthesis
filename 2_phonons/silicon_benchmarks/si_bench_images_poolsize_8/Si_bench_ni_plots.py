@@ -42,6 +42,8 @@ if __name__ == "__main__":
 
     ni_plots.plot(wait_time, n_procs, "si_ph_poolsize_8", "wait")
 
+    ni_plots.plot_two([speedup, wait_time], n_procs, "si_ph_poolsize_8", ["speedup", "wait"])
+
     ### Plot efficiency
 
     efficiency = {}

@@ -67,6 +67,58 @@ def plot_images(y, n_procs, prefix):
 
     fig.savefig(filename, bbox_inches="tight")
 
+def plot_two(y, n_procs, prefix, type):
+    TEXTWIDTH = 5.62315
+
+    y_std = []
+    y_mean = []
+
+    for i, y_sub in enumerate(y):
+        y_std_tmp, y_mean_tmp = take_mean(y_sub)
+        y_std.append(y_std_tmp)
+        y_mean.append(y_mean_tmp)
+
+    width = 1.3 * TEXTWIDTH
+    height = 0.4 * width
+
+    fig, axes = plt.subplots(1, 2, figsize=(width, height))
+    fig.set_tight_layout(True)
+
+    max_nprocs = 0
+    for ni in n_procs:
+        if np.max(n_procs[ni].flatten()) > max_nprocs:
+            max_nprocs = np.max(n_procs[ni].flatten())
+
+
+    for i, y_sub in enumerate(y_mean):
+        if type[i] == "speedup":
+            linear_nprocs = np.linspace(0, max_nprocs)
+            axes[i].plot(linear_nprocs, linear_nprocs)
+        axes[i].set_xlabel("number of processors $N$")
+        for nk in n_procs:
+            color = next(axes[i]._get_lines.prop_cycler)['color']
+            if type[i] == "absolute":
+                axes[i].set_ylabel("runtime $T$ [$s$]")
+                axes[i].fill_between(n_procs[nk][0], y_mean[i][nk]-y_std[i][nk], y_mean[i][nk]+y_std[i][nk], alpha=0.2, color=color)
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
+            if type[i] == "speedup":
+                axes[i].set_ylabel("speedup $S$")
+                axes[i].fill_between(n_procs[nk][0], y_mean[i][nk]-y_std[i][nk], y_mean[i][nk]+y_std[i][nk], alpha=0.2, color=color)
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
+            if type[i] == "wait":
+                axes[i].set_ylabel('wait time [%]')
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
+            if type[i] == "efficiency":
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed')
+
+        axes[i].legend()
+        axes[i].grid(0.3)
+
+    filename = prefix + "_bench_nk_" + type[0] + "_" + type[1] + ".pdf"
+
+    fig.savefig(filename, bbox_inches="tight")
+
+
 def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
     TEXTWIDTH = 5.62315
 
