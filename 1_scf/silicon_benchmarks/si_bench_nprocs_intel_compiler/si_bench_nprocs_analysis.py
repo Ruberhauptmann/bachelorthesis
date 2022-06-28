@@ -53,6 +53,8 @@ if __name__ == "__main__":
 
     plot(walltimes, n_procs, "si_intel", "absolute", plot_error=True)
 
+    nprocs_plots.plot(walltimes, n_procs, "small_si_intel", "absolute", plot_error=True, figsize="small")
+
     print(n_procs[0])
     print(take_mean(walltimes)[1][0])
     print(n_procs[1])
@@ -73,6 +75,8 @@ if __name__ == "__main__":
     speedup = walltime_singlecore / walltimes
 
     nprocs_plots.plot(speedup, n_procs, "si_intel", "speedup", plot_error=True)
+
+    nprocs_plots.plot(speedup, n_procs, "small_si_intel", "speedup", plot_error=True, figsize="small")
 
     ### Plot idle time
 

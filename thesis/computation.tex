@@ -80,7 +80,7 @@ For analysis mainly speedup will be used to evaluate the scalability of \QE calc
 It makes comparing the scaling of calculations with different absolute runtimes easy: as discussed in sec. \ref{sub:scalability_general}, optimal scaling is achieved when the speedup has a slope of one, independent of the runtime.
 
 Regardless, the other two parameters should also always be considered: in the end, absolute runtime is the most important factor and should govern the decision of how much resources are used for solving a particular problem.
-As an example, for a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
+For instance, a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
 Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
 On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
 
@@ -88,9 +88,9 @@ As for the \gls{wait_time}, this metric can be used to separate the different fa
 Startup overhead is easy to identify, as this should be a small, near constant percentage of the absolute runtime.
 This of course can vary depending on how complex data distribution is, but there should at least not be a strong dependence on the number of processors, as only a small amount of communication is needed.
 Communication and bottlenecks on the other hand both introduce wait time which depends on the number of processors.
-Differentiating between them is relies on knowledge of the specific hardware of the system running the calculations, so how many cores are on a single chip/motherboard/node, which resources are shared between how many cores, etc.
+Differentiating between them is relies on knowledge of the specific hardware of the system running the calculations, so how many cores are on a single chip, motherboard or node, which resources are shared between how many cores, etc.\,.
 
-For this interpretation to be meaningful, the CPU and wall times reported by \QE have to accurate, because they are trusted without verification.
+For this interpretation to be meaningful, the CPU and wall times reported by \QE have to be accurate, because they are trusted without verification.
 Just as an example for the pitfalls of this approach, when executing programs on multiple processors in parallel, \gls{cpu_time} is measured per processor, so some kind of truncation is done when a single number (such as in \QE) is reported.
 Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
 
@@ -98,11 +98,11 @@ However, the notion of using the difference between \gls{wall_time} and \gls{cpu
 
 \section{\QE}\label{sec:qe}
 
-\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties (module \texttt{PWscf}) as well as phonon frequencies and eigenvectors (module \texttt{PHonon}).
+\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties (module \texttt{PWscf}) as well as phonon frequencies and eigenmodes (module \texttt{PHonon}).
 
 \subsection{Compilation of \QE}\label{sub:qe_compilation}
 
-As the core of this thesis is an in depth examination of the \QE software and ways its performance can be optimized, a discussion of the way is is compiled is needed.
+As the core of this thesis is an in depth examination of the \QE software and ways its performance can be optimized, a discussion of the way it is compiled is needed.
 The information in this section is taken from the \QE 7.0 user guide \cite{noauthor_quantum_nodate}.
 
 The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make} \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
@@ -113,7 +113,7 @@ In order to make the installation as easy as possible, \QE comes with a publicly
 Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations significantly improves performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
 
 On the PHYSnet cluster, a variety of software packages are available as modules.
-The benchmark in this thesis were made using the following module combinations:
+The benchmarks in this thesis were made using the following module combinations:
 \begin{itemize}
     \item \texttt{openmpi/4.1.1.gcc10.2-infiniband}: \gls{openmpi} 4.1.0 (implies usage of \QE provided \gls{blas}/\gls{lapack})
     \item \texttt{openmpi/4.1.1.gcc10.2-infiniband openblas/0.3.20}: \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
@@ -121,7 +121,7 @@ The benchmark in this thesis were made using the following module combinations:
     \item \texttt{intel/oneAPI-2021.4}: \gls{oneapi} 2021.4
 \end{itemize}
 
-\QE offers an configuration script to automatically find all required libraries.
+\QE offers a configuration script to automatically find all required libraries.
 As the default options of the \texttt{configure} script work well in the use case of this thesis, all compilations were made using the minimal commands
 \begin{verbatim}
     module load <module names>
@@ -129,7 +129,7 @@ As the default options of the \texttt{configure} script work well in the use cas
 \end{verbatim}
 with the scalapack options yes (when using \texttt{scalapack/2.2.0}), intel (when using \\ \texttt{intel/oneAPI-2021.4}) and no otherwise.
 
-The output of the configuration script gives information about the libraries it found.
+The output of the configuration script gives information about the detected libraries.
 In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas} and \gls{scalapack} libraries from that package will be used, whereas the included \gls{fft} library will be used:
 \begin{verbatim}
     The following libraries have been found:
@@ -139,12 +139,13 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
     FFT_LIBS= 
 \end{verbatim}
 
-\subsection{Parallelization capabilities offered by \QE}\label{sub:qe_parallelization}
+\subsection{Parallelization capabilities implemented in \QE}\label{sub:qe_parallelization}
 
 \QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
 This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
 
 \begin{figure}[ht!]
+\label{fig:diagram-scf-calculations}
 %\centering
 \begin{tikzpicture}[
     squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=8cm,},
@@ -168,11 +169,10 @@ This section introduces the parallelization capabilities of the \texttt{PWscf} a
     \draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
     \draw[->] (step_5.south) -- (done.north);
 \end{tikzpicture}
-\label{fig:diagram_scf_calculations}
 \caption{Flowchart of an algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform}
 \end{figure}
 
-Fig. \ref{fig:diagram_scf_calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
+Fig. \ref{fig:diagram-scf-calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
 A few possibilities for parallelization of calculations can be derived from that.
 
 First of all, the real/reciprocal are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the orbitals in the plane wave basis set as well as charges and densities.
@@ -182,11 +182,13 @@ The price to pay for this parallelization is the need for communication between 
 This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
 
 As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
-\QE can use this fact and separate the total number of processors into smaller pools, each doing the calculations for a set of k points, so called \emph{k point parallelization}.
-The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into, so the resulting number of processors in one pool is \(N / N_k\).
+In \QE this is implemented such that a separation of the total number of processors into smaller pools, each doing the calculations for a set of k points is possible.
+This is called \emph{k point parallelization}.
+The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into.
+Hence, the resulting number of processors in one pool is \(\nicefrac{N}{N_k}\).
 Within one k point processor pool, the PW parallelization with its heavy communication is automatically applied.
 
-In an level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
+In a level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
 This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group>}.
 Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
 Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra group has to be a square number.

@@ -24,11 +24,17 @@ if __name__ == "__main__":
 
     nprocs_plots.plot(speedup, n_procs, "TaS2_ompi", "speedup", plot_error=True)
 
+    nprocs_plots.plot(speedup, n_procs, "TaS2_ompi_small", "speedup", plot_error=True, figsize="small")
+
     ### Plot idle time
 
     wait_time = (walltimes - cputimes) / walltimes
 
     nprocs_plots.plot(wait_time, n_procs, "TaS2_ompi", "wait")
+
+    ### Plot absolute and wait side by side
+
+    nprocs_plots.plot_two([walltimes, wait_time], n_procs, "TaS2_ompi", ["absolute", "wait"])
 
     ### Plot efficiency
 

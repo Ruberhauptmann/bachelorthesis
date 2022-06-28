@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     walltimes_max, cputimes_max = ni_plots.take_image_max(walltimes), ni_plots.take_image_max(cputimes)
 
-    ni_plots.plot(walltimes_max, n_procs, "si_ph_poolsize_8", "absolute", plot_error=True)
+    ni_plots.plot(walltimes_max, n_procs, "si_ph_poolsize_8", "absolute", plot_error=True, figsize="big")
 
     ### Plot speedup
 

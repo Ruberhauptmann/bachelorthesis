@@ -1,14 +1,14 @@
 from matplotlib.pyplot import plot
 import numpy as np
 
-from qe_benchmarking import qe_helper, nk_plots
+from qe_benchmarking import qe_helper, nd_plots
 
 if __name__ == "__main__":
     ### Plot absolute times
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=True)
 
-    nk_plots.plot(walltimes, n_procs, "si_intel_mkl", "absolute", plot_error=True)
+    nd_plots.plot(walltimes, n_procs, "si_intel", "absolute", plot_error=True)
 
     ### Plot speedup
 
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     for nk in n_procs:
         speedup[nk] = walltime_singlecore / walltimes[nk]
 
-    nk_plots.plot(speedup, n_procs, "si_intel_mkl", "speedup", plot_error=True)
+    nd_plots.plot(speedup, n_procs, "si_intel", "speedup", plot_error=True)
 
     ### Plot idle time
 
@@ -31,7 +31,9 @@ if __name__ == "__main__":
     for nk in n_procs:
         wait_time[nk] = (walltimes[nk] - cputimes[nk]) / walltimes[nk]
 
-    nk_plots.plot(wait_time, n_procs, "si_intel_mkl", "wait")
+    nd_plots.plot(wait_time, n_procs, "si_intel", "wait")
+    
+    nd_plots.plot_two([speedup, walltimes], n_procs, "si_intel", ["speedup", "absolute"])
 
     ### Plot efficiency
 
@@ -40,4 +42,4 @@ if __name__ == "__main__":
     for nk in n_procs:
         efficiency[nk] = speedup[nk] / n_procs[nk]
 
-    nk_plots.plot(efficiency, n_procs, "si_intel_mkl", "efficiency")
+    nd_plots.plot(efficiency, n_procs, "si_intel", "efficiency")

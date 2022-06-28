@@ -36,6 +36,8 @@ if __name__ == "__main__":
 
     nk_plots.plot(wait_time, n_procs, "si_hlrn", "wait", plot_error=True)
 
+    nk_plots.plot_two([walltimes, wait_time], n_procs, "si_hlrn", ["absolute", "wait"])
+
     ### Plot efficiency
 
     efficiency = {}

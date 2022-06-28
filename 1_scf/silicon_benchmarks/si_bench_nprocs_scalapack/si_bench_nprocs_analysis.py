@@ -20,6 +20,8 @@ if __name__ == "__main__":
 
     nprocs_plots.plot(speedup, n_procs, "si_scalapack", "speedup", plot_error=True)
 
+    nprocs_plots.plot(speedup, n_procs, "small_si_scalapack", "speedup", plot_error=True, figsize="small")
+
     ### Plot idle time
 
     wait_time = (walltimes - cputimes) / walltimes

@@ -11,6 +11,8 @@ if __name__ == "__main__":
 
     nk_plots.plot(walltimes, n_procs, "TaS2_intel", "absolute", plot_error=True)
 
+    nk_plots.plot(walltimes, n_procs, "small_TaS2_intel", "absolute", plot_error=True, figsize="small")
+
     ### Plot speedup
 
     cputimes_singlecore, walltimes_singlecore = qe_helper.extract_times("out_files_singlecore", multiple_runs=True)[0:2]
@@ -27,6 +29,8 @@ if __name__ == "__main__":
 
     nk_plots.plot(speedup, n_procs, "TaS2_intel", "speedup", plot_error=True)
 
+    nk_plots.plot(speedup, n_procs, "small_TaS2_intel", "speedup", plot_error=True, figsize="small")
+
     ### Plot idle time
 
     wait_time = {}
@@ -37,6 +41,10 @@ if __name__ == "__main__":
             wait_time[nk][run_index] = (walltime_nk - cputimes[nk][run_index]) / walltime_nk
 
     nk_plots.plot(wait_time, n_procs, "TaS2_intel", "wait")
+
+    ### Plot wait and absolute time side by side
+
+    nk_plots.plot_two([walltimes, wait_time], n_procs, "TaS2_intel", ["absolute", "wait"])
 
     ### Plot efficiency
 

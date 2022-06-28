@@ -57,7 +57,9 @@ if __name__ == "__main__":
 
     print("Time at ", n_procs["2"][0][4], " processors: ", walltimes_mean["2"][4])
 
-    plot(walltimes, n_procs, "si_intel", "absolute", plot_error=True)
+    nk_plots.plot(walltimes, n_procs, "si_intel", "absolute", plot_error=True)
+
+    nk_plots.plot(walltimes, n_procs, "small_si_intel", "absolute", plot_error=True, figsize="small")
 
     ### Plot speedup
 
@@ -74,6 +76,8 @@ if __name__ == "__main__":
             speedup[nk][run_index] = walltime_singlecore / walltime_nk
 
     nk_plots.plot(speedup, n_procs, "si_intel", "speedup", plot_error=True)
+
+    nk_plots.plot(walltimes, n_procs, "small_si_intel", "speedup", plot_error=True, figsize="small")
 
     ### Plot idle time
 

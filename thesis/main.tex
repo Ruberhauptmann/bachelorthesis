@@ -8,9 +8,9 @@
 
 \input{preamble.tex}
 
-\usepackage{blindtext}
-
 \loadglsentries[main]{glossary.tex}
+
+\usepackage{layouts}
 
 \newcommand{\QE}{\textsc{Quantum} ESPRESSO\xspace}
 \newcommand{\TaS}{TaS\textsubscript{2}\xspace}
@@ -27,6 +27,12 @@
     %
     % Wie in Büchern: Seitennummerierung in kleinen römischen Zahlen; Kapitel und Abschnitte ohne Nummerierung
 	\frontmatter
+
+    %\layout
+    %\pagediagram
+    textwidth in inches: \printinunitsof{in}\prntlen{\textwidth}
+
+    textheight in inches: \printinunitsof{in}\prntlen{\textheight}
 
     \listoftodos
     \clearpage
