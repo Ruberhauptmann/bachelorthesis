@@ -96,7 +96,7 @@ The wait time (also calculated from the longest running image) shown in fig. \re
 As an example, for 64 processors, 8 images is \(\nicefrac{N_P}{N_i} = 8\), so the pool size is already 8 as required and the parameter \texttt{nk} is chosen to be 1.
 So at least for the silicon system it seems to be advisable to choose the parameter \texttt{ni} as large as possible, so that \texttt{nk} can be chosen as small as possible while keeping a pool size of 8.
 
-\section{Phonon calculations on \TaS}
+\section{Phonon calculations on \TaS}\label{sec:phonon_tas2}
 
 The results from the last section can be used to estimate good parallelization parameters for a phonon calculation at the \(\mathrm{\Gamma}\) point for \TaS in the charge density wave phase.
 The calculations were run on 180 processors, once with the previous established optimal pool size of 36 and once with a pool size of 18 for comparison.

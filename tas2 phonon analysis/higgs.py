@@ -98,6 +98,33 @@ plot.line(*list(zip(*RS))[:2], ball_color='yellow', **atom)
 
 for i in range(len(RTa)):
     if plot.xmin < RTa[i, 0] < plot.xmax and plot.ymin < RTa[i, 1] < plot.ymax:
-        plot.code(r'\draw[draw=red, ->] (<x=%g>, <y=%g>) -- (<x=%g>, <y=%g>);' % (R1[i, 0], R1[i, 1], R2[i, 0], R2[i, 1]))
+        plot.code(r'\draw[draw=orange, ->, line width=0.3mm] (<x=%g>, <y=%g>) -- (<x=%g>, <y=%g>);' % (R1[i, 0], R1[i, 1], R2[i, 0], R2[i, 1]))
 
 plot.save('higgs', pdf=True)
+
+plot = storylines.Plot(
+    style = 'NatCommun',
+
+    xyaxes = False,
+
+    height = 0,
+
+    xmax = a[0, 0] + margin,
+    xmin = a[1, 0] - margin,
+    ymin = -margin,
+    ymax = a[1, 1] + margin,
+    )
+
+plot.line(*list(zip(0 * a[0], a[0], a[0] + a[1], a[1], 0 * a[1]))[:2])
+
+atom = dict(mark='ball', mark_size='1mm', only_marks=True, omit=False, cut=True)
+
+plot.line(*list(zip(*r))[:2], ball_color='gray', **atom)
+plot.line(*list(zip(*RTa))[:2], ball_color='black', **atom)
+plot.line(*list(zip(*RS))[:2], ball_color='yellow', **atom)
+
+#for i in range(len(RTa)):
+#    if plot.xmin < RTa[i, 0] < plot.xmax and plot.ymin < RTa[i, 1] < plot.ymax:
+#        plot.code(r'\draw[draw=red, ->] (<x=%g>, <y=%g>) -- (<x=%g>, <y=%g>);' % (R1[i, 0], R1[i, 1], R2[i, 0], R2[i, 1]))
+
+plot.save('symmetric', pdf=True)

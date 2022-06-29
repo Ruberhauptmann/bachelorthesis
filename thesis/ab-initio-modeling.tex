@@ -137,25 +137,35 @@ Bloch's theorem states that in case of a periodic external potential, which make
 \begin{equation}
     \Psi (\vb*{r}) = \Psi_{n \vb*{k}} (\vb*{r}) = e^{i \vb*{k} \cdot \vb*{r}} u_{n \vb*{k}} (\vb*{r})\,,
 \end{equation}
-where \(\vb*{k}\) is the quasi-momentum and \(u_{n \vb*{k}} (\vb*{r})\) has the periodicity of the unit cell.
+where \(\vb*{k}\) is the quasi-momentum, \(n\) is the band index and \(u_{n \vb*{k}} (\vb*{r})\) has the periodicity of the unit cell.
 A natural choice to represent \(u_{n \vb*{k}} (\vb*{r})\) is the discrete set of plane waves \(\ket{\vb*{G}}\)
 \begin{align}
-    \bra{\vb*{r}} \ket{\vb*{G}} &= \frac{1}{\sqrt{V}} e^{i \vb*{G} \vb*{r}} \\
-    \implies \Psi_{n \vb*{k}} (\vb*{r}) &= \sum_{\vb*{G}} c_{n \vb*{k}, \vb*{G}} e^{i (\vb*{k} + \vb*{G}) \vb*{r}}
+    u_{n \vb*{k}} (\vb*{r}) &= \frac{1}{\sqrt{V}} \sum_{\vb*{G}} e^{i \vb*{G} \vb*{r}}\,,
 \end{align}
-where \(\vb*{G}\) is a reciprocal lattice vector. \todo{right like that? do the plane waves have the periodicity of the unit cell?}
+where \(\vb*{G}\) is a reciprocal lattice vector and \(V\) is the volume of the unit cell.
+From that the form \(\Psi_{n \vb*{k}}\) follows:
+\begin{align}\label{}
+    \implies \Psi_{n \vb*{k}} (\vb*{r}) &= \frac{1}{\sqrt{V}} \sum_{\vb*{G}} e^{i (\vb*{k} + \vb*{G}) \vb*{r}}\,.
+\end{align}
 With this choice of basis set, the kinetic energy is easily calculated:
 \begin{equation}
-    \bra{\Psi_{n \vb*{k}} (\vb*{r})} - \nabla^2 \ket{\Psi_{n \vb*{k}} (\vb*{r})} = \sum_{\vb*{G}} c_{n \vb*{k}, \vb*{G}}^2 \vert \vb*{k} + \vb*{G} \vert^2
+    \bra{\Psi_{n \vb*{k}} (\vb*{r})} - \nabla^2 \ket{\Psi_{n \vb*{k}} (\vb*{r})} = \sum_{\vb*{G}} c_{n \vb*{k}, \vb*{G}}^2 \vert \vb*{k} + \vb*{G} \vert^2\,.
 \end{equation}
 Another important consequence of this choice of basis set is that the electron density (eq. \ref{eq:density_ks_states}) now becomes an integral over the Brillouin zone, which for numerical computation has to be approximated by a sum over a finite set of k points. \todo{concrete formula for that?}
 
-One problem of this choice of basis set lies in the fact that the lower energy core electrons are very localized around the cores and as such need a lot of basis functions.
-Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
+One problem of this choice of basis set lies in the fact that the lower energy core electrons are localized in the unit cell and as such need a significant amount of plane waves to be meaningfully described.
 
-Importantly, the core electrons don't contribute much to the electronic structure problem, so an approach to make the calculations more economically is to introduce an effective screened potential which describes the nuclear potential as well as the states close to the nucleus.
-These potentials are called \acrfull{pp} and the orbitals constructed with them are smooth functions and can be accurately represented with a small number of basis functions.
-This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\vert \vb*{k} + \vb*{G} \vert^2 \leq E_{cutoff}\) \todo{should be (k+G) to the power of 2 right? also maybe concrete formula for that}. Besides the number of k points, this is the second variable which can influences the computation time of \acrshort{dft} calculations.
+%Because the higher orbitals have to be orthogonal to the lower orbitals, they must also have features on the length scale of the core electrons, which means more basis functions are needed to describe them accurately.
+
+Importantly, the core electrons don't contribute directly to physical properties of a solid, only by interaction with valence electrons.
+An approach to make the calculations more economically is to then not treat the core electrons explicitly, but instead to introduce an effective potential which 
+
+as well as the states close to the nucleus.
+
+These potentials are called \acrfull{pp} 
+
+and the orbitals constructed with them are smooth functions and can be accurately represented with a small number of basis functions.
+%This fact can be used in computation by introducing a \emph{cutoff energy} \(E_{cutoff}\) which limits the number of basis functions by using only expansion coefficents with \(\nicefrac{\vert \vb*{k} + \vb*{G} \vert^2}{2} \leq E_{cutoff}\). Besides the number of k points, this is the second variable which can influences the computation time of \acrshort{dft} calculations.
 
 With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transform from (discrete) real to (discrete) reciprocal space.
 Every expectation value can be calculated in the optimal representation: in reciprocal space for the kinetic energy and in real space for the pseudopotentials.

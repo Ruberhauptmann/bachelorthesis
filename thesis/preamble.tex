@@ -58,6 +58,8 @@
 \usepackage{tensor}
 \usepackage{fixmath}
 \usepackage{siunitx}
+\sisetup{range-phrase=-, range-units=single}
+\DeclareSIUnit{\rydberg}{Ry}
 \usepackage{braket,physics}
 	\renewcommand{\vec}[1]{\vb*{#1}}
     \newcommand{\mat}[1]{\textbf{#1}}
@@ -180,6 +182,7 @@
       linkcolor = UHHblue,
       citecolor  = purple,
       urlcolor   = myblue,
+      %urlcolor   = myblue,
       colorlinks = true,
     }
 \usepackage{cleveref}
