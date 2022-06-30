@@ -36,6 +36,8 @@ if __name__ == "__main__":
         for run_index, walltime_nk in enumerate(walltimes[nk]):
             wait_time[nk][run_index] = (walltime_nk - cputimes[nk][run_index]) / walltime_nk
 
+    print(wait_time)
+
     nk_plots.plot(wait_time, n_procs, "TaS2_hlrn", "wait", plot_error=True)
 
     nk_plots.plot_two([walltimes, wait_time], n_procs, "TaS2_hlrn", ["absolute", "wait"])

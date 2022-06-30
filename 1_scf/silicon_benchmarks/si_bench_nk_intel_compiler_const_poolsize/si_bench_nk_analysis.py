@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     nk_plots.plot(speedup, n_procs, "si_intel", "speedup", plot_error=True)
 
-    nk_plots.plot(walltimes, n_procs, "small_si_intel", "speedup", plot_error=True, figsize="small")
+    nk_plots.plot(speedup, n_procs, "small_si_intel", "speedup", plot_error=True, figsize="small")
 
     ### Plot idle time
 

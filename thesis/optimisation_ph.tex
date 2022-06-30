@@ -5,6 +5,7 @@
 
 The \texttt{PHonon} package enables calculations of phonon frequencies and eigenmodes.
 This chapter examines the best ways to run \texttt{PHonon} calculations.
+The benchmarks are averaged over 10 runs.
 
 \section{Optimal parallelization parameters for phonon calculations}
 
@@ -92,7 +93,7 @@ The speedup shows that using image parallelization helps the phonon calculations
 Even just using 2 images almost doubles the maximal achieved speedup in fig. \ref{fig:scaling_ph_nk_si}.
 This behavior doesn't extend across the whole range of processors, but using more images can partially elevate this problem.
 
-The wait time (also calculated from the longest running image) shown in fig. \ref{fig:scaling_ph_ni_poolsize_8_si_wait} is particularly good for every first data point, so in cases where only image parallelization without additional k point parallelization is applied.
+The wait time (also calculated from the longest running image) shown in fig. \ref{fig:scaling_ph_nk_si_absolute_wait} is particularly good for every first data point, so in cases where only image parallelization without additional k point parallelization is applied.
 As an example, for 64 processors, 8 images is \(\nicefrac{N_P}{N_i} = 8\), so the pool size is already 8 as required and the parameter \texttt{nk} is chosen to be 1.
 So at least for the silicon system it seems to be advisable to choose the parameter \texttt{ni} as large as possible, so that \texttt{nk} can be chosen as small as possible while keeping a pool size of 8.
 
@@ -103,7 +104,7 @@ The calculations were run on 180 processors, once with the previous established 
 The relevant benchmark values for this calculation are listed in tab. \ref{tab:tas2_cdw_phonon_times}.
 
 \begin{table}[ht!]
-    \caption{Run and wait time for phonon calculations of \TaS in the charge density wave phase, run on 180 processors}
+    \caption{Benchmark values for phonon calculations of \TaS in the charge density wave phase, run on 180 processors}
     \begin{tabular}{@{}lll@{}}
     \toprule
                  & runtime            & wait time \\ \midrule

@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_nk("out_files", multiple_runs=True)
 
-    print(walltimes)
+    print(nk_plots.take_mean(walltimes)[1])
 
     nk_plots.plot(walltimes, n_procs, "TaS2_intel", "absolute", plot_error=True)
 

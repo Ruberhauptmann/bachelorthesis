@@ -2,22 +2,30 @@
 
 \begin{document}
 \chapter{Computational Details\label{ch:computation}}
-%\epigraph{It's a secret to everybody.}{a Moblin in \textit{The Legend of Zelda}}
 
-\section{Parallel computing\label{sec:parallel_computing}}
+\section{Parallel computing and scalability\label{sec:parallel_computing}}
 
 The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
 The information presented in this section comes from the textbook on high-performance computing by Hager and Wellein \cite{hager_introduction_2010}.
 
-\subsection{On scalabilty}\label{sub:scalability_general}
-
 In scientific computing, one can identify two distinct reasons for distributing workloads to multiple processors:
 \begin{itemize}
     \item The execution time on a single core is not sufficient. The definition of sufficient is dependent on the specific task and can range from \enquote{over lunch} to \enquote{multiple weeks}.
-    \item The memory requirements grow outside the capabilities of a single core.
+    \item The memory requirements exceed the capabilities of a single core.
 \end{itemize}
 
-In order to judge how well a task can be parallelized, usually a scalability metric is employed, for example:
+Parallelization of a task across multiple processors can be differentiated into two ways:
+\begin{description}
+    \item[Single Program Multiple Data (SPMD)] Every processor runs the same program, with data distributed among processors.
+    \item[Multiple Program Multiple Data (MPMD)] Every processor runs a different function, for example in a pipelining process where multiple consequent operations on the input data need to be done and data comes in chunks, so every step of the pipeline can run independent of the others.
+\end{description}
+The typical case in physics is SPMD.
+For example, many calculations require diagonalization of matrices, which can be iteratively done with algorithms requiring only knowledge of the data of the nearest neighbors for every matrix element in every step.
+This enables parallelization as the whole matrix can be distributed and communication is only required at the bordering regions for exchange of data in every iteration step.
+
+\todo{why does that introduce waiting times?}
+
+In order to judge how well a task can be parallelized, a scalability metric is employed, for example:
 \begin{itemize}
     \item How fast can a problem be solved with \(N\) processors instead of one?
     \item What kind of bigger problem (finer resolution, more particles, etc.) can be solved with \(N\) processors?
@@ -29,18 +37,18 @@ This metric is called speedup and is defined as
     S = \frac{T_1}{T_N}\,, 
 \end{equation}
 where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
-In the ideal case, where all the work can be perfectly distributed among the processors, all processors need the same time for their respective workloads and don't depend on others processors finishing their workload to continue, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so inserting this into eq. \ref{eq:definition_speedup} gives a speedup of
-\begin{equation}
+In the ideal case, where all the work can be perfectly distributed among the processors and all processors need the same time for their respective workloads, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so inserting this into eq. \ref{eq:definition_speedup} gives a speedup of
+\begin{equation}\label{eq:ideal_speedup}
     S = \frac{T_1}{\frac{T_1}{N}} = N\,.
 \end{equation}
 
 In reality, there are many factors either limiting or in some cases supporting parallel code scalability. Limiting factors include:
-\begin{itemize}
-    \item \emph{Algorithmic limitations}: when parts of a calculation are mutually dependent on each other, the calculation cannot be fully parallelized
-    \item \emph{Bottlenecks}: in any computer system exist resources which are shared between processor cores with limitations on parallel access. This serializes the execution by requiring cores to wait for others to complete the task which uses the shared resources in question
-    \item \emph{Startup Overhead}: introducing parallelization into a programm necessarily introduces an overhead, e.g. for distributing data across all the processors
-    \item \emph{Communication}: often solving a problem requires communication between different cores (e.g. exchange of interim results after a step of the calculation). Communication can be implemented very effectively, but can still introduce a big prize in computation time
-\end{itemize}
+\begin{description}
+    \item[Algorithmic limitations] When parts of a calculation are mutually dependent on each other, the calculation cannot be fully parallelized.
+    \item[Bottlenecks] In any computer system exist resources which are shared between processor cores with limitations on parallel access. This serializes the execution by requiring cores to wait for others to complete the task which uses the shared resources in question.
+    \item[Startup Overhead] Introducing parallelization into a program necessarily introduces an overhead, e.g. for distributing data across all the processors.
+    \item[Communication] Often solving a problem requires communication between different cores (e.g. exchange of interim results after a step of the calculation). Communication can be implemented very effectively, but can still introduce a big prize in computation time.
+\end{description}
 On the other hand, \emph{better caching} can lead to better scaling than \(S = N\): as optimal performance per core is achieved when all the data can be kept in cache, reducing the data size per processor by distributing data among more processors can lead to each individual processor being faster than in the single core case.
 
 A simple ansatz for modeling speedup with these limitations in mind was first derived by Gene Amdahl \cite{amdahl_validity_1967}.
@@ -54,53 +62,35 @@ The time for solving the problem on \(N\) processors is then
 \end{equation}
 The speedup is now
 \begin{equation}\label{eq:amdahls_law}
-    S = \frac{T_s}{T_p} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}
+    S = \frac{T_s}{T_p} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}\,.
 \end{equation}
-This equation is called \emph{Amdahl's law} and is plotted in fig. \ref{fig:amdahl} over a range of processors for a few different values of \(s\).
+This equation is called \emph{Amdahl's law}.
+It shows that even for \(N \to \infty\), the speedup has an upper bound of \(\frac{1}{s}\).
+Furthermore, the value of \(s\) determines the range of processors where the speedup is close to the ideal case, as shown in fig. \ref{fig:amdahl}.
+It shows that for a bigger value of \(s\), not only leads to the speedup saturating at a smaller constant, but also differing significantly from the ideal case even for a small number of processors.
+For \(s = 0.01\), a speedup of around 16 for 20 processors used can be deemed acceptable in terms of how efficient the computing resources are used, whereas even using more than 6 processors in the case of \(s = 0.2\) is not.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.6\textwidth]{amdahl.pdf}
+    \caption{Speedup modeled by Amdahl's law for different portions of strictly serial workload \(s\)}
     \label{fig:amdahl}
-    \caption{Amdahl's law for different portions of not parallelizable workload \(s\)}
 \end{figure}
 
-\subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
+The weakness of Amdahl's law lies in the simplicity of it, as the different factors limiting parallelization are generally not independent of \(N\).
+Communication overhead would need to be accounted for with some kind of function \(c(N)\) with the form depending on many factors like speed and bandwidth of the communication hardware or the way the data is distributed.
 
-In the \QE output, a time report listing is printed at the end.
-This time report includes \gls{cpu_time} and \gls{wall_time}, from those three different metrics of scalability can be calculated:
-\begin{itemize}
-    \item runtime: absolute runtime (\gls{wall_time}) of the compute job
-    \item speedup: runtime on \(N\) processors divided by runtime on a single core
-    \item \gls{wait_time}: percentage of \gls{wall_time} not used by \QE process, so writing to disk, waiting for IO devices or other processes, etc. (calculated as (\gls{wall_time} - \gls{cpu_time}) / \gls{wall_time})
-\end{itemize}
-For analysis mainly speedup will be used to evaluate the scalability of \QE calculation.
-It makes comparing the scaling of calculations with different absolute runtimes easy: as discussed in sec. \ref{sub:scalability_general}, optimal scaling is achieved when the speedup has a slope of one, independent of the runtime.
+With just Amdahl's law, decomposition into the several factors limiting parallelization is not possible, so an assessment of how calculations can be improved in detail is also not possible.
+Regardless, Amdahl's law explains in simple ways how speedup can differ from the ideal case and can also be reasonable accurate when the costs for communication don't depend strongly on \(N\).
 
-Regardless, the other two parameters should also always be considered: in the end, absolute runtime is the most important factor and should govern the decision of how much resources are used for solving a particular problem.
-For instance, a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
-Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
-On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
-
-As for the \gls{wait_time}, this metric can be used to separate the different factors of poor parallelization discussed in \ref{sub:scalability_general}.
-Startup overhead is easy to identify, as this should be a small, near constant percentage of the absolute runtime.
-This of course can vary depending on how complex data distribution is, but there should at least not be a strong dependence on the number of processors, as only a small amount of communication is needed.
-Communication and bottlenecks on the other hand both introduce wait time which depends on the number of processors.
-Differentiating between them is relies on knowledge of the specific hardware of the system running the calculations, so how many cores are on a single chip, motherboard or node, which resources are shared between how many cores, etc.\,.
-
-For this interpretation to be meaningful, the CPU and wall times reported by \QE have to be accurate, because they are trusted without verification.
-Just as an example for the pitfalls of this approach, when executing programs on multiple processors in parallel, \gls{cpu_time} is measured per processor, so some kind of truncation is done when a single number (such as in \QE) is reported.
-Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
-
-However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), therefore it will also be used as a qualitative measure of good parallelization in this thesis.
 
 \section{\QE}\label{sec:qe}
 
-\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{seq:theory_dfpt} to calculate electronic structure properties (module \texttt{PWscf}) as well as phonon frequencies and eigenmodes (module \texttt{PHonon}).
+\QE (opEn-Source Package for Research in Electronic Structure, Simulation, and Optimization) \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} is a collection of packages implementing (among others) the techniques described in sec. \ref{sec:theory_dft} and \ref{sec:theory_dfpt} to calculate electronic structure properties (module \texttt{PWscf}) as well as phonon frequencies and eigenmodes (module \texttt{PHonon}).
 
 \subsection{Compilation of \QE}\label{sub:qe_compilation}
 
-As the core of this thesis is an in depth examination of the \QE software and ways its performance can be optimized, a discussion of the way it is compiled is needed.
+As the core of this thesis is an in depth examination of the \QE software and ways its performance can be optimized and the used compilers influence significantly how \QE performs, a discussion of the way it is compiled is needed.
 The information in this section is taken from the \QE 7.0 user guide \cite{noauthor_quantum_nodate}.
 
 The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make} \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
@@ -108,7 +98,7 @@ For parallel execution, also \gls{mpi} libraries and an \gls{mpi} aware compiler
 
 \QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear algebra as well as an implementation of \gls{fft} for fourier transforms.
 In order to make the installation as easy as possible, \QE comes with a publicly available reference implementation of the \gls{blas} routines, the publicly available \gls{lapack} package and an older version of FFTW (Fastest Fourier Transform in the West, an open source implementation of \gls{fft}).
-Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations significantly improves performance (e.g. libraries provided by Intel can use CPU optimizations not present on AMD processors).
+Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations might improve performance, e.g. libraries included in \gls{oneapi}, which are optimized for use on Intel CPUs.
 
 On the PHYSnet cluster, a variety of software packages are available as modules.
 The benchmarks in this thesis were made using the following module combinations:
@@ -143,20 +133,19 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
 This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
 
 \begin{figure}[htb!]
-\label{fig:diagram-scf-calculations}
 %\centering
 \begin{tikzpicture}[
     squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=8cm,},
     node distance=0.5cm]
     \tikzset{every node/.style={inner sep=8pt}}
     %Nodes
-    \node[squarednode]      (init)          {initial \(n(\vb*{r})\)};
-    \node[squarednode]      (step_1)    [below= of init]  {calculate \(v_H [n(\vb*{r})]\) and \(v_{XC} [n(\vb*{r})]\)};
-    \node[squarednode]      (step_2)    [below= of step_1]      {fourier transform potentials};
-    \node[squarednode]      (step_3)    [below= of step_2]      {solve \acrshort{kohn_sham} equations in reciprocal space};
-    \node[squarednode]      (step_4)    [below= of step_3]      {fourier transform wavefunctions};
-    \node[squarednode]      (step_5)    [below= of step_4]      {calculate \(n(\vb*{r})\) and \(E [n(\vb*{r})]\)};
-    \node[squarednode]      (done)      [below= of step_5]      {done if change in \(E\) is small enough};
+    \node[squarednode]      (init)          {Initial \(n(\vb*{r})\)};
+    \node[squarednode]      (step_1)    [below= of init]  {Calculate \(v_H [n(\vb*{r})]\) and \(v_{XC} [n(\vb*{r})]\)};
+    \node[squarednode]      (step_2)    [below= of step_1]      {Fourier transform potentials};
+    \node[squarednode]      (step_3)    [below= of step_2]      {Solve \acrshort{kohn_sham} equations in reciprocal space};
+    \node[squarednode]      (step_4)    [below= of step_3]      {Fourier transform wave functions};
+    \node[squarednode]      (step_5)    [below= of step_4]      {Calculate \(n(\vb*{r})\) and \(E [n(\vb*{r})]\)};
+    \node[squarednode]      (done)      [below= of step_5]      {Done if change in \(E\) is small enough};
     
     %Lines
     \draw[->] (init.south) -- (step_1.north);
@@ -167,12 +156,18 @@ This section introduces the parallelization capabilities of the \texttt{PWscf} a
     \draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
     \draw[->] (step_5.south) -- (done.north);
 \end{tikzpicture}
-\caption{Flowchart of an algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform}
+\caption{Flowchart of an iterative algorithm to iteratively solve the \acrshort{kohn_sham} equations with the use of fourier transform. As the density \(n(\vb*{r})\) determines again the potentials going into the \acrshort{kohn_sham} equations, steps 2-5 are run until self-consistency is reached.}
+\label{fig:diagram-scf-calculations}
 \end{figure}
 Fig. \ref{fig:diagram-scf-calculations} shows a possible approach to solving the \acrshort{kohn_sham} equations.
+The algorithm is taken from the textbook by Martin \cite{martin_electronic_2004}, with the fourier transform steps added to establish in which representation every calculation step is run.
+
+
+\todo{talk a bit about the figure}
+
 A few possibilities for parallelization of calculations can be derived from that.
 
-First of all, the real/reciprocal are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the orbitals in the plane wave basis set as well as charges and densities.
+First of all, the real and reciprocal space are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the wave functions in the plane wave basis set as well as charges and densities.
 This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
 Going further, \QE automatically parallelizes all linear algebra operations on this real space/reciprocal grid.
 The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from and to the whole reciprocal/real grid in order to transform between them.
@@ -188,7 +183,8 @@ Within one k point processor pool, the PW parallelization with its heavy communi
 In a level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
 This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group>}.
 Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
-Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors, so the number of processors in the linear algebra group has to be a square number.
+Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors.
+This means that the number of processors in the linear algebra group has to be a square number.
 
 In the case of the \texttt{PHonon} module, the representation of states in a plane-wave basis set stays the same, so all three parallelization schemes mentioned for the \texttt{PWscf} module can also be employed.
 Furthermore, as calculations for two phonon wave vectors \(\vb*{q}, \vb*{q}^{\prime}\) are not coupled (as different wave vectors lead to different perturbations and as such independent self-consistent equations), they can be split up into images.
@@ -196,21 +192,43 @@ The concept of image parallelization in \QE is actually more general than just f
 The parameter controlling image parallelization is \texttt{ni <number of images>}.
 Following this, the number of processors in one k point pool is then given by \(N / N_i / N_k\).
 
+\subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
+
+In the \QE output, a time report is printed at the end.
+This time report includes \gls{cpu_time} and \gls{wall_time}.
+Three different metrics of scalability can be calculated from this:
+\begin{itemize}
+    \item runtime: absolute runtime (\gls{wall_time}) of the compute job
+    \item speedup: runtime on \(N\) processors divided by runtime on a single core
+    \item \gls{wait_time}: percentage of \gls{wall_time} not used by \QE process, so writing to disk, waiting for IO devices or other processes, etc. (calculated as (\gls{wall_time} - \gls{cpu_time}) / \gls{wall_time})
+\end{itemize}
+For analysis mainly speedup will be used to evaluate the scalability of \QE calculation.
+It makes comparing the scaling of calculations with different absolute runtimes easy: as discussed in sec. \ref{sec:parallel_computing}, optimal scaling is achieved when the speedup has a slope of one, independent of the runtime.
+
+Regardless, the other two parameters should also always be considered.
+In the end, absolute runtime is the most important factor and should govern the decision of how much computational resources should be used for solving a particular problem.
+For instance, a problem with a single core runtime of \(\SI{600}{\s}\), a speedup of 100 would mean a runtime of \(\SI{6}{\s}\), whereas a speedup of 200 would mean a runtime of \(\SI{3}{\s}\).
+Even with optimal scaling, the 100 processors needed for the speedup of 200 could be considered wasted for just \(\SI{3}{s}\) of saved time.
+On the other hand, for a problem with a single core runtime of \(\SI{2400}{\hour}\), the difference between a speedup of 100 (runtime \(\SI{24}{\hour}\)) and 200 (runtime \(\SI{12}{\hour}\)) is the difference between needing to wait a whole day for the calculation and being able to let the job run overnight and continue working in the morning, so using 100 more processors for that can be considered a good use of resources.
+
+As for the \gls{wait_time}, this metric can be used to separate the different factors of poor parallelization discussed in \ref{sec:parallel_computing}.
+Startup overhead is easy to identify, as this should be a small, near constant percentage of the absolute runtime.
+This of course can vary depending on how complex data distribution is, but there should at least not be a strong dependence on the number of processors, as only a small amount of communication is needed.
+Communication and bottlenecks on the other hand both introduce wait time which depends on the number of processors.
+Differentiating between them relies on knowledge of the specific hardware of the system running the calculations.
+This means how many cores are on a single chip, motherboard or node, which resources are shared between how many cores, etc.\,.
+
+For this interpretation to be meaningful, the CPU and wall times reported by \QE have to be accurate.
+As an example for how errors could be overlooked, when executing programs on multiple processors in parallel, \gls{cpu_time} is measured per processors.
+This means some kind of information truncation is done when a single number (such as in \QE) is reported.
+Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
+
+However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), therefore it will also be used as a qualitative measure of good parallelization in this thesis.
+
 \section{Hardware configuration of the PHYSnet cluster}\label{sec:hardware_physnet}
 
-All calculations were run on a reserved subset of the \texttt{infinix} queue on the PHYSnet compute cluster, with 20 nodes.
+All calculations were run on a reserved subset of the \texttt{infinix} queue on the PHYSnet compute cluster with 20 nodes.
 As of time of writing, the nodes in this queue are equipped with two Intel Xeon E5-2680 CPUs, as such providing 20 cores per node, 10 per chip and 200 processors in the whole queue.
-
-\todo{speed comparison, why is this important?}
-
-%Knowing the specific hardware configuration the calculations are run on is important, as that provides a scale of different communication speeds:
-%\begin{itemize}
-%    \item between processors on one chip:
-%    \item between processors on one motherboard:
-%    \item between processors on different nodes:
-%\end{itemize}
-%\todo{speed comparison between processors on one chip, on one motherboard, between nodes (infiniband)}
-%This gives guidelines on how well calculations can be parallelized on different numbers of processors.
-%As an example, any calculation with a massive need for communication, for example the calculations one the PW 
+The nodes are connected with with an Infiniband FDR 4x network.
 
 \end{document}

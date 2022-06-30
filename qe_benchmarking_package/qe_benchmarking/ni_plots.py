@@ -107,7 +107,7 @@ def plot_two(y, n_procs, prefix, type):
                 axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
             if type[i] == "wait":
                 axes[i].set_ylabel('wait time [%]')
-                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk] * 100, label=nk, marker='o', linestyle='dashed', color=color)
             if type[i] == "efficiency":
                 axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed')
 

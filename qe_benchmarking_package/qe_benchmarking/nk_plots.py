@@ -43,7 +43,7 @@ def plot_two(y, n_procs, prefix, type):
                 axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
             if type[i] == "wait":
                 axes[i].set_ylabel('wait time [%]')
-                axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed', color=color)
+                axes[i].plot(n_procs[nk][0], y_mean[i][nk] * 100, label=nk, marker='o', linestyle='dashed', color=color)
             if type[i] == "efficiency":
                 axes[i].plot(n_procs[nk][0], y_mean[i][nk], label=nk, marker='o', linestyle='dashed')
 
@@ -95,7 +95,7 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
             ax1.fill_between(n_procs[nk][0], y_mean[nk]-y_std[nk], y_mean[nk]+y_std[nk], alpha=0.2, color=color)
             ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed', color=color)
         if type == "wait":
-            ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed')
+            ax1.plot(n_procs[nk][0], y_mean[nk] * 100, label=nk, marker='o', linestyle='dashed')
         if type == "efficiency":
             ax1.plot(n_procs[nk][0], y_mean[nk], label=nk, marker='o', linestyle='dashed')
 
