@@ -5,8 +5,8 @@
 
 \section{Parallel computing and scalability\label{sec:parallel_computing}}
 
-The following section will give an overview of the technical aspects of running computer code (such as \QE) on massively parallel computing environments (such as the PHYSnet compute cluster).
-The information presented in this section comes from the textbook on high-performance computing by Hager and Wellein \cite{hager_introduction_2010}.
+The following section will give an overview of the technical aspects of running computer code, such as \QE, on massively parallel computing environments.
+The information presented in this section follows closely the textbook on high-performance computing by Hager and Wellein \cite{hager_introduction_2010}.
 
 In scientific computing, one can identify two distinct reasons for distributing workloads to multiple processors:
 \begin{itemize}
@@ -37,7 +37,7 @@ This metric is called speedup and is defined as
     S = \frac{T_1}{T_N}\,, 
 \end{equation}
 where \(T_1\) is the execution time on a single processor and \(T_N\) is the execution time on \(N\) processors.
-In the ideal case, where all the work can be perfectly distributed among the processors and all processors need the same time for their respective workloads, the execution time on \(N\) processors would be \(\frac{T_1}{N}\), so inserting this into eq. \ref{eq:definition_speedup} gives a speedup of
+In the ideal case, where all the work can be perfectly distributed among the processors and all processors need the same time for their respective workloads, the execution time on \(N\) processors would be \(\nicefrac{T_1}{N}\), so inserting this into eq. \ref{eq:definition_speedup} gives a speedup of
 \begin{equation}\label{eq:ideal_speedup}
     S = \frac{T_1}{\frac{T_1}{N}} = N\,.
 \end{equation}
@@ -70,7 +70,7 @@ Furthermore, the value of \(s\) determines the range of processors where the spe
 It shows that for a bigger value of \(s\), not only leads to the speedup saturating at a smaller constant, but also differing significantly from the ideal case even for a small number of processors.
 For \(s = 0.01\), a speedup of around 16 for 20 processors used can be deemed acceptable in terms of how efficient the computing resources are used, whereas even using more than 6 processors in the case of \(s = 0.2\) is not.
 
-\begin{figure}[ht!]
+\begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{amdahl.pdf}
     \caption{Speedup modeled by Amdahl's law for different portions of strictly serial workload \(s\)}
@@ -96,7 +96,7 @@ The information in this section is taken from the \QE 7.0 user guide \cite{noaut
 The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make} \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
 For parallel execution, also \gls{mpi} libraries and an \gls{mpi} aware compiler need to be provided.
 
-\QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear algebra as well as an implementation of \gls{fft} for fourier transforms.
+\QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear-algebra as well as an implementation of \gls{fft} for fourier transforms.
 In order to make the installation as easy as possible, \QE comes with a publicly available reference implementation of the \gls{blas} routines, the publicly available \gls{lapack} package and an older version of FFTW (Fastest Fourier Transform in the West, an open source implementation of \gls{fft}).
 Even though these libraries are already optimized in terms of the algorithms implemented, usage of libraries implementing the same routines which can use more specific CPU optimizations might improve performance, e.g. libraries included in \gls{oneapi}, which are optimized for use on Intel CPUs.
 
@@ -167,30 +167,30 @@ The algorithm is taken from the textbook by Martin \cite{martin_electronic_2004}
 
 A few possibilities for parallelization of calculations can be derived from that.
 
-First of all, the real and reciprocal space are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the wave functions in the plane wave basis set as well as charges and densities.
+First of all, the real and reciprocal space are discretized to allow for numerical treatment, these grids can be distributed among processors, meaning the wave functions in the plane-wave basis set as well as charges and densities.
 This distribution of data mainly works around memory constraints, as using more processors lowers the memory requirement for every single processor.
-Going further, \QE automatically parallelizes all linear algebra operations on this real space/reciprocal grid.
+Going further, \QE automatically parallelizes all linear-algebra operations on this real space/reciprocal grid.
 The price to pay for this parallelization is the need for communication between processors: as an example, fourier transforms always need to collect and distribute contributions from and to the whole reciprocal/real grid in order to transform between them.
-This kind of parallelization is called \emph{PW (plane wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
+This kind of parallelization is called \emph{PW (plane-wave)} or \emph{R\&G (real \& reciprocal)} parallelization. 
 
-As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane wave basis set is a sum over different k points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
-In \QE this is implemented such that a separation of the total number of processors into smaller pools, each doing the calculations for a set of k points is possible.
+As discussed in sec. \ref{sub:theory_basis_set}, the density in the plane-wave basis set is a sum over different \(k\) points, where the calculation for these are independent of each other until calculating the density \(n( \vb*{r})\).
+In \QE this is implemented such that a separation of the total number of processors into smaller pools, each doing the calculations for a set of \(k\) points is possible.
 This is called \emph{k point parallelization}.
 The CLI parameter \texttt{-nk <number of pools>} determines how many pools the total number of processor \(N\) is split into.
 Hence, the resulting number of processors in one pool is \(\nicefrac{N}{N_k}\).
-Within one k point processor pool, the PW parallelization with its heavy communication is automatically applied.
+Within one \(k\)-point processor pool, the PW parallelization with its heavy communication is automatically applied.
 
 In a level of parallelization independent of that, \QE can use \gls{scalapack} to parallelize (among other things) the iterative orthonormalization of \acrshort{kohn_sham} states.
-This parallelization level is called \emph{linear algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear algebra group>}.
-Importantly, this parameter sets the size for the linear algebra group in every k point processor pool, so the number of processors in the linear algebra group has to be smaller than the number of processors in one pool.
+This parallelization level is called \emph{linear-algebra parallelization} and is controlled by the CLI parameter \texttt{-nd <number of processors in linear-algebra group>}.
+Importantly, this parameter sets the size for the linear-algebra group in every \(k\)-point processor pool, so the number of processors in the linear-algebra group has to be smaller than the number of processors in one pool.
 Furthermore, the arrays on which the calculations are performed on are distributed in a 2D grid among processors.
-This means that the number of processors in the linear algebra group has to be a square number.
+This means that the number of processors in the linear-algebra group has to be a square number.
 
 In the case of the \texttt{PHonon} module, the representation of states in a plane-wave basis set stays the same, so all three parallelization schemes mentioned for the \texttt{PWscf} module can also be employed.
 Furthermore, as calculations for two phonon wave vectors \(\vb*{q}, \vb*{q}^{\prime}\) are not coupled (as different wave vectors lead to different perturbations and as such independent self-consistent equations), they can be split up into images.
 The concept of image parallelization in \QE is actually more general than just for phonon calculations, as other kinds of independent iterative calculations can also be run with image parallelization.
 The parameter controlling image parallelization is \texttt{ni <number of images>}.
-Following this, the number of processors in one k point pool is then given by \(N / N_i / N_k\).
+Following this, the number of processors in one \(k\)-point pool is then given by \(N / N_i / N_k\).
 
 \subsection{Evaluating the scalability of \QE calculations}\label{sub:scalability_qe}
 
