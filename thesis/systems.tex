@@ -6,14 +6,14 @@
 
 \section{Silicon}\label{sec:systems_silicon}
 
-Silicon is the fundamental material in modern transistors and as such is one of the pillars of the digital revolution.
+Silicon is the fundamental material in modern transistors and as such one of the pillars of the digital revolution.
 Analogue to the Stone, Bronze or Iron Age, the current age of civilization can thus be called the Silicon Age \cite{chabal_fundamental_2001}.
 Consequently, silicon is a well studied material from an experimental and theoretical standpoint.
 Combining this with the fact that \acrshort{dft} calculations on silicon are not particularly expensive makes it an ideal system for an introduction to \acrshort{dft} calculations as well as a good benchmarking system.
 Consequently, all benchmarks in this thesis were run on silicon first and with the information gained from that, benchmarks on a more expensive system were run.
 
 The calculations in \cref{ch:optimisation_scf} and \ref{ch:optimization_ph} were made with a plane-wave cutoff of \(\SI{70}{\rydberg}\) and on a \(40\times40\times40\)/\(6\times6\times6\) \(k\)-point grid respectively.
-All calculations use a PBE (Perdew-Burke-Ernzerhof \cite{perdew_generalized_1996}) XC-functional with a norm-conserving \acrshort{pp} generated using Vanderbilt's method \cite{hamann_erratum_2017}.
+All calculations use a PBE XC-functional with a norm-conserving \acrshort{pp} generated using Vanderbilt's method \cite{hamann_erratum_2017}.
 
 \section{\TaS}\label{sec:systems_tas2}
 
@@ -36,15 +36,14 @@ Seen from above, they form a honeycomb lattice.
     \label{fig:tas2_structure}
 \end{figure}
 
-\acrshort{tmdc}'s were known and studied as a bulk material since more than five decades \cite{wilson_transition_1969}.
-The more recent possibility to do experiments on freestanding monolayers \cite{novoselov_two-dimensional_2005} has brought these materials back into focus,  as bulk \TaS shows superconductivity and formation of charge density waves, so the effect of the reduction of dimensionality on these phenomenon can be studied on them \cite{navarro-moratalla_enhanced_2016}.
+\acrshort{tmdc}s were known and studied as a bulk material since more than five decades \cite{wilson_transition_1969}.
+The more recent possibility to do experiments on freestanding monolayers \cite{novoselov_two-dimensional_2005} has brought these materials back into focus,  as for instance bulk \TaS shows superconductivity \cite{nagata_superconductivity_1992} and formation of charge density waves \cite{wilson_charge-density_1974}, so the effect of the reduction of dimensionality on these phenomena can be studied on it \cite{navarro-moratalla_enhanced_2016,hall_environmental_2019}.
 
 \subsection{Charge-density waves}
 
 A charge density wave is a periodic modulation of the electronic charge density of a solid.
 This changes the potential acting on the nuclei, so a distortion of the lattice accompanies the formation of a charge-density wave, to the point where both terms are used interchangeably.
 Fig. \ref{fig:tas2_cdw_structure} shows a charge-density wave in 2H-\TaS.
-\TaS forms charge-density waves in both the bulk case \cite{wilson_charge-density_1974} and as a monolayer \cite{hall_environmental_2019}.
 
 A simple model for the formation of charge-density waves in a one-dimensional case was given by Peierls in 1955.
 Following the review by Grüner \cite{gruner_dynamics_1988}, the argument is as follows: 

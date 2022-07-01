@@ -4,7 +4,8 @@
 \chapter{Motivation}
 
 For a realistic description of matter, methods derived from first principle (so called ab-initio methods) are needed.
-Phenomena explainable only from ab-initio methods range from the thermodynamic properties of matter which are directly tied to phonons, i.e. quasi particles emerging in the quantization of vibrational modes, to phenomena like superconductivity, which still don't have established theories explaining every kind of superconductor.
+Phenomena explainable from ab initio methods span from thermodynamics properties of matter to superconductivity.
+The former deals with the description of quasi-particles emerging from the quantization of vibrational modes and the latter still lacks a theory explaining all kinds of known superconductivity.
 
 One such ab-initio method is \gls{dft}, the foundations of which were laid in 1964 by Hohenberg and Kohn \cite{hohenberg_inhomogeneous_1964}, and in 1965 by Kohn and Sham \cite{kohn_self-consistent_1965}.
 Since 1990, methods within the density functional formalism have been very successful across a number of disciplines in physics, chemistry and biology, with over \num{160000} publications on the topic between 1990 and 2015 \cite{jones_density_2015}.
@@ -13,14 +14,14 @@ These calculations are computationally cheap in comparison to methods working wi
 In software suites such as \QE \cite{giannozzi_quantum_2009,giannozzi_advanced_2017} \gls{dft} methods are easily available today.
 
 Going beyond simple calculations of a few atoms and towards current research questions makes parallel calculations over multiple nodes on compute cluster with hundreds or thousands of CPUs the only feasible possibility.
-An important step is as such making sure the process of scaling the work across multiple processors is done in an effective manner to utilize available computing resources as efficiently as possible.
+An important step therefore is to guarantee that the process of scaling the work across multiple processors is done in an effective manner to utilize available computing resources as efficiently as possible.
 
 Thus, the task of this thesis was two-fold:
 First, examining the way \QE calculations are best parallelized on the PHYSnet cluster and then using this knowledge to run calculations for a system of current interest and relate to recent experimental data of this system \cite{hall_environmental_2019}.
 
 The examined system is \TaS, a \acrfull{tmdc}.
-As bulk structures, \acrshort{tmdc}'s have been first described in 1923 by Dickinson and Pauling \cite{dickinson_crystal_1923}, by 1969 Wilson et al. characterized over 60 \acrshort{tmdc}'s.
-The more recently discovered monolayers of \acrshort{tmdc}'s \cite{novoselov_two-dimensional_2005} have brought a new focus on these materials, as they are among the candidates for materials enabling controllable electronic quantum phases \cite{basov_towards_2017}.
+As bulk structures, \acrshort{tmdc}s have been first described in 1923 by Dickinson and Pauling \cite{dickinson_crystal_1923}, in 1969 Wilson et al. characterized over 60 \acrshort{tmdc}s.
+The more recently discovered monolayers of \acrshort{tmdc}s \cite{novoselov_two-dimensional_2005} have brought a new focus on these materials, as they are among the candidates for materials enabling controllable electronic quantum phases \cite{basov_towards_2017}.
 \TaS in particular is notable as a superconducting material, both in the bulk and the monolayer case.
 Furthermore, both bulk and monolayer \TaS form a charge density wave (a periodic modulation of the electronic charge density of a solid) at low temperatures \cite{hall_environmental_2019}.
 This particular phase of monolayer \TaS is an active area of research and will be examined in this thesis.

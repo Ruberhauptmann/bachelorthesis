@@ -5,7 +5,7 @@
 
 %\section{The electronic structure problem\label{sec:theory_schrödinger}}
 
-The description of matter by theoretical methods starts from the Hamiltonian of an interacting system of electrons and nuclei (with electrons coordinates \(\vb*{r}_i\) and nuclei coordinates \(\vb*{R}_{\alpha}\))
+The description of matter by theoretical methods starts from the Hamiltonian of an interacting system of electrons and nuclei (with electronic coordinates \(\vb*{r}_i\) and nucleic coordinates \(\vb*{R}_{\alpha}\))
 \begin{align}
     \ope{H} &= \ope{T}_{\mathrm{e}} + \ope{U}_{\mathrm{e-e}} + \ope{T}_{\mathrm{n}} + \ope{V}_{\mathrm{n-e}} + \ope{W}_{\mathrm{n-n}} \\
     &= - \sum_i \frac{1}{2} \nabla^2_i 
@@ -17,9 +17,9 @@ The description of matter by theoretical methods starts from the Hamiltonian of 
 where
 \begin{itemize}
     \item \(\ope{T}_{\mathrm{e}}\,, \ope{T}_{\mathrm{n}}\) are the kinetic energies of the electrons and nuclei respectively,
-    \item \(\ope{U}_{\mathrm{e-e}}\) is the Coulomb interaction between the electrons,
-    \item \(\ope{V}_{\mathrm{n-e}}\) is the Coulomb interaction between the electrons and the nuclei,
-    \item \(\ope{W}_{\mathrm{n-n}}\) is the Coulomb interaction between the nuclei.
+    \item \(\ope{U}_{\mathrm{e-e}}\) is the Coulomb interaction between electrons,
+    \item \(\ope{V}_{\mathrm{n-e}}\) is the Coulomb interaction between electrons and nuclei,
+    \item \(\ope{W}_{\mathrm{n-n}}\) is the Coulomb interaction between nuclei.
 \end{itemize}
 This very general problem consisting of both the electronic and nucleic degrees of freedom can be simplified in a first step by employing the Born-Oppenheimer approximation \cite{born_zur_1927}.
 The approximation assumes the nuclei to be fixed point charges which create a potential for the \(N\) interacting electrons, so that the electronic part can be solved independently using the nuclei positions as a parameter
@@ -38,7 +38,7 @@ The terms \(\ope{V}_{n-e}\) and \(\ope{W}_{n-n}\) here are just a function of th
 
 \section{Density Functional Theory\label{sec:theory_dft}}
 
-Obtaining solutions to the Schrödinger equation with the Hamiltonian \ref{eq:bo_hamiltonian} is analytically impossible, as it produces a system of \(3N\) coupled differential equations, with \(N \sim N_{\mathrm{Avogadro}} \sim \mathcal{O} (10^{23})\).
+Obtaining solutions to the Schrödinger equation with the Hamiltonian \ref{eq:bo_hamiltonian} is analytically infeasible, as it produces a system of \(3N\) coupled differential equations, with \(N \sim N_{\mathrm{Avogadro}} \sim \mathcal{O} (10^{23})\).
 As such, the need for good approximations to obtain results for real world
 systems is high.
 One particularly successful approach is \acrfull{dft}.
@@ -61,12 +61,14 @@ As the ground state wave function is a functional of the ground state density, a
     &= \expval{\ope{T} + \ope{U} + \ope{V}}{\Psi} \\
     &= \expval{\ope{T} + \ope{U}}{\Psi} + \int \dd{\vb*{r}^{\prime}} \Psi^* (\vb*{r}^{\prime}) V(\vb*{r}^{\prime}) \Psi (\vb*{r}^{\prime})\,.
 \end{align*}
+Here, \(\ket{\Psi}\) is the full many-body state of the system at hand.
 Defining the universal functional \(F[n(\vb*{r})] = \expval{T + U}{\Psi}\), which is material independent and writing \(n (\vb*{r}^{\prime}) = \Psi^* (\vb*{r}^{\prime}) \Psi (\vb*{r}^{\prime})\), the energy functional becomes
 \begin{equation}\label{eq:hohenberg_kohn_energy_functional}
     E[n(\vb*{r})] = F[n(\vb*{r})] + \int \dd{\vb*{r}^{\prime}} V(\vb*{r}^{\prime}) n (\vb*{r}^{\prime})\,.
 \end{equation}
 This is just a formal definition, as all the formerly mentioned complication of the Hamiltonian \ref{eq:solid_state_hamiltonian} now lies in the functional \(F[n(\vb*{r})]\).
-With a known or well approximated universal functional \(F[n(\vb*{r})]\), the Hohenberg-Kohn theorems provide a great simplification for finding the ground state properties of a solid state system, as the problem is now only a variational problem with 3 spatial coordinates instead of \(3N\) coordinates when trying to solve the full Hamiltonian.
+With a known or well approximated universal functional \(F[n(\vb*{r})]\), the Hohenberg-Kohn theorems provide a great simplification for finding the ground state properties of a solid state system, as the problem is now only a variational problem with three spatial coordinates instead of \(3N\) coordinates when trying to solve the full Hamiltonian.
+This is due to the change to density as the basic variable instead of many-body wave-functions.
 
 
 \subsection{Kohn-Sham equations}
@@ -76,7 +78,7 @@ Kohn and Sham proposed an approach for handling interacting many-body systems by
     H_0 = \sum_i^{N_e} \frac{p_i^2}{2m} + v_{\mathrm{KS}} (\vb*{r}_i)\,.
 \end{equation}
 With a correction potential \(v_{\mathrm{KS}}\) such that the ground state charge density for the auxiliary and the interacting system are the same.
-This introduces a new set of orthonormal wave functions, the solutions to the non-interacting problem \(\psi_i\).
+This introduces a new set of orthonormal single-particle wave functions, the solutions to the non-interacting problem \(\psi_i\).
 The density for this system is calculated as
 \begin{equation}\label{eq:density_ks_states}
     n(\vb*{r}) = \sum_{i=1}^{\nicefrac{N_{\mathrm{e}}}{2}} \vert \psi_i (\vb*{r}) \vert^2\,.
@@ -90,7 +92,7 @@ The important point is that in principle, all many-body properties are available
     \begin{empheq}[box=\widefbox]{align*}
         V (\vb*{r}) & \hspace{1cm} \stackrel{\mathclap{\normalfont\mbox{HK}}}{\impliedby} &  n_0 (\vb*{r}) & \hspace{1cm}\stackrel{\mathclap{\normalfont\mbox{KS}}}{\iff} & n_0 (\vb*{r}) & \hspace{1cm}\stackrel{\mathclap{\normalfont\mbox{HK}}}{\implies} & v_{\mathrm{KS}} (\vb*{r}) \\
         \Downarrow & & \Uparrow & & \Uparrow & & \Downarrow \\
-        \Psi_i (\vb*{r}) & \hspace{1cm} \implies &  \Psi_0 (\vb*{r}) & & \psi_i (\vb*{r}) & \hspace{1cm}\impliedby & \psi_i (\vb*{r})
+        \Psi (\vb*{r}) & \hspace{1cm} \implies &  \Psi_0 (\vb*{r}) & & \psi_{0, i} (\vb*{r}) & \hspace{1cm}\impliedby & \psi_i (\vb*{r})
     \end{empheq}
     \end{subequations}
     %\includegraphics[width=0.7\textwidth]{martins_ks_dft_schema.pdf}
@@ -100,11 +102,11 @@ The important point is that in principle, all many-body properties are available
 
 The kinetic energy of such a non-interacting problem can be easily calculated as sum over all electrons
 \begin{equation}
-    T_{\mathrm{S}} [n(\vb*{r})] = - \frac{1}{2} \sum_{i=1}^{N_{\mathrm{e}} / 2} \int \dd[3]{r} \psi_i^* (\vb*{r}) \Delta \psi_i (\vb*{r})\,.
+    T_{\mathrm{S}} [n(\vb*{r})] = - \frac{1}{2} \sum_{i=1}^{\nicefrac{N_{\mathrm{e}}}{2}} \int \dd{\vb*{r}} \psi_i^* (\vb*{r}) \Delta \psi_i (\vb*{r})\,.
 \end{equation}
 With the help of this system and the classical electrostatic energy 
 \begin{equation}
-    E_{\mathrm{H}} [n(\vb*{r})] = \frac{1}{2} \int \int \dd[3]{r_1} \dd[3]{r_2} \frac{n(\vb*{r}_1) n(\vb*{r}_2)}{\vert \vb*{r}_1 - \vb*{r}_2 \vert}\,,
+    E_{\mathrm{H}} [n(\vb*{r})] = \frac{1}{2} \int \int \dd{\vb*{r_1}} \dd{\vb*{r_2}} \frac{n(\vb*{r}_1) n(\vb*{r}_2)}{\vert \vb*{r}_1 - \vb*{r}_2 \vert}\,,
 \end{equation}
 an ansatz for the total energy functional in eq. \ref{eq:hohenberg_kohn_energy_functional} can be written as
 \begin{equation}
@@ -113,6 +115,8 @@ an ansatz for the total energy functional in eq. \ref{eq:hohenberg_kohn_energy_f
 where now \(E_{\mathrm{XC}} [n(\vb*{r})]\) is a functional of the density accounting for all exchange and correlation effects not present in the non-interacting electron system.
 The success of \acrshort{dft} lies in the fact that \(E_{\mathrm{XC}}\) contributes only a small part of the total energy and can be approximated in a useful manner. 
 Even very simple approximations to \(E_{\mathrm{XC}}\) such as the Local Density Approximation (LDA), which uses the exchange and correlation energy of a homogenous electron gas can give accurate results for very inhomogeneous systems \cite{harris_adiabatic-connection_1984}.
+Better results for systems with rapidly changing densities can be achieved with General-Gradient-Approximations (GGA) to \(E_{\mathrm{XC}}\), which also consider the gradient of the density.
+Perdew, Burke and Ernzerhof developed the first exchange-correlation-functional of this type , the PBE XC-functional \cite{perdew_generalized_1996}.
 
 Using that form of \(E[n(\vb*{r})]\), from the variational problem (with a Lagrange parameter introduced to ensure the orthonormality of the states \(\psi_i\))
 \begin{align}
@@ -157,15 +161,17 @@ With this choice of basis set, the kinetic energy is easily calculated:
 \begin{equation}
     \bra{\psi_{n \vb*{k}} (\vb*{r})} - \nabla^2 \ket{\psi_{n \vb*{k}} (\vb*{r})} = \sum_{\vb*{G}} c_{n \vb*{k}, \vb*{G}}^2 \vert \vb*{k} + \vb*{G} \vert^2\,.
 \end{equation}
-\todo{this is still weird with the expansion coefficent c}
-Another important consequence of this choice of basis set is that the electron density (eq. \ref{eq:density_ks_states}) now becomes an integral over the Brillouin zone, which for numerical computation has to be approximated by a sum over a finite set of \(k\) points. \todo{concrete formula for that?}
+Another important consequence of this choice of basis set is that the electron density (eq. \ref{eq:density_ks_states}) now becomes an integral over the Brillouin zone, which for numerical computation has to be approximated by a sum over a finite set of \(k\) points.
 
 One problem of this choice of basis set lies in the fact that the lower energy core electrons are localized in the unit cell and as such need a significant amount of plane waves to be meaningfully described.
 
 Importantly, the core electrons don't contribute directly to chemical bonds and physical properties of a solid, only by interaction with valence electrons.
-An approach to make the calculations more economically is to then not treat the core electrons explicitly, but instead to introduce an effective potential which includes the effects of both the core and the core electrons.
+An approach to make the calculations more economical is then not to treat the core electrons explicitly, but instead to introduce an effective potential which includes the effects of both the core and the core electrons.
 These potentials are called \acrfull{pp}.
-They can be constructed from precise atomical calculations and significantly reduce the number of basis functions required while keeping the calculations accurate.
+They can be constructed from precise atomic calculations and significantly reduce the number of plane waves required while keeping the calculations accurate.
+One procedure to construct \acrshort{pp}s which are transferable over a range of different environments was given by Haman et. al. \cite{hamann_norm-conserving_1979}.
+The idea is to construct the potentials in such a way, that the energies from the real and pseudo wave functions (wave functions calculated with the \acrshort{pp}s) agree, the real and pseudo wave functions agree beyond a certain radius \(r_{\mathrm{C}}\) from the nucleus and the charge densities calculated from real and pseudo wave functions agree inside the radius \(r_{\mathrm{C}}\).
+\acrshort{pp}s constructed in such a way are called norm-conserving \acrshort{pp}s.
 
 A \emph{cutoff energy} \(E_{\mathrm{cutoff}}\) can be used to further reduce computation time by allowing only expansion coefficient with 
 \begin{equation}
@@ -173,7 +179,7 @@ A \emph{cutoff energy} \(E_{\mathrm{cutoff}}\) can be used to further reduce com
 \end{equation}
 
 With Fast Fourier Transforms \gls{fft}, an efficient algorithm exists to transform from (discrete) real to (discrete) reciprocal space.
-Every expectation value can be calculated in the optimal representation: in reciprocal space for the kinetic energy and in real space for the pseudopotentials.
+Every expectation value can be calculated in the representation where the respective operators are diagonal: in reciprocal space for the kinetic energy and in real space for the potentials.
 Details about the implementation of this will be discussed in sec. \ref{sub:qe_parallelization}.
 
 \section{Density Functional Perturbation Theory}\label{sec:theory_dfpt}
@@ -225,46 +231,52 @@ Starting from the Schrödinger equation
 \end{equation}
 the derivative of \(E_{\lambda}\) with respect to \(\lambda\) can be calculated using the product rule
 \begin{align}
-    \pdv{E_{\lambda}}{\lambda} &= \pdv{\lambda} \bra{\psi_{\lambda}} \ope{H}_{\lambda} \ket{\psi_{\lambda}} \\
-    &= \bra*{\pdv{\psi_{\lambda}}{\lambda}} \ope{H}_{\lambda} \ket{\psi_{\lambda}} + \bra{\psi_{\lambda}} \ope{H}_{\lambda} \ket*{\pdv{\psi_{\lambda}}{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}\,.
+    \pdv{E_{\lambda}}{\lambda} &= \pdv{\lambda} \mel{\psi_{\lambda}}{\ope{H}_{\lambda}}{\psi_{\lambda}} \\
+    &= \mel{\pdv{\psi_{\lambda}}{\lambda}}{\ope{H}_{\lambda}}{\psi_{\lambda}} 
+    + \mel{\psi_{\lambda}}{\ope{H}_{\lambda}}{\pdv{\psi_{\lambda}}{\lambda}} 
+    + \mel**{\psi_{\lambda}}{\pdv{\ope{H}_{\lambda}}{\lambda}}{\psi_{\lambda}}\,.
 \end{align}
 \(\ope{H}_{\lambda}\) can now act on the states \(\ket{\psi_{\lambda}}\) to the right or to the left in the first two terms
 \begin{align}
-    &= E_{\lambda} \bra*{\pdv{\psi_{\lambda}}{\lambda}} \ket{\psi_{\lambda}} + E_{\lambda} \bra{\psi_{\lambda}} \ket*{\pdv{\psi_{\lambda}}{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}} \\
-    &= E_{\lambda} \pdv{\lambda} \braket{\psi_{\lambda}} + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}} \\
-    &= E_{\lambda} \pdv{\lambda} 1 + \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}\,.
+    &= E_{\lambda} \bra{\pdv{\psi_{\lambda}}{\lambda}}\ket{\psi_{\lambda}}
+    + E_{\lambda} \bra{\psi_{\lambda}}\ket{\pdv{\psi_{\lambda}}{\lambda}}
+    + \mel**{\psi_{\lambda}}{\pdv{\ope{H}_{\lambda}}{\lambda}}{\psi_{\lambda}} \\
+    &= E_{\lambda} \pdv{\lambda} \braket{\psi_{\lambda}}
+    + \mel**{\psi_{\lambda}}{\pdv{\ope{H}_{\lambda}}{\lambda}}{\psi_{\lambda}} \\
+    &= E_{\lambda} \pdv{\lambda} 1 + \mel**{\psi_{\lambda}}{\pdv{\ope{H}_{\lambda}}{\lambda}}{\psi_{\lambda}}\,.
 \end{align}
 With that the \emph{Hellman-Feynman theorem} follows:
 \begin{equation}\label{eq:dfpt_hellman_feynman}
-    \pdv{E_{\lambda}}{\lambda} = \bra{\psi_{\lambda}} \pdv{\ope{H}_{\lambda}}{\lambda} \ket{\psi_{\lambda}}
+    \pdv{E_{\lambda}}{\lambda} = \mel**{\psi_{\lambda}}{\pdv{\ope{H}_{\lambda}}{\lambda}}{\psi_{\lambda}}
 \end{equation}
 
 \subsection{Lattice vibrations from electronic structure}
 
 As discussed in the beginning of this chapter, nucleic and electronic degrees of freedom can be decoupled in the Born-Oppenheimer approximation.
 The connection between lattice dynamics and the electronic structure in the Born-Oppenheimer approximation was first pointed out by De Cicco and Johnson  \cite{decicco_quantum_1969} and Pick, Cohen, and Martin \cite{pick_microscopic_1970}.
-The lattice dynamics are determined by
+The lattice dynamics are determined by the Schrödinger equation involving the previously neglected kinetic energy of the nuclei and \(E(\vb*{R})\), the ground-state energy of the electronic Hamiltonian \ref{eq:bo_hamiltonian}, which depends parametrically on the set of all nucleic coordinates \(\vb*{R}\):
 \begin{equation}
-    \left( - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha} + E(\vb*{R}) \right) \Phi (\vb*{R}) = \mathcal{E} \Phi (\vb*{R})\,,
+    \left( - \sum_{\alpha} \frac{1}{2 M_{\alpha}} \nabla^2_{\alpha} + E(\vb*{R}) \right) \Phi (\vb*{R}) = \mathcal{E} \Phi (\vb*{R})
 \end{equation}
-where \(\vb*{R}\) is the set of all nuclear coordinates \(\vb*{R}_{\alpha}\) and \(E(\vb*{R})\) is the ground-state energy of the electronic Hamiltonian \ref{eq:bo_hamiltonian}, which depends parametrically on \(\vb*{R}\).
+This equation gives eigenstates \(\Phi (\vb*{R})\) and energies \(\mathcal{E}\) for the nuclei.
 The system is then in equilibrium, when the forces acting on the nuclei vanish
 \begin{equation}
     \vb*{F}_{\alpha} = - \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}} = 0\,.
 \end{equation}
 The vibrational frequencies \(\omega\) are determined by the Hessian of \(E(\vb*{R})\), usually called the matrix of interatomic force constants:
 \begin{equation}
-    \det \left\vert \frac{1}{\sqrt{M_{\alpha} M_{\beta}}} \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}}{\vb*{R}_{\beta}} - \omega^2 \right\vert = 0\,.
+    \det \left\vert \frac{1}{\sqrt{M_{\alpha} M_{\beta}}} \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}}{\vb*{R}_{\beta}} - \omega^2 \right\vert = 0
 \end{equation}
 Thus, the calculation of the vibrational properties as well as the equilibrium geometry depend on the first and second derivatives of the energies \(E(\vb*{R})\).
 These derivatives can be calculated using the Hellman-Feynman theorem \ref{eq:dfpt_hellman_feynman}, where the parameter \(\lambda\) is the nucleic coordinate \(\vb*{R}_{\alpha}\). 
 Keeping in mind that in the Born-Oppenheimer Hamiltonian \ref{eq:bo_hamiltonian} only the Coulomb interaction between the electrons and the nuclei and the Coulomb interaction between the nuclei have a dependence on the nucleic coordinates \(\vb*{R}\), the force acting on nucleus \(\alpha\) is then
 \begin{align}
-    \vb*{F}_{\alpha} = - \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}} &= - \mel**{\psi_{\vb*{R}}(\vb*{r})}{\pdv{\ope{H}_{\mathrm{BO}} (\vb*{R})}{\vb*{R}_{\alpha}}}{\psi_{\vb*{R}}(\vb*{r})} \\
-    &= - \mel**{\psi_{\vb*{R}}(\vb*{r})}{\pdv{\ope{V}_{\mathrm{n-e}}}{\vb*{R}_{\alpha}} + \pdv{\ope{W}_{\mathrm{n-n}}}{\vb*{R}_{\alpha}}}{\psi_{\vb*{R}}(\vb*{r})} \\
+    \vb*{F}_{\alpha} = - \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}} &= - \mel**{\Psi_{\vb*{R}}(\vb*{r})}{\pdv{\ope{H}_{\mathrm{BO}} (\vb*{R})}{\vb*{R}_{\alpha}}}{\Psi_{\vb*{R}}(\vb*{r})} \\
+    &= - \mel**{\Psi_{\vb*{R}}(\vb*{r})}{\pdv{\ope{V}_{\mathrm{n-e}}}{\vb*{R}_{\alpha}} + \pdv{\ope{W}_{\mathrm{n-n}}}{\vb*{R}_{\alpha}}}{\Psi_{\vb*{R}}(\vb*{r})} \\
     &= - \int \dd{\vb*{r}} n_{\vb*{R}} (\vb*{r}) \pdv{V_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\alpha}} - \pdv{W_{\mathrm{n-n}}}{\vb*{R}_{\alpha}}\,,
 \end{align}
-where \(n_{\vb*{R}} (\vb*{r})\) is the ground state electronic density corresponding to a nucleic configuration \(\vb*{R}\).
+where \(\Psi_{\vb*{R}} (\vb*{r})\) is the ground state wave function of \(\ope{H}_{\mathrm{BO}} (\vb*{R})\) and \(n_{\vb*{R}} (\vb*{r})\) is the ground state electronic density corresponding to a nucleic configuration \(\vb*{R}\).
+
 The second derivative of \(E(\vb*{R})\) is then calculated using the product rule
 \begin{equation}\label{eq:dfpt_second_energy_derivative}
     \pdv{E(\vb*{R})}{\vb*{R}_{\alpha}}{\vb*{R}_{\beta}} = - \pdv{\vb*{F}_{\alpha}}{\vb*{R}_{\beta}} = \int \dd{\vb*{r}} \pdv{n_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\beta}}  \pdv{V_{\vb*{R}} (\vb*{r})}{\vb*{R}_{\alpha}}
@@ -296,6 +308,6 @@ where \(H_0\) is the unperturbed \acrshort{kohn_sham} Hamiltonian \ref{eq:kohn_s
 \end{equation}
 and \(\Delta \epsilon_i = \expval{\Delta v_{\mathrm{KS}}}{\psi_i}\) is the first-order correction to the \acrshort{kohn_sham} eigenvalue \(\epsilon_i\).
 
-As the right hand site in eq. \ref{eq:dfpt_correction_ks_orbitals} depends again on the perturbed density \(\Delta n(\vb*{r})\) (and as such on \(\ket{\Delta \psi_i}\)), eq. \ref{eq:dfpt_finite_difference_density}, \ref{eq:dfpt_correction_ks_orbitals} and \ref{eq:dfpt_correction_ks_potential} are again self consistent equations. Wherefore, they can be solved in an iterative manner.
+As the right hand site in eq. \ref{eq:dfpt_correction_ks_orbitals} depends again on the perturbed density \(\Delta n(\vb*{r})\) (and as such on \(\ket{\Delta \psi_i}\)), eq. \ref{eq:dfpt_finite_difference_density}, \ref{eq:dfpt_correction_ks_orbitals} and \ref{eq:dfpt_correction_ks_potential} are again self-consistent equations. Wherefore, they can be solved in an iterative manner.
 
 \end{document}

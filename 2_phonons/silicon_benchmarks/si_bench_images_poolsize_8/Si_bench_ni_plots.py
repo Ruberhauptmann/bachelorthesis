@@ -7,6 +7,8 @@ if __name__ == "__main__":
 
     cputimes, walltimes, n_procs = qe_helper.extract_times_ni("out_files", type="ph", multiple_runs=True)
 
+    print(ni_plots.take_image_mean(walltimes)[0])
+
     ni_plots.plot_images(walltimes, n_procs, "si_ph_poolsize_8")
 
     walltimes_max, cputimes_max = ni_plots.take_image_max(walltimes), ni_plots.take_image_max(cputimes)
