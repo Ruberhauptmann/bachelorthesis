@@ -96,7 +96,7 @@ The important point is that in principle, all many-body properties are available
     \end{empheq}
     \end{subequations}
     %\includegraphics[width=0.7\textwidth]{martins_ks_dft_schema.pdf}
-    \caption{Representation of the \acrshort{kohn_sham} ansatz. This scheme shows the connection between many-body properties (left) and the auxiliary \acrshort{kohn_sham} system (right). \(\mathrm{HK}\) here denotes the Hohenberg-Kohn theorems applied to the respective system. The schema is taken from \cite[137]{martin_electronic_2004} and adapted for the notation in this thesis.}
+    \caption{Representation of the \acrshort{kohn_sham} ansatz. This scheme shows the connection between many-body properties (left) and the auxiliary \acrshort{kohn_sham} system (right). \(\mathrm{HK}\) here denotes the Hohenberg-Kohn theorems applied to the respective system and the subscript \(0\) the respective ground state. The schema is taken from \cite[137]{martin_electronic_2004} and adapted for the notation in this thesis.}
     \label{fig:kohn_sham_dft_schema}
 \end{figure}
 
@@ -116,7 +116,7 @@ where now \(E_{\mathrm{XC}} [n(\vb*{r})]\) is a functional of the density accoun
 The success of \acrshort{dft} lies in the fact that \(E_{\mathrm{XC}}\) contributes only a small part of the total energy and can be approximated in a useful manner. 
 Even very simple approximations to \(E_{\mathrm{XC}}\) such as the Local Density Approximation (LDA), which uses the exchange and correlation energy of a homogenous electron gas can give accurate results for very inhomogeneous systems \cite{harris_adiabatic-connection_1984}.
 Better results for systems with rapidly changing densities can be achieved with General-Gradient-Approximations (GGA) to \(E_{\mathrm{XC}}\), which also consider the gradient of the density.
-Perdew, Burke and Ernzerhof developed the first exchange-correlation-functional of this type , the PBE XC-functional \cite{perdew_generalized_1996}.
+Perdew, Burke and Ernzerhof developed the first exchange-correlation-functional of this type, the PBE XC-functional \cite{perdew_generalized_1996}.
 
 Using that form of \(E[n(\vb*{r})]\), from the variational problem (with a Lagrange parameter introduced to ensure the orthonormality of the states \(\psi_i\))
 \begin{align}
@@ -159,7 +159,7 @@ From that the form \(\psi_{n \vb*{k}}\) follows:
 \end{align}
 With this choice of basis set, the kinetic energy is easily calculated:
 \begin{equation}
-    \bra{\psi_{n \vb*{k}} (\vb*{r})} - \nabla^2 \ket{\psi_{n \vb*{k}} (\vb*{r})} = \sum_{\vb*{G}} c_{n \vb*{k}, \vb*{G}}^2 \vert \vb*{k} + \vb*{G} \vert^2\,.
+    \bra{\psi_{n \vb*{k}} (\vb*{r})} - \nabla^2 \ket{\psi_{n \vb*{k}} (\vb*{r})} = \frac{1}{V} \sum_{\vb*{G}} \vert \vb*{k} + \vb*{G} \vert^2\,.
 \end{equation}
 Another important consequence of this choice of basis set is that the electron density (eq. \ref{eq:density_ks_states}) now becomes an integral over the Brillouin zone, which for numerical computation has to be approximated by a sum over a finite set of \(k\) points.
 

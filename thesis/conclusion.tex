@@ -1,0 +1,23 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+\chapter{Conclusion}
+
+The benchmarks on \QE's \texttt{PWscf} and \texttt{PHonon} modules carried out in this thesis show how system size, compilers and parallelization parameters interplay to influence scaling of calculation across multiple processors.
+\TaS, the system with longer times per iteration has a different scaling behavior to silicon, the system with shorter times per iteration:
+the former shows linear speedup for significantly more processors than the latter.
+Using the \gls{oneapi} instead of the \gls{openmpi} module leads to different scaling behavior on silicon, while minimal runtime stays the same.
+This is due to the slightly longer single core performance with \gls{oneapi} carrying over into calculation of the speedup.
+In calculations on \TaS, using \gls{oneapi} compilers leads to the calculations scaling well not just on a single node, but on almost two full nodes.
+
+The different ranges for the optimal number of processors carries over to the choice of parameters for \QE's \(k\)-point parallelization.
+For calculations on both systems, the optimal size of processor pools for \(k\)-point parallelization is near the number of processors where the speedup does not follow ideal scaling anymore.
+For the system sizes at hand, utilizing linear-algebra parallelization has no impact in most cases and slows down the calculation in the case of electronic structure calculations on silicon.
+In phonon calculations, using a combination of \(k\)-point and image parallelization leads to the calculations scaling over a wide range of processors.
+
+The calculated phonon modes and frequencies on \TaS in the charge-density-wave phase give a possible explanation for a gap around the Fermi level observed in an \acrshort{sts} experiment on the material.
+This gap forms via an inelastic tunneling process involving the amplitude mode near the \(\Gamma\) point opening up just for electron energies higher than that of this phonon mode.
+While the energy does not fit perfectly to the size of the gap, the symmetric form of the gap would be explained.
+Further theoretical work is needed to confirm this proposition.
+
+\end{document}

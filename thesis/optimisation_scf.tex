@@ -16,7 +16,7 @@ The tests are run using \QE 7.0, compiled using the Fortran and C compilers in \
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/si_ompi_bench_nprocs_speedup.pdf}
-\caption{Scalability for the Si benchmarking system. The speedup shows linear scaling with a slope of 1 on one node, with worse than single core performance on more than on node. \emph{\QE 7.0 compiled with \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Scalability for the Si benchmarking system. The speedup shows linear scaling with a slope of \(\nicefrac{1}{2}\) up to 10 processors, with worse than single core performance on more than on node. \emph{\QE 7.0 compiled with \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_si_speedup}
 \end{figure}
 
@@ -57,7 +57,7 @@ This assumes perfect scaling for 1-4 processors, but the relative scaling is acc
 \begin{figure}
 \centering
 \includegraphics[width=0.75\textwidth]{plots_scf/TaS2_ompi_bench_nprocs_speedup.pdf}
-\caption{Scalability for the \TaS benchmarking system. The speedup is linear with \(N\) on a single node, with a drop in speedup over two nodes. \emph{\QE 7.0 compiled with \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
+\caption{Scalability for the \TaS benchmarking system. The speedup is linear with a slope of one on a single node, with a drop in speedup over two nodes. \emph{\QE 7.0 compiled with \gls{openmpi} 4.1.0, \texttt{nk 1} and \texttt{nd 1}}}
 \label{fig:scaling_scf_ompi_nprocs_tas2_speedup}
 \end{figure}
 
@@ -191,7 +191,7 @@ The observations on how many processors are optimal for certain kinds of systems
 The \(k\)-point parallelization explained in sec. \ref{sub:qe_parallelization} can distribute the workload in such a way that processor pools of sizes within this range work on individual \(k\) points and as such can provide optimal scaling within one pool while also not losing performance because the pools do not need to communicate with each other in the same order of magnitude as the pools have to communicate within themselves.
 
 Keeping the results of this section in mind, an estimate for the quality of \(k\)-point parallelization can already be made:
-For the silicon system, the size of pools should not be bigger than 6 processors for optimal scaling and for the \TaS system they should not be bigger than 32 processors.
+For the silicon system, the size of pools should not be bigger than 6 processors for optimal scaling and for the \TaS system they should not be bigger than 40 processors.
 
 \section{Using the parallelization parameters of \QE}\label{sec:scf_scaling_qe_parallelization}
 

@@ -94,7 +94,7 @@ The choice and availability of different compilers will significantly influence 
 Therefore, a short overview is presented here.
 The information in this section is taken from the \QE 7.0 user guide \cite{noauthor_quantum_nodate}.
 
-The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make} \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
+The \QE distribution is packaged with everything needed for simple, non-parallel execution, the only additional software needed are a minimal Unix environment (a shell like \texttt{bash} or \texttt{sh} as well as the utilities \texttt{make}, \texttt{awk} and \texttt{sed}) and a Fortran compiler compliant with the F2008 standard.
 For parallel execution, also \gls{mpi} libraries and an \gls{mpi} aware compiler need to be provided.
 
 \QE needs three external mathematical libraries, \gls{blas} and \gls{lapack} for linear-algebra as well as an implementation of \gls{fft} for Fourier transforms.
@@ -105,7 +105,6 @@ On the PHYSnet cluster, a variety of software packages are available as modules.
 The benchmarks in this thesis were made using the following module combinations:
 \begin{itemize}
     \item \texttt{openmpi/4.1.1.gcc10.2-infiniband}: \gls{openmpi} 4.1.0 (implies usage of \QE provided \gls{blas}/\gls{lapack})
-    \item \texttt{openmpi/4.1.1.gcc10.2-infiniband openblas/0.3.20}: \gls{openmpi} 4.1.0 and \gls{openblas} 0.3.20
     \item \texttt{scalapack/2.2.0}: \gls{openmpi} 4.1.0, \gls{openblas} 0.3.20 and \gls{scalapack} 2.2.0
     \item \texttt{intel/oneAPI-2021.4}: \gls{oneapi} 2021.4
 \end{itemize}
@@ -131,7 +130,7 @@ In the following output, the Intel \gls{oneapi} package was loaded, so \gls{blas
 \subsection{Parallelization capabilities implemented in \QE}\label{sub:qe_parallelization}
 
 \QE is intended to be used in parallel environments and as such offers possibilities to manage how the work is parallelized.
-This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}
+This section introduces the parallelization capabilities of the \texttt{PWscf} and \texttt{PHonon} modules and explores how they potentially affect the scaling behavior of \QE. The information in this section stems from the user guides for the two modules \cite{noauthor_pwscf_nodate, noauthor_phonon_nodate}.
 
 \begin{figure}[htb!]
 %\centering
@@ -184,8 +183,9 @@ Furthermore, the arrays on which the calculations are performed on are distribut
 This means that the number of processors in the linear-algebra group has to be a square number.
 
 In the case of the \texttt{PHonon} module, the representation of states in a plane-wave basis set stays the same, so all three parallelization schemes mentioned for the \texttt{PWscf} module can also be employed.
-Furthermore, as calculations for two phonon wave vectors \(\vb*{q}, \vb*{q}^{\prime}\) are not coupled (as different wave vectors lead to different perturbations and as such independent self-consistent equations), they can be split up into images.
-The concept of image parallelization in \QE is actually more general than just for phonon calculations, as other kinds of independent iterative calculations can also be run with image parallelization.
+Furthermore, calculations for two phonon wave vectors \(\vb*{q}, \vb*{q}^{\prime}\) are not coupled, as different wave vectors lead to different perturbations and as such independent self-consistent equations.
+Thus they can be split up into independent calculations, which are called images in \QE.
+The concept of image parallelization in \QE is actually more general than just to be used for phonon calculations, as other kinds of independent iterative calculations can also be run with image parallelization.
 The parameter controlling image parallelization is \texttt{ni <number of images>}.
 Following this, the number of processors in one \(k\)-point pool is then given by \(N / N_i / N_k\), if image and k-point parallelization is applied, where \(N_\mathrm{i}\) denotes the number of images.
 
@@ -220,7 +220,7 @@ As an example for how errors could be overseen, when executing programs on multi
 This means some kind of information truncation is done when a single number (such as in \QE) is reported.
 Whether this is taking the average over all processors, just reporting the time for a single processor or any other kind of truncation is unclear.
 
-However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite{noauthor_pwscf_nodate} (sec. 4.5), therefore it will also be used as a qualitative measure of good parallelization in this thesis.
+However, the notion of using the difference between \gls{wall_time} and \gls{cpu_time} for evaluating the quality of parallelization is supported by the user guide for one of the \QE modules \cite[sec. 4.5]{noauthor_pwscf_nodate}, therefore it will also be used as a qualitative measure of good parallelization in this thesis.
 
 \section{Hardware configuration of the PHYSnet cluster}\label{sec:hardware_physnet}
 

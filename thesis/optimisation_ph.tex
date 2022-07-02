@@ -97,12 +97,12 @@ So at least for the silicon system it seems to be advisable to choose the parame
 
 \section{Phonon calculations on \TaS}\label{sec:phonon_tas2}
 
-The results from the last section can be used to estimate good parallelization parameters for a phonon calculation at the \(\mathrm{\Gamma}\) point for \TaS in the charge density wave phase.
+The results from the last section can be used to estimate good parallelization parameters for a phonon calculation at the \(\Gamma\) point for \TaS in the charge-density-wave phase.
 The calculations were run on 180 processors, once with the previous established optimal pool size of 36 and once with a pool size of 18 for comparison.
 The relevant benchmark values for this calculation are listed in tab. \ref{tab:tas2_cdw_phonon_times}.
 
 \begin{table}
-    \caption{Benchmark values for phonon calculations of \TaS in the charge density wave phase, run on 180 processors}
+    \caption{Benchmark values for phonon calculations of \TaS in the charge-density-wave phase, run on 180 processors}
     \begin{tabular}{@{}lll@{}}
     \toprule
                  & runtime            & wait time \\ \midrule
@@ -122,6 +122,6 @@ Linear-algebra parallelization was shown to have no impact on calculations.
 Image parallelization in combination with \(k\)-point parallelization led to very good scaling across a wide range of processors.
 Best results were found when the processors were only split up by image parallelization.
 
-Phonon calculations on \TaS in the charge density wave phase were then carried out, with the best time reached for a pool size of 36.
+Phonon calculations on \TaS in the charge-density-wave phase were then carried out, with the best time reached for a pool size of 36.
 
 \end{document}
