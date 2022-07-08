@@ -1,0 +1,135 @@
+\documentclass[aspectratio=169]{beamer}
+
+\input{preamble}
+
+\title[Bachelor's Colloquium]{Optimization of the Quantum Espresso Density Functional Theory Code for parallel execution on the PHYSnet-Cluster}
+\author{Tjark Sievers}
+\date{13th July 2022}
+\institute[I. ITP -- AG Computational Condensed Matter Theory]{I. Institute of Theoretical Physics}
+
+\usetheme{CCMT}
+
+
+\begin{document}
+
+{
+\setbeamertemplate{footline}{\empty}
+\begin{frame}
+	\titlepage
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+\begin{frame}
+	\frametitle{Motivation}
+
+	
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Speedup}
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			How much faster can a problem be solved with \(N\) processors instead of one?
+			
+			\begin{equation}
+				S \coloneqq \frac{T_1}{T_N}
+			\end{equation}
+
+			with serial runtime \(T_1\), runtime on \(N\) cores \(T_N\)
+
+			ideal case: every processor needs the same time
+			\begin{align}
+				T_N = \frac{T_1}{N}
+				\implies S = \frac{T_1}{\frac{T_1}{N}} = N
+			\end{align}
+				
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.9\textwidth]{figs/amdahl.pdf}
+				%\caption{Speedup modeled by Amdahl's law for different portions of strictly serial workload}
+				\label{fig:ideal_speedup}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Amdahl's Law}
+	
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			In reality: several factors limiting parallelization
+
+			Simple model given by \emph{Amdahl's law}:
+			\begin{itemize}
+				\item split serial time into a strictly serial part \(s\) and one which can be parallelized perfectly \(p\)
+				\item normalize serial time \(T_1 = s + p = 1\)
+				\item execution time on \(N\) processors: \(T_N = s + \frac{p}{N}\)
+				\item speedup: \(S = \frac{T_1}{T_N} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}\)
+				\item relevant features: limited by \(\nicefrac{1}{s}\), for smaller \(s\): closer to linear speedup
+			\end{itemize}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=0.9\textwidth]{figs/amdahl.pdf}
+				%\caption{Speedup modeled by Amdahl's law for different portions of strictly serial workload}
+				\label{fig:amdahl}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+
+	\begin{columns}
+	\begin{column}{0.5\textwidth}
+	\begin{tikzpicture}[
+		scale=0.65,transform shape, squarednode/.style={rectangle, draw=purple!60, fill=purple!5, thick, minimum size=5mm, text centered, text width=8cm,},
+		node distance=0.5cm]
+		\tikzset{every node/.style={inner sep=8pt}}
+		%Nodes
+		\node[squarednode]      (init)          {Initial \(n(\vb*{r})\)};
+		\node[squarednode]      (step_1)    [below= of init]  {Calculate \(v_{\mathrm{H}} [n(\vb*{r})]\) and \(v_{\mathrm{XC}} [n(\vb*{r})]\)};
+		\node[squarednode]      (step_2)    [below= of step_1]      {Fourier transform potentials};
+		\node[squarednode]      (step_3)    [below= of step_2]      {Solve Kohn-Sham equations in reciprocal space};
+		\node[squarednode]      (step_4)    [below= of step_3]      {Fourier transform wave functions};
+		\node[squarednode]      (step_5)    [below= of step_4]      {Calculate \(n(\vb*{r})\) and \(E [n(\vb*{r})]\)};
+		\node[squarednode]      (done)      [below= of step_5]      {Done if change in \(E\) is small enough};
+		
+		%Lines
+		\draw[->] (init.south) -- (step_1.north);
+		\draw[->] (step_1.south) -- (step_2.north);
+		\draw[->] (step_2.south) -- (step_3.north);
+		\draw[->] (step_3.south) -- (step_4.north);
+		\draw[->] (step_4.south) -- (step_5.north);
+		\draw[->] (step_5.east) to [out=30,in=-30] (step_1.east);
+		\draw[->] (step_5.south) -- (done.north);
+	\end{tikzpicture}
+	\end{column}
+
+	\begin{column}{0.5\textwidth}
+		
+	\end{column}
+
+	\end{columns}
+\end{frame}
+
+% Folien für Rückfragen
+
+\begin{frame}
+	\frametitle{Factors limiting parallel execution}
+
+	
+
+\end{frame}
+
+\end{document}

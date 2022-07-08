@@ -1,0 +1,36 @@
+\mode<presentation>
+
+\setbeamersize{text margin left=15.33pt,text margin right=15.33pt}
+
+% Frame title
+\defbeamertemplate*{frametitle}{ESoCM}[1][]
+{
+    \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+        \begin{tikzpicture}
+        	\node at (0,0) {};
+            \node[yshift=-19pt,xshift=-129.67pt,uhhstone]%
+            		at (0,0)
+                {
+                    \includegraphics[height=20pt]{figs/uhh-logo-de.eps}
+                };
+            \node[yshift=-19pt,xshift=52pt,uhhstone,text width={\paperwidth-218pt},align=center]%
+            		at (0,0)
+                {
+                    \insertframetitle
+                };
+            \draw[yshift=-38pt,xshift=-175pt,draw=uhhblue,fill=uhhblue] (0,0) rectangle ++(16,0.05);
+        \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+\defbeamertemplate*{footline}{ESoCM}[2][]{
+	\begin{beamercolorbox}[wd=\paperwidth,ht=2cm]{framefoot}
+    			% shortauthor, shortinstitute, and shorttitle
+    			\vspace{5pt}
+    			\hspace{5pt}
+          	\insertauthor\quad$\vert$\quad\insertshorttitle\quad$\vert$\quad\insertshortinstitute\hfill\insertshortdate\hfill\insertframenumber
+    			\hspace{5pt}
+	\end{beamercolorbox}
+}
+
+\mode<all>

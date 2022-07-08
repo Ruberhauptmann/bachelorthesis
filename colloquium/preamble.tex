@@ -1,0 +1,87 @@
+\usepackage[british]{babel}
+\usepackage{lipsum}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{multicol}
+\usepackage{paralist}
+\usepackage{ulem}
+\usepackage{blindtext}
+%Bibliography
+\usepackage[backend=biber, style = authoryear, sorting=nyt]{biblatex}
+    \bibliography{references.bib}
+
+\renewbibmacro*{cite}{%
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+       {\usebibmacro{cite:label}%
+        \setunit{\printdelim{nonameyeardelim}}}
+       {\printnames{labelname}%
+        \setunit{\printdelim{nameyeardelim}}}%
+     \usebibmacro{cite:labeldate+extradate}%
+     \setunit{\addcomma\space}%
+     \usebibmacro{journal}
+     \setunit{\addcomma\space}%
+     \usebibmacro{title}}
+    {\usebibmacro{cite:shorthand}}}
+
+%Graphikeinbindungen
+\usepackage{graphicx}
+%\usepackage{sidecap}  
+\usepackage{pgfplots}
+    \pgfplotsset{compat = 1.15}
+\usepackage{tikz}
+    \usetikzlibrary{calc,quotes,arrows.meta,automata}
+    \usetikzlibrary{overlay-beamer-styles}
+\usepackage{tikz-dimline}
+\usepackage[compat=1.1.0]{tikz-feynman}
+%Farbeinstellungen für Hyperlinks und Pythoncode
+\usepackage{xcolor}
+    \definecolor{myred}  {HTML}{A3061E}
+    \definecolor{myblue} {RGB} {0,63,119}
+    \definecolor{myyellow} {cmy} {0,0.263,0.741}
+    \definecolor{mygreen} {HTML}{0B6E4F}
+    \colorlet{myorange} {myyellow!60!myred}
+    \colorlet{myviolett} {myred!50!myblue!80}
+%für Python code
+\usepackage{listings}
+	\lstdefinestyle{python}{
+	language         = Python                   ,
+	basicstyle       = \ttfamily                ,
+	keywordstyle     = \color{myred}            ,
+	identifierstyle  = \color{myblue}           ,
+	stringstyle      = \color{mygreen}          ,
+	commentstyle     = \color{black!50}         ,
+	numberstyle      = \color{black!50}\tiny    ,
+	numbers          = left                     ,
+	belowcaptionskip = \baselineskip            ,
+	}
+%
+\usepackage{caption}
+    \captionsetup{%
+        font=small,%
+        format=plain,%
+        labelfont=bf,%
+        labelsep=colon,%
+        margin=10pt,%
+        textfont=sl,%
+        singlelinecheck=true%
+    }
+%Gegen Widowline
+\usepackage[defaultlines=2,all]{nowidow}
+%Mathe-. und Physikdinge
+\usepackage{amssymb, amsmath, amsfonts, amsthm, mathtools, nicefrac, bm, dsfont, upgreek}
+\usepackage{mathrsfs}
+\usepackage{tensor}
+\usepackage{fixmath}
+    \usefonttheme[onlymath]{serif}
+\usepackage{physics,braket,siunitx}
+\usepackage{csquotes}
+\usepackage{hyperref}
+    \renewcommand{\thefootnote}{\roman{footnote}}
+%
+\renewcommand{\vec}[1]{\bm{#1}}
+\newcommand{\mat}[1]{\vphantom{\uuline{#1}}\smash{\uuline{\mkern-1mu \vphantom{\underline{#1}}#1\mkern-1mu}\mkern2mu}}
+\newcommand{\uvec}[1]{\vphantom{\underline{#1}}\smash{\underline{\mkern-1mu #1\mkern-1mu}\mkern2mu}}
