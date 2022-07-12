@@ -77,16 +77,20 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
         for nk in n_procs:
             if np.max(n_procs[nk].flatten()) > max_nprocs:
                 max_nprocs = np.max(n_procs[nk].flatten())
-        linear_nprocs = np.linspace(0, max_nprocs)
+        linear_nprocs = np.linspace(1, max_nprocs)
         ax1.plot(linear_nprocs, linear_nprocs)
-        ax1.axhline(y=1, color='r', linestyle='dashed')
+        #ax1.axhline(y=1, color='r', linestyle='dashed')
         ax1.set_ylabel("speedup $S$")
     if type == "wait":
         ax1.set_ylabel("wait time [%]")
     if type == "efficiency":
         ax1.set_ylabel("efficiency (speedup / Number of processors)")
 
-    for nk in n_procs:
+    args = np.array([int(x) for x in list(n_procs.keys())])
+    args = [str(x) for x in args[np.argsort(args)]]
+
+    #for nk in n_procs:
+    for nk in args:
         color = next(ax1._get_lines.prop_cycler)['color']
         if type == "absolute":
             ax1.fill_between(n_procs[nk][0], y_mean[nk]-y_std[nk], y_mean[nk]+y_std[nk], alpha=0.2, color=color)

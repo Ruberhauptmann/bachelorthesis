@@ -37,6 +37,8 @@
 
 	\vspace{10pt}
 
+	\pause
+
 	I aim to answer some questions:
 
 	\begin{itemize}
@@ -49,38 +51,26 @@
 
 
 
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Speedup}
 
 	\begin{columns}
-		\begin{column}{\textwidth}
+		\begin{column}[T]{0.48\textwidth}
 			How much faster can a problem be solved with \(N\) processors instead of one?
 			
-			\begin{equation}
+			\begin{equation*}
 				S \coloneqq \frac{T_1}{T_N}
-			\end{equation}
+			\end{equation*}
 
 			with serial runtime \(T_1\), runtime on \(N\) cores \(T_N\)
-
-			\vspace{10pt}
-
+		\end{column}
+		\begin{column}[T]{0.48\textwidth}
 			\emph{Ideal case}: every processor needs the same time
-			\begin{align}
+			\begin{align*}
 				T_N = \frac{T_1}{N}
 				\implies S = \frac{T_1}{\frac{T_1}{N}} = N
-			\end{align}
-
-				
+			\end{align*}
 		\end{column}
-
-		%\begin{column}{0.5\textwidth}
-		%	\begin{figure}
-		%		\centering
-		%		\includegraphics[width=0.9\textwidth]{figs/amdahl.pdf}
-		%		%\caption{Speedup modeled by Amdahl's law for different portions of strictly serial workload}
-		%		\label{fig:ideal_speedup}
-		%	\end{figure}
-		%\end{column}
 	\end{columns}
 \end{frame}
 
@@ -92,15 +82,17 @@
 			In reality: several factors limiting parallelization: communication between processors, startup time, algorithmic limitations
 
 			\vspace{10pt}
+			\pause
 
 			Simple model given by \emph{Amdahl's law}
-			\begin{equation}
+			\begin{equation*}
 				S = \frac{T_1}{T_N} = \frac{1}{s + \frac{1 - s}{N}}
-			\end{equation}
+			\end{equation*}
 			with \(s\) the part of the calculation which cannot be perfectly parallelized
 		\end{column}
 
 		\begin{column}{0.48\textwidth}
+			\pause
 			\includegraphics[width=0.9\textwidth]{figs/amdahl.pdf}
 			\begin{itemize}
 				\item upper bound for speedup given by \(\nicefrac{1}{s}\)
@@ -143,9 +135,9 @@
 
 	\begin{column}{0.5\textwidth}
 		Basis set for periodic systems: plane waves
-		\begin{equation}
+		\begin{equation*}
 			\psi_{n \vb*{k}} (\vb*{r}) = \frac{1}{\sqrt{V}} \sum_{\vb*{G}} e^{i (\vb*{k} + \vb*{G}) \vb*{r}}
-		\end{equation}	
+		\end{equation*}	
 
 		%\vspace{10pt}
 
@@ -154,7 +146,6 @@
 		\begin{itemize}
 			\item distributing grids in real/reciprocal space (\emph{R/G parallelization})
 			\item solve Kohn-Sham equations for different \(k\)-points separately (\emph{\(k\)-point parallelization})
-			\item (additionally in DFPT) separate calculations for different phonon wave vectors \(q\) (\emph{image parallelization})
 		\end{itemize}
 		
 	\end{column}
@@ -186,55 +177,69 @@
 
 	\QE has the argument \texttt{nk}: determines number of processors pools the available processors are split into (for \(k\)-point parallelization)
 
-	\(\implies\) different partition of the processors, depending on the total number of processors
+	\(\leadsto\) different partition of the processors, depending on the total number of processors
 
-	\vspace{8pt}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
-			\centering
-			no \(k\) point parallelization
+			\pause[2]\begin{center}
+				no \(k\) point parallelization
 
-			\centering
-			\includegraphics[width=0.3\textwidth]{figs/np16_no_kpoint.pdf}
-			
-			\centering
+				\includegraphics[width=0.3\textwidth]{figs/np16_no_kpoint.pdf}
+			\end{center}
+
+			\pause[3]\begin{center}
 			\includegraphics[width=0.15\textwidth]{figs/np4_no_kpoint.pdf}			
+			\end{center}
 		\end{column}
 
 		\begin{column}{0.5\textwidth}
-			\centering
-			\texttt{nk 4}
+			\pause[2]\begin{center}
+				\texttt{nk 4}
 
-			\centering
-			\includegraphics[width=0.3\textwidth]{figs/np16_nk_4.pdf}			
+				\centering
+				\includegraphics[width=0.3\textwidth]{figs/np16_nk_4.pdf}			
+			\end{center}
 
-			\centering
-			\includegraphics[width=0.15\textwidth]{figs/np4_nk_4.pdf}			
+			\pause[3]\begin{center}
+				\includegraphics[width=0.15\textwidth]{figs/np4_nk_4.pdf}			
+			\end{center}
 		\end{column}
 	\end{columns}
 	
 	\vspace{8pt}
 
-	Use size of the resulting pools for comparison, not the parameter \texttt{nk}
+	\pause
+
+	\(\leadsto\) use size of the resulting pools for comparison, not the parameter \texttt{nk}
 
 \end{frame}
 
 
 \begin{frame}
-	\frametitle{Examined system}
+	\frametitle{Examined systems}
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
-			\includegraphics[width=\textwidth]{figs/symmetric.pdf}
-
 			\centering
-			light gray: symmetric structure
+			\includegraphics[width=0.8\textwidth]{figs/symmetric.pdf}
 
-			dark gray/yellow: cdw structure
+			\begin{center}
+				Monolayer Tantalum Disulfide (\TaS)
+
+				light gray: symmetric structure
+
+				dark gray/yellow: charge density wave phase
+			\end{center}
+			 %(\TaS) in a \(3\times 3\) charge density wave
 		\end{column}
 
 		\begin{column}{0.5\textwidth}
-			Monolayer Tantalum Disulfide (\TaS) in a \(3\times 3\) charge density wave
+			\centering
+			\includegraphics[width=0.8\textwidth]{figs/Silicon.png}
+
+			\begin{center}
+				Silicon
+			\end{center}
 		\end{column}
 	\end{columns}	
 
@@ -244,13 +249,7 @@
 % pwscf
 
 \begin{frame}
-	\begin{center}
-		{\huge Benchmarking electronic structure calculations}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{No \(k\)-point parallelization}
+	\frametitle{Electronic structure\\ No \(k\)-point parallelization}
 	
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -273,7 +272,7 @@
 
 
 \begin{frame}
-	\frametitle{\(k\)-point parallelization}
+	\frametitle{Electronic structure\\ \(k\)-point parallelization}
 	
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -293,7 +292,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{\(k\)-point parallelization}
+	\frametitle{Electronic structure\\ \(k\)-point parallelization}
 	
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -338,27 +337,45 @@
 % Phonons
 
 \begin{frame}
-	\begin{center}
-		{\huge Benchmarking phonon calculations}
-	\end{center}
-\end{frame}
+	\frametitle{Phonons\\ Preliminaries \& \(k\)-point parallelization}
 
-\begin{frame}
-	\frametitle{\(k\)-point parallelization}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			%Some formula
 
-	Two pool sizes tested, both on 180 processors:
-	\begin{itemize}
-		\item pool size 18: \SI{3044}{\minute}
-    	\item pool size 36: \SI{2020}{\minute}
-	\end{itemize}
+			DFPT: again a set of equations to be solved self-consistently
 
-	\vspace{10pt}
+			\vspace{10pt}
 
-	Difference already after first phonon mode:
-	\begin{itemize}
-		\item pool size 18: \SI{2832.1}{\second}
-		\item pool size 36: \SI{2183.3}{\second}
-	\end{itemize}
+			Multiple ways to parallelize:
+
+			\begin{itemize}
+				\item \emph{R/G parallelization}
+				\item \emph{\(k\)-point parallelization}
+				\item separate calculations for different phonon wave vectors \(q\) (\emph{image parallelization})
+			\end{itemize}
+		\end{column}
+		\pause
+		\begin{column}{0.5\textwidth}
+			Phonon calculations at \(q = 0\)
+
+			Two pool sizes tested, both on 180 processors:
+			\begin{itemize}
+				\item pool size 18: \SI{3044}{\minute}
+				\item pool size 36: \SI{2020}{\minute}
+			\end{itemize}
+
+			\vspace{10pt}
+
+			Difference already after first phonon mode:
+			\begin{itemize}
+				\item pool size 18: \SI{2832.1}{\second}
+				\item pool size 36: \SI{2183.3}{\second}
+			\end{itemize}
+
+			\(\leadsto\) optimal pool size translates over modules
+		\end{column}
+	\end{columns}
 \end{frame}
 
 %\begin{frame}
@@ -381,7 +398,7 @@
 %\end{frame}
 
 \begin{frame}
-	\frametitle{Image parallelization}
+	\frametitle{Phonon calculations\\ Image parallelization}
 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
@@ -393,7 +410,8 @@
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
 				\item benchmark run on bulk silicon
-				\item different combinations of \texttt{ni} (different colors in the plot) and \texttt{nk} with resulting pool size of 8
+				\item for that system: pool size 8 performed best
+				\item[\(\leadsto\)] benchmark with combinations of \texttt{ni} and \texttt{nk} with resulting pool size of 8
 				\item linear scaling continues when using more images
 			\end{itemize}
 		\end{column}
@@ -411,15 +429,15 @@
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Right choice of parallelization parameters has a significant impact on the runtime of calculations with \QE
-				\item Good choice of parameters translates between the two modules examined as well as between different compute clusters
+				\item goal of this thesis: examine how \QE calculations parallelize, measured by speedup
+				\pause\item right choice of parallelization parameters has a significant impact on the runtime of calculations with \QE
+				\pause\item good choice of parameters translates between the two modules examined and between different compute clusters
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=\textwidth]{figs/TaS2_intel_bench_nk_speedup.pdf}
-				\caption*{PHYSnet}
-			\end{figure}
+			\centering
+			\pause[2]\includegraphics[height=0.5\textheight]{figs/TaS2_intel_bench_nk_speedup.pdf}
+			\pause[2]\includegraphics[height=0.5\textheight]{figs/si_ph_poolsize_8_bench_ni_speedup.pdf}
 		\end{column}
 	\end{columns}
 
@@ -446,14 +464,14 @@
 
 	pool size 18:
 	\begin{itemize}
-		\item Estimated max dynamical RAM per process > 178.04 MB
-		\item Estimated total dynamical RAM > 28.67 GB
+		\item estimated max dynamical RAM per process > 178.04 MB
+		\item estimated total dynamical RAM > 28.67 GB
 	\end{itemize}
 
 	pool size 36:
 	\begin{itemize}
-		\item Estimated max dynamical RAM per process > 103.76 MB
-		\item Estimated total dynamical RAM > 17.07 GB
+		\item estimated max dynamical RAM per process > 103.76 MB
+		\item estimated total dynamical RAM > 17.07 GB
 	\end{itemize}
 \end{frame}
 
@@ -463,10 +481,6 @@
 	\centering
 	\includegraphics[width=0.6\textwidth]{figs/TaS2_intel_bench_nprocs_absolute.pdf}
 
-\end{frame}
-
-\begin{frame}
-	\frametitle{Linear Algebra parallelization}
 \end{frame}
 
 %\begin{frame}
@@ -479,37 +493,13 @@
 %\end{frame}
 
 \begin{frame}
-	\frametitle{Amdahl's Law}
-	
-	\begin{columns}
-		\begin{column}{0.48\textwidth}
-			%\vspace{10pt}
-			Simple model given by \emph{Amdahl's law}:
-			\begin{itemize}
-				\item split serial time into serial part \(s\) and perfectly parallelizable part \(p\): 
-				\begin{equation}
-					T_1 = s + p = 1
-				\end{equation}	
-				\item execution time on \(N\) processors: 
-				\begin{equation}
-					T_N = s + \frac{p}{N}
-				\end{equation}
-				\item speedup: 
-				\begin{equation}
-					S = \frac{T_1}{T_N} = \frac{1}{s + \frac{p}{N}} = \frac{1}{s + \frac{1 - s}{N}}
-				\end{equation}
-			\end{itemize}
-		\end{column}
+	\frametitle{Amdahl's Law: limitations}
 
-		\begin{column}{0.48\textwidth}
-			\includegraphics[width=0.9\textwidth]{figs/amdahl.pdf}
-			\begin{itemize}
-				\item upper bound for speedup given by \(\nicefrac{1}{s}\)
-				\item smaller \(s\): closer to \(S = N\) for more processors
-			\end{itemize}
-			
-		\end{column}
-	\end{columns}
+	\begin{itemize}
+		\item no distinction between different limiting factors: e.g. communication limits parallelization with some dependence on \(N\)
+		\item[\(\leadsto\)] serial part \(s\) gives no information about what could be improved
+	\end{itemize}
+
 \end{frame}
 
 \end{document}

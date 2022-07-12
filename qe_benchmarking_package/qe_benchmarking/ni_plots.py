@@ -139,16 +139,20 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
             max_nprocs = np.max(n_procs[ni].flatten())
 
     if type == "speedup":
-        linear_nprocs = np.linspace(0, max_nprocs)
+        linear_nprocs = np.linspace(1, max_nprocs)
         ax1.plot(linear_nprocs, linear_nprocs)
 
-    for ni in n_procs:
+    args = np.array([int(x) for x in list(n_procs.keys())])
+    args = [str(x) for x in args[np.argsort(args)]]
+
+    for ni in args:
+    #for ni in n_procs:
         color = next(ax1._get_lines.prop_cycler)['color']
         if plot_error:
             if len(n_procs[ni][0]) == 1:
                 ax1.errorbar(n_procs[ni][0], y_mean[ni], y_std[ni], color=color)
             ax1.fill_between(n_procs[ni][0], y_mean[ni]-y_std[ni], y_mean[ni]+y_std[ni], alpha=0.2, color=color)
-            ax1.plot(n_procs[ni][0], y_mean[ni], label=ni, marker='o', linestyle='dashed', color=color)
+            ax1.plot(n_procs[ni][0], y_mean[ni], label="ni " + ni, marker='o', linestyle='dashed', color=color)
         elif type == "wait":
             ax1.plot(n_procs[ni][0], y_mean[ni] * 100, label=ni, marker='o', linestyle='dashed', color=color)
         else:
@@ -159,7 +163,7 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
     if type == "absolute":
         ax1.set_ylabel("runtime $T$ [s]")
     if type == "speedup":
-        ax1.axhline(y=1, color='r', linestyle='dashed')
+        #ax1.axhline(y=1, color='r', linestyle='dashed')
         ax1.set_ylabel("speedup $S$")
     if type == "wait":
         ax1.set_ylabel("wait time [%]")

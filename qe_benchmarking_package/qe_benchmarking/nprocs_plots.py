@@ -75,11 +75,11 @@ def plot(y, n_procs, prefix, type, plot_error=False, figsize="big"):
         ax1.plot(n_procs, y, marker='o', linestyle='dashed')
         ax1.set_ylabel("runtime $T$ [s]")
     if type == "speedup":
-        linear_nprocs = np.linspace(0, n_procs[-1])
+        linear_nprocs = np.linspace(1, n_procs[-1])
         ax1.plot(linear_nprocs, linear_nprocs)
         ax1.fill_between(n_procs, y-y_std, y+y_std, alpha=0.2)
         ax1.plot(n_procs, y, marker='o', linestyle='dashed')
-        ax1.axhline(y=1, color='r', linestyle='dashed')
+        #ax1.axhline(y=1, color='r', linestyle='dashed')
         ax1.set_ylabel("speedup $S$")
     if type == "wait":
         ax1.plot(n_procs, y * 100, marker='o', linestyle='dashed')
